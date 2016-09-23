@@ -1,0 +1,23 @@
+{
+  "name": "register-with-a-gp-prototypes",
+  "version": "1.0.0",
+  "description": "Register with a GP design prototypes",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nhsuk/register-with-a-gp-prototypes.git"
+  },
+  "author": "Demotive",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nhsuk/register-with-a-gp-prototypes/issues"
+  },
+  "homepage": "https://github.com/nhsuk/register-with-a-gp-prototypes#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "nunjucks": "^2.5.2"
+  }
+}
