@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <title>{% block page_title %}{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="/public/stylesheets/app.css">
+    {% block html_head %}{% endblock %}
+  </head>
+
+  <body class="{% block body_css_classes %}{% endblock %}">
+    <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
+
+    <div class="skiplinks">
+      <div class="skiplinks--inner">
+        <a href="#content" class="skiplinks--link">Skip to main content</a>
+      </div>
+    </div>
+
+    {% block header_before %}{% endblock %}
+
+    <header role="banner">
+      {% block header %}{% endblock %}
+    </header>
+
+    <main id="content" role="main" tabindex="-1" class="util-nofocus">
+      {% block content %}{% endblock %}
+    </main>
+
+    <footer role="contentinfo">
+      {% block footer %}{% endblock %}
+    </footer>
+
+    <!-- scripts etc -->
+    {% block body_after %}{% endblock %}
+
+  </body>
+
+</html>

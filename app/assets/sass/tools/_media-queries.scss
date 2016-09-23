@@ -1,0 +1,32 @@
+// Media query helpers
+
+// The base css you write should be for mobile.
+//
+// Usage:
+//
+//   div.columns {
+//     border: 1px solid;
+//
+//     @include media(large) {
+//       width: 30%;
+//       float: left;
+//     }
+//   }
+
+@mixin media($size: false) {
+  @if $size == large {
+    @media (min-width: 980px) {
+      @content;
+    }
+    
+    } @else if $size == mid {
+    @media (min-width: 500px) {
+      @content
+    }
+
+    } @else {
+    @media (min-width: $size) {
+      @content
+    }
+  }
+}
