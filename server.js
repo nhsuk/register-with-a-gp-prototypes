@@ -32,7 +32,8 @@ app.use('/', routes);
 
 nunjucks.configure('./app/views', {
     autoescape: true,
-    express: app
+    express: app,
+    noCache: true
 });
 
 // Force HTTPs on production connections
