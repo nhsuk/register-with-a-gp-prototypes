@@ -40,7 +40,7 @@
 
 .js-enabled .block-label.selection-button-radio::before {
   content: "";
-  border: 2px solid;
+  border: 3px solid $nhs-blue;
   border-radius: 50%;
   background: $white;
   width: 34px;
@@ -57,8 +57,8 @@
   width: 20px;
   height: 20px;
   position: absolute;
-  top: 9px;
-  left: 9px;
+  top: 10px;
+  left: 10px;
   zoom: 1;
   filter: alpha(opacity=0);
   opacity: 0;
@@ -66,7 +66,7 @@
 
 .js-enabled .block-label.selection-button-checkbox::before {
   content: "";
-  border: 2px solid;
+  border: 3px solid $nhs-blue;
   background: $white;
   width: 34px;
   height: 34px;
@@ -83,8 +83,8 @@
   width: 17px;
   height: 7px;
   position: absolute;
-  top: 10px;
-  left: 8px;
+  top: 11px;
+  left: 9px;
   -moz-transform: rotate(-45deg);
   -o-transform: rotate(-45deg);
   -webkit-transform: rotate(-45deg);
@@ -96,9 +96,9 @@
 }
 
 .js-enabled .block-label.selection-button-radio.focused::before, .js-enabled .block-label.selection-button-checkbox.focused::before {
-  -webkit-box-shadow: 0 0 0 5px #ffbf47;
-  -moz-box-shadow: 0 0 0 5px #ffbf47;
-  box-shadow: 0 0 0 5px #ffbf47;
+  -webkit-box-shadow: 0 0 0 5px $focus-colour;
+  -moz-box-shadow: 0 0 0 5px $focus-colour;
+  box-shadow: 0 0 0 5px $focus-colour;
 }
 
 .js-enabled .block-label.selection-button-radio.selected::after, .js-enabled .block-label.selection-button-checkbox.selected::after {

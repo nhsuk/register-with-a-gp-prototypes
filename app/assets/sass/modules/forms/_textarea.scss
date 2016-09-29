@@ -6,13 +6,23 @@ textarea {
   width: 100%;
   margin: $leading 0 $leading*2 0;
   padding: 0 $leading/4;
-  border: 2px solid $grey;
+  border: 3px solid $nhs-blue;
   font-family: inherit;
   font-size: inherit;
   font-weight: $bodyweight;
   line-height: inherit;
 
+  background-image: -webkit-linear-gradient(top, $nhs-blue 0, rgba(255,255,255,0) 1px);
+  background-image: -moz-linear-gradient(top, $nhs-blue 0, rgba(255,255,255,0) 1px);
+  background-image: -o-linear-gradient(top, $nhs-blue 0, rgba(255,255,255,0) 1px);
+  background-image: linear-gradient(to bottom, $nhs-blue 0, rgba(255,255,255,0) 1px);
+  background-repeat: repeat-y;
+  background-size: 100% $leading*2;
+
   &:focus {
-    outline: 2px solid $yellow2;
+    outline: 0;
+    -webkit-box-shadow: 0 0 0 5px $focus-colour;
+    -moz-box-shadow: 0 0 0 5px $focus-colour;
+    box-shadow: 0 0 0 5px $focus-colour;
   }
 }

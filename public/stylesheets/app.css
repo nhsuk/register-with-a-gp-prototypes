@@ -418,7 +418,7 @@ input[type='text'] {
   width: 100%;
   margin: 14px 0 28px 0;
   padding: 0 3.5px;
-  border: 2px solid #e6e6e6;
+  border: 3px solid #0072c6;
   font-family: inherit;
   font-size: inherit;
   font-weight: 400;
@@ -426,7 +426,10 @@ input[type='text'] {
 }
 
 input[type='text']:focus {
-  outline: 2px solid #FFB81C;
+  outline: 0;
+  -webkit-box-shadow: 0 0 0 5px #F7E214;
+  -moz-box-shadow: 0 0 0 5px #F7E214;
+  box-shadow: 0 0 0 5px #F7E214;
 }
 
 label {
@@ -482,7 +485,7 @@ label:focus {
 
 .js-enabled .block-label.selection-button-radio::before {
   content: "";
-  border: 2px solid;
+  border: 3px solid #0072c6;
   border-radius: 50%;
   background: #fff;
   width: 34px;
@@ -499,8 +502,8 @@ label:focus {
   width: 20px;
   height: 20px;
   position: absolute;
-  top: 9px;
-  left: 9px;
+  top: 10px;
+  left: 10px;
   zoom: 1;
   filter: alpha(opacity=0);
   opacity: 0;
@@ -508,7 +511,7 @@ label:focus {
 
 .js-enabled .block-label.selection-button-checkbox::before {
   content: "";
-  border: 2px solid;
+  border: 3px solid #0072c6;
   background: #fff;
   width: 34px;
   height: 34px;
@@ -525,8 +528,8 @@ label:focus {
   width: 17px;
   height: 7px;
   position: absolute;
-  top: 10px;
-  left: 8px;
+  top: 11px;
+  left: 9px;
   -moz-transform: rotate(-45deg);
   -o-transform: rotate(-45deg);
   -webkit-transform: rotate(-45deg);
@@ -538,9 +541,9 @@ label:focus {
 }
 
 .js-enabled .block-label.selection-button-radio.focused::before, .js-enabled .block-label.selection-button-checkbox.focused::before {
-  -webkit-box-shadow: 0 0 0 5px #ffbf47;
-  -moz-box-shadow: 0 0 0 5px #ffbf47;
-  box-shadow: 0 0 0 5px #ffbf47;
+  -webkit-box-shadow: 0 0 0 5px #F7E214;
+  -moz-box-shadow: 0 0 0 5px #F7E214;
+  box-shadow: 0 0 0 5px #F7E214;
 }
 
 .js-enabled .block-label.selection-button-radio.selected::after, .js-enabled .block-label.selection-button-checkbox.selected::after {
@@ -557,13 +560,22 @@ textarea {
   width: 100%;
   margin: 14px 0 28px 0;
   padding: 0 3.5px;
-  border: 2px solid #e6e6e6;
+  border: 3px solid #0072c6;
   font-family: inherit;
   font-size: inherit;
   font-weight: 400;
   line-height: inherit;
+  background-image: -webkit-linear-gradient(top, #0072c6 0, rgba(255, 255, 255, 0) 1px);
+  background-image: -moz-linear-gradient(top, #0072c6 0, rgba(255, 255, 255, 0) 1px);
+  background-image: -o-linear-gradient(top, #0072c6 0, rgba(255, 255, 255, 0) 1px);
+  background-image: linear-gradient(to bottom, #0072c6 0, rgba(255, 255, 255, 0) 1px);
+  background-repeat: repeat-y;
+  background-size: 100% 28px;
 }
 
 textarea:focus {
-  outline: 2px solid #FFB81C;
+  outline: 0;
+  -webkit-box-shadow: 0 0 0 5px #F7E214;
+  -moz-box-shadow: 0 0 0 5px #F7E214;
+  box-shadow: 0 0 0 5px #F7E214;
 }

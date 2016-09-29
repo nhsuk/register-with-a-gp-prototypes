@@ -6,13 +6,16 @@ input[type='text'] {
   width: 100%;
   margin: $leading 0 $leading*2 0;
   padding: 0 $leading/4;
-  border: 2px solid $grey;
+  border: 3px solid $nhs-blue;
   font-family: inherit;
   font-size: inherit;
   font-weight: $bodyweight;
   line-height: $leading*3;
 
   &:focus {
-    outline: 2px solid $yellow2;
+    outline: 0;
+    -webkit-box-shadow: 0 0 0 5px $focus-colour;
+    -moz-box-shadow: 0 0 0 5px $focus-colour;
+    box-shadow: 0 0 0 5px $focus-colour;
   }
 }
