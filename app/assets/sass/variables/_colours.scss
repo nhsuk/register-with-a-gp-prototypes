@@ -1,7 +1,14 @@
 // NHS Colour palette, from http://www.nhsidentity.nhs.uk/
-$pure-black: #000000;
+$pure-black: #000;
 $black: #231f20;
-$white: #ffffff;
+$white: #fff;
+
+// Newer colour palette items
+$blue: #0072c6;
+$nhs-blue: $blue;
+$dark-grey: #425563;
+$pale-grey: #d9e1e2;
+
 
 /*
 
@@ -10,8 +17,6 @@ i.e. NHS is blue50 as thats a median point, and if we add dark or light tints,
 we can add other blues, named like blue40 (for a lighter blue) or blue60 for a darker blue.
 
 */
-
-$blue: #0072C6;
 $dark-blue: #00365D;
 $dark-blue2: #006BBD;
 $light-blue: #1D86D1; /*#0988E7;*/
@@ -39,7 +44,6 @@ $smallprint-grey: #666666;
 $feedback-alert-strip: #FFE799;
 
 // Semantic colour names
-$nhs-blue: $blue;
 
 $page-colour: #F7FCFF;
 

@@ -1,18 +1,9 @@
 #global-header {
-  border-bottom: 4px solid $nhs-blue;
-}
-
-.header-container {
   @extend %block;
   @extend %contain-floats;
+  border-bottom: 4px solid $nhs-blue;
   padding-top: $leading;
   padding-bottom: $leading;
-
-  @include media(500px) {
-    padding-top: $leading*1.5;
-    padding-bottom: $leading;
-  }
-
 }
 
 .header-logo {

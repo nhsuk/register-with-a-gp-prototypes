@@ -1,9 +1,8 @@
-@import url("//fast.fonts.net/cssapi/4c65968f-c33e-4eb6-9a5d-ab4f81a0543f.css");
-.grid-row, .header-container {
+.grid-row, .prototype-warning-inner, #global-header {
   zoom: 1;
 }
 
-.grid-row:after, .header-container:after {
+.grid-row:after, .prototype-warning-inner:after, #global-header:after {
   content: "";
   display: block;
   clear: both;
@@ -25,81 +24,81 @@ we can add other blues, named like blue40 (for a lighter blue) or blue60 for a d
   */
 /*#5CAEED; /* #0AC0FC; E2EEFB */
 body {
-  font-family: "Frutiger W01", sans-serif;
+  font-family: "Frutiger Neue", "Frutiger", sans-serif;
   font-weight: 400;
   font-size: 20px;
-  line-height: 32px;
+  line-height: 28px;
 }
 
 .measure {
   max-width: 34em;
 }
 
-h1 {
+h1, .heading-xxlarge {
   margin: 0;
-  padding: 16px 0;
+  padding: 14px 0;
   font-size: 40px;
   font-weight: 700;
-  line-height: 48px;
+  line-height: 42px;
 }
 
 @media (min-width: 500px) {
-  h1 {
+  h1, .heading-xxlarge {
     font-size: 48px;
-    line-height: 64px;
+    line-height: 56px;
   }
 }
 
 @media (min-width: 980px) {
-  h1 {
+  h1, .heading-xxlarge {
     font-size: 56px;
-    line-height: 80px;
+    line-height: 70px;
   }
 }
 
-h2 {
+h2, .heading-xlarge {
   margin: 0;
-  padding: 16px 0 0 0;
+  padding: 14px 0 0 0;
   font-size: 30px;
   font-weight: 700;
-  line-height: 48px;
+  line-height: 42px;
 }
 
 @media (min-width: 500px) {
-  h2 {
+  h2, .heading-xlarge {
     font-size: 32px;
-    line-height: 48px;
+    line-height: 42px;
   }
 }
 
 @media (min-width: 980px) {
-  h2 {
+  h2, .heading-xlarge {
     font-size: 36px;
-    line-height: 48px;
+    line-height: 42px;
   }
 }
 
-h3 {
+h3, .heading-large {
   margin: 0;
-  padding: 16px 0;
+  padding: 14px 0;
   font-size: 24px;
   font-weight: 700;
-  line-height: 32px;
+  line-height: 28px;
 }
 
-h4 {
+h4, .heading-body {
   margin: 0;
-  padding: 16px 0;
+  padding: 14px 0;
   font-size: 20px;
   font-weight: 700;
-  line-height: 32px;
+  line-height: 28px;
 }
 
 p.lede {
-  margin: 0 0 32px 0;
+  margin: 0 0 28px 0;
   font-size: 20px;
   letter-spacing: 0.03em;
-  line-height: 32px;
+  line-height: 28px;
   font-weight: 200;
   color: #A8E8FF;
 }
@@ -110,12 +109,77 @@ p.lede {
 }
 
 body {
+  color: #0b0c0c;
+}
+
+.baseline {
+  background-image: -webkit-linear-gradient(top, cyan 0, rgba(255, 255, 255, 0) 1px);
+  background-image: -moz-linear-gradient(top, cyan 0, rgba(255, 255, 255, 0) 1px);
+  background-image: -o-linear-gradient(top, cyan 0, rgba(255, 255, 255, 0) 1px);
+  background-image: linear-gradient(to bottom, cyan 0, rgba(255, 255, 255, 0) 1px);
+  background-repeat: repeat-y;
+  background-size: 100% 14px;
+}
+
+/* remove undelines for a tags used as anchors */
+h1 a, .heading-xxlarge a,
+h2 a, .heading-xlarge a,
+h3 a, .heading-large a,
+h4 a, .heading-body a,
+h5 a,
+h6 a {
+  text-decoration: none;
+}
+
+p {
+  margin: 28px 0 28px 0;
+}
+
+ul, ol {
+  margin: 14px 0 28px 0;
+  padding-left: 1em;
+  letter-spacing: 0.01em;
+  list-style-position: outside;
+}
+
+ul {
+  list-style-type: disc;
+}
+
+ol {
+  list-style-type: decimal;
+}
+
+li {
+  margin: 0 0 14px 0;
+  padding-left: 0;
+}
+
+ul.link-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+a {
+  color: #0072c6;
+  text-decoration: underline;
+}
+
+a:hover {
+  color: #66B0E8;
+}
+
+a:visited {
+  color: #4c2c92;
+}
+
+body {
   margin: 0;
   padding: 0;
   background-color: #F7FCFF;
 }
 
-.header-container,
+.prototype-warning-inner, #global-header,
 .content {
   max-width: 960px;
   margin: 0 auto;
@@ -124,7 +188,7 @@ body {
 }
 
 @media (min-width: 980px) {
-  .header-container,
+  .prototype-warning-inner, #global-header,
   .content {
     padding-left: 0;
     padding-right: 0;
@@ -132,7 +196,7 @@ body {
 }
 
 .content {
-  padding-top: 32px;
+  padding-top: 28px;
 }
 
 @media (min-width: 640px) {
@@ -235,20 +299,21 @@ body {
   /*background-color: #eee;*/
 }
 
+.prototype-warning {
+  background-color: #425563;
+  color: #d9e1e2;
+  font-size: 16px;
+}
+
+.prototype-warning-inner {
+  padding-bottom: 7px;
+  padding-top: 7px;
+}
+
 #global-header {
-  border-bottom: 4px solid #0072C6;
-}
-
-.header-container {
-  padding-top: 16px;
-  padding-bottom: 16px;
-}
-
-@media (min-width: 500px) {
-  .header-container {
-    padding-top: 24px;
-    padding-bottom: 16px;
-  }
+  border-bottom: 4px solid #0072c6;
+  padding-top: 14px;
+  padding-bottom: 14px;
 }
 
 .header-logo {
@@ -269,26 +334,26 @@ body {
   display: none;
   box-sizing: border-box;
   float: left;
-  height: 16px;
+  height: 14px;
   width: 300px;
   padding: 0;
   margin: 0;
-  background-color: #ffffff;
+  background-color: #fff;
   border: 1px solid #00365D;
 }
 
 @media (min-width: 640px) {
   .header-search input[type='text'] {
     display: block;
-    height: 40px;
+    height: 35px;
   }
 }
 
 .header-search button {
   box-sizing: border-box;
   float: left;
-  height: 32px;
-  width: 32px;
+  height: 28px;
+  width: 28px;
   margin: 0;
   text-indent: -999em;
   background: url("/images/icon-search.svg") center center no-repeat #00365D;
@@ -299,6 +364,6 @@ body {
 @media (min-width: 640px) {
   .header-search button {
     display: block;
-    height: 40px;
+    height: 35px;
   }
 }

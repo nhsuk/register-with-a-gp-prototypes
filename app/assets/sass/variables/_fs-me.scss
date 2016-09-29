@@ -1,24 +1,51 @@
-//@import url('//fast.fonts.net/cssapi/4c65968f-c33e-4eb6-9a5d-ab4f81a0543f.css');
-//$family: "Frutiger W01", sans-serif;
+@font-face {
+  font-family: 'FS Me';
+  src: url('/fonts/FSMeWeb-Light.woff');
+  font-weight: 200;
+  font-style: normal;
+}
 
-// For offline / train dev:
-$family: "Frutiger Neue", "Frutiger", sans-serif;
+@font-face {
+  font-family: 'FS Me';
+  src: url('/fonts/FSMeWeb-Regular.woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'FS Me';
+  src: url('/fonts/FSMeWeb-Bold.woff');
+  font-weight: 600;
+  font-style: bold;
+}
+
+@font-face {
+  font-family: 'FS Me';
+  src: url('/fonts/FSMeWeb-Heavy.woff');
+  font-weight: 800;
+  font-style: bold;
+}
 
 $body: 20px;
-$leading: 14px;//16px;
+$leading: 16px;
+$family: "FS Me", sans-serif;
 $lightweight: 200;
 $bodyweight: 400;
-$boldweight: 700;
+$boldweight: 600;
 $heavyweight: 800;
-$smallprint: 16px;
+$smallprint: 14px;
 $feedback: 16px;
 $callout: 18px;
 
 body {
   font-family: $family;
-  font-weight: $bodyweight;
+  font-weight: $lightweight;
   font-size: $body;
   line-height: $leading*2;
+
+  @include media(640px) {
+      font-weight: $bodyweight;
+  }
 }
 
 // Reading width
@@ -27,7 +54,7 @@ body {
 }
 
 h1 {
-  margin: 0; padding: $leading 0;
+  margin: $leading 0;
   font-size: 40px;
   font-weight: $boldweight;
   line-height: $leading*3;
@@ -35,19 +62,20 @@ h1 {
   @include media(mid) {
     font-size: 48px;
     line-height: $leading*4;
+    letter-spacing: -0.02em;
   }
 
   @include media(large) {
-    font-size: 56px;
+    font-size: 64px;
     line-height: $leading*5;
   }
 }
 
 h2 {
-  margin: 0; padding: $leading 0 0 0;
-  font-size: 30px;
+  margin: $leading 0;
   font-weight: $boldweight;
-  line-height: $leading*3;
+  line-height: $leading*2.5;
+  font-size: 28px;
 
   @include media(mid) {
     font-size: 32px;
@@ -61,17 +89,21 @@ h2 {
 }
 
 h3 {
-  margin: 0; padding: $leading 0;
+  margin: $leading 0;
   font-size: 24px;
   font-weight: $boldweight;
   line-height: $leading*2;
 }
 
 h4 {
-  margin: 0; padding: $leading 0;
+  margin: $leading 0;
   font-size: $body;
   font-weight: $boldweight;
   line-height: $leading*2;
+}
+
+p {
+  letter-spacing: 0.01em;
 }
 
 p.lede {
