@@ -34,7 +34,7 @@ app.use(function (req, res, next) {
 })
 
 // Middleware to serve static assets
-app.use('/public', express.static(path.join(__dirname, '/public')))
+app.use('/', express.static(path.join(__dirname, '/public')))
 
 // Application settings
 app.set('view engine', 'html')
@@ -45,6 +45,26 @@ nunjucks.configure('./app/views', {
     autoescape: true,
     express: app,
     noCache: true
+});
+
+// auto render any view that exists
+app.get(/^\/([^.]+)$/, function (req, res) {
+  var path = (req.params[0])
+
+  res.render(path, function (err, html) {
+    if (err) {
+      res.render(path + '/index', function (err2, html) {
+        if (err2) {
+          console.log(err)
+          res.status(404).send(err + '<br>' + err2)
+        } else {
+          res.end(html)
+        }
+      })
+    } else {
+      res.end(html)
+    }
+  })
 });
 
 // Force HTTPs on production connections
