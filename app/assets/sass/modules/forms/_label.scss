@@ -1,0 +1,12 @@
+label {
+  display: block;
+  width: 100%;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: $boldweight;
+  line-height: inherit;
+
+  &:focus {
+    outline: 2px solid $yellow2;
+  }
+}

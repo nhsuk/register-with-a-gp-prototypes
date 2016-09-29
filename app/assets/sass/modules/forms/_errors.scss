@@ -1,0 +1,26 @@
+.error-summary {
+  color: $red;
+  margin: $leading 0;
+  padding: 0 $leading;
+  background: $white;
+  border: 4px solid $red;
+
+  a {
+    color: $red;
+  }
+}
+.error-summary-heading {
+  font-size: $body;
+}
+
+.form-group.-errors {
+  input,
+  textarea {
+    border-color: $red;
+  }
+}
+
+.error-hint {
+  display: block;
+  color: $red;
+}

@@ -1,3 +1,72 @@
 {% extends '_layouts/layout.html' %}
 
 {% block page_title %}Form elements : {{serviceName}}{% endblock %}
+
+{% block content %}
+
+<h1>Example form</h1>
+
+<form action="" method="get" name="form-example">
+
+  <fieldset>
+    <legend>Legend</legend>
+    <div class="form-group">
+      <label for="example-0">
+        Form label
+      </label>
+      <input type="text" name="example-0" id="example-0" value="">
+    </div>
+    <div class="form-group">
+      <label for="example-0">
+        Form label
+      </label>
+      <input type="text" name="example-0" id="example-0" value="">
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Legend</legend>
+    <div class="form-group">
+      <label for="example-1">
+        Form label
+      </label>
+      <textarea rows="4" name="example-1" id="example-1"></textarea>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Legend</legend>
+    <label for="radio-1" class="block-label">
+      <input id="radio-1" type="radio" name="radio-group" value="radio-1">
+      Radio 1
+    </label>
+    <label for="radio-2" class="block-label">
+      <input id="radio-2" type="radio" name="radio-group" value="radio-2">
+      Radio 2
+    </label>
+    <p>or</p>
+    <label for="radio-3" class="block-label">
+      <input id="radio-3" type="radio" name="radio-group" value="radio-3">
+      Radio 2
+    </label>
+  </fieldset>
+
+  <fieldset>
+    <legend>Legend</legend>
+    <label for="checkbox-1" class="block-label">
+      <input id="checkbox-1" name="checkbox-group" type="checkbox" value="checkbox-1">
+      Checkbox 1
+    </label>
+    <label for="checkbox-2" class="block-label">
+      <input id="checkbox-2" name="checkbox-group" type="checkbox" value="checkbox-2">
+      Checkbox 2
+    </label>
+    <label for="checkbox-3" class="block-label">
+      <input id="checkbox-3" name="checkbox-group" type="checkbox" value="checkbox-3">
+      Checkbox 3
+    </label>
+</fieldset>
+
+</form>
+
+{% endblock %}

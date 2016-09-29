@@ -16,6 +16,12 @@
 @import "modules/layout/layout";
 @import "modules/layout/grid";
 
-//Individual modules
+// Modules
 @import "modules/banner/prototype";
 @import "modules/header-global/header-global";
+
+@import "modules/forms/errors";
+@import "modules/forms/input";
+@import "modules/forms/label";
+@import "modules/forms/radio-checkbox";
+@import "modules/forms/textarea";
