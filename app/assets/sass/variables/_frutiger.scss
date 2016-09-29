@@ -1,0 +1,90 @@
+//@import url('//fast.fonts.net/cssapi/4c65968f-c33e-4eb6-9a5d-ab4f81a0543f.css');
+//$family: "Frutiger W01", sans-serif;
+
+// For offline / train dev:
+$family: "Frutiger Neue", "Frutiger", sans-serif;
+
+$body: 20px;
+$leading: 14px;//16px;
+$lightweight: 200;
+$bodyweight: 400;
+$boldweight: 700;
+$heavyweight: 800;
+$smallprint: 16px;
+$feedback: 16px;
+$callout: 18px;
+
+body {
+  font-family: $family;
+  font-weight: $bodyweight;
+  font-size: $body;
+  line-height: $leading*2;
+}
+
+// Reading width
+.measure {
+  max-width: 34em;
+}
+
+h1 {
+  margin: 0; padding: $leading 0;
+  font-size: 40px;
+  font-weight: $boldweight;
+  line-height: $leading*3;
+
+  @include media(mid) {
+    font-size: 48px;
+    line-height: $leading*4;
+  }
+
+  @include media(large) {
+    font-size: 56px;
+    line-height: $leading*5;
+  }
+}
+
+h2 {
+  margin: 0; padding: $leading 0 0 0;
+  font-size: 30px;
+  font-weight: $boldweight;
+  line-height: $leading*3;
+
+  @include media(mid) {
+    font-size: 32px;
+    line-height: $leading*3;
+  }
+
+  @include media(large) {
+    font-size: 36px;
+    line-height: $leading*3;
+  }
+}
+
+h3 {
+  margin: 0; padding: $leading 0;
+  font-size: 24px;
+  font-weight: $boldweight;
+  line-height: $leading*2;
+}
+
+h4 {
+  margin: 0; padding: $leading 0;
+  font-size: $body;
+  font-weight: $boldweight;
+  line-height: $leading*2;
+}
+
+p.lede {
+  margin: 0 0 $leading*2 0;
+  font-size: $body;
+  letter-spacing: 0.03em;
+  line-height: $leading*2;
+  font-weight: $lightweight;
+  color: $light-blue3;
+
+}
+
+.smallprint {
+  font-size: $smallprint;
+  color: $smallprint-grey;
+}

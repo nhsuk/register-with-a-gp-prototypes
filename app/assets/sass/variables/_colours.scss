@@ -1,0 +1,65 @@
+// NHS Colour palette, from http://www.nhsidentity.nhs.uk/
+$pure-black: #000;
+$black: #231f20;
+$white: #fff;
+
+// Newer colour palette items
+$blue: #0072c6;
+$nhs-blue: $blue;
+$dark-grey: #425563;
+$pale-grey: #d9e1e2;
+
+
+/*
+
+these should be a scale of tint: blue00, blue10...blue70....
+i.e. NHS is blue50 as thats a median point, and if we add dark or light tints,
+we can add other blues, named like blue40 (for a lighter blue) or blue60 for a darker blue.
+
+*/
+$dark-blue: #00365D;
+$dark-blue2: #006BBD;
+$light-blue: #1D86D1; /*#0988E7;*/
+$light-blue2: #66B0E8;
+$light-blue3: #A8E8FF; /* #70C1FF */
+$blue2: #0091C9;
+
+$yellow: #FFED00;
+$yellow2: #FFB81C;
+$yellow-dark: #cc9316;
+
+$red: #D81E05;
+$red-dark: shade($red, 20%) ;
+$green: #76BD18;
+$green-dark: #6AAB20;
+$feedback-button-green: #417505;
+
+$grey: #e6e6e6;
+$grey-2: rgba(118,134,146,0.2);
+$light-grey:  rgba(66,85,99,.15);
+$hr-white-30: rgba(white, 0.3);
+$opt-out-button-grey: #999999;
+$smallprint-grey: #666666;
+
+$feedback-alert-strip: #FFE799;
+
+// Semantic colour names
+
+$page-colour: #F7FCFF;
+
+  /*
+    colours to test:
+    very light grey:F7F7F7
+    very light NHS blue: EBF6FF
+  */
+
+$header-bottom-margin: $hr-white-30;
+$text-colour: #0b0c0c; //off blacks
+
+$link-colour: $blue;
+$hover-link-colour: $light-blue2;
+$visited-link-colour: #4c2c92;
+$link-colour-on-blue: $white;
+$visited-link-colour-on-blue: #D4EFFF; /*#5CAEED; /* #0AC0FC; E2EEFB */
+
+$focus-colour: $yellow;

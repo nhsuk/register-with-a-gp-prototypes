@@ -1,3 +1,23 @@
-HELLO FROM INDEX
+{% extends '_layouts/layout.html' %}
 
-TEST A CHANGE
+{% block page_title %}Index : {{serviceName}}{% endblock %}
+
+{% block header %}
+  <header role="banner" id="global-header">
+    <div class="header-container">
+      <a href="/" class="header-logo" title="Go to the index page">
+        <img src="/public/images/nhs-logotype-blue.svg" alt="NHS" width="79" height="32" />
+      </a>
+    </div>
+  </header>
+{% endblock %}
+
+{% block content %}
+  <p>Hello world</p>
+  <ul>
+    <li>Test <a href="#">Link</a></li>
+    <li>Test <a href="#">Link</a></li>
+  </ul>
+{% endblock %}
+
+{% block footer %}{% endblock %}

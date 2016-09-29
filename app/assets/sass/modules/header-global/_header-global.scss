@@ -1,0 +1,56 @@
+#global-header {
+  @extend %block;
+  @extend %contain-floats;
+  border-bottom: 4px solid $nhs-blue;
+  padding-top: $leading;
+  padding-bottom: $leading;
+}
+
+.header-logo {
+  display: block;
+  float: left;
+
+  img {
+    display: block;
+  }
+}
+
+.header-search {
+  display: block;
+  float: right;
+
+  input[type='text'] {
+    display: none;  // This is not right. Work on interaction for this.
+    box-sizing: border-box;
+    float: left;
+    height: $leading;
+    width: 300px;
+    padding: 0;
+    margin: 0;
+    background-color: $white;
+    border: 1px solid $dark-blue;
+
+    @include media(640px) {
+      display: block;
+      height: $leading*2.5;
+    }
+  }
+
+  button {
+    box-sizing: border-box;
+    float: left;
+    height: $leading*2;
+    width: $leading*2;
+    margin: 0;
+    text-indent: -999em;
+    background: url("/images/icon-search.svg") center center no-repeat $dark-blue;
+    background-size: 16px;
+    border: 1px solid $dark-blue;
+
+    @include media(640px) {
+      display: block;
+      height: $leading*2.5;
+    }
+
+  }
+}
