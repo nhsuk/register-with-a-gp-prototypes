@@ -323,49 +323,13 @@ body {
 
 .header-logo img {
   display: block;
+  width: 79px;
+  height: 32px;
 }
 
-.header-search {
-  display: block;
-  float: right;
-}
-
-.header-search input[type='text'] {
-  display: none;
-  box-sizing: border-box;
-  float: left;
-  height: 14px;
-  width: 300px;
-  padding: 0;
-  margin: 0;
-  background-color: #fff;
-  border: 1px solid #00365D;
-}
-
-@media (min-width: 640px) {
-  .header-search input[type='text'] {
-    display: block;
-    height: 35px;
-  }
-}
-
-.header-search button {
-  box-sizing: border-box;
-  float: left;
-  height: 28px;
-  width: 28px;
-  margin: 0;
-  text-indent: -999em;
-  background: url("/images/icon-search.svg") center center no-repeat #00365D;
-  background-size: 16px;
-  border: 1px solid #00365D;
-}
-
-@media (min-width: 640px) {
-  .header-search button {
-    display: block;
-    height: 35px;
-  }
+.service-name {
+  line-height: 32px;
+  margin-left: 14px;
 }
 
 .error-summary {
@@ -455,7 +419,7 @@ label:focus {
   cursor: pointer;
 }
 
-@media (min-width: 641px) {
+@media (min-width: 500px) {
   .block-label {
     float: left;
     padding-top: 7px;
