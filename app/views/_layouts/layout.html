@@ -14,9 +14,7 @@
 
     {% block header_before %}{% endblock %}
 
-    <header role="banner">
-      {% block header %}{% endblock %}
-    </header>
+    {% include '_includes/masthead.html' %}
 
     <main id="content" role="main" class="content">
       {% block content %}{% endblock %}
