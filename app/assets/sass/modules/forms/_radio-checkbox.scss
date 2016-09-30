@@ -36,7 +36,7 @@
     content: "";
     border: 3px solid $nhs-blue;
     border-radius: 50%;
-    background: $white;
+    background: $pure-white;
     width: 34px;
     height: 34px;
     position: absolute;
@@ -61,7 +61,7 @@
   &.selection-button-checkbox::before {
     content: "";
     border: 3px solid $nhs-blue;
-    background: $white;
+    background: $pure-white;
     width: 34px;
     height: 34px;
     position: absolute;
