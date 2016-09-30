@@ -9,10 +9,17 @@ $leading: 14px;//16px;
 $lightweight: 200;
 $bodyweight: 400;
 $boldweight: 700;
-$heavyweight: 800;
 $smallprint: 16px;
-$feedback: 16px;
-$callout: 18px;
+
+
+/*
+56px
+32px,
+36px,
+26px,
+21px,
+18px,
+*/
 
 body {
   font-family: $family;
@@ -27,9 +34,9 @@ body {
 }
 
 h1 {
-  margin: 0; padding: $leading 0;
+  margin: $leading 0;
   font-size: 40px;
-  font-weight: $boldweight;
+  font-weight: $bodyweight;
   line-height: $leading*3;
 
   @include media(mid) {
@@ -72,16 +79,6 @@ h4 {
   font-size: $body;
   font-weight: $boldweight;
   line-height: $leading*2;
-}
-
-p.lede {
-  margin: 0 0 $leading*2 0;
-  font-size: $body;
-  letter-spacing: 0.03em;
-  line-height: $leading*2;
-  font-weight: $lightweight;
-  color: $light-blue3;
-
 }
 
 .smallprint {

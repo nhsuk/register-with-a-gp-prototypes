@@ -23,6 +23,14 @@ we can add other blues, named like blue40 (for a lighter blue) or blue60 for a d
     very light NHS blue: EBF6FF
   */
 /*#5CAEED; /* #0AC0FC; E2EEFB */
+/*
+56px
+32px,
+36px,
+26px,
+21px,
+18px,
+*/
 body {
   font-family: "Frutiger Neue", "Frutiger", sans-serif;
   font-weight: 400;
@@ -34,23 +42,22 @@ body {
   max-width: 34em;
 }
 
-h1, .heading-xxlarge {
-  margin: 0;
-  padding: 14px 0;
+h1, .heading-xxlarge, .primary {
+  margin: 14px 0;
   font-size: 40px;
-  font-weight: 700;
+  font-weight: 400;
   line-height: 42px;
 }
 
 @media (min-width: 500px) {
-  h1, .heading-xxlarge {
+  h1, .heading-xxlarge, .primary {
     font-size: 48px;
     line-height: 56px;
   }
 }
 
 @media (min-width: 980px) {
-  h1, .heading-xxlarge {
+  h1, .heading-xxlarge, .primary {
     font-size: 56px;
     line-height: 70px;
   }
@@ -94,15 +101,6 @@ h4, .heading-body {
   line-height: 28px;
 }
 
-p.lede {
-  margin: 0 0 28px 0;
-  font-size: 20px;
-  letter-spacing: 0.03em;
-  line-height: 28px;
-  font-weight: 200;
-  color: #A8E8FF;
-}
-
 .smallprint {
   font-size: 16px;
   color: #666666;
@@ -122,7 +120,7 @@ body {
 }
 
 /* remove undelines for a tags used as anchors */
-h1 a, .heading-xxlarge a,
+h1 a, .heading-xxlarge a, .primary a,
 h2 a, .heading-xlarge a,
 h3 a, .heading-large a,
 h4 a, .heading-body a,
@@ -311,7 +309,7 @@ body {
 }
 
 #global-header {
-  border-bottom: 4px solid #0072c6;
+  border-bottom: 3px solid #0072c6;
   padding-top: 14px;
   padding-bottom: 14px;
 }
@@ -328,6 +326,7 @@ body {
 }
 
 .service-name {
+  color: #425563;
   line-height: 32px;
   margin-left: 14px;
 }
@@ -348,14 +347,14 @@ body {
   font-size: 20px;
 }
 
-.form-group.-errors input,
-.form-group.-errors textarea {
-  border-color: #D81E05;
-}
-
 .error-hint {
   display: block;
   color: #D81E05;
+}
+
+.form-group.-errors {
+  border-left: 7px solid #D81E05;
+  padding-left: 28px;
 }
 
 fieldset {
@@ -396,23 +395,25 @@ input[type='text']:focus {
   box-shadow: 0 0 0 5px #F7E214;
 }
 
+/*.form-group.-errors {
+  input[type='text'] {
+    border-color: $error-colour;
+  }
+}*/
 label {
   display: block;
   width: 100%;
-  font-family: inherit;
-  font-size: inherit;
-  font-weight: 700;
-  line-height: inherit;
 }
 
-label:focus {
-  outline: 2px solid #FFB81C;
+label .form-hint {
+  display: block;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 28px;
 }
 
 .block-label {
   display: block;
-  float: none;
-  clear: left;
   position: relative;
   padding: 8px 10px 9px 50px;
   margin-bottom: 10px;
@@ -421,7 +422,6 @@ label:focus {
 
 @media (min-width: 500px) {
   .block-label {
-    float: left;
     padding-top: 7px;
     padding-bottom: 7px;
   }
@@ -516,6 +516,12 @@ label:focus {
   opacity: 1;
 }
 
+/*.form-group.-errors {
+  .selection-button-radio::before,
+  .selection-button-checkbox::before {
+    border-color: $error-colour;
+  }
+}*/
 textarea {
   box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -543,3 +549,14 @@ textarea:focus {
   -moz-box-shadow: 0 0 0 5px #F7E214;
   box-shadow: 0 0 0 5px #F7E214;
 }
+
+/*.form-group.-errors {
+  textarea {
+    border-color: $error-colour;
+
+    background-image: -webkit-linear-gradient(top, $error-colour 0, rgba(255,255,255,0) 1px);
+    background-image: -moz-linear-gradient(top, $error-colour 0, rgba(255,255,255,0) 1px);
+    background-image: -o-linear-gradient(top, $error-colour 0, rgba(255,255,255,0) 1px);
+    background-image: linear-gradient(to bottom, $error-colour 0, rgba(255,255,255,0) 1px);
+  }
+}*/

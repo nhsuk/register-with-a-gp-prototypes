@@ -13,14 +13,12 @@
   font-size: $body;
 }
 
-.form-group.-errors {
-  input,
-  textarea {
-    border-color: $red;
-  }
-}
-
 .error-hint {
   display: block;
   color: $red;
+}
+
+.form-group.-errors {
+  border-left: $leading/2 solid $error-colour;
+  padding-left: $leading*2;
 }

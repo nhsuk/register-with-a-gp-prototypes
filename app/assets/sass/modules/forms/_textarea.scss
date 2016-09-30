@@ -26,3 +26,14 @@ textarea {
     box-shadow: 0 0 0 5px $focus-colour;
   }
 }
+
+/*.form-group.-errors {
+  textarea {
+    border-color: $error-colour;
+
+    background-image: -webkit-linear-gradient(top, $error-colour 0, rgba(255,255,255,0) 1px);
+    background-image: -moz-linear-gradient(top, $error-colour 0, rgba(255,255,255,0) 1px);
+    background-image: -o-linear-gradient(top, $error-colour 0, rgba(255,255,255,0) 1px);
+    background-image: linear-gradient(to bottom, $error-colour 0, rgba(255,255,255,0) 1px);
+  }
+}*/

@@ -1,12 +1,15 @@
 label {
   display: block;
   width: 100%;
-  font-family: inherit;
-  font-size: inherit;
-  font-weight: $boldweight;
-  line-height: inherit;
 
-  &:focus {
-    outline: 2px solid $yellow2;
+  .form-hint {
+    display: block;
+    font-size: $body;
+    font-weight: $bodyweight;
+    line-height: $leading*2;
   }
+}
+
+.primary {
+  @extend h1;
 }

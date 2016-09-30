@@ -1,14 +1,11 @@
 .block-label {
   display: block;
-  float: none;
-  clear: left;
   position: relative;
   padding: 8px 10px 9px 50px;
   margin-bottom: 10px;
   cursor: pointer;
 
   @include media(mid) {
-    float: left;
     padding-top: 7px;
     padding-bottom: 7px;
   }
@@ -106,3 +103,10 @@
     opacity: 1;
   }
 }
+
+/*.form-group.-errors {
+  .selection-button-radio::before,
+  .selection-button-checkbox::before {
+    border-color: $error-colour;
+  }
+}*/
