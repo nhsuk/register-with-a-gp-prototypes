@@ -1,0 +1,15 @@
+label {
+  display: block;
+  width: 100%;
+
+  .form-hint {
+    display: block;
+    font-size: $body;
+    font-weight: $bodyweight;
+    line-height: $leading*2;
+  }
+}
+
+.primary {
+  @extend h1;
+}

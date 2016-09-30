@@ -1,0 +1,153 @@
+{% extends '_layouts/layout.html' %}
+
+{% block page_title %}Form elements : {{serviceName}}{% endblock %}
+
+{% block content %}
+
+<h1>Example form</h1>
+
+<form action="" method="get" class="measure">
+
+  <fieldset>
+    <legend>Legend</legend>
+    <div class="form-group">
+      <label for="example-input-0" class="primary">
+        Form label .primary
+        <span class="form-hint">
+          Form hint .form-hint
+        </span>
+      </label>
+      <input type="text" name="example-input-0" id="example-input-0" value="">
+    </div>
+    <div class="form-group">
+      <label for="example-input-1">
+        Form label
+      </label>
+      <input type="text" name="example-input-1" id="example-input-1" value="">
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Legend</legend>
+    <div class="form-group">
+      <label for="example-textarea-0">
+        Your address this is a really long and wrapping question
+        <span class="form-hint">As you would write it on an envelope</span>
+      </label>
+      <textarea rows="4" name="example-textarea-0" id="example-textarea-0"></textarea>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend class="primary">Legend .primary</legend>
+    <div class="form-group">
+      <label for="radio-1" class="block-label">
+        <input id="radio-1" type="radio" name="radio-group" value="radio-1">
+        Radio 1
+      </label>
+      <label for="radio-2" class="block-label">
+        <input id="radio-2" type="radio" name="radio-group" value="radio-2">
+        Radio 2
+      </label>
+      <p>or</p>
+      <label for="radio-3" class="block-label">
+        <input id="radio-3" type="radio" name="radio-group" value="radio-3">
+        Radio 3
+      </label>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Legend</legend>
+    <div class="form-group">
+      <label for="checkbox-1" class="block-label">
+        <input id="checkbox-1" name="checkbox-group" type="checkbox" value="checkbox-1">
+        Checkbox 1
+      </label>
+      <label for="checkbox-2" class="block-label">
+        <input id="checkbox-2" name="checkbox-group" type="checkbox" value="checkbox-2">
+        Checkbox 2
+      </label>
+      <label for="checkbox-3" class="block-label">
+        <input id="checkbox-3" name="checkbox-group" type="checkbox" value="checkbox-3">
+        Checkbox 3
+      </label>
+    </div>
+  </fieldset>
+
+</form>
+
+<h2>Errors</h2>
+
+<form action="" method="get" class="measure">
+
+  <fieldset>
+    <legend>Legend</legend>
+    <div class="error-summary">
+      <h3>Example error states</h3>
+      <p>This is a set of errors.</p>
+    </div>
+    <div class="form-group -errors">
+      <label for="error-example-input-0">
+        Form label
+      </label>
+      <input type="text" name="error-example-input-0" id="error-example-input-0" value="">
+    </div>
+    <div class="form-group -errors">
+      <label for="error-example-input-1">
+        Form label
+      </label>
+      <input type="text" name="error-example-input-1" id="error-example-input-1" value="">
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Legend</legend>
+    <div class="form-group -errors">
+      <label for="error-example-textarea-0">
+        Form label
+      </label>
+      <textarea rows="4" name="error-example-textarea-0" id="error-example-textarea-0"></textarea>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Legend</legend>
+    <div class=" form-group -errors">
+      <label for="error-radio-1" class="block-label">
+        <input id="error-radio-1" type="radio" name="error-radio-group" value="radio-1">
+        Radio 1
+      </label>
+      <label for="error-radio-2" class="block-label">
+        <input id="error-radio-2" type="radio" name="error-radio-group" value="radio-2">
+        Radio 2
+      </label>
+      <p>or</p>
+      <label for="error-radio-3" class="block-label">
+        <input id="error-radio-3" type="radio" name="error-radio-group" value="radio-3">
+        Radio 3
+      </label>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Legend</legend>
+    <div class=" form-group -errors">
+      <label for="error-checkbox-1" class="block-label">
+        <input id="error-checkbox-1" name="error-checkbox-group" type="checkbox" value="checkbox-1">
+        Checkbox 1
+      </label>
+      <label for="error-checkbox-2" class="block-label">
+        <input id="error-checkbox-2" name="error-checkbox-group" type="checkbox" value="checkbox-2">
+        Checkbox 2
+      </label>
+      <label for="error-checkbox-3" class="block-label">
+        <input id="error-checkbox-3" name="error-checkbox-group" type="checkbox" value="checkbox-3">
+        Checkbox 3
+      </label>
+    </div>
+  </fieldset>
+
+</form>
+
+{% endblock %}

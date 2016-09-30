@@ -1,0 +1,21 @@
+.error-summary {
+  color: $error-colour;
+  a {
+    color: $error-colour;
+  }
+}
+
+.error-hint {
+  display: block;
+  color: $error-colour;
+}
+
+.form-group.-errors {
+  input,
+  textarea {
+    border-color: $error-colour;
+  }
+  textarea {
+
+  }
+}

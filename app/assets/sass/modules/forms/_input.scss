@@ -1,0 +1,25 @@
+input[type='text'] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  display: block; // Remove margin under textarea in Chrome and FF
+  width: 100%;
+  margin: $leading 0 $leading*2 0;
+  padding: $leading/2 $leading/4;
+  border: 3px solid $nhs-blue;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: $bodyweight;
+  line-height: $leading*3;
+
+  &:focus {
+    outline: 0;
+    -webkit-box-shadow: 0 0 0 5px $focus-colour;
+    -moz-box-shadow: 0 0 0 5px $focus-colour;
+    box-shadow: 0 0 0 5px $focus-colour;
+  }
+}
