@@ -1,6 +1,7 @@
 .block-label {
   display: block;
   position: relative;
+  width: auto;
   padding: 8px 10px 9px 50px;
   margin-bottom: 10px;
   cursor: pointer;
@@ -103,10 +104,3 @@
     opacity: 1;
   }
 }
-
-/*.form-group.-errors {
-  .selection-button-radio::before,
-  .selection-button-checkbox::before {
-    border-color: $error-colour;
-  }
-}*/

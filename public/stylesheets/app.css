@@ -174,7 +174,7 @@ a:visited {
 body {
   margin: 0;
   padding: 0;
-  background-color: #F7FCFF;
+  background-color: #fff;
 }
 
 .prototype-warning-inner, #global-header,
@@ -333,18 +333,10 @@ body {
 
 .error-summary {
   color: #D81E05;
-  margin: 14px 0;
-  padding: 0 14px;
-  background: #fff;
-  border: 4px solid #D81E05;
 }
 
 .error-summary a {
   color: #D81E05;
-}
-
-.error-summary-heading {
-  font-size: 20px;
 }
 
 .error-hint {
@@ -352,9 +344,9 @@ body {
   color: #D81E05;
 }
 
-.form-group.-errors {
-  border-left: 7px solid #D81E05;
-  padding-left: 28px;
+.form-group.-errors input,
+.form-group.-errors textarea {
+  border-color: #D81E05;
 }
 
 fieldset {
@@ -374,13 +366,17 @@ fieldset legend {
 }
 
 input[type='text'] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   display: block;
   width: 100%;
   margin: 14px 0 28px 0;
-  padding: 0 3.5px;
+  padding: 7px 3.5px;
   border: 3px solid #0072c6;
   font-family: inherit;
   font-size: inherit;
@@ -395,11 +391,6 @@ input[type='text']:focus {
   box-shadow: 0 0 0 5px #F7E214;
 }
 
-/*.form-group.-errors {
-  input[type='text'] {
-    border-color: $error-colour;
-  }
-}*/
 label {
   display: block;
   width: 100%;
@@ -415,6 +406,7 @@ label .form-hint {
 .block-label {
   display: block;
   position: relative;
+  width: auto;
   padding: 8px 10px 9px 50px;
   margin-bottom: 10px;
   cursor: pointer;
@@ -516,31 +508,29 @@ label .form-hint {
   opacity: 1;
 }
 
-/*.form-group.-errors {
-  .selection-button-radio::before,
-  .selection-button-checkbox::before {
-    border-color: $error-colour;
-  }
-}*/
 textarea {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   display: block;
   width: 100%;
   margin: 14px 0 28px 0;
-  padding: 0 3.5px;
+  padding: 7px 3.5px;
   border: 3px solid #0072c6;
   font-family: inherit;
   font-size: inherit;
   font-weight: 400;
-  line-height: inherit;
-  background-image: -webkit-linear-gradient(top, #0072c6 0, rgba(255, 255, 255, 0) 1px);
-  background-image: -moz-linear-gradient(top, #0072c6 0, rgba(255, 255, 255, 0) 1px);
-  background-image: -o-linear-gradient(top, #0072c6 0, rgba(255, 255, 255, 0) 1px);
-  background-image: linear-gradient(to bottom, #0072c6 0, rgba(255, 255, 255, 0) 1px);
+  line-height: 42px;
+  background-image: -webkit-linear-gradient(top, #d9e1e2 0, rgba(255, 255, 255, 0) 1px);
+  background-image: -moz-linear-gradient(top, #d9e1e2 0, rgba(255, 255, 255, 0) 1px);
+  background-image: -o-linear-gradient(top, #d9e1e2 0, rgba(255, 255, 255, 0) 1px);
+  background-image: linear-gradient(to bottom, #d9e1e2 0, rgba(255, 255, 255, 0) 1px);
   background-repeat: repeat-y;
-  background-size: 100% 28px;
+  background-size: 100% 42px;
 }
 
 textarea:focus {
@@ -549,14 +539,3 @@ textarea:focus {
   -moz-box-shadow: 0 0 0 5px #F7E214;
   box-shadow: 0 0 0 5px #F7E214;
 }
-
-/*.form-group.-errors {
-  textarea {
-    border-color: $error-colour;
-
-    background-image: -webkit-linear-gradient(top, $error-colour 0, rgba(255,255,255,0) 1px);
-    background-image: -moz-linear-gradient(top, $error-colour 0, rgba(255,255,255,0) 1px);
-    background-image: -o-linear-gradient(top, $error-colour 0, rgba(255,255,255,0) 1px);
-    background-image: linear-gradient(to bottom, $error-colour 0, rgba(255,255,255,0) 1px);
-  }
-}*/

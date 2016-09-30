@@ -1,23 +1,27 @@
 textarea {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   display: block; // Remove margin under textarea in Chrome and FF
   width: 100%;
   margin: $leading 0 $leading*2 0;
-  padding: 0 $leading/4;
+  padding: $leading/2 $leading/4;
   border: 3px solid $nhs-blue;
   font-family: inherit;
   font-size: inherit;
   font-weight: $bodyweight;
-  line-height: inherit;
+  line-height: $leading*3;
 
-  background-image: -webkit-linear-gradient(top, $nhs-blue 0, rgba(255,255,255,0) 1px);
-  background-image: -moz-linear-gradient(top, $nhs-blue 0, rgba(255,255,255,0) 1px);
-  background-image: -o-linear-gradient(top, $nhs-blue 0, rgba(255,255,255,0) 1px);
-  background-image: linear-gradient(to bottom, $nhs-blue 0, rgba(255,255,255,0) 1px);
+  background-image: -webkit-linear-gradient(top, $pale-grey 0, rgba(255,255,255,0) 1px);
+  background-image: -moz-linear-gradient(top, $pale-grey 0, rgba(255,255,255,0) 1px);
+  background-image: -o-linear-gradient(top, $pale-grey 0, rgba(255,255,255,0) 1px);
+  background-image: linear-gradient(to bottom, $pale-grey 0, rgba(255,255,255,0) 1px);
   background-repeat: repeat-y;
-  background-size: 100% $leading*2;
+  background-size: 100% $leading*3;
 
   &:focus {
     outline: 0;
@@ -26,14 +30,3 @@ textarea {
     box-shadow: 0 0 0 5px $focus-colour;
   }
 }
-
-/*.form-group.-errors {
-  textarea {
-    border-color: $error-colour;
-
-    background-image: -webkit-linear-gradient(top, $error-colour 0, rgba(255,255,255,0) 1px);
-    background-image: -moz-linear-gradient(top, $error-colour 0, rgba(255,255,255,0) 1px);
-    background-image: -o-linear-gradient(top, $error-colour 0, rgba(255,255,255,0) 1px);
-    background-image: linear-gradient(to bottom, $error-colour 0, rgba(255,255,255,0) 1px);
-  }
-}*/
