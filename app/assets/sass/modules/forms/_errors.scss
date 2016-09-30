@@ -15,7 +15,8 @@
   textarea {
     border-color: $error-colour;
   }
-  textarea {
-
+  .js-enabled & .selection-button-radio::before,
+  .js-enabled & .selection-button-checkbox::before {
+    border-color: $error-colour;
   }
 }

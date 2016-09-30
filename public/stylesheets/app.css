@@ -349,6 +349,11 @@ body {
   border-color: #D81E05;
 }
 
+.js-enabled .form-group.-errors .selection-button-radio::before,
+.js-enabled .form-group.-errors .selection-button-checkbox::before {
+  border-color: #D81E05;
+}
+
 fieldset {
   border: 0;
   padding: 0.01em 0 0 0;
