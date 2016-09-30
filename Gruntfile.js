@@ -61,6 +61,10 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks(task)
   })
 
+  grunt.registerTask('generate-assets', [
+    'sass'
+  ])
+
   grunt.registerTask('default', [
     'sass',
     'concurrent:target'
