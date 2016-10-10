@@ -1,11 +1,13 @@
 var path = require('path')
 var express = require('express')
+var session = require('express-session')
 var favicon = require('serve-favicon')
 var nunjucks = require('nunjucks')
-var routes = require('./app/routes.js')
+var request = require('request')
 var bodyParser = require('body-parser')
 var utils = require('./lib/utils.js')
 var config = require('./app/config.js')
+var routes = require('./app/routes.js')
 
 var app = express()
 
@@ -32,6 +34,26 @@ app.use(function (req, res, next) {
   res.locals.cookieText = config.cookieText
   next()
 })
+
+// Support session data
+app.use(session({
+  resave: false,
+  saveUninitialized: false,
+  secret: Math.round(Math.random() * 100000).toString()
+}))
+
+var myLogger = function (req, res, next) {
+  console.log(req.session);
+  next();
+};
+
+app.use(myLogger);
+
+// Handle form POSTS
+app.use( bodyParser.json() );       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  extended: true
+}));
 
 // Middleware to serve static assets
 app.use('/', express.static(path.join(__dirname, '/public')))

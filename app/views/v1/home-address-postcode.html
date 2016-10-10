@@ -1,0 +1,36 @@
+{% extends '_layouts/layout.html' %}
+
+{% block page_title %}Index : {{serviceName}}{% endblock %}
+
+{% block content %}
+  <form method="post" class="measure">
+    <fieldset>
+      <legend class="primary">
+        What is your address?
+      </legend>
+
+      {% if error %}
+        <div class="error-summary">
+          <div>
+            <p>{{ error }}</p>
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="form-group">
+        <div>
+          <label for="postcode">Enter the postcode where you live</label>
+          <input type="text" id="postcode" name="postcode" value="{{ postcode }}" class="-small">
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="form-group -controls">
+      <button type="submit" class="button">Find address</button>
+      <a href="date-of-birth" class="button -back">Back</a>
+    </div>
+
+  </form>
+{% endblock %}
+
+{% block footer %}{% endblock %}

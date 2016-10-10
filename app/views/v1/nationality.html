@@ -1,0 +1,34 @@
+{% extends '_layouts/layout.html' %}
+
+{% block page_title %}Index : {{serviceName}}{% endblock %}
+
+{% block content %}
+  <h1>What is your nationality?</h1>
+  <p>Select all options relevant to you</p>
+  <form action="" method="get" class="measure">
+    <fieldset>
+      <div class="form-group">
+        <label for="uk" class="block-label">
+          British (including English, Scottish, Welsh and Northern Irish)
+          <input type="checkbox" id="uk" name="nationality" value="uk">
+        </label>
+      </div>
+      <div class="form-group">
+        <label for="eire" class="block-label">
+          Irish
+          <input type="checkbox" id="eire" name="nationality" value="eire">
+        </label>
+      </div>
+      <div class="form-group">
+        <label for="other" class="block-label">
+          Citizen of a different country
+          <input type="checkbox" id="other" name="nationality" value="other">
+        </label>
+      </div>
+    </fieldset>
+
+    <a href="02-birth">Continue</a>
+  </form>
+{% endblock %}
+
+{% block footer %}{% endblock %}

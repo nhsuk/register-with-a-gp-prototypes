@@ -1,5 +1,16 @@
 .error-summary {
-  color: $error-colour;
+  @extend %contain-floats;
+
+  margin: $leading*2 0;
+
+  & > div {
+    float: left;
+    border-top: 2px solid $error-colour;
+    background-color: tint($error-colour, 90);
+    padding: 0 $leading*2;
+    color: $error-colour;
+  }
+
   a {
     color: $error-colour;
   }

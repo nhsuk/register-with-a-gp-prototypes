@@ -1,0 +1,37 @@
+{% extends '_layouts/layout.html' %}
+
+{% block page_title %}Index : {{serviceName}}{% endblock %}
+
+{% block content %}
+  <h1 class="primary">Check your answers</h1>
+
+  <p>
+    {{ session.name.firstName }} {{ session.name.middleNames }} {{ session.name.lastName }}
+  </p>
+  <p>
+    {{ session.name.nameChanged }}<br>
+    {{ session.name.firstNamePrev }} {{ session.name.middleNamesPrev }} {{ session.name.lastNamePrev }}
+  </p>
+  <p>{{ session.dob.day }} / {{ session.dob.month }} / {{ session.dob.year }}</p>
+
+  <p>{{ session.address }}, {{ session.postcode }}</p>
+
+  <p>
+    {{ session.contact.telephone }}<br>
+    {{ session.contact.mobile }}<br>
+    {{ session.contact.email }}
+  </p>
+
+  <p>
+    {{ session.nhsnumber.known }}<br>
+    {{ session.nhsnumber.number }}
+  </p>
+
+  <div class="form-group -controls">
+    <a href="" class="button">These are right</button>
+    <a href="javascript:window.history.back();" class="button -back">Back</a>
+  </div>
+
+{% endblock %}
+
+{% block footer %}{% endblock %}

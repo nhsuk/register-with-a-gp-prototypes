@@ -20,6 +20,8 @@
     "basic-auth": "^1.0.4",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
+    "express-session": "^1.14.1",
+    "express-validator": "^2.20.10",
     "grunt": "^1.0.1",
     "grunt-cli": "^1.2.0",
     "grunt-concurrent": "^2.3.1",
@@ -29,6 +31,7 @@
     "nunjucks": "^2.5.2",
     "portscanner": "^1.0.0",
     "prompt": "^1.0.0",
+    "request": "^2.75.0",
     "serve-favicon": "^2.3.0"
   }
 }
