@@ -5,7 +5,18 @@ var router = express.Router()
 var postcode_api = process.env.POSTCODE_API
 
 router.get('/', function (req, res) {
+  req.session.destroy(function(err) {
+    console.log('Index page - destroying session');
+  })
   res.render('index.html');
+});
+
+// Start page ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+router.get('/v1/start', function (req, res) {
+  req.session.destroy(function(err) {
+    console.log('Start page - destroying session');
+  })
+  res.render('v1/start');
 });
 
 // Name ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
