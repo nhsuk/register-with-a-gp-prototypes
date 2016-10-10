@@ -2,13 +2,13 @@
   display: block;
   position: relative;
   width: auto;
-  padding: 8px 10px 9px 50px;
-  margin-bottom: 10px;
+  padding: 7px 0 7px 50px;
+  margin: $leading 0;
   cursor: pointer;
 
   @include media(mid) {
-    padding-top: 7px;
-    padding-bottom: 7px;
+    float: left;
+    clear: both;
   }
 
   input {

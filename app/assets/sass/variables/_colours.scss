@@ -5,12 +5,15 @@ $pure-white: #fff;
 
 // Newer colour palette items
 $blue: #0072c6;
+
 $red: #D81E05;
+
+$yellow: #F7E214;
+
+$button-green: #3E8117;
 
 $dark-grey: #425563;
 $pale-grey: #d9e1e2;
-
-$yellow: #F7E214;
 
 // Functional colour aliases
 $page-background: $pure-white;
@@ -18,7 +21,6 @@ $text-colour: $black;
 $nhs-blue: $blue;
 $focus-colour: $yellow;
 $error-colour: $red;
-
 
 /*
 
@@ -70,5 +72,3 @@ $hover-link-colour: $light-blue2;
 $visited-link-colour: #4c2c92;
 $link-colour-on-blue: $pure-white;
 $visited-link-colour-on-blue: #D4EFFF; /*#5CAEED; /* #0AC0FC; E2EEFB */
-
-$focus-colour: $yellow;

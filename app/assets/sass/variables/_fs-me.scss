@@ -62,7 +62,6 @@ h1 {
   @include media(mid) {
     font-size: 48px;
     line-height: $leading*4;
-    letter-spacing: -0.02em;
   }
 
   @include media(large) {
@@ -102,14 +101,9 @@ h4 {
   line-height: $leading*2;
 }
 
-p {
-  letter-spacing: 0.01em;
-}
-
 p.lede {
   margin: 0 0 $leading*2 0;
   font-size: $body;
-  letter-spacing: 0.03em;
   line-height: $leading*2;
   font-weight: $lightweight;
   color: $light-blue3;

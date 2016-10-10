@@ -1,0 +1,25 @@
+html {
+  background-color: $pale-grey;
+}
+
+#global-footer {
+  margin-top: $leading*4;
+  padding-top: $leading;
+  padding-bottom: $leading;
+  min-height: 80px;
+  border-top: 1px solid darken($pale-grey, 5);
+  background-color: $pale-grey;
+}
+
+.footer-container {
+  @extend %block;
+  @extend %contain-floats;
+  padding-bottom: $leading/2;
+  padding-top: $leading/2;
+
+  img {
+    display: block;
+    width: 79px;
+    height: 32px;
+  }
+}

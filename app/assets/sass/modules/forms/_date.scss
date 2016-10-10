@@ -1,0 +1,19 @@
+.-date {
+
+  @extend %contain-floats;
+
+  div {
+    float: left;
+    padding-right: 1em;
+  }
+
+  .day,
+  .month {
+    width: 3em;
+  }
+
+  .year {
+    width: 4em;
+  }
+
+}

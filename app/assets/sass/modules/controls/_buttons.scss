@@ -1,0 +1,60 @@
+// Fix unwanted button padding in Firefox
+.button::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+.button {
+  box-sizing: border-box;
+  display: inline-block;
+  font-family: inherit;
+  font-weight: $boldweight;
+  font-size: inherit;
+  line-height: $leading*3;
+  width: 100%;
+  padding: 0 $leading*2;
+  margin: 0 0 $leading 0;
+  text-align: center;
+  color: $pure-white;
+  background-color: $button-green;
+  cursor: pointer;
+  border: 1px solid $button-green;
+  -webkit-appearance: none;
+
+
+  &:link,
+  &:hover,
+  &:focus,
+  &:visited {
+    text-decoration: none;
+    color: $pure-white;
+    background-color: $button-green;
+  }
+
+  @include media(mid) {
+    width: auto;
+    margin: 0 $leading 0 0;
+  }
+
+  &.-back {
+    background-color: transparent;
+    border: transparent;
+    border-left: 0;
+    padding-left: 0;
+    color: $dark-grey;
+    font-weight: $bodyweight;
+    font-size: $smallprint;
+    text-decoration: underline;
+
+    &::before {
+      content: "";
+      display: inline-block;
+      margin-right: $leading/2;
+      width: 0;
+      height: 0;
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+      border-right: 5px solid $dark-grey;
+    }
+  }
+}
