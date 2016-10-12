@@ -5,34 +5,54 @@
 {% block content %}
   <h1 class="primary">Check your answers</h1>
 
-  <table>
+  <table class="measure">
     <tr>
       <th scope="row">Your name</th>
       <td>{{ session.name.firstName }} {{ session.name.middleNames }} {{ session.name.lastName }}</td>
-      <td><a href="name">Edit</a></td>
+      <td class="control">
+        <a href="name" class="button -secondary">Change</a>
+      </td>
     </tr>
 
     <tr>
       <th scope="row">Have you ever changed your name?</th>
       <td>
-        {{ session.name.nameChanged }}
+        {% if session.name.nameChanged == "no" %}
+          No I have not
+        {% endif %}
+        {% if session.name.nameChanged == "not-saying" %}
+          I’d prefer not to say
+        {% endif %}
         {% if session.name.nameChanged == "yes" %}
           <br>{{ session.name.firstNamePrev }} {{ session.name.middleNamesPrev }} {{ session.name.lastNamePrev }}
         {% endif %}
       </td>
-      <td><a href="name">Edit</a></td>
+      <td class="control">
+        <a href="name" class="button -secondary">Change</a>
+      </td>
     </tr>
 
     <tr>
       <th scope="row">Your date of birth</th>
       <td>{{ session.dob.day }} / {{ session.dob.month }} / {{ session.dob.year }}</td>
-      <td><a href="date-of-birth">Edit</a></td>
+      <td class="control">
+        <a href="date-of-birth" class="button -secondary">Change</a>
+      </td>
     </tr>
 
     <tr>
       <th scope="row">Your home address</th>
-      <td>{{ session.address }}, {{ session.postcode }}</td>
-      <td><a href="home-address">Edit</a></td>
+      <td>
+        {% for line in session.address %}
+          {% if line != '' %}
+            {{ line }},<br>
+          {% endif %}
+        {% endfor %}
+        {{ session.postcode | upper }}
+      </td>
+      <td class="control">
+        <a href="home-address" class="button -secondary">Change</a>
+      </td>
     </tr>
 
     <tr>
@@ -48,7 +68,9 @@
           Email: {{ session.contact.email }}<br>
         {% endif %}
       </td>
-      <td><a href="contact-details">Edit</a></td>
+      <td class="control">
+        <a href="contact-details" class="button -secondary">Change</a>
+      </td>
     </tr>
 
     <tr>
@@ -56,15 +78,24 @@
       <td>
         {% if session.nhsnumber.known == 'yes' %}
           {{ session.nhsnumber.number }}
+        {% else %}
+          I don’t know my NHS number
         {% endif %}
       </td>
-      <td><a href="nhs-number">Edit</a></td>
+      <td class="control">
+        <a href="nhs-number" class="button -secondary">Change</a>
+      </td>
     </tr>
   </table>
 
-  <div class="form-group -controls">
-    <a href="" class="button">These are right</button>
-    <a href="javascript:window.history.back();" class="button -back">Back</a>
+  <h2 class="secondary">Send your details</h2>
+
+  <div class="measure">
+    <p>By sending your application you confirm that the information you have provided is true.</p>
+
+    <div class="form-group">
+      <a href="registration-submitted" class="button">I accept - send my application</a>
+    </div>
   </div>
 
 {% endblock %}

@@ -21,8 +21,10 @@ router.get('/v1/start', function (req, res) {
 
 // Name ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/v1/name', function (req, res) {
+  console.log(req.session);
   res.render('v1/name', {
-    name: req.session.name
+    name: req.session.name,
+    edit: req.session.edit
   });
 });
 
@@ -62,7 +64,11 @@ router.post('/v1/name', function (req, res) {
       name: req.session.name
     });
   } else {
-    res.redirect('/v1/date-of-birth')
+    if (req.session.edit === true) {
+      res.redirect('/v1/confirm-details')
+    } else {
+      res.redirect('/v1/date-of-birth')
+    }
   }
 
 })
@@ -70,7 +76,8 @@ router.post('/v1/name', function (req, res) {
 // DOB +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/v1/date-of-birth', function (req, res) {
   res.render('v1/date-of-birth', {
-    dob: req.session.dob
+    dob: req.session.dob,
+    edit: req.session.edit
   });
 });
 
@@ -87,14 +94,19 @@ router.post('/v1/date-of-birth', function (req, res) {
       error: 'Please enter your date of birth'
     });
   } else {
-    res.redirect('/v1/home-address')
+    if (req.session.edit === true) {
+      res.redirect('/v1/confirm-details')
+    } else {
+      res.redirect('/v1/home-address')
+    }
   }
 })
 
 // Postcode ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/v1/home-address', function (req, res) {
   res.render('v1/home-address-postcode', {
-    postcode: req.session.postcode
+    postcode: req.session.postcode,
+    edit: req.session.edit
   });
 });
 
@@ -135,13 +147,14 @@ router.post('/v1/home-address', function (req, res) {
 router.get('/v1/select-address', function (req, res) {
   res.render('v1/select-address', {
     postcode: req.session.postcode,
-    results: req.session.addressResults
+    results: req.session.addressResults,
+    edit: req.session.edit
   });
 });
 
 router.post('/v1/select-address', function (req, res) {
 
-  req.session.address = req.body['address'];
+  req.session.address = req.body['address'].split(',');
 
   if (!req.body['address']) {
     res.render('v1/home-address-result', {
@@ -150,14 +163,19 @@ router.post('/v1/select-address', function (req, res) {
       results: req.session.addressResults
     });
   } else {
-    res.redirect('/v1/contact-details')
+    if (req.session.edit === true) {
+      res.redirect('/v1/confirm-details')
+    } else {
+      res.redirect('/v1/contact-details')
+    }
   }
 })
 
 // Contact details +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/v1/contact-details', function (req, res) {
   res.render('v1/contact-details', {
-    contact: req.session.contact
+    contact: req.session.contact,
+    edit: req.session.edit
   });
 });
 
@@ -181,7 +199,8 @@ router.post('/v1/contact-details', function (req, res) {
 // NHS Number known? +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/v1/nhs-number', function (req, res) {
   res.render('v1/nhs-number-choice', {
-    nhsnumber: req.session.nhsnumber
+    nhsnumber: req.session.nhsnumber,
+    edit: req.session.edit
   });
 })
 
@@ -218,13 +237,20 @@ router.post('/v1/nhs-number-entry', function (req, res) {
   }
 })
 
-// Check you answers +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// Check your answers ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/v1/confirm-details', function (req, res) {
+  req.session.edit = true;
   res.render('v1/confirm-details', {
     session: req.session
   });
 });
 
-
+// Registration submitted ++++++++++++++++++++++++++++++++++++++++++++++++++++++
+router.get('/v1/registration-submitted', function (req, res) {
+  req.session.edit = false;
+  res.render('v1/registration-submitted', {
+    session: req.session
+  });
+});
 
 module.exports = router
