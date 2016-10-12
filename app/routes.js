@@ -200,7 +200,7 @@ router.post('/v1/nhs-number', function (req, res) {
   if (req.body['nhs-number-known'] === 'yes') {
     res.redirect('/v1/nhs-number-entry')
   } else if (req.body['nhs-number-known'] === 'no') {
-    res.redirect('/')
+    res.redirect('/v1/confirm-details')
   }
 })
 

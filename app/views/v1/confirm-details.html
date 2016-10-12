@@ -5,27 +5,62 @@
 {% block content %}
   <h1 class="primary">Check your answers</h1>
 
-  <p>
-    {{ session.name.firstName }} {{ session.name.middleNames }} {{ session.name.lastName }}
-  </p>
-  <p>
-    {{ session.name.nameChanged }}<br>
-    {{ session.name.firstNamePrev }} {{ session.name.middleNamesPrev }} {{ session.name.lastNamePrev }}
-  </p>
-  <p>{{ session.dob.day }} / {{ session.dob.month }} / {{ session.dob.year }}</p>
+  <table>
+    <tr>
+      <th scope="row">Your name</th>
+      <td>{{ session.name.firstName }} {{ session.name.middleNames }} {{ session.name.lastName }}</td>
+      <td><a href="name">Edit</a></td>
+    </tr>
 
-  <p>{{ session.address }}, {{ session.postcode }}</p>
+    <tr>
+      <th scope="row">Have you ever changed your name?</th>
+      <td>
+        {{ session.name.nameChanged }}
+        {% if session.name.nameChanged == "yes" %}
+          <br>{{ session.name.firstNamePrev }} {{ session.name.middleNamesPrev }} {{ session.name.lastNamePrev }}
+        {% endif %}
+      </td>
+      <td><a href="name">Edit</a></td>
+    </tr>
 
-  <p>
-    {{ session.contact.telephone }}<br>
-    {{ session.contact.mobile }}<br>
-    {{ session.contact.email }}
-  </p>
+    <tr>
+      <th scope="row">Your date of birth</th>
+      <td>{{ session.dob.day }} / {{ session.dob.month }} / {{ session.dob.year }}</td>
+      <td><a href="date-of-birth">Edit</a></td>
+    </tr>
 
-  <p>
-    {{ session.nhsnumber.known }}<br>
-    {{ session.nhsnumber.number }}
-  </p>
+    <tr>
+      <th scope="row">Your home address</th>
+      <td>{{ session.address }}, {{ session.postcode }}</td>
+      <td><a href="home-address">Edit</a></td>
+    </tr>
+
+    <tr>
+      <th scope="row">Your contact details</th>
+      <td>
+        {% if session.contact.telephone != '' %}
+          Telephone: {{ session.contact.telephone }}<br>
+        {% endif %}
+        {% if session.contact.mobile != '' %}
+          Mobile: {{ session.contact.mobile }}<br>
+        {% endif %}
+        {% if session.contact.email != '' %}
+          Email: {{ session.contact.email }}<br>
+        {% endif %}
+      </td>
+      <td><a href="contact-details">Edit</a></td>
+    </tr>
+
+    <tr>
+      <th scope="row">Your NHS number</th>
+      <td>
+        {% if session.nhsnumber.known == 'yes' %}
+          {{ session.nhsnumber.number }}
+        {% endif %}
+      </td>
+      <td><a href="nhs-number">Edit</a></td>
+    </tr>
+  </table>
 
   <div class="form-group -controls">
     <a href="" class="button">These are right</button>
