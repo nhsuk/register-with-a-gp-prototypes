@@ -32,7 +32,7 @@
           <label for="address-{{ loop.index0 }}" class="block-label">
             {% for line in result %}
               {% if line != '' %}
-                {{ line }}{% if loop.last !== true %},{% endif %}
+                {{ line }}{% if loop.last !== true %}, {% endif %}
               {% endif %}
             {% endfor %}
             <input type="radio" id="address-{{ loop.index0 }}" name="address" value="{{ result }}">
@@ -42,9 +42,11 @@
 
     </fieldset>
 
+    <!--
     <p>
       <a href="#">I can’t find my address in this list</a>
     </p>
+    -->
 
     <div class="form-group -controls">
       <button type="submit" class="button">Continue</button>

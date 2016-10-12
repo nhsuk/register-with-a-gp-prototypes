@@ -101,7 +101,11 @@
 
     <div class="form-group -controls">
       <button type="submit" class="button">Continue</button>
-      <a href="start" class="button -back">Back</a>
+      {% set back = 'start' %}
+      {% if edit == true %}
+        {% set back = 'confirm-details' %}
+      {% endif %}
+      <a href="{{ back }}" class="button -back">Back</a>
     </div>
   </form>
 {% endblock %}

@@ -57,4 +57,11 @@
       border-right: 5px solid $dark-grey;
     }
   }
+
+  &.-secondary {
+    background-color: tint($nhs-blue, 90);
+    border-color: tint($nhs-blue, 80);
+    color: $black;
+    font-weight: $bodyweight;
+  }
 }

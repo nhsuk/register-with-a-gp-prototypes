@@ -27,7 +27,11 @@
 
     <div class="form-group -controls">
       <button type="submit" class="button">Find address</button>
-      <a href="date-of-birth" class="button -back">Back</a>
+      {% set back = 'date-of-birth' %}
+      {% if edit == true %}
+        {% set back = 'confirm-details' %}
+      {% endif %}
+      <a href="{{ back }}" class="button -back">Back</a>
     </div>
 
   </form>

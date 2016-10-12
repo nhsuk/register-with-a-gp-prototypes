@@ -46,7 +46,6 @@ var myLogger = function (req, res, next) {
   console.log(req.session);
   next();
 };
-
 app.use(myLogger);
 
 // Handle form POSTS

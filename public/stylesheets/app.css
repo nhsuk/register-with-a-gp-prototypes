@@ -370,6 +370,43 @@ body {
   border-right: 5px solid #425563;
 }
 
+.button.-secondary {
+  background-color: #e6f1f9;
+  border-color: #cce3f4;
+  color: #231f20;
+  font-weight: 400;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-top: 1px solid #d9e1e2;
+  margin-bottom: 28px;
+}
+
+table th, table td {
+  text-align: left;
+  vertical-align: top;
+  padding: 14px 0;
+  font-weight: 400;
+  font-size: 16px;
+  border-bottom: 1px solid #d9e1e2;
+}
+
+table th {
+  color: #425563;
+}
+
+table .control {
+  text-align: right;
+}
+
+table .control .button {
+  padding: 14px;
+  margin-right: 0;
+  line-height: 14px;
+}
+
 details {
   margin: 28px 0;
 }

@@ -1,0 +1,32 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-top: 1px solid $pale-grey;
+  margin-bottom: $leading*2;
+
+  th, td {
+    text-align: left;
+    vertical-align: top;
+    padding: $leading 0;
+
+    font-weight: $bodyweight;
+    font-size: $smallprint;
+
+    border-bottom: 1px solid $pale-grey;
+  }
+
+  th {
+    color: $dark-grey;
+  }
+
+  .control {
+    text-align: right;
+
+    .button {
+      padding: $leading;
+      margin-right: 0;
+      line-height: $leading;
+    }
+  }
+
+}
