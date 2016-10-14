@@ -28,6 +28,7 @@
     "grunt-contrib-watch": "^1.0.0",
     "grunt-nodemon": "^0.4.2",
     "grunt-sass": "^1.2.1",
+    "javascript-natural-sort": "^0.7.1",
     "nunjucks": "^2.5.2",
     "portscanner": "^1.0.0",
     "prompt": "^1.0.0",

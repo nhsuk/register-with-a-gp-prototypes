@@ -31,6 +31,7 @@ if (env === 'production' && useAuth === 'true') {
 // Add variables that are available in all views
 app.use(function (req, res, next) {
   res.locals.serviceName = config.serviceName
+  res.locals.practiceName = config.practiceName
   res.locals.cookieText = config.cookieText
   next()
 })
@@ -46,7 +47,7 @@ var myLogger = function (req, res, next) {
   console.log(req.session);
   next();
 };
-app.use(myLogger);
+//app.use(myLogger);
 
 // Handle form POSTS
 app.use( bodyParser.json() );       // to support JSON-encoded bodies

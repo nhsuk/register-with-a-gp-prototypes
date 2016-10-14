@@ -1,6 +1,5 @@
 @import "tools/contain-floats";
 @import "tools/media-queries";
-@import "tools/spacing";
 @import "tools/tints";
 
 @import "variables/colours";
@@ -17,6 +16,7 @@
 // Layout and grid
 @import "modules/layout/layout";
 @import "modules/layout/grid";
+@import "modules/layout/spacing";
 
 // Modules
 @import "modules/banner/prototype";

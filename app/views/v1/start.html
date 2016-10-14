@@ -1,27 +1,43 @@
 {% extends '_layouts/layout.html' %}
 
-{% block page_title %}Index : {{serviceName}}{% endblock %}
+{% block page_title %}
+  {% if practiceName %}
+    Register with {{ practiceName }}
+  {% else %}
+    {{serviceName}}
+  {% endif %}
+{% endblock %}
 
 {% block content %}
-  <h1 class="primary">Register with a GP</h1>
+  <h1 class="primary">
+    {% if practiceName %}
+      Register with {{ practiceName }}
+    {% else %}
+      {{serviceName}}
+    {% endif %}
+  </h1>
 
-  <p>You can use this service to register with a GP in England.</p>
+  <p>Use this service to apply to register with {{ practiceName }}.</p>
 
-  <!--
-  <p>You will need:</p>
+  <p>Something about what you might need...</p>
 
-  <ul>
-    <li></li>
-  </ul>
-  -->
-  <!--
-  <div>
-    Your rights?
-  </div>
-  <div>
-    GP rights?
-  </div>
-  -->
+  <details>
+    <summary>How can I find my NHS number?</summary>
+    <div class="signage">
+      <div class="info">
+        <p>
+          An NHS number is a 10 digit number, for example: <b>943 476 5919</b>
+        </p>
+        <p>You can find your NHS number:</p>
+        <ul>
+          <li><a href="javascript:return false;">Online using the Find My NHS Number servce</a></li>
+          <li>on your NHS medical card if you have one</li>
+          <li>on a letter from your GP or a hospital</li>
+          <li>on a printed prescription</li>
+        </ul>
+      </div>
+    </div>
+  </details>
 
   <div class="cta">
     <a href="name" class="button">Start</a>

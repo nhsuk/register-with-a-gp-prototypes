@@ -1,5 +1,6 @@
 var express = require('express')
 var request = require('request')
+var naturalSort = require('javascript-natural-sort')
 var router = express.Router()
 
 var postcode_api = process.env.POSTCODE_API
@@ -106,6 +107,7 @@ router.post('/v1/date-of-birth', function (req, res) {
 router.get('/v1/home-address', function (req, res) {
   res.render('v1/home-address-postcode', {
     postcode: req.session.postcode,
+    building: req.session.building,
     edit: req.session.edit
   });
 });
@@ -113,30 +115,74 @@ router.get('/v1/home-address', function (req, res) {
 router.post('/v1/home-address', function (req, res) {
 
   req.session.postcode = req.body['postcode'];
+  req.session.building = req.body['building'];
 
   if (req.body['postcode'] === '') {
     res.render('v1/home-address-postcode', {
-      error: 'Please enter your home postcode'
+      building: req.session.building,
+      error: {
+        postcode: 'Please enter your home postcode'
+      }
     });
   } else {
     // strip spaces
     var cleaned = req.session.postcode.replace(/\s+/g, '').toLowerCase();
 
-    // getaddress.io API function
-    request('https://api.getAddress.io/v2/uk/' + cleaned + '?api-key=' + postcode_api + '&format=true', function (error, response, body) {
-      if (!error && response.statusCode == 200) {
+    request('https://api.getAddress.io/v2/uk/' + cleaned + '/?api-key=' + postcode_api + '&format=true', function (error, response, body) {
+      if (!error) {
+        if (response.statusCode == 200) {
+          var parsed = JSON.parse(body);
+          var addresses = parsed['Addresses'];
+          addresses.sort(naturalSort);
+          var filtered = [];
 
-        var parsed = JSON.parse(body);
-        req.session.addressResults = parsed['Addresses'];
+          if (req.session.building !== '') {
+            for (var i=0; i<addresses.length; i++) {
+              var current = addresses[i][0];
+              if (current.indexOf(req.session.building) !== -1) {
+                filtered.push(addresses[i]);
+              }
+            }
 
-        res.render('v1/home-address-result', {
-          postcode: req.session.postcode,
-          results: req.session.addressResults
-        });
+            req.session.addressResults = filtered;
+
+            if (filtered.length === 0) {
+              // Nothing found for this combo of building / postcode
+              res.render('v1/home-address-postcode', {
+                error: {
+                  general: 'Sorry, no addresses have been found. Please check and try again.'
+                },
+                postcode: req.session.postcode,
+                building: req.session.building
+              });
+            } else {
+              res.render('v1/home-address-result', {
+                postcode: req.session.postcode,
+                building: req.session.building,
+                results: req.session.addressResults
+              });
+            }
+
+          } else {
+
+            req.session.addressResults = addresses;
+
+            res.render('v1/home-address-result', {
+              postcode: req.session.postcode,
+              building: req.session.building,
+              results: req.session.addressResults
+            });
+
+          }
+        }
+
       } else {
         res.render('v1/home-address-postcode', {
-          error: 'Sorry, there’s been a problem looking up your postcode. Please try again.',
-          postcode: req.session.postcode
+          error: {
+            general: 'Sorry, there’s been a problem looking up your address. Please try again.'
+          },
+          postcode: req.session.postcode,
+          building: req.session.building
         });
       }
     });
@@ -154,15 +200,15 @@ router.get('/v1/select-address', function (req, res) {
 
 router.post('/v1/select-address', function (req, res) {
 
-  req.session.address = req.body['address'].split(',');
-
   if (!req.body['address']) {
     res.render('v1/home-address-result', {
       error: 'Please select your home address',
+      building: req.session.building,
       postcode: req.session.postcode,
       results: req.session.addressResults
     });
   } else {
+    req.session.address = req.body['address'].split(',');
     if (req.session.edit === true) {
       res.redirect('/v1/confirm-details')
     } else {
@@ -196,9 +242,9 @@ router.post('/v1/contact-details', function (req, res) {
   }
 })
 
-// NHS Number known? +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// NHS Number ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/v1/nhs-number', function (req, res) {
-  res.render('v1/nhs-number-choice', {
+  res.render('v1/nhs-number', {
     nhsnumber: req.session.nhsnumber,
     edit: req.session.edit
   });
@@ -206,35 +252,43 @@ router.get('/v1/nhs-number', function (req, res) {
 
 router.post('/v1/nhs-number', function (req, res) {
 
+  var passed = true;
+  var errors = {};
+
   req.session.nhsnumber = {
     known: req.body['nhs-number-known'],
-    number: ''
+    number: req.body['nhs-number']
+  }
+
+  if (req.body['nhs-number-known'] === 'no') {
+    res.redirect('/v1/confirm-details')
   }
 
   if (!req.body['nhs-number-known']) {
-    res.render('v1/nhs-number-choice', {
-      error: 'Please answer ‘yes’ or ‘no’'
-    });
+    passed = false;
+    errors = {
+      known: 'Please answer ‘yes’ or ‘no’',
+      number: ''
+    }
   }
-  if (req.body['nhs-number-known'] === 'yes') {
-    res.redirect('/v1/nhs-number-entry')
-  } else if (req.body['nhs-number-known'] === 'no') {
-    res.redirect('/v1/confirm-details')
+
+  if (req.body['nhs-number-known'] === 'yes' && req.body['nhs-number'] === '') {
+    passed = false;
+    errors = {
+      known: '',
+      number: 'Please enter your NHS number'
+    }
   }
-})
 
-// NHS Number entry ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-router.post('/v1/nhs-number-entry', function (req, res) {
-
-  req.session.nhsnumber.number = req.body['nhs-number'];
-
-  if (req.body['nhs-number'] === '') {
-    res.render('v1/nhs-number-entry', {
-      error: 'Please enter your NHS number'
+  if (passed === false) {
+    res.render('v1/nhs-number', {
+      nhsnumber: req.session.nhsnumber,
+      errors: errors
     });
   } else {
     res.redirect('/v1/confirm-details')
   }
+
 })
 
 // Check your answers ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

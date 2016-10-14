@@ -7,7 +7,7 @@ table {
   th, td {
     text-align: left;
     vertical-align: top;
-    padding: $leading 0;
+    padding: $leading $leading/2;
 
     font-weight: $bodyweight;
     font-size: $smallprint;
@@ -26,6 +26,16 @@ table {
       padding: $leading;
       margin-right: 0;
       line-height: $leading;
+    }
+  }
+
+  &.natural {
+    width: auto;
+  }
+
+  &.compact {
+    th, td {
+      padding: leading/2;
     }
   }
 

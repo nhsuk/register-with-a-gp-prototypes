@@ -1,14 +1,35 @@
 {% extends '_layouts/layout.html' %}
 
-{% block page_title %}Index : {{serviceName}}{% endblock %}
+{% block page_title %}
+  Your home address :
+  {% if practiceName %}
+    Register with {{ practiceName }}
+  {% else %}
+    {{serviceName}}
+  {% endif %}
+{% endblock %}
 
 {% block content %}
 
   <form action="select-address" method="post">
     <fieldset>
       <legend class="primary">
-        What is your address?
+        What is your home address?
       </legend>
+
+      <table class="natural compact">
+        <tr>
+          {% if building !== '' %}
+            <th>Number:</th>
+            <td>{{ building }}</td>
+          {% endif %}
+          <th>Postcode:</th>
+          <td>{{ postcode }}</td>
+          <td class="control" rowspan="2">
+            <a href="home-address">change</a>
+          </td>
+        </tr>
+      </table>
 
       {% if error %}
         <div class="error-summary">
@@ -17,15 +38,6 @@
           </div>
         </div>
       {% endif %}
-
-      <div class="signage">
-        <div class="info">
-          <p>
-            Postcode: <b>{{ postcode }}</b>
-            <a href="home-address">change</a>
-          </p>
-        </div>
-      </div>
 
       {% for result in results %}
         <div class="form-group">
