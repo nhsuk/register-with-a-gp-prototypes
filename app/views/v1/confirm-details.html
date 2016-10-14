@@ -8,7 +8,7 @@
   <table class="measure">
     <tr>
       <th scope="row">Your name</th>
-      <td>{{ session.name.firstName }} {{ session.name.middleNames }} {{ session.name.lastName }}</td>
+      <td>{{ session.name.firstName | title }} {{ session.name.middleNames | title }} {{ session.name.lastName | title }}</td>
       <td class="control">
         <a href="name" class="button -secondary">Change</a>
       </td>
@@ -18,13 +18,14 @@
       <th scope="row">Have you ever changed your name?</th>
       <td>
         {% if session.name.nameChanged == "no" %}
-          No I have not
+          No, I have not
         {% endif %}
         {% if session.name.nameChanged == "not-saying" %}
           I’d prefer not to say
         {% endif %}
         {% if session.name.nameChanged == "yes" %}
-          <br>{{ session.name.firstNamePrev }} {{ session.name.middleNamesPrev }} {{ session.name.lastNamePrev }}
+          Yes, I have<br>
+          {{ session.name.firstNamePrev | title }} {{ session.name.middleNamesPrev | title }} {{ session.name.lastNamePrev | title }}
         {% endif %}
       </td>
       <td class="control">
