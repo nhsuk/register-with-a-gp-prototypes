@@ -301,6 +301,14 @@ body {
   margin-top: 0;
 }
 
+.shunt {
+  margin-top: 28px;
+}
+
+.shunt-2 {
+  margin-top: 56px;
+}
+
 .prototype-warning {
   background-color: #425563;
   color: #d9e1e2;

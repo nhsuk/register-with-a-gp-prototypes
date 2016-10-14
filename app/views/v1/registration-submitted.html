@@ -1,6 +1,12 @@
 {% extends '_layouts/layout.html' %}
 
-{% block page_title %}Index : {{serviceName}}{% endblock %}
+{% block page_title %}
+  {% if practiceName %}
+    Register with {{ practiceName }}
+  {% else %}
+    {{serviceName}}
+  {% endif %}
+{% endblock %}
 
 {% block content %}
   <div class="measure">

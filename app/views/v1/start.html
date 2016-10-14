@@ -1,9 +1,21 @@
 {% extends '_layouts/layout.html' %}
 
-{% block page_title %}Index : {{serviceName}}{% endblock %}
+{% block page_title %}
+  {% if practiceName %}
+    Register with {{ practiceName }}
+  {% else %}
+    {{serviceName}}
+  {% endif %}
+{% endblock %}
 
 {% block content %}
-  <h1 class="primary">Register with a GP</h1>
+  <h1 class="primary">
+    {% if practiceName %}
+      Register with {{ practiceName }}
+    {% else %}
+      {{serviceName}}
+    {% endif %}
+  </h1>
 
   <p>You can use this service to register with a GP in England.</p>
 
