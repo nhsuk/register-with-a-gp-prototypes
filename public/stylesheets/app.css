@@ -1,3 +1,4 @@
+@import url("//fast.fonts.net/cssapi/4c65968f-c33e-4eb6-9a5d-ab4f81a0543f.css");
 .grid-row, .prototype-warning-inner, .footer-container, .-date, .error-summary, form, .form-group, #global-header, .signage {
   zoom: 1;
 }
@@ -32,7 +33,7 @@ we can add other blues, named like blue40 (for a lighter blue) or blue60 for a d
 18px,
 */
 body {
-  font-family: "Frutiger Neue", "Frutiger", sans-serif;
+  font-family: "Neue Frutiger W01", sans-serif;
   font-weight: 400;
   font-size: 20px;
   line-height: 28px;
