@@ -1,7 +1,7 @@
 {% extends '_layouts/layout.html' %}
 
 {% block page_title %}
-  Your home address : 
+  Your home address :
   {% if practiceName %}
     Register with {{ practiceName }}
   {% else %}
@@ -10,23 +10,39 @@
 {% endblock %}
 
 {% block content %}
+
+  <h1 class="primary">What is your home address?</h1>
+
   <form method="post" class="measure">
     <fieldset>
-      <legend class="primary">
-        What is your address?
-      </legend>
 
-      {% if error %}
+      {% if error.general %}
         <div class="error-summary">
           <div>
-            <p>{{ error }}</p>
+            <p>{{ error.general }}</p>
           </div>
         </div>
       {% endif %}
 
       <div class="form-group">
         <div>
-          <label for="postcode">Enter the postcode where you live</label>
+          <label for="building">Enter your building or flat number (optional)</label>
+          <input type="text" id="building" name="building" value="{{ building }}" class="-small">
+          <span class="form-hint">For example “122” or “Flat 11”</span>
+        </div>
+      </div>
+
+      {% if error.postcode %}
+        <div class="error-summary">
+          <div>
+            <p>{{ error.postcode }}</p>
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="form-group {% if error.postcode %}-errors{% endif %}">
+        <div>
+          <label for="postcode">Enter your home postcode</label>
           <input type="text" id="postcode" name="postcode" value="{{ postcode }}" class="-small">
         </div>
       </div>

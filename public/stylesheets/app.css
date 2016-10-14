@@ -395,7 +395,7 @@ table {
 table th, table td {
   text-align: left;
   vertical-align: top;
-  padding: 14px 0;
+  padding: 14px 7px;
   font-weight: 400;
   font-size: 16px;
   border-bottom: 1px solid #d9e1e2;
@@ -413,6 +413,14 @@ table .control .button {
   padding: 14px;
   margin-right: 0;
   line-height: 14px;
+}
+
+table.natural {
+  width: auto;
+}
+
+table.compact th, table.compact td {
+  padding: leading/2;
 }
 
 details {
