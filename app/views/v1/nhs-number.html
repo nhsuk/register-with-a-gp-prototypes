@@ -24,30 +24,40 @@
         </div>
       {% endif %}
 
-      <div class="form-group {% if error %}-errors{% endif %}">
+      <div class="form-group {% if errors.known %}-errors{% endif %}">
         <label for="nhs-number-yes" class="block-label">
           Yes
           <input type="radio" id="nhs-number-yes" name="nhs-number-known" value="yes" {% if nhsnumber.known == "yes" %}checked="checked"{% endif %}>
         </label>
       </div>
 
-      <fieldset id="nhs-number-entry">
-        <div class="form-group">
-          <label for="nhs-number">What is your NHS number?</label>
-          <input type="text" id="nhs-number" name="nhs-number" value="{{ nhsnumber.number }}" class="-small">
-        </div>
-        <p class="form-hint">
-          For example: 943 476 5919
-        </p>
-      </fieldset>
-
-      <div class="form-group {% if error %}-errors{% endif %}">
+      <div class="form-group {% if errors.known %}-errors{% endif %}">
         <label for="nhs-number-no" class="block-label">
           No
           <input type="radio" id="nhs-number-no" name="nhs-number-known" value="no" {% if nhsnumber.known == "no" %}checked="checked"{% endif %}>
         </label>
       </div>
     </fieldset>
+
+    <div id="nhs-number-entry">
+      {% if errors.number %}
+        <div class="error-summary">
+          <div>
+            <p>{{ errors.number }}</p>
+          </div>
+        </div>
+      {% endif %}
+
+      <fieldset>
+        <div class="form-group {% if errors.number %}-errors{% endif %}">
+          <label for="nhs-number" class="secondary">What is your NHS number?</label>
+          <input type="text" id="nhs-number" name="nhs-number" value="{{ nhsnumber.number }}" class="-small">
+        </div>
+        <p class="form-hint">
+          For example: 943 476 5919
+        </p>
+      </fieldset>
+    </div>
 
     <details>
       <summary>How can I find my NHS number?</summary>

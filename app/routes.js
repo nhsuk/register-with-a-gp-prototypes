@@ -266,21 +266,24 @@ router.post('/v1/nhs-number', function (req, res) {
 
   if (!req.body['nhs-number-known']) {
     passed = false;
-    errors: {
-      known: 'Please answer ‘yes’ or ‘no’'
+    errors = {
+      known: 'Please answer ‘yes’ or ‘no’',
+      number: ''
     }
   }
 
   if (req.body['nhs-number-known'] === 'yes' && req.body['nhs-number'] === '') {
     passed = false;
-    errors: {
+    errors = {
+      known: '',
       number: 'Please enter your NHS number'
     }
   }
 
   if (passed === false) {
     res.render('v1/nhs-number', {
-      nhsnumber: req.session.nhsnumber
+      nhsnumber: req.session.nhsnumber,
+      errors: errors
     });
   } else {
     res.redirect('/v1/confirm-details')

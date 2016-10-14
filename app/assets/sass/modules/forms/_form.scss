@@ -4,7 +4,6 @@ form {
 }
 
 .form-group {
-  margin-bottom: $leading;
   @extend %contain-floats;
 
   &.-controls {
