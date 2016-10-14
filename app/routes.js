@@ -242,9 +242,9 @@ router.post('/v1/contact-details', function (req, res) {
   }
 })
 
-// NHS Number known? +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// NHS Number ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/v1/nhs-number', function (req, res) {
-  res.render('v1/nhs-number-choice', {
+  res.render('v1/nhs-number', {
     nhsnumber: req.session.nhsnumber,
     edit: req.session.edit
   });
@@ -252,35 +252,40 @@ router.get('/v1/nhs-number', function (req, res) {
 
 router.post('/v1/nhs-number', function (req, res) {
 
+  var passed = true;
+  var errors = {};
+
   req.session.nhsnumber = {
     known: req.body['nhs-number-known'],
-    number: ''
+    number: req.body['nhs-number']
+  }
+
+  if (req.body['nhs-number-known'] === 'no') {
+    res.redirect('/v1/confirm-details')
   }
 
   if (!req.body['nhs-number-known']) {
-    res.render('v1/nhs-number-choice', {
-      error: 'Please answer ‘yes’ or ‘no’'
-    });
+    passed = false;
+    errors: {
+      known: 'Please answer ‘yes’ or ‘no’'
+    }
   }
-  if (req.body['nhs-number-known'] === 'yes') {
-    res.redirect('/v1/nhs-number-entry')
-  } else if (req.body['nhs-number-known'] === 'no') {
-    res.redirect('/v1/confirm-details')
+
+  if (req.body['nhs-number-known'] === 'yes' && req.body['nhs-number'] === '') {
+    passed = false;
+    errors: {
+      number: 'Please enter your NHS number'
+    }
   }
-})
 
-// NHS Number entry ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-router.post('/v1/nhs-number-entry', function (req, res) {
-
-  req.session.nhsnumber.number = req.body['nhs-number'];
-
-  if (req.body['nhs-number'] === '') {
-    res.render('v1/nhs-number-entry', {
-      error: 'Please enter your NHS number'
+  if (passed === false) {
+    res.render('v1/nhs-number', {
+      nhsnumber: req.session.nhsnumber
     });
   } else {
     res.redirect('/v1/confirm-details')
   }
+
 })
 
 // Check your answers ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

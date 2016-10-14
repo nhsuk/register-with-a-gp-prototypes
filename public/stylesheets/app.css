@@ -520,6 +520,10 @@ form {
   display: block;
 }
 
+.form-group {
+  margin-bottom: 14px;
+}
+
 .form-group.-controls {
   margin: 14px 0;
 }
