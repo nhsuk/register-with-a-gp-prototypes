@@ -4,22 +4,22 @@ $family: "Neue Frutiger W01", sans-serif;
 // For offline / train dev:
 //$family: "Frutiger Neue", "Frutiger", sans-serif;
 
+/*
+56px
+56px,
+40px,
+28px,
+20px,
+
+16px
+*/
+
 $body: 20px;
 $leading: 14px;//16px;
 $lightweight: 200;
 $bodyweight: 400;
 $boldweight: 700;
 $smallprint: 16px;
-
-
-/*
-56px
-32px,
-36px,
-26px,
-21px,
-18px,
-*/
 
 body {
   font-family: $family;
@@ -43,11 +43,6 @@ h1 {
     font-size: 48px;
     line-height: $leading*4;
   }
-
-  @include media(large) {
-    font-size: 56px;
-    line-height: $leading*5;
-  }
 }
 
 h2 {
@@ -60,25 +55,6 @@ h2 {
     font-size: 32px;
     line-height: $leading*3;
   }
-
-  @include media(large) {
-    font-size: 36px;
-    line-height: $leading*3;
-  }
-}
-
-h3 {
-  margin: 0; padding: $leading 0;
-  font-size: 24px;
-  font-weight: $boldweight;
-  line-height: $leading*2;
-}
-
-h4 {
-  margin: 0; padding: $leading 0;
-  font-size: $body;
-  font-weight: $boldweight;
-  line-height: $leading*2;
 }
 
 .smallprint {

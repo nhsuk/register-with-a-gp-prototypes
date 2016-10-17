@@ -1,0 +1,104 @@
+{% extends '_layouts/layout.html' %}
+
+{% block page_title %}
+  Your current GP :
+  {% if practiceName %}
+    Register with {{ practiceName }}
+  {% else %}
+    {{serviceName}}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+
+  <h1 class="primary">Are you currently registered with a GP?</h1>
+
+  <form method="post">
+    <fieldset>
+
+      {% if errors.registered %}
+        <div class="error-summary">
+          <div>
+            <p>{{ errors.registered }}</p>
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="form-group {% if errors.registered %}-errors{% endif %}">
+        <label for="current-gp-yes" class="block-label">
+          Yes
+          <input type="radio" id="current-gp-yes" name="current-gp" value="yes" {% if currentgp.registered == "yes" %}checked="checked"{% endif %}>
+        </label>
+      </div>
+
+      <div class="form-group {% if errors.registered %}-errors{% endif %}">
+        <label for="current-gp-no" class="block-label">
+          No
+          <input type="radio" id="current-gp-no" name="current-gp" value="no" {% if currentgp.registered == "no" %}checked="checked"{% endif %}>
+        </label>
+      </div>
+    </fieldset>
+
+    <div id="current-gp-entry" class="measure">
+      {% if errors.details %}
+        <div class="error-summary">
+          <div>
+            <p>{{ errors.details }}</p>
+          </div>
+        </div>
+      {% endif %}
+
+      <fieldset>
+        <div class="form-group {% if errors.details %}-errors{% endif %}">
+          <label for="current-gp-name">
+            Your current GP’s name
+            <span class="form-hint">
+              If you know it
+            </span>
+          </label>
+          <input type="text" id="current-gp-name" name="current-gp-name" value="{{ currentgp.name }}">
+        </div>
+
+        <div class="form-group {% if errors.details %}-errors{% endif %}">
+          <label for="current-gp">
+            Your current GP’s address
+            <span class="form-hint">
+              As you’d write it on an envelope
+            </span>
+          </label>
+          <textarea rows="6" id="current-gp-address" name="current-gp-address">{{ currentgp.address }}</textarea>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="form-group -controls">
+      <button type="submit" class="button">Continue</button>
+      {% set back = 'nhs-number' %}
+      {% if edit == true %}
+        {% set back = 'confirm-details' %}
+      {% endif %}
+      <a href="{{ back }}" class="button -back">Back</a>
+    </div>
+
+  </form>
+{% endblock %}
+
+{% block body_after %}
+  <script>
+    $(function() {
+      var $group = $('#current-gp-entry');
+      var $els = $('[name="current-gp"]');
+      var $selectedEl = $('[name="current-gp"]:checked');
+      if ($selectedEl.val() !== "yes") {
+        $group.hide();
+      }
+      $els.on('change', function(e) {
+        if (this.value === "yes") {
+          $group.show();
+        } else {
+          $group.hide();
+        }
+      });
+    });
+  </script>
+{% endblock %}

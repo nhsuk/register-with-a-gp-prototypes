@@ -1,7 +1,7 @@
 {% extends '_layouts/layout.html' %}
 
 {% block page_title %}
-  Your home address :
+  Your previous address :
   {% if practiceName %}
     Register with {{ practiceName }}
   {% else %}
@@ -11,7 +11,7 @@
 
 {% block content %}
 
-  <h1 class="primary">What is your home address?</h1>
+  <h1 class="primary">What was your previous home address?</h1>
 
   <form method="post" class="measure">
     <fieldset>
@@ -27,8 +27,7 @@
       <div class="form-group">
         <div>
           <label for="building">
-            Enter your building or flat number (optional)
-            <span class="form-hint">For example ‘122’ or ‘Flat 11’</span>
+            Enter your previous building or flat number (optional)
           </label>
           <input type="text" id="building" name="building" value="{{ building }}" class="-small">
         </div>
@@ -44,7 +43,7 @@
 
       <div class="form-group {% if error.postcode %}-errors{% endif %}">
         <div>
-          <label for="postcode">Enter your home postcode</label>
+          <label for="postcode">Enter your previous home postcode</label>
           <input type="text" id="postcode" name="postcode" value="{{ postcode }}" class="-small">
         </div>
       </div>
@@ -52,7 +51,7 @@
 
     <div class="form-group -controls">
       <button type="submit" class="button">Find address</button>
-      {% set back = 'date-of-birth' %}
+      {% set back = 'previous-address' %}
       {% if edit == true %}
         {% set back = 'confirm-details' %}
       {% endif %}

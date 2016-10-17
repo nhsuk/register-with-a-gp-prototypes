@@ -239,7 +239,11 @@ router.post('/v1/contact-details', function (req, res) {
       error: 'Please enter at least one'
     });
   } else {
-    res.redirect('/v1/nhs-number')
+    if (req.session.edit === true) {
+      res.redirect('/v1/confirm-details')
+    } else {
+      res.redirect('/v1/nhs-number')
+    }
   }
 })
 
@@ -259,10 +263,6 @@ router.post('/v1/nhs-number', function (req, res) {
   req.session.nhsnumber = {
     known: req.body['nhs-number-known'],
     number: req.body['nhs-number']
-  }
-
-  if (req.body['nhs-number-known'] === 'no') {
-    res.redirect('/v1/confirm-details')
   }
 
   if (!req.body['nhs-number-known']) {
@@ -287,9 +287,211 @@ router.post('/v1/nhs-number', function (req, res) {
       errors: errors
     });
   } else {
+    if (req.session.edit === true) {
+      res.redirect('/v1/confirm-details')
+    } else {
+      res.redirect('/v1/current-gp')
+    }
+  }
+
+})
+
+// Current GP ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+router.get('/v1/current-gp', function (req, res) {
+  res.render('v1/current-gp', {
+    currentgp: req.session.currentgp,
+    edit: req.session.edit
+  });
+})
+
+router.post('/v1/current-gp', function (req, res) {
+
+  var passed = true;
+  var errors = {};
+
+  req.session.currentgp = {
+    registered: req.body['current-gp'],
+    name: req.body['current-gp-name'],
+    address: req.body['current-gp-address']
+  }
+
+  if (!req.body['current-gp']) {
+    passed = false;
+    errors = {
+      registered: 'Please answer ‘yes’ or ‘no’',
+      details: ''
+    }
+  }
+
+  if (req.body['current-gp'] === 'yes' && req.body['current-gp-name'] === '' && req.body['current-gp-address'] === '') {
+    passed = false;
+    errors = {
+      registered: '',
+      details: 'Please enter as much detail as you can about your current GP'
+    }
+  }
+
+  if (passed === false) {
+    res.render('v1/current-gp', {
+      currentgp: req.session.currentgp,
+      errors: errors
+    });
+  } else {
+    if (req.session.edit === true) {
+      res.redirect('/v1/confirm-details')
+    } else {
+      res.redirect('/v1/previous-address')
+    }
+  }
+
+});
+
+// Previous address ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+router.get('/v1/previous-address', function (req, res) {
+  res.render('v1/previous-address', {
+    prevaddress: req.session.prevaddress,
+    edit: req.session.edit
+  });
+})
+
+router.post('/v1/previous-address', function (req, res) {
+
+  var passed = true;
+  var errors = {};
+
+  req.session.prevaddress = req.body['prev-address'];
+
+  if (!req.body['prev-address']) {
+    passed = false;
+    error = 'Please answer ‘yes’ or ‘no’';
+  }
+
+  if (passed === false) {
+    res.render('v1/previous-address', {
+      prevaddress: req.session.prevaddress,
+      error: error
+    });
+  } else if (req.body['prev-address'] === 'yes') {
+    res.redirect('/v1/previous-address-postcode')
+  } else {
     res.redirect('/v1/confirm-details')
   }
 
+});
+
+// Previous address - find +++++++++++++++++++++++++++++++++++++++++++++++++++++
+router.get('/v1/previous-address-postcode', function (req, res) {
+  res.render('v1/previous-address-postcode', {
+    postcode: req.session.prevpostcode,
+    building: req.session.prevbuilding,
+    edit: req.session.edit
+  });
+});
+
+router.post('/v1/previous-address-postcode', function (req, res) {
+
+  req.session.prevpostcode = req.body['postcode'];
+  req.session.prevbuilding = req.body['building'];
+
+  if (req.body['postcode'] === '') {
+    res.render('v1/previous-address-postcode', {
+      building: req.session.prevbuilding,
+      error: {
+        postcode: 'Please enter your previous home postcode'
+      }
+    });
+  } else {
+    // strip spaces
+    var cleaned = req.session.prevpostcode.replace(/\s+/g, '').toLowerCase();
+
+    request('https://api.getAddress.io/v2/uk/' + cleaned + '/?api-key=' + postcode_api + '&format=true', function (error, response, body) {
+      if (!error) {
+        if (response.statusCode == 200) {
+          var parsed = JSON.parse(body);
+          var addresses = parsed['Addresses'];
+          addresses.sort(naturalSort);
+          var filtered = [];
+
+          if (req.session.prevpostcode !== '') {
+            for (var i=0; i<addresses.length; i++) {
+              //var current = addresses[i][0];
+              var current = addresses[i].toString().toLowerCase();
+              if (current.indexOf(req.session.prevbuilding.toLowerCase()) !== -1) {
+                filtered.push(addresses[i]);
+              }
+            }
+
+            if (filtered.length === 0) {
+              // Nothing found for this combo of building / postcode
+              // So just display the postcode results?
+              req.session.prevAddressResults = addresses;
+              res.render('v1/previous-address-result', {
+                message: 'No exact match has been found, showing all addresses within ' + req.session.prevpostcode,
+                postcode: req.session.prevpostcode,
+                building: req.session.prevbuilding,
+                results: req.session.prevAddressResults
+              });
+            } else {
+              req.session.prevAddressResults = filtered;
+              res.render('v1/previous-address-result', {
+                postcode: req.session.prevpostcode,
+                building: req.session.prevbuilding,
+                results: req.session.prevAddressResults
+              });
+            }
+
+          } else {
+
+            req.session.prevAddressResults = addresses;
+
+            res.render('v1/previous-address-result', {
+              postcode: req.session.prevpostcode,
+              building: req.session.prevbuilding,
+              results: req.session.prevAddressResults
+            });
+
+          }
+        }
+
+      } else {
+        res.render('v1/previous-address-postcode', {
+          error: {
+            general: 'Sorry, there’s been a problem looking up your address. Please try again.'
+          },
+          postcode: req.session.prevpostcode,
+          building: req.session.prevbuilding
+        });
+      }
+    });
+  }
+})
+
+// Previous address selection ++++++++++++++++++++++++++++++++++++++++++++++++++
+router.get('/v1/select-previous-address', function (req, res) {
+  res.render('v1/select-previous-address', {
+    postcode: req.session.prevpostcode,
+    results: req.session.prevAddressResults,
+    edit: req.session.edit
+  });
+});
+
+router.post('/v1/select-previous-address', function (req, res) {
+
+  if (!req.body['address']) {
+    res.render('v1/previous-address-result', {
+      error: 'Please select your home address',
+      building: req.session.prevbuilding,
+      postcode: req.session.prevpostcode,
+      results: req.session.prevAddressResults
+    });
+  } else {
+    req.session.prevAddress = req.body['address'].split(',');
+    if (req.session.edit === true) {
+      res.redirect('/v1/confirm-details')
+    } else {
+      res.redirect('/v1/confirm-details')
+    }
+  }
 })
 
 // Check your answers ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

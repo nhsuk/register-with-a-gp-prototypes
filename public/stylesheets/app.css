@@ -26,13 +26,14 @@ we can add other blues, named like blue40 (for a lighter blue) or blue60 for a d
 /*#5CAEED; /* #0AC0FC; E2EEFB */
 /*
 56px
-32px,
-36px,
-26px,
-21px,
-18px,
+56px,
+40px,
+28px,
+20px,
+
+16px
 */
-body {
+body, pre.user-input {
   font-family: "Neue Frutiger W01", sans-serif;
   font-weight: 400;
   font-size: 20px;
@@ -57,13 +58,6 @@ h1, .heading-xxlarge, .primary {
   }
 }
 
-@media (min-width: 980px) {
-  h1, .heading-xxlarge, .primary {
-    font-size: 56px;
-    line-height: 70px;
-  }
-}
-
 h2, .heading-xlarge, .secondary {
   margin: 0;
   padding: 14px 0 0 0;
@@ -79,35 +73,12 @@ h2, .heading-xlarge, .secondary {
   }
 }
 
-@media (min-width: 980px) {
-  h2, .heading-xlarge, .secondary {
-    font-size: 36px;
-    line-height: 42px;
-  }
-}
-
-h3, .heading-large {
-  margin: 0;
-  padding: 14px 0;
-  font-size: 24px;
-  font-weight: 700;
-  line-height: 28px;
-}
-
-h4, .heading-body {
-  margin: 0;
-  padding: 14px 0;
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 28px;
-}
-
 .smallprint {
   font-size: 16px;
   color: #666666;
 }
 
-body {
+body, pre.user-input {
   color: #0b0c0c;
 }
 
@@ -132,6 +103,10 @@ h6 a {
 
 p {
   margin: 28px 0 28px 0;
+}
+
+pre.user-input {
+  font-size: inherit;
 }
 
 ul, ol {
@@ -172,7 +147,7 @@ a:visited {
   color: #4c2c92;
 }
 
-body {
+body, pre.user-input {
   margin: 0;
   padding: 0;
   background-color: #fff;
@@ -508,7 +483,7 @@ fieldset {
   min-width: 0;
 }
 
-body:not(:-moz-handler-blocked) fieldset {
+body:not(:-moz-handler-blocked) fieldset, pre.user-input:not(:-moz-handler-blocked) fieldset {
   display: table-cell;
 }
 
@@ -591,10 +566,14 @@ label {
   display: block;
   clear: both;
   margin: 14px 0 28px 0;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 400;
   line-height: 28px;
   color: #5C6770;
+}
+
+label .form-hint {
+  margin: 7px 0 0 0;
 }
 
 .primary {
@@ -730,7 +709,7 @@ textarea {
   width: 100%;
   margin: 14px 0 28px 0;
   padding: 7px;
-  border: 3px solid #0072c6;
+  border: 2px solid #0072c6;
   font-family: inherit;
   font-size: inherit;
   font-weight: 400;

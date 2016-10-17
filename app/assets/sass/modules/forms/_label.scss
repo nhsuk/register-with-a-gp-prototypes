@@ -8,10 +8,14 @@ label {
   display: block;
   clear: both;
   margin: $leading 0 $leading*2 0;
-  font-size: $body;
+  font-size: $smallprint;
   font-weight: $bodyweight;
   line-height: $leading*2;
   color: #5C6770;
+}
+
+label .form-hint {
+  margin: $leading/2 0 0 0;
 }
 
 .primary {

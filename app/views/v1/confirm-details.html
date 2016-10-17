@@ -1,6 +1,13 @@
 {% extends '_layouts/layout.html' %}
 
-{% block page_title %}Index : {{serviceName}}{% endblock %}
+{% block page_title %}
+  Check your answers : 
+  {% if practiceName %}
+    Register with {{ practiceName }}
+  {% else %}
+    {{serviceName}}
+  {% endif %}
+{% endblock %}
 
 {% block content %}
   <h1 class="primary">Check your answers</h1>
@@ -87,6 +94,47 @@
         <a href="nhs-number" class="button -secondary">Change</a>
       </td>
     </tr>
+
+    <tr>
+      <th scope="row">Your current GP</th>
+      <td>
+        {% if session.currentgp.registered == 'yes' %}
+          {% if session.currentgp.name != '' %}
+            {{ session.currentgp.name }}<br>
+          {% endif %}
+          {% if session.currentgp.address != '' %}
+            <pre class="user-input">{{ session.currentgp.address }}</pre>
+          {% endif %}
+        {% endif %}
+
+        {% if session.currentgp.registered == 'no' %}
+          I’m not registered with a GP
+        {% endif %}
+      </td>
+      <td class="control">
+        <a href="current-gp" class="button -secondary">Change</a>
+      </td>
+    </tr>
+
+    <tr>
+      <th scope="row">Your previous address</th>
+      <td>
+        {% if session.prevaddress == 'yes' %}
+          {% for line in session.prevAddress %}
+            {% if line != '' %}
+              {{ line }},<br>
+            {% endif %}
+          {% endfor %}
+          {{ session.prevpostcode | upper }}
+        {% endif %}
+        {% if session.prevaddress == 'no' %}
+          I’m not providing a previous address
+        {% endif %}
+      </td>
+      <td class="control">
+        <a href="previous-address" class="button -secondary">Change</a>
+      </td>
+    </tr>
   </table>
 
   <div class="shunt-2">
@@ -94,5 +142,3 @@
   </div>
 
 {% endblock %}
-
-{% block footer %}{% endblock %}
