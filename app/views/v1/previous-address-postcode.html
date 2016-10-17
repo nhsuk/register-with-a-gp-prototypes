@@ -1,0 +1,64 @@
+{% extends '_layouts/layout.html' %}
+
+{% block page_title %}
+  Your previous address :
+  {% if practiceName %}
+    Register with {{ practiceName }}
+  {% else %}
+    {{serviceName}}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+
+  <h1 class="primary">What was your previous home address?</h1>
+
+  <form method="post" class="measure">
+    <fieldset>
+
+      {% if error.general %}
+        <div class="error-summary">
+          <div>
+            <p>{{ error.general }}</p>
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="form-group">
+        <div>
+          <label for="building">
+            Enter your previous building or flat number (optional)
+          </label>
+          <input type="text" id="building" name="building" value="{{ building }}" class="-small">
+        </div>
+      </div>
+
+      {% if error.postcode %}
+        <div class="error-summary">
+          <div>
+            <p>{{ error.postcode }}</p>
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="form-group {% if error.postcode %}-errors{% endif %}">
+        <div>
+          <label for="postcode">Enter your previous home postcode</label>
+          <input type="text" id="postcode" name="postcode" value="{{ postcode }}" class="-small">
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="form-group -controls">
+      <button type="submit" class="button">Find address</button>
+      {% set back = 'previous-address' %}
+      {% if edit == true %}
+        {% set back = 'confirm-details' %}
+      {% endif %}
+      <a href="{{ back }}" class="button -back">Back</a>
+    </div>
+
+  </form>
+{% endblock %}
+
+{% block footer %}{% endblock %}

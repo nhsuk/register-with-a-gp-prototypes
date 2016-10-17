@@ -108,6 +108,26 @@
         <a href="current-gp" class="button -secondary">Change</a>
       </td>
     </tr>
+
+    <tr>
+      <th scope="row">Your previous address</th>
+      <td>
+        {% if session.prevaddress == 'yes' %}
+          {% for line in session.prevAddress %}
+            {% if line != '' %}
+              {{ line }},<br>
+            {% endif %}
+          {% endfor %}
+          {{ session.prevpostcode | upper }}
+        {% endif %}
+        {% if session.prevaddress == 'no' %}
+          I’m not providing a previous address
+        {% endif %}
+      </td>
+      <td class="control">
+        <a href="previous-address" class="button -secondary">Change</a>
+      </td>
+    </tr>
   </table>
 
   <div class="shunt-2">
