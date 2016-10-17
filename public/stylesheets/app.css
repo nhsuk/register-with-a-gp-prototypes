@@ -479,11 +479,11 @@ html {
   border-top: 2px solid #D81E05;
   background-color: #fbe9e6;
   padding: 0 28px;
-  color: #D81E05;
+  color: #a61704;
 }
 
 .error-summary a {
-  color: #D81E05;
+  color: #a61704;
 }
 
 .error-hint {
@@ -791,4 +791,10 @@ textarea:focus {
 .info {
   border-top: 2px solid #425563;
   background-color: #eceeef;
+}
+
+.message {
+  border-top: 2px solid #F7E214;
+  background-color: #fefce8;
+  color: #6e6404;
 }
