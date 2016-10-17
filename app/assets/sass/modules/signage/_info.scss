@@ -12,3 +12,9 @@
   border-top: 2px solid $dark-grey;
   background-color: tint($dark-grey, 90);
 }
+
+.message {
+  border-top: 2px solid $yellow;
+  background-color: tint($yellow, 90);
+  color: darken($yellow, 30);
+}

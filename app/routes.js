@@ -138,24 +138,25 @@ router.post('/v1/home-address', function (req, res) {
 
           if (req.session.building !== '') {
             for (var i=0; i<addresses.length; i++) {
-              var current = addresses[i][0];
-              if (current.indexOf(req.session.building) !== -1) {
+              //var current = addresses[i][0];
+              var current = addresses[i].toString().toLowerCase();
+              if (current.indexOf(req.session.building.toLowerCase()) !== -1) {
                 filtered.push(addresses[i]);
               }
             }
 
-            req.session.addressResults = filtered;
-
             if (filtered.length === 0) {
               // Nothing found for this combo of building / postcode
-              res.render('v1/home-address-postcode', {
-                error: {
-                  general: 'Sorry, no addresses have been found. Please check and try again.'
-                },
+              // So just display the postcode results?
+              req.session.addressResults = addresses;
+              res.render('v1/home-address-result', {
+                message: 'No exact match has been found, showing all addresses within ' + req.session.postcode,
                 postcode: req.session.postcode,
-                building: req.session.building
+                building: req.session.building,
+                results: req.session.addressResults
               });
             } else {
+              req.session.addressResults = filtered;
               res.render('v1/home-address-result', {
                 postcode: req.session.postcode,
                 building: req.session.building,

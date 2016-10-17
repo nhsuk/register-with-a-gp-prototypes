@@ -8,11 +8,11 @@
     border-top: 2px solid $error-colour;
     background-color: tint($error-colour, 90);
     padding: 0 $leading*2;
-    color: $error-colour;
+    color: darken($error-colour, 10);
   }
 
   a {
-    color: $error-colour;
+    color: darken($error-colour, 10);
   }
 }
 
