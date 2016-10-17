@@ -261,10 +261,6 @@ router.post('/v1/nhs-number', function (req, res) {
     number: req.body['nhs-number']
   }
 
-  if (req.body['nhs-number-known'] === 'no') {
-    res.redirect('/v1/confirm-details')
-  }
-
   if (!req.body['nhs-number-known']) {
     passed = false;
     errors = {
@@ -287,10 +283,56 @@ router.post('/v1/nhs-number', function (req, res) {
       errors: errors
     });
   } else {
-    res.redirect('/v1/confirm-details')
+    res.redirect('/v1/current-gp')
   }
 
 })
+
+// Current GP ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+router.get('/v1/current-gp', function (req, res) {
+  res.render('v1/current-gp', {
+    currentgp: req.session.currentgp,
+    edit: req.session.edit
+  });
+})
+
+router.post('/v1/current-gp', function (req, res) {
+
+  var passed = true;
+  var errors = {};
+
+  req.session.currentgp = {
+    registered: req.body['current-gp'],
+    name: req.body['current-gp-name'],
+    address: req.body['current-gp-address']
+  }
+
+  if (!req.body['current-gp']) {
+    passed = false;
+    errors = {
+      registered: 'Please answer ‘yes’ or ‘no’',
+      details: ''
+    }
+  }
+
+  if (req.body['current-gp'] === 'yes' && req.body['current-gp-name'] === '' && req.body['current-gp-address'] === '') {
+    passed = false;
+    errors = {
+      registered: '',
+      details: 'Please enter as much detail as you can about your current GP'
+    }
+  }
+
+  if (passed === false) {
+    res.render('v1/current-gp', {
+      currentgp: req.session.currentgp,
+      errors: errors
+    });
+  } else {
+    res.redirect('/v1/confirm-details')
+  }
+
+});
 
 // Check your answers ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/v1/confirm-details', function (req, res) {
