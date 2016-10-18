@@ -1,7 +1,7 @@
 {% extends '_layouts/layout.html' %}
 
 {% block page_title %}
-  Check your answers : 
+  Check your answers :
   {% if practiceName %}
     Register with {{ practiceName }}
   {% else %}
@@ -53,7 +53,7 @@
       <td>
         {% for line in session.address %}
           {% if line != '' %}
-            {{ line }},<br>
+            {{ line }}<br>
           {% endif %}
         {% endfor %}
         {{ session.postcode | upper }}
@@ -122,7 +122,7 @@
         {% if session.prevaddress == 'yes' %}
           {% for line in session.prevAddress %}
             {% if line != '' %}
-              {{ line }},<br>
+              {{ line }}<br>
             {% endif %}
           {% endfor %}
           {{ session.prevpostcode | upper }}

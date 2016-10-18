@@ -24,7 +24,7 @@
             <td>{{ building }}</td>
           {% endif %}
           <th>Postcode:</th>
-          <td>{{ postcode }}</td>
+          <td>{{ postcode | upper }}</td>
           <td class="control" rowspan="2">
             <a href="previous-address-postcode">change</a>
           </td>
@@ -42,11 +42,23 @@
       {% for result in results %}
         <div class="form-group">
           <label for="address-{{ loop.index0 }}" class="block-label">
-            {% for line in result %}
-              {% if line != '' %}
-                {{ line }}{% if loop.last !== true %}, {% endif %}
-              {% endif %}
-            {% endfor %}
+            {# single address result #}
+            {% if results.length == 1 %}
+              {% for line in result %}
+                {% if line != '' %}
+                  {{ line }}<br>
+                {% endif %}
+              {% endfor %}
+              {{ postcode | upper }}
+
+            {% else %}
+              {# multiple address result #}
+              {% for line in result %}
+                {% if line != '' %}
+                  {{ line }}{% if loop.last !== true %}, {% endif %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
             <input type="radio" id="address-{{ loop.index0 }}" name="address" value="{{ result }}">
           </label>
         </div>
