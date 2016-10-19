@@ -150,7 +150,7 @@ router.post('/v1/home-address', function (req, res) {
               // So just display the postcode results?
               req.session.addressResults = addresses;
               res.render('v1/home-address-result', {
-                message: 'No exact match has been found, showing all addresses within ' + req.session.postcode,
+                message: 'No exact match has been found, showing all addresses for ' + req.session.postcode,
                 postcode: req.session.postcode,
                 building: req.session.building,
                 results: req.session.addressResults
@@ -426,7 +426,7 @@ router.post('/v1/previous-address-postcode', function (req, res) {
               // So just display the postcode results?
               req.session.prevAddressResults = addresses;
               res.render('v1/previous-address-result', {
-                message: 'No exact match has been found, showing all addresses within ' + req.session.prevpostcode,
+                message: 'No exact match has been found, showing all addresses for ' + req.session.prevpostcode,
                 postcode: req.session.prevpostcode,
                 building: req.session.prevbuilding,
                 results: req.session.prevAddressResults

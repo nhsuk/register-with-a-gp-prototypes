@@ -61,13 +61,13 @@ app.use('/', express.static(path.join(__dirname, '/public')))
 // Application settings
 app.set('view engine', 'html')
 
-app.use('/', routes);
-
 nunjucks.configure('./app/views', {
     autoescape: true,
     express: app,
     noCache: true
 });
+
+app.use('/', routes);
 
 // auto render any view that exists
 app.get(/^\/([^.]+)$/, function (req, res) {

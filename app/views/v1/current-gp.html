@@ -11,7 +11,7 @@
 
 {% block content %}
 
-  <h1 class="primary">Are you currently registered with a GP?</h1>
+  <h1 class="primary">Are you already registered with a GP?</h1>
 
   <form method="post">
     <fieldset>
@@ -62,9 +62,6 @@
         <div class="form-group {% if errors.details %}-errors{% endif %}">
           <label for="current-gp">
             Your current GP’s address
-            <span class="form-hint">
-              As you’d write it on an envelope
-            </span>
           </label>
           <textarea rows="6" id="current-gp-address" name="current-gp-address">{{ currentgp.address }}</textarea>
         </div>
