@@ -10,11 +10,11 @@
 {% endblock %}
 
 {% block content %}
-  <h1 class="primary">Check your answers</h1>
+  <h1 class="primary">Check your details</h1>
 
   <table class="measure">
     <tr>
-      <th scope="row">Your name</th>
+      <th scope="row">Name</th>
       <td>{{ session.name.firstName | title }} {{ session.name.middleNames | title }} {{ session.name.lastName | title }}</td>
       <td class="control">
         <a href="name" class="button -secondary">Change</a>
@@ -22,16 +22,15 @@
     </tr>
 
     <tr>
-      <th scope="row">Have you ever changed your name?</th>
+      <th scope="row">Previous name</th>
       <td>
         {% if session.name.nameChanged == "no" %}
-          No, I have not
+          I’ve not changed my name
         {% endif %}
         {% if session.name.nameChanged == "not-saying" %}
           I’d prefer not to say
         {% endif %}
         {% if session.name.nameChanged == "yes" %}
-          Yes, I have<br>
           {{ session.name.firstNamePrev | title }} {{ session.name.middleNamesPrev | title }} {{ session.name.lastNamePrev | title }}
         {% endif %}
       </td>
@@ -41,7 +40,7 @@
     </tr>
 
     <tr>
-      <th scope="row">Your date of birth</th>
+      <th scope="row">Date of birth</th>
       <td>{{ session.dob.day }} / {{ session.dob.month }} / {{ session.dob.year }}</td>
       <td class="control">
         <a href="date-of-birth" class="button -secondary">Change</a>
@@ -49,7 +48,7 @@
     </tr>
 
     <tr>
-      <th scope="row">Your home address</th>
+      <th scope="row">Address</th>
       <td>
         {% for line in session.address %}
           {% if line != '' %}
@@ -64,16 +63,33 @@
     </tr>
 
     <tr>
-      <th scope="row">Your contact details</th>
+      <th scope="row">Previous address</th>
+      <td>
+        {% if session.prevaddress == 'yes' %}
+          {% for line in session.prevAddress %}
+            {% if line != '' %}
+              {{ line }}<br>
+            {% endif %}
+          {% endfor %}
+          {{ session.prevpostcode | upper }}
+        {% endif %}
+        {% if session.prevaddress == 'no' %}
+          I’m not providing a previous address
+        {% endif %}
+      </td>
+      <td class="control">
+        <a href="previous-address" class="button -secondary">Change</a>
+      </td>
+    </tr>
+
+    <tr>
+      <th scope="row">Contact details</th>
       <td>
         {% if session.contact.telephone != '' %}
-          Telephone: {{ session.contact.telephone }}<br>
-        {% endif %}
-        {% if session.contact.mobile != '' %}
-          Mobile: {{ session.contact.mobile }}<br>
+          {{ session.contact.telephone }}<br>
         {% endif %}
         {% if session.contact.email != '' %}
-          Email: {{ session.contact.email }}<br>
+          {{ session.contact.email }}
         {% endif %}
       </td>
       <td class="control">
@@ -82,7 +98,7 @@
     </tr>
 
     <tr>
-      <th scope="row">Your NHS number</th>
+      <th scope="row">NHS number</th>
       <td>
         {% if session.nhsnumber.known == 'yes' %}
           {{ session.nhsnumber.number }}
@@ -96,7 +112,7 @@
     </tr>
 
     <tr>
-      <th scope="row">Your current GP</th>
+      <th scope="row">Current GP</th>
       <td>
         {% if session.currentgp.registered == 'yes' %}
           {% if session.currentgp.name != '' %}
@@ -115,30 +131,10 @@
         <a href="current-gp" class="button -secondary">Change</a>
       </td>
     </tr>
-
-    <tr>
-      <th scope="row">Your previous address</th>
-      <td>
-        {% if session.prevaddress == 'yes' %}
-          {% for line in session.prevAddress %}
-            {% if line != '' %}
-              {{ line }}<br>
-            {% endif %}
-          {% endfor %}
-          {{ session.prevpostcode | upper }}
-        {% endif %}
-        {% if session.prevaddress == 'no' %}
-          I’m not providing a previous address
-        {% endif %}
-      </td>
-      <td class="control">
-        <a href="previous-address" class="button -secondary">Change</a>
-      </td>
-    </tr>
   </table>
 
   <div class="shunt-2">
-    <a href="registration-submitted" class="button">Send my application</a>
+    <a href="registration-submitted" class="button">Send my details and register</a>
   </div>
 
 {% endblock %}

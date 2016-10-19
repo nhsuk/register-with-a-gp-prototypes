@@ -1,7 +1,7 @@
 {% extends '_layouts/layout.html' %}
 
 {% block page_title %}
-  Your name : 
+  Your name :
   {% if practiceName %}
     Register with {{ practiceName }}
   {% else %}
@@ -12,7 +12,7 @@
 {% block content %}
   <h1 class="primary">
     What is your full name?
-    <span class="form-hint">Please enter full names, don’t use initials</span>
+    <span class="form-hint">Enter your names in full, don’t use initials</span>
   </h1>
   <form action="name" method="post" class="measure">
 
@@ -61,7 +61,7 @@
       </div>
       <div class="form-group {% if errors['name-changed'] %}-errors{% endif %}">
         <label for="yes" class="block-label">
-          Yes, I changed my name
+          Yes, I’ve changed my name
           <input type="radio" id="yes" name="name-changed" value="yes" {% if name.nameChanged == "yes" %}checked="checked"{% endif %}>
         </label>
       </div>
@@ -77,10 +77,7 @@
       <legend class="secondary">What was your previous name?</legend>
       <div class="form-hint">
         <p>
-          You don’t have to tell us your previous name but it will help us find your medical records.
-        </p>
-        <p>
-          If you’ve changed your name more than once, just enter your most recent previous name.
+          You don’t have to give your previous name but it helps the GP find your medical records
         </p>
       </div>
 

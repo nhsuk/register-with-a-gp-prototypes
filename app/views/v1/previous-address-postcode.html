@@ -11,7 +11,7 @@
 
 {% block content %}
 
-  <h1 class="primary">What was your previous home address?</h1>
+  <h1 class="primary">What was your address?</h1>
 
   <form method="post" class="measure">
     <fieldset>
@@ -27,7 +27,8 @@
       <div class="form-group">
         <div>
           <label for="building">
-            Enter your previous building or flat number (optional)
+            Flat or house number, or house name (optional)
+            <span class="form-hint">For example, 122 or 17c</span>
           </label>
           <input type="text" id="building" name="building" value="{{ building }}" class="-small">
         </div>
@@ -43,7 +44,7 @@
 
       <div class="form-group {% if error.postcode %}-errors{% endif %}">
         <div>
-          <label for="postcode">Enter your previous home postcode</label>
+          <label for="postcode">Postcode</label>
           <input type="text" id="postcode" name="postcode" value="{{ postcode }}" class="-small">
         </div>
       </div>
