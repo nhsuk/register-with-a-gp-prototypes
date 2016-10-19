@@ -9,6 +9,10 @@
   {% endif %}
 {% endblock %}
 
+{% block html_head %}
+  <meta name="format-detection" content="telephone=no">
+{% endblock %}
+
 {% block content %}
   <h1 class="primary">Check your details</h1>
 
@@ -125,6 +129,22 @@
       </td>
       <td class="control">
         <a href="armed-forces" class="button -secondary">Change</a>
+      </td>
+    </tr>
+
+    <tr>
+      <th scope="row">From abroad</th>
+      <td>
+        {% if session.abroad.boolean == 'yes' %}
+          Arrived in the UK: {{ session.abroad.arrival.day }} / {{ session.abroad.arrival.month }} / {{ session.abroad.arrival.year }}<br>
+          Date of leaving the UK: {{ session.abroad.leaving.day }} / {{ session.abroad.leaving.month }} / {{ session.abroad.leaving.year }}
+        {% endif %}
+        {% if session.abroad.boolean == 'no' %}
+          I’m not from abroad
+        {% endif %}
+      </td>
+      <td class="control">
+        <a href="from-abroad" class="button -secondary">Change</a>
       </td>
     </tr>
 

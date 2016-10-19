@@ -539,6 +539,65 @@ router.post('/v1/armed-forces', function (req, res) {
     if (req.session.edit === true) {
       res.redirect('/v1/confirm-details')
     } else {
+      res.redirect('/v1/from-abroad')
+    }
+  }
+
+});
+
+// From abroad? ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+router.get('/v1/from-abroad', function (req, res) {
+  res.render('v1/from-abroad', {
+    abroad: req.session.abroad,
+    edit: req.session.edit
+  });
+});
+
+router.post('/v1/from-abroad', function (req, res) {
+
+  var passed = true;
+  var errors = {};
+
+  req.session.abroad = {
+    boolean: req.body['abroad'],
+    arrival: {
+      day: req.body['arrival-day'],
+      month: req.body['arrival-month'],
+      year: req.body['arrival-year']
+    },
+    leaving: {
+      day: req.body['leaving-day'],
+      month: req.body['leaving-month'],
+      year: req.body['leaving-year']
+    }
+  }
+
+  if (!req.body['abroad']) {
+    passed = false;
+    error = 'Please answer ‘yes’ or ‘no’';
+  }
+
+  if (req.body['abroad'] === 'no') {
+    req.session.abroad.arrival = {
+      day: '',
+      month: '',
+      year: ''
+    },
+    req.session.abroad.leaving = {
+      day: '',
+      month: '',
+      year: ''
+    }
+  }
+
+  if (passed === false) {
+    res.render('v1/from-abroad', {
+      error: error
+    });
+  } else {
+    if (req.session.edit === true) {
+      res.redirect('/v1/confirm-details')
+    } else {
       res.redirect('/v1/confirm-details')
     }
   }

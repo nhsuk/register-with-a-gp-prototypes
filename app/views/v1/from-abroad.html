@@ -1,0 +1,118 @@
+{% extends '_layouts/layout.html' %}
+
+{% block page_title %}
+  Are you from abroad? :
+  {% if practiceName %}
+    Register with {{ practiceName }}
+  {% else %}
+    {{serviceName}}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+
+  <h1 class="primary">Are you from abroad?</h1>
+
+  <form method="post">
+    <fieldset>
+
+      {% if error %}
+        <div class="error-summary">
+          <div>
+            <p>{{ error }}</p>
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="form-group {% if error %}-errors{% endif %}">
+        <label for="abroad-yes" class="block-label">
+          Yes
+          <input type="radio" id="abroad-yes" name="abroad" value="yes" {% if abroad.boolean == "yes" %}checked="checked"{% endif %}>
+        </label>
+      </div>
+
+      <div class="form-group {% if error %}-errors{% endif %}">
+        <label for="abroad-no" class="block-label">
+          No
+          <input type="radio" id="abroad-no" name="abroad" value="no" {% if abroad.boolean == "no" %}checked="checked"{% endif %}>
+        </label>
+      </div>
+    </fieldset>
+
+    <div id="details-entry">
+
+      <fieldset>
+        <legend>
+          The date you first came to live in the UK
+        </legend>
+        <div class="form-group -date">
+          <div>
+            <label for="arrival-day">Day</label>
+            <input type="text" id="arrival-day" name="arrival-day" value="{{ abroad.arrival.day }}" class="day" maxlength="2">
+          </div>
+          <div>
+            <label for="arrival-month">Month</label>
+            <input type="text" id="arrival-month" name="arrival-month" value="{{ abroad.arrival.month }}" class="month" maxlength="2">
+          </div>
+          <div>
+            <label for="arrival-year">Year</label>
+            <input type="text" id="arrival-year" name="arrival-year" value="{{ abroad.arrival.year }}" class="year" maxlength="4">
+          </div>
+          <p class="form-hint">
+            For example, 12 / 10 / 2004
+          </p>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>
+          If previously resident in the UK, the date you left
+        </legend>
+        <div class="form-group -date">
+          <div>
+            <label for="leaving-day">Day</label>
+            <input type="text" id="leaving-day" name="leaving-day" value="{{ abroad.leaving.day }}" class="day" maxlength="2">
+          </div>
+          <div>
+            <label for="leaving-month">Month</label>
+            <input type="text" id="leaving-month" name="leaving-month" value="{{ abroad.leaving.month }}" class="month" maxlength="2">
+          </div>
+          <div>
+            <label for="leaving-year">Year</label>
+            <input type="text" id="leaving-year" name="leaving-year" value="{{ abroad.leaving.year }}" class="year" maxlength="4">
+          </div>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="form-group -controls">
+      <button type="submit" class="button">Continue</button>
+      {% set back = 'previous-address' %}
+      {% if edit == true %}
+        {% set back = 'confirm-details' %}
+      {% endif %}
+      <a href="{{ back }}" class="button -back">Back</a>
+    </div>
+
+  </form>
+{% endblock %}
+
+{% block body_after %}
+  <script>
+    $(function() {
+      var $group = $('#details-entry');
+      var $els = $('[name="abroad"]');
+      var $selectedEl = $('[name="abroad"]:checked');
+      if ($selectedEl.val() !== "yes") {
+        $group.hide();
+      }
+      $els.on('change', function(e) {
+        if (this.value === "yes") {
+          $group.show();
+        } else {
+          $group.hide();
+        }
+      });
+    });
+  </script>
+{% endblock %}
