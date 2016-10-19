@@ -21,7 +21,7 @@
         <tr>
           {% if building !== '' %}
             <th>Number:</th>
-            <td>{{ building }}</td>
+            <td>{{ building | title }}</td>
           {% endif %}
           <th>Postcode:</th>
           <td>{{ postcode | upper }}</td>

@@ -102,12 +102,29 @@
       <td>
         {% if session.nhsnumber.known == 'yes' %}
           {{ session.nhsnumber.number }}
-        {% else %}
+        {% endif %}
+        {% if session.nhsnumber.known == 'no' %}
           I don’t know my NHS number
         {% endif %}
       </td>
       <td class="control">
         <a href="nhs-number" class="button -secondary">Change</a>
+      </td>
+    </tr>
+
+    <tr>
+      <th scope="row">Armed forces</th>
+      <td>
+        {% if session.armedforces.leaving == 'yes' %}
+          Service / personnel number: {{ session.armedforces.serviceno }}<br>
+          Enlistment date: {{ session.armedforces.enlistment.day }} / {{ session.armedforces.enlistment.month }} / {{ session.armedforces.enlistment.year }}
+        {% endif %}
+        {% if session.armedforces.leaving == 'no' %}
+          I’m not returning from the armed forces
+        {% endif %}
+      </td>
+      <td class="control">
+        <a href="armed-forces" class="button -secondary">Change</a>
       </td>
     </tr>
 
