@@ -6,17 +6,13 @@ var router = express.Router()
 var postcode_api = process.env.POSTCODE_API
 
 router.get('/', function (req, res) {
-  req.session.destroy(function(err) {
-    console.log('Index page - destroying session');
-  })
+  req.session.destroy();
   res.render('index.html');
 });
 
 // Start page ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/v1/start', function (req, res) {
-  req.session.destroy(function(err) {
-    console.log('Start page - destroying session');
-  })
+  req.session.destroy();
   res.render('v1/start');
 });
 
@@ -281,6 +277,10 @@ router.post('/v1/nhs-number', function (req, res) {
     }
   }
 
+  if (req.body['nhs-number-known'] === 'no') {
+    req.session.nhsnumber.number = '';
+  }
+
   if (passed === false) {
     res.render('v1/nhs-number', {
       nhsnumber: req.session.nhsnumber,
@@ -374,7 +374,7 @@ router.post('/v1/previous-address', function (req, res) {
   } else if (req.body['prev-address'] === 'yes') {
     res.redirect('/v1/previous-address-postcode')
   } else {
-    res.redirect('/v1/confirm-details')
+    res.redirect('/v1/armed-forces')
   }
 
 });
@@ -489,10 +489,61 @@ router.post('/v1/select-previous-address', function (req, res) {
     if (req.session.edit === true) {
       res.redirect('/v1/confirm-details')
     } else {
-      res.redirect('/v1/confirm-details')
+      res.redirect('/v1/armed-forces')
     }
   }
 })
+
+// Leaving the armed forces? +++++++++++++++++++++++++++++++++++++++++++++++++++
+router.get('/v1/armed-forces', function (req, res) {
+  res.render('v1/armed-forces', {
+    armedforces: req.session.armedforces,
+    edit: req.session.edit
+  });
+});
+
+router.post('/v1/armed-forces', function (req, res) {
+
+  var passed = true;
+  var errors = {};
+
+  req.session.armedforces = {
+    leaving: req.body['armed-forces'],
+    serviceno: req.body['service-no'],
+    enlistment: {
+      day: req.body['enlistment-day'],
+      month: req.body['enlistment-month'],
+      year: req.body['enlistment-year']
+    }
+  }
+
+  if (!req.body['armed-forces']) {
+    passed = false;
+    error = 'Please answer ‘yes’ or ‘no’';
+  }
+
+  if (req.body['armed-forces'] === 'no') {
+    req.session.armedforces.serviceno = '';
+    req.session.armedforces.enlistment = {
+      day: '',
+      month: '',
+      year: ''
+    };
+  }
+
+  if (passed === false) {
+    res.render('v1/armed-forces', {
+      error: error
+    });
+  } else {
+    if (req.session.edit === true) {
+      res.redirect('/v1/confirm-details')
+    } else {
+      res.redirect('/v1/confirm-details')
+    }
+  }
+
+});
 
 // Check your answers ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/v1/confirm-details', function (req, res) {

@@ -47,7 +47,7 @@ var myLogger = function (req, res, next) {
   console.log(req.session);
   next();
 };
-//app.use(myLogger);
+app.use(myLogger);
 
 // Handle form POSTS
 app.use( bodyParser.json() );       // to support JSON-encoded bodies

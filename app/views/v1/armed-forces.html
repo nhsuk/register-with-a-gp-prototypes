@@ -27,23 +27,23 @@
       <div class="form-group {% if error %}-errors{% endif %}">
         <label for="armed-forces-yes" class="block-label">
           Yes
-          <input type="radio" id="armed-forces-yes" name="armed-forces" value="yes" {% if armedforces == "yes" %}checked="checked"{% endif %}>
+          <input type="radio" id="armed-forces-yes" name="armed-forces" value="yes" {% if armedforces.leaving == "yes" %}checked="checked"{% endif %}>
         </label>
       </div>
 
       <div class="form-group {% if error %}-errors{% endif %}">
         <label for="armed-forces-no" class="block-label">
           No
-          <input type="radio" id="armed-forces-no" name="armed-forces" value="no" {% if armedforces == "no" %}checked="checked"{% endif %}>
+          <input type="radio" id="armed-forces-no" name="armed-forces" value="no" {% if armedforces.leaving == "no" %}checked="checked"{% endif %}>
         </label>
       </div>
     </fieldset>
 
     <div id="details-entry">
       <fieldset>
-        <div class="form-group {% if errors.number %}-errors{% endif %}">
+        <div class="form-group">
           <label for="service-no">Your service or personnel number</label>
-          <input type="text" id="service-no" name="service-no" value="{{ armedforces.number }}" class="-small">
+          <input type="text" id="service-no" name="service-no" value="{{ armedforces.serviceno }}">
         </div>
       </fieldset>
 
@@ -54,18 +54,18 @@
         <div class="form-group -date">
           <div>
             <label for="enlistment-day">Day</label>
-            <input type="text" id="enlistment-day" name="enlistment-day" value="{{ enlistment.day }}" class="day" maxlength="2">
+            <input type="text" id="enlistment-day" name="enlistment-day" value="{{ armedforces.enlistment.day }}" class="day" maxlength="2">
           </div>
           <div>
             <label for="enlistment-month">Month</label>
-            <input type="text" id="enlistment-month" name="enlistment-month" value="{{ enlistment.month }}" class="month" maxlength="2">
+            <input type="text" id="enlistment-month" name="enlistment-month" value="{{ armedforces.enlistment.month }}" class="month" maxlength="2">
           </div>
           <div>
             <label for="enlistment-year">Year</label>
-            <input type="text" id="enlistment-year" name="enlistment-year" value="{{ enlistment.year }}" class="year" maxlength="4">
+            <input type="text" id="enlistment-year" name="enlistment-year" value="{{ armedforces.enlistment.year }}" class="year" maxlength="4">
           </div>
           <p class="form-hint">
-            For example: 31/12/1980
+            For example, 12 / 10 / 2004
           </p>
         </div>
       </fieldset>
