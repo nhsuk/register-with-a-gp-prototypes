@@ -16,33 +16,41 @@
   <form method="post" class="measure">
     <fieldset>
 
-      {% if error.general %}
+      {% if error %}
         <div class="error-summary">
           <div>
-            <p>{{ error.general }}</p>
+            <p>{{ error }}</p>
           </div>
         </div>
       {% endif %}
 
-      <div class="form-group">
+      <div class="form-group {% if error %}-errors{% endif %}">
         <div>
-          <label for="building">
-            Flat or house number, or house name (optional)
-            <span class="form-hint">For example, 122 or 17c</span>
+          <label for="address-1">
+            Address
           </label>
-          <input type="text" id="building" name="building" value="{{ building }}" class="-small">
+          <div>
+            <input type="text" id="address-1" name="address-1" value="{{ address[0] }}">
+          </div>
+          <div>
+            <input type="text" name="address-2" value="{{ address[1] }}">
+          </div>
+          <div>
+            <input type="text" name="address-3" value="{{ address[2] }}">
+          </div>
         </div>
       </div>
 
-      {% if error.postcode %}
-        <div class="error-summary">
-          <div>
-            <p>{{ error.postcode }}</p>
-          </div>
+      <div class="form-group {% if error %}-errors{% endif %}">
+        <div>
+          <label for="locality">
+            Town or city
+          </label>
+          <input type="text" id="address-4" name="address-4" value="{{ address[3] }}">
         </div>
-      {% endif %}
+      </div>
 
-      <div class="form-group {% if error.postcode %}-errors{% endif %}">
+      <div class="form-group {% if error %}-errors{% endif %}">
         <div>
           <label for="postcode">Postcode</label>
           <input type="text" id="postcode" name="postcode" value="{{ postcode }}" class="-small">
@@ -50,11 +58,9 @@
       </div>
     </fieldset>
 
-    <p><a href="home-address-manual">I’ll type in my address</a></p>
-
     <div class="form-group -controls">
-      <button type="submit" class="button">Find address</button>
-      {% set back = 'date-of-birth' %}
+      <button type="submit" class="button">Continue</button>
+      {% set back = 'home-address' %}
       {% if edit == true %}
         {% set back = 'confirm-details' %}
       {% endif %}
