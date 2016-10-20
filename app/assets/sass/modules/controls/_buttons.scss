@@ -65,3 +65,27 @@
     font-weight: $bodyweight;
   }
 }
+
+.button {
+
+  &.-bordered {
+    border: 2px solid rgba($pale-grey, 0.5);
+    background-color: rgba($pale-grey, 0.1);
+    padding: 2px $leading/2;
+    color: $nhs-blue;
+    margin-right: $leading/4;
+    font-weight: $bodyweight;
+
+  }
+  &.-bordered:hover {
+    background-color: $pale-grey;
+  }
+
+  &.-small {
+    @extends .-bordered;
+    margin-top: $leading/2;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+}

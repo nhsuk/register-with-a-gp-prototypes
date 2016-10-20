@@ -20,6 +20,7 @@
 
 // Modules
 @import "modules/banner/prototype";
+@import "modules/controls/breadcrumbs";
 @import "modules/controls/buttons";
 @import "modules/data/table";
 @import "modules/disclosure/details";
@@ -33,4 +34,5 @@
 @import "modules/forms/radio-checkbox";
 @import "modules/forms/textarea";
 @import "modules/header-global/header-global";
+@import "modules/header-local/header-panel-local";
 @import "modules/signage/info";

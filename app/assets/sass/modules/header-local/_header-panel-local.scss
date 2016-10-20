@@ -1,0 +1,23 @@
+.header-panel {
+  color: $pure-white;
+  background-color: $nhs-blue;
+  padding-top: $leading*3;
+  padding-left: $leading*2;
+  padding-right: $leading*2;
+  padding-bottom: $leading*2;
+  margin-bottom: 32px;
+
+  .header {
+    margin-bottom: $leading*2;
+  }
+
+  .content-seperator {
+    width: 130px;
+    height: $leading/4;
+    background-color: tint($nhs-blue, 20%);
+  }
+
+  .precis {
+    font-weight: $lightweight;
+  }
+}

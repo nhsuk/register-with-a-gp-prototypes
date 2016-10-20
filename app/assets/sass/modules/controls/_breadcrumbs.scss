@@ -1,0 +1,20 @@
+.breadcrumb {
+  @extend %contain-floats;
+
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: block;
+
+  li {
+    float: left;
+  }
+  
+  li.selected {
+    font-size: 16px;
+    line-height: 24px;
+    margin-top:12px;
+    padding-left: $leading/4;
+    letter-spacing:-0.1px;
+  }
+}
