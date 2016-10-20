@@ -59,7 +59,7 @@
                 {% endif %}
               {% endfor %}
             {% endif %}
-            <input type="radio" id="address-{{ loop.index0 }}" name="address" value="{{ result }}">
+            <input type="radio" id="address-{{ loop.index0 }}" name="address" value="{{ result }}" {% if results.length == 1 %}checked="checked"{% endif %}>
           </label>
         </div>
       {% endfor %}
