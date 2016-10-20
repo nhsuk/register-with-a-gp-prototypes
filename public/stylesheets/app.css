@@ -77,6 +77,15 @@ h2, .heading-xlarge, .secondary,
   }
 }
 
+h3, .heading-large,
+.h3 {
+  margin: 0;
+  padding: 16px 0;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+}
+
 .smallprint {
   font-size: 16px;
   color: #666666;
