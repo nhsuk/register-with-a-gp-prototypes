@@ -214,6 +214,41 @@ router.post('/v1/select-address', function (req, res) {
   }
 })
 
+// Manual address entry ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+router.get('/v1/home-address-manual', function (req, res) {
+  res.render('v1/home-address-manual', {
+    address: req.session.address,
+    postcode: req.session.postcode,
+    edit: req.session.edit
+  });
+});
+
+router.post('/v1/home-address-manual', function (req, res) {
+
+  /*if (!req.body['address']) {
+    res.render('v1/home-address-result', {
+      error: 'Please select your home address',
+      building: req.session.building,
+      postcode: req.session.postcode,
+      results: req.session.addressResults
+    });
+  }*/
+
+  req.session.address = [
+    req.body['address-1'],
+    req.body['address-2'],
+    req.body['address-3'],
+    req.body['address-4']
+  ];
+  req.session.postcode = req.body['postcode'];
+  if (req.session.edit === true) {
+    res.redirect('/v1/confirm-details')
+  } else {
+    res.redirect('/v1/contact-details')
+  }
+
+})
+
 // Contact details +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/v1/contact-details', function (req, res) {
   res.render('v1/contact-details', {
