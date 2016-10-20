@@ -225,15 +225,6 @@ router.get('/v1/home-address-manual', function (req, res) {
 
 router.post('/v1/home-address-manual', function (req, res) {
 
-  /*if (!req.body['address']) {
-    res.render('v1/home-address-result', {
-      error: 'Please select your home address',
-      building: req.session.building,
-      postcode: req.session.postcode,
-      results: req.session.addressResults
-    });
-  }*/
-
   req.session.address = [
     req.body['address-1'],
     req.body['address-2'],
@@ -241,7 +232,14 @@ router.post('/v1/home-address-manual', function (req, res) {
     req.body['address-4']
   ];
   req.session.postcode = req.body['postcode'];
-  if (req.session.edit === true) {
+
+  if (!req.body['address-1'] && !req.body['address-4']) {
+    res.render('v1/home-address-manual', {
+      error: 'Please enter your full address',
+      address: req.session.address,
+      postcode: req.session.postcode
+    });
+  } else if (req.session.edit === true) {
     res.redirect('/v1/confirm-details')
   } else {
     res.redirect('/v1/contact-details')

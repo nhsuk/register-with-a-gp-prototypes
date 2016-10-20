@@ -16,15 +16,15 @@
   <form method="post" class="measure">
     <fieldset>
 
-      {% if error.general %}
+      {% if error %}
         <div class="error-summary">
           <div>
-            <p>{{ error.general }}</p>
+            <p>{{ error }}</p>
           </div>
         </div>
       {% endif %}
 
-      <div class="form-group">
+      <div class="form-group {% if error %}-errors{% endif %}">
         <div>
           <label for="address-1">
             Address
@@ -41,7 +41,7 @@
         </div>
       </div>
 
-      <div class="form-group">
+      <div class="form-group {% if error %}-errors{% endif %}">
         <div>
           <label for="locality">
             Town or city
@@ -50,7 +50,7 @@
         </div>
       </div>
 
-      <div class="form-group">
+      <div class="form-group {% if error %}-errors{% endif %}">
         <div>
           <label for="postcode">Postcode</label>
           <input type="text" id="postcode" name="postcode" value="{{ postcode }}" class="-small">
