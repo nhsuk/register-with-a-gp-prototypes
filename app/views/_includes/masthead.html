@@ -3,12 +3,14 @@
     <a href="/" class="header-logo" title="Go to the index page">
       <img src="/images/nhs-logotype-blue.svg" alt="NHS" />
     </a>
-    <span class="service-name">
-      {% if practiceName %}
-        Register with {{ practiceName }}
-      {% else %}
-        {{serviceName}}
-      {% endif %}
-    </span>
+    {% if not suppressServiceName %}
+      <span class="service-name">
+        {% if practiceName %}
+          Register with {{ practiceName }}
+        {% else %}
+          {{serviceName}}
+        {% endif %}
+      </span>
+    {% endif %}
   </div>
 </header>

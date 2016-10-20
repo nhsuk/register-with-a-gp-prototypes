@@ -1,9 +1,13 @@
 #global-header {
-  @extend %block;
+  //@extend %block;
   @extend %contain-floats;
   border-bottom: 3px solid $nhs-blue;
-  padding-top: $leading;
+  padding-top: $leading*2;
   padding-bottom: $leading;
+}
+
+.header-container {
+  @extend %block;
 }
 
 .header-logo {

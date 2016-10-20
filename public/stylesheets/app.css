@@ -1,8 +1,9 @@
-.grid-row, .prototype-warning-inner, .footer-container, .-date, .error-summary, form, .form-group, #global-header, .signage {
+@import url("//fast.fonts.net/cssapi/4c65968f-c33e-4eb6-9a5d-ab4f81a0543f.css");
+.grid-row, .prototype-warning-inner, .breadcrumb, .footer-container, .-date, .error-summary, form, .form-group, #global-header, .signage {
   zoom: 1;
 }
 
-.grid-row:after, .prototype-warning-inner:after, .footer-container:after, .-date:after, .error-summary:after, form:after, .form-group:after, #global-header:after, .signage:after {
+.grid-row:after, .prototype-warning-inner:after, .breadcrumb:after, .footer-container:after, .-date:after, .error-summary:after, form:after, .form-group:after, #global-header:after, .signage:after {
   content: "";
   display: block;
   clear: both;
@@ -33,42 +34,46 @@ we can add other blues, named like blue40 (for a lighter blue) or blue60 for a d
 16px
 */
 body, pre.user-input {
-  font-family: "Frutiger Neue", "Frutiger", sans-serif;
+  font-family: "Neue Frutiger W01", sans-serif;
   font-weight: 400;
   font-size: 20px;
-  line-height: 28px;
+  line-height: 32px;
 }
 
 .measure {
   max-width: 34em;
 }
 
-h1, .heading-xxlarge, .primary {
-  margin: 14px 0;
+h1, .heading-xxlarge, .primary,
+.h1 {
+  margin: 16px 0;
   font-size: 40px;
   font-weight: 400;
-  line-height: 42px;
+  line-height: 48px;
 }
 
 @media (min-width: 500px) {
-  h1, .heading-xxlarge, .primary {
+  h1, .heading-xxlarge, .primary,
+  .h1 {
     font-size: 48px;
-    line-height: 56px;
+    line-height: 64px;
   }
 }
 
-h2, .heading-xlarge, .secondary {
+h2, .heading-xlarge, .secondary,
+.h2 {
   margin: 0;
-  padding: 14px 0 0 0;
+  padding: 16px 0 0 0;
   font-size: 30px;
   font-weight: 700;
-  line-height: 42px;
+  line-height: 48px;
 }
 
 @media (min-width: 500px) {
-  h2, .heading-xlarge, .secondary {
+  h2, .heading-xlarge, .secondary,
+  .h2 {
     font-size: 32px;
-    line-height: 42px;
+    line-height: 48px;
   }
 }
 
@@ -87,7 +92,7 @@ body, pre.user-input {
   background-image: -o-linear-gradient(top, cyan 0, rgba(255, 255, 255, 0) 1px);
   background-image: linear-gradient(to bottom, cyan 0, rgba(255, 255, 255, 0) 1px);
   background-repeat: repeat-y;
-  background-size: 100% 14px;
+  background-size: 100% 16px;
 }
 
 /* remove undelines for a tags used as anchors */
@@ -101,7 +106,7 @@ h6 a {
 }
 
 p {
-  margin: 28px 0 28px 0;
+  margin: 32px 0 32px 0;
 }
 
 pre.user-input {
@@ -109,7 +114,7 @@ pre.user-input {
 }
 
 ul, ol {
-  margin: 14px 0 28px 0;
+  margin: 16px 0 32px 0;
   padding-left: 1em;
   letter-spacing: 0.01em;
   list-style-position: outside;
@@ -124,7 +129,7 @@ ol {
 }
 
 li {
-  margin: 0 0 14px 0;
+  margin: 0 0 16px 0;
   padding-left: 0;
 }
 
@@ -152,7 +157,7 @@ body, pre.user-input {
   background-color: #fff;
 }
 
-.prototype-warning-inner, .footer-container, #global-header,
+.prototype-warning-inner, .footer-container, .header-container,
 .content {
   max-width: 960px;
   margin: 0 auto;
@@ -161,7 +166,7 @@ body, pre.user-input {
 }
 
 @media (min-width: 980px) {
-  .prototype-warning-inner, .footer-container, #global-header,
+  .prototype-warning-inner, .footer-container, .header-container,
   .content {
     padding-left: 0;
     padding-right: 0;
@@ -169,7 +174,7 @@ body, pre.user-input {
 }
 
 .content {
-  padding-top: 28px;
+  padding-top: 32px;
 }
 
 @media (min-width: 640px) {
@@ -277,11 +282,11 @@ body, pre.user-input {
 }
 
 .shunt {
-  margin-top: 28px;
+  margin-top: 32px;
 }
 
 .shunt-2 {
-  margin-top: 56px;
+  margin-top: 64px;
 }
 
 .prototype-warning {
@@ -291,8 +296,27 @@ body, pre.user-input {
 }
 
 .prototype-warning-inner {
-  padding-bottom: 7px;
-  padding-top: 7px;
+  padding-bottom: 8px;
+  padding-top: 8px;
+}
+
+.breadcrumb {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+
+.breadcrumb li {
+  float: left;
+}
+
+.breadcrumb li.selected {
+  font-size: 16px;
+  line-height: 24px;
+  margin-top: 12px;
+  padding-left: 4px;
+  letter-spacing: -0.1px;
 }
 
 .button::-moz-focus-inner {
@@ -306,10 +330,10 @@ body, pre.user-input {
   font-family: inherit;
   font-weight: 700;
   font-size: inherit;
-  line-height: 42px;
+  line-height: 48px;
   width: 100%;
-  padding: 0 28px;
-  margin: 0 0 14px 0;
+  padding: 0 32px;
+  margin: 0 0 16px 0;
   text-align: center;
   color: #fff;
   background-color: #3E8117;
@@ -327,7 +351,7 @@ body, pre.user-input {
 @media (min-width: 500px) {
   .button {
     width: auto;
-    margin: 0 14px 0 0;
+    margin: 0 16px 0 0;
   }
 }
 
@@ -345,7 +369,7 @@ body, pre.user-input {
 .button.-back::before {
   content: "";
   display: inline-block;
-  margin-right: 7px;
+  margin-right: 8px;
   width: 0;
   height: 0;
   border-top: 5px solid transparent;
@@ -360,17 +384,37 @@ body, pre.user-input {
   font-weight: 400;
 }
 
+.button.-bordered {
+  border: 2px solid rgba(217, 225, 226, 0.5);
+  background-color: rgba(217, 225, 226, 0.1);
+  padding: 2px 8px;
+  color: #0072c6;
+  margin-right: 4px;
+  font-weight: 400;
+}
+
+.button.-bordered:hover {
+  background-color: #d9e1e2;
+}
+
+.button.-small {
+  @extends .-bordered;
+  margin-top: 8px;
+  font-size: 16px;
+  line-height: 24px;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
   border-top: 1px solid #d9e1e2;
-  margin-bottom: 28px;
+  margin-bottom: 32px;
 }
 
 table th, table td {
   text-align: left;
   vertical-align: top;
-  padding: 14px 7px;
+  padding: 16px 8px;
   font-weight: 400;
   font-size: 16px;
   border-bottom: 1px solid #d9e1e2;
@@ -385,9 +429,9 @@ table .control {
 }
 
 table .control .button {
-  padding: 14px;
+  padding: 16px;
   margin-right: 0;
-  line-height: 14px;
+  line-height: 16px;
 }
 
 table.natural {
@@ -399,7 +443,7 @@ table.compact th, table.compact td {
 }
 
 details {
-  margin: 28px 0;
+  margin: 32px 0;
 }
 
 details summary {
@@ -411,17 +455,17 @@ html {
 }
 
 #global-footer {
-  margin-top: 56px;
-  padding-top: 14px;
-  padding-bottom: 14px;
+  margin-top: 64px;
+  padding-top: 16px;
+  padding-bottom: 16px;
   min-height: 80px;
   border-top: 1px solid #cbd6d7;
   background-color: #d9e1e2;
 }
 
 .footer-container {
-  padding-bottom: 7px;
-  padding-top: 7px;
+  padding-bottom: 8px;
+  padding-top: 8px;
 }
 
 .footer-container img {
@@ -445,14 +489,14 @@ html {
 }
 
 .error-summary {
-  margin: 28px 0;
+  margin: 32px 0;
 }
 
 .error-summary > div {
   float: left;
   border-top: 2px solid #D81E05;
   background-color: #fbe9e6;
-  padding: 0 28px;
+  padding: 0 32px;
   color: #a61704;
 }
 
@@ -478,7 +522,7 @@ html {
 fieldset {
   border: 0;
   padding: 0.01em 0 0 0;
-  margin: 0 0 28px 0;
+  margin: 0 0 32px 0;
   min-width: 0;
 }
 
@@ -496,7 +540,7 @@ form {
 }
 
 .form-group.-controls {
-  margin: 14px 0;
+  margin: 16px 0;
 }
 
 @media (min-width: 500px) {
@@ -523,13 +567,13 @@ input[type='tel'] {
   -webkit-box-sizing: border-box;
   display: block;
   width: 100%;
-  margin: 14px 0 28px 0;
-  padding: 7px;
+  margin: 16px 0 32px 0;
+  padding: 8px;
   border: 2px solid #0072c6;
   font-family: inherit;
   font-size: inherit;
   font-weight: 400;
-  line-height: 28px;
+  line-height: 32px;
 }
 
 @media (min-width: 500px) {
@@ -564,15 +608,15 @@ label {
 .form-hint {
   display: block;
   clear: both;
-  margin: 14px 0 28px 0;
+  margin: 16px 0 32px 0;
   font-size: 16px;
   font-weight: 400;
-  line-height: 28px;
+  line-height: 32px;
   color: #5C6770;
 }
 
 label .form-hint {
-  margin: 7px 0 0 0;
+  margin: 8px 0 0 0;
 }
 
 .primary {
@@ -596,7 +640,7 @@ label .form-hint {
   position: relative;
   width: auto;
   padding: 7px 0 7px 50px;
-  margin: 14px 0;
+  margin: 16px 0;
   cursor: pointer;
 }
 
@@ -706,19 +750,19 @@ textarea {
   -webkit-box-sizing: border-box;
   display: block;
   width: 100%;
-  margin: 14px 0 28px 0;
-  padding: 7px;
+  margin: 16px 0 32px 0;
+  padding: 8px;
   border: 2px solid #0072c6;
   font-family: inherit;
   font-size: inherit;
   font-weight: 400;
-  line-height: 28px;
+  line-height: 32px;
   background-image: -webkit-linear-gradient(top, #d9e1e2 0, rgba(255, 255, 255, 0) 1px);
   background-image: -moz-linear-gradient(top, #d9e1e2 0, rgba(255, 255, 255, 0) 1px);
   background-image: -o-linear-gradient(top, #d9e1e2 0, rgba(255, 255, 255, 0) 1px);
   background-image: linear-gradient(to bottom, #d9e1e2 0, rgba(255, 255, 255, 0) 1px);
   background-repeat: repeat-y;
-  background-size: 100% 28px;
+  background-size: 100% 32px;
 }
 
 @media (min-width: 500px) {
@@ -736,8 +780,8 @@ textarea:focus {
 
 #global-header {
   border-bottom: 3px solid #0072c6;
-  padding-top: 14px;
-  padding-bottom: 14px;
+  padding-top: 32px;
+  padding-bottom: 16px;
 }
 
 .header-logo {
@@ -754,16 +798,40 @@ textarea:focus {
 .service-name {
   color: #425563;
   line-height: 32px;
-  margin-left: 14px;
+  margin-left: 16px;
+}
+
+.header-panel {
+  color: #fff;
+  background-color: #0072c6;
+  padding-top: 48px;
+  padding-left: 32px;
+  padding-right: 32px;
+  padding-bottom: 32px;
+  margin-bottom: 32px;
+}
+
+.header-panel .header {
+  margin-bottom: 32px;
+}
+
+.header-panel .content-seperator {
+  width: 130px;
+  height: 4px;
+  background-color: #338ed1;
+}
+
+.header-panel .precis {
+  font-weight: 200;
 }
 
 .signage {
-  margin: 28px 0;
+  margin: 32px 0;
 }
 
 .signage > div {
   float: left;
-  padding: 0 28px;
+  padding: 0 32px;
 }
 
 .info {

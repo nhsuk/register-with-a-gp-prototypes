@@ -13,7 +13,9 @@ router.get('/', function (req, res) {
 // Start page ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/v1/start', function (req, res) {
   req.session.destroy();
-  res.render('v1/start');
+  res.render('v1/start', {
+    suppressServiceName: true
+  });
 });
 
 // Name ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

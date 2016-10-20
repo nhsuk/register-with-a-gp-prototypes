@@ -15,7 +15,7 @@ $family: "Neue Frutiger W01", sans-serif;
 */
 
 $body: 20px;
-$leading: 14px;//16px;
+$leading: 16px;
 $lightweight: 200;
 $bodyweight: 400;
 $boldweight: 700;
@@ -33,7 +33,8 @@ body {
   max-width: 34em;
 }
 
-h1 {
+h1,
+.h1 {
   margin: $leading 0;
   font-size: 40px;
   font-weight: $bodyweight;
@@ -45,7 +46,8 @@ h1 {
   }
 }
 
-h2 {
+h2,
+.h2 {
   margin: 0; padding: $leading 0 0 0;
   font-size: 30px;
   font-weight: $boldweight;

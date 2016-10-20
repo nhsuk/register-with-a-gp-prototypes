@@ -9,19 +9,30 @@
 {% endblock %}
 
 {% block content %}
-  <h1 class="primary">
-    {% if practiceName %}
-      Register with {{ practiceName }}
-    {% else %}
-      {{serviceName}}
-    {% endif %}
-  </h1>
+  <div class="grid-row">
+    <div class="grid-3-3">
+      <ol class="breadcrumb">
+        <li><a href="#" class="button -bordered -small">GP practices</a></li>
+        <li><a href="#" class="button -bordered -small">{{ practiceName }}</a></li>
+        <li class="selected">Register</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="grid-row">
+    <div class="grid-3-3">
+      <div class="header-panel">
+        <h1 class="h2 header">
+          Register with {{ practiceName }}
+        </h1>
+        <div class="content-seperator"></div>
+        <p class="precis">It usually takes about 10 minutes.</p>
+      </div>
+    </div>
+  </div>
+
 
   <div class="measure">
-
-    <p>Register with {{ practiceName }} online.</p>
-
-    <p>It usually takes about 10 minutes.</p>
 
     <p>You’ll be asked for your:</p>
 
