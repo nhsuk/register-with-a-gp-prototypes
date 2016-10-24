@@ -18,3 +18,8 @@
   background-color: tint($yellow, 90);
   color: darken($yellow, 30);
 }
+
+.completion {
+  border-top: 2px solid $light-green;
+  background-color: tint($light-green, 90);
+}
