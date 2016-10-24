@@ -853,3 +853,8 @@ textarea:focus {
   background-color: #fefce8;
   color: #6e6404;
 }
+
+.completion {
+  border-top: 2px solid #5bbf21;
+  background-color: #eff9e9;
+}

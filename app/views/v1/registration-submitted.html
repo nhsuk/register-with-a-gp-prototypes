@@ -11,7 +11,13 @@
 {% block content %}
   <div class="measure">
 
-    <h1>Your details have been sent to {{ practiceName }} and you’ll get an email confirming this.</h1>
+    <h1>Thank you</h1>
+
+    <div class="signage completion">
+      <div>
+        <p>Your details have been sent to {{ practiceName }} and you’ll get an email confirming this.</p>
+      </div>
+    </div>
 
     <h2>What happens next?</h2>
 
@@ -19,9 +25,15 @@
 
     <p>If you need to book an appointment phone your GP.</p>
 
-    <h3>Sign up for blood and organ donation</h3>
+    <div>
+      <a href="http://www.nhsbt.nhs.uk/" title="This link will open in a new window or tab" target="_blank">
+        <img src="/images/puff-donation.svg" style="max-width: 100%;">
+      </a>
+    </div>
 
-    <p>You can help those who need a <a href="#">blood</a> or <a href="#">organ donation.</a></p>
+    <p>
+      <a href="beta.nhs.uk">Back to NHS.UK</a>
+    </p>
 
   </div>
 {% endblock %}
