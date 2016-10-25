@@ -52,6 +52,21 @@
     </tr>
 
     <tr>
+      <th scope="row">Contact details</th>
+      <td>
+        {% if session.contact.telephone != '' %}
+          {{ session.contact.telephone }}<br>
+        {% endif %}
+        {% if session.contact.email != '' %}
+          {{ session.contact.email }}
+        {% endif %}
+      </td>
+      <td class="control">
+        <a href="contact-details" class="button -secondary">Change</a>
+      </td>
+    </tr>
+
+    <tr>
       <th scope="row">Address</th>
       <td>
         {% for line in session.address %}
@@ -87,36 +102,6 @@
     </tr>
 
     <tr>
-      <th scope="row">Contact details</th>
-      <td>
-        {% if session.contact.telephone != '' %}
-          {{ session.contact.telephone }}<br>
-        {% endif %}
-        {% if session.contact.email != '' %}
-          {{ session.contact.email }}
-        {% endif %}
-      </td>
-      <td class="control">
-        <a href="contact-details" class="button -secondary">Change</a>
-      </td>
-    </tr>
-
-    <tr>
-      <th scope="row">NHS number</th>
-      <td>
-        {% if session.nhsnumber.known == 'yes' %}
-          {{ session.nhsnumber.number }}
-        {% endif %}
-        {% if session.nhsnumber.known == 'no' %}
-          I don’t know my NHS number
-        {% endif %}
-      </td>
-      <td class="control">
-        <a href="nhs-number" class="button -secondary">Change</a>
-      </td>
-    </tr>
-
-    <tr>
       <th scope="row">Armed forces</th>
       <td>
         {% if session.armedforces.leaving == 'yes' %}
@@ -136,8 +121,12 @@
       <th scope="row">From abroad</th>
       <td>
         {% if session.abroad.boolean == 'yes' %}
-          Arrived in the UK: {{ session.abroad.arrival.day }} / {{ session.abroad.arrival.month }} / {{ session.abroad.arrival.year }}<br>
-          Date of leaving the UK: {{ session.abroad.leaving.day }} / {{ session.abroad.leaving.month }} / {{ session.abroad.leaving.year }}
+          {% if session.abroad.arrival.year != '' %}
+            Arrived {{ session.abroad.arrival.day }} / {{ session.abroad.arrival.month }} / {{ session.abroad.arrival.year }}<br>
+          {% endif %}
+          {% if session.abroad.leaving.year != '' %}
+            Left {{ session.abroad.leaving.day }} / {{ session.abroad.leaving.month }} / {{ session.abroad.leaving.year }}
+          {% endif %}
         {% endif %}
         {% if session.abroad.boolean == 'no' %}
           I’m not from abroad
@@ -145,6 +134,21 @@
       </td>
       <td class="control">
         <a href="from-abroad" class="button -secondary">Change</a>
+      </td>
+    </tr>
+
+    <tr>
+      <th scope="row">NHS number</th>
+      <td>
+        {% if session.nhsnumber.known == 'yes' %}
+          {{ session.nhsnumber.number }}
+        {% endif %}
+        {% if session.nhsnumber.known == 'no' %}
+          I don’t know my NHS number
+        {% endif %}
+      </td>
+      <td class="control">
+        <a href="nhs-number" class="button -secondary">Change</a>
       </td>
     </tr>
 
