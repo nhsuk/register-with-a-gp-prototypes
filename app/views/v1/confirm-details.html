@@ -45,7 +45,7 @@
 
     <tr>
       <th scope="row">Date of birth</th>
-      <td>{{ session.dob.day }} / {{ session.dob.month }} / {{ session.dob.year }}</td>
+      <td>{{ session.dob.day }} {{ session.dob.month | date("MMMM") }} {{ session.dob.year }}</td>
       <td class="control">
         <a href="date-of-birth" class="button -secondary">Change</a>
       </td>
@@ -105,8 +105,12 @@
       <th scope="row">Armed forces</th>
       <td>
         {% if session.armedforces.leaving == 'yes' %}
-          Service / personnel number: {{ session.armedforces.serviceno }}<br>
-          Enlistment date: {{ session.armedforces.enlistment.day }} / {{ session.armedforces.enlistment.month }} / {{ session.armedforces.enlistment.year }}
+          {% if session.armedforces.serviceno != '' %}
+            Service / personnel number: {{ session.armedforces.serviceno }}<br>
+          {% endif %}
+          {% if session.armedforces.enlistment.year != '' %}
+            Enlisted {{ session.armedforces.enlistment.day }} {{ session.armedforces.enlistment.month | date("MMMM") }} {{ session.armedforces.enlistment.year }}
+          {% endif %}
         {% endif %}
         {% if session.armedforces.leaving == 'no' %}
           I’m not returning from the armed forces
@@ -122,10 +126,10 @@
       <td>
         {% if session.abroad.boolean == 'yes' %}
           {% if session.abroad.arrival.year != '' %}
-            Arrived {{ session.abroad.arrival.day }} / {{ session.abroad.arrival.month }} / {{ session.abroad.arrival.year }}<br>
+            Arrived {{ session.abroad.arrival.day }} {{ session.abroad.arrival.month | date("MMMM") }} {{ session.abroad.arrival.year }}<br>
           {% endif %}
           {% if session.abroad.leaving.year != '' %}
-            Left {{ session.abroad.leaving.day }} / {{ session.abroad.leaving.month }} / {{ session.abroad.leaving.year }}
+            Left {{ session.abroad.leaving.day }} {{ session.abroad.leaving.month | date("MMMM") }} {{ session.abroad.leaving.year }}
           {% endif %}
         {% endif %}
         {% if session.abroad.boolean == 'no' %}

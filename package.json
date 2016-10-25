@@ -30,6 +30,7 @@
     "grunt-sass": "^1.2.1",
     "javascript-natural-sort": "^0.7.1",
     "nunjucks": "^2.5.2",
+    "nunjucks-date-filter": "^0.1.1",
     "portscanner": "^1.0.0",
     "prompt": "^1.0.0",
     "request": "^2.75.0",
