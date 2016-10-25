@@ -3,6 +3,7 @@ var express = require('express')
 var session = require('express-session')
 var favicon = require('serve-favicon')
 var nunjucks = require('nunjucks')
+var dateFilter = require('nunjucks-date-filter')
 var request = require('request')
 var bodyParser = require('body-parser')
 var utils = require('./lib/utils.js')
@@ -14,17 +15,17 @@ var app = express()
 // Grab environment variables specified in Procfile or as Heroku config vars
 var username = process.env.USERNAME
 var password = process.env.PASSWORD
-var env = process.env.NODE_ENV || 'development'
+var appEnvironment = process.env.NODE_ENV || 'development'
 var useAuth = process.env.USE_AUTH || config.useAuth
 var useHttps = process.env.USE_HTTPS || config.useHttps
 
-env = env.toLowerCase()
+appEnvironment = appEnvironment.toLowerCase()
 useAuth = useAuth.toLowerCase()
 useHttps = useHttps.toLowerCase()
 
 // Authenticate against the environment-provided credentials, if running
 // the app in production (Heroku, effectively)
-if (env === 'production' && useAuth === 'true') {
+if (appEnvironment === 'production' && useAuth === 'true') {
   app.use(utils.basicAuth(username, password))
 }
 
@@ -61,11 +62,12 @@ app.use('/', express.static(path.join(__dirname, '/public')))
 // Application settings
 app.set('view engine', 'html')
 
-nunjucks.configure('./app/views', {
+var env = nunjucks.configure('./app/views', {
     autoescape: true,
     express: app,
     noCache: true
 });
+env.addFilter('date', dateFilter);
 
 app.use('/', routes);
 
@@ -90,7 +92,7 @@ app.get(/^\/([^.]+)$/, function (req, res) {
 });
 
 // Force HTTPs on production connections
-if (env === 'production' && useHttps === 'true') {
+if (appEnvironment === 'production' && useHttps === 'true') {
   app.use(utils.forceHttps)
 }
 
