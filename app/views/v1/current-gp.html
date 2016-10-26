@@ -27,14 +27,14 @@
       <div class="form-group {% if errors.registered %}-errors{% endif %}">
         <label for="current-gp-yes" class="block-label">
           Yes
-          <input type="radio" id="current-gp-yes" name="current-gp" value="yes" {% if currentgp.registered == "yes" %}checked="checked"{% endif %}>
+          <input type="radio" id="current-gp-yes" name="current-gp" value="yes" {% if session.currentgp.registered == "yes" %}checked="checked"{% endif %}>
         </label>
       </div>
 
       <div class="form-group {% if errors.registered %}-errors{% endif %}">
         <label for="current-gp-no" class="block-label">
           No
-          <input type="radio" id="current-gp-no" name="current-gp" value="no" {% if currentgp.registered == "no" %}checked="checked"{% endif %}>
+          <input type="radio" id="current-gp-no" name="current-gp" value="no" {% if session.currentgp.registered == "no" %}checked="checked"{% endif %}>
         </label>
       </div>
     </fieldset>
@@ -56,14 +56,14 @@
               If you know it
             </span>
           </label>
-          <input type="text" id="current-gp-name" name="current-gp-name" value="{{ currentgp.name }}">
+          <input type="text" id="current-gp-name" name="current-gp-name" value="{{ session.currentgp.name }}">
         </div>
 
         <div class="form-group {% if errors.details %}-errors{% endif %}">
           <label for="current-gp">
             Your current GP’s address
           </label>
-          <textarea rows="6" id="current-gp-address" name="current-gp-address">{{ currentgp.address }}</textarea>
+          <textarea rows="6" id="current-gp-address" name="current-gp-address">{{ session.currentgp.address }}</textarea>
         </div>
       </fieldset>
     </div>
@@ -71,7 +71,7 @@
     <div class="form-group -controls">
       <button type="submit" class="button">Continue</button>
       {% set back = 'nhs-number' %}
-      {% if edit == true %}
+      {% if session.edit == true %}
         {% set back = 'confirm-details' %}
       {% endif %}
       <a href="{{ back }}" class="button -back">Back</a>

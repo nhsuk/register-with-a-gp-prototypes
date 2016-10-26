@@ -27,15 +27,15 @@
     <fieldset>
       <div class="form-group {% if errors.name %}-errors{% endif %}">
         <label for="first-name">First name</label>
-        <input type="text" id="first-name" name="first-name" value="{{ name.firstName }}">
+        <input type="text" id="first-name" name="first-name" value="{{ session.name.firstName }}">
       </div>
       <div class="form-group">
         <label for="middle-names">Middle names</label>
-        <input type="text" id="middle-names" name="middle-names" value="{{ name.middleNames }}">
+        <input type="text" id="middle-names" name="middle-names" value="{{ session.name.middleNames }}">
       </div>
       <div class="form-group {% if errors.name %}-errors{% endif %}">
         <label for="last-name">Last name</label>
-        <input type="text" id="last-name" name="last-name" value="{{ name.lastName }}">
+        <input type="text" id="last-name" name="last-name" value="{{ session.name.lastName }}">
       </div>
     </fieldset>
 
@@ -56,19 +56,19 @@
       <div class="form-group {% if errors['name-changed'] %}-errors{% endif %}">
         <label for="no" class="block-label">
           No, I haven’t changed my name
-          <input type="radio" id="no" name="name-changed" value="no" {% if name.nameChanged == "no" %}checked="checked"{% endif %}>
+          <input type="radio" id="no" name="name-changed" value="no" {% if session.name.nameChanged == "no" %}checked="checked"{% endif %}>
         </label>
       </div>
       <div class="form-group {% if errors['name-changed'] %}-errors{% endif %}">
         <label for="yes" class="block-label">
           Yes, I’ve changed my name
-          <input type="radio" id="yes" name="name-changed" value="yes" {% if name.nameChanged == "yes" %}checked="checked"{% endif %}>
+          <input type="radio" id="yes" name="name-changed" value="yes" {% if session.name.nameChanged == "yes" %}checked="checked"{% endif %}>
         </label>
       </div>
       <div class="form-group {% if errors['name-changed'] %}-errors{% endif %}">
         <label for="not-saying" class="block-label">
           Prefer not to say
-          <input type="radio" id="not-saying" name="name-changed" value="not-saying" {% if name.nameChanged == "not-saying" %}checked="checked"{% endif %}>
+          <input type="radio" id="not-saying" name="name-changed" value="not-saying" {% if session.name.nameChanged == "not-saying" %}checked="checked"{% endif %}>
         </label>
       </div>
     </fieldset>
@@ -91,22 +91,22 @@
 
       <div class="form-group {% if errors['previous-name'] %}-errors{% endif %}">
         <label for="first-name-previous">First name</label>
-        <input type="text" id="first-name-previous" name="first-name-previous" value="{{ name.firstNamePrev }}">
+        <input type="text" id="first-name-previous" name="first-name-previous" value="{{ session.name.firstNamePrev }}">
       </div>
       <div class="form-group">
         <label for="middle-names-previous">Middle names</label>
-        <input type="text" id="middle-names-previous" name="middle-names-previous" value="{{ name.middleNamesPrev }}">
+        <input type="text" id="middle-names-previous" name="middle-names-previous" value="{{ session.name.middleNamesPrev }}">
       </div>
       <div class="form-group {% if errors['previous-name'] %}-errors{% endif %}">
         <label for="last-name-previous">Last name</label>
-        <input type="text" id="last-name-previous" name="last-name-previous" value="{{ name.lastNamePrev}}">
+        <input type="text" id="last-name-previous" name="last-name-previous" value="{{ session.name.lastNamePrev}}">
       </div>
     </fieldset>
 
     <div class="form-group -controls">
       <button type="submit" class="button">Continue</button>
       {% set back = 'start' %}
-      {% if edit == true %}
+      {% if session.edit == true %}
         {% set back = 'confirm-details' %}
       {% endif %}
       <a href="{{ back }}" class="button -back">Back</a>

@@ -30,7 +30,7 @@
             Flat or house number, or house name (optional)
             <span class="form-hint">For example, 122 or 17c</span>
           </label>
-          <input type="text" id="building" name="building" value="{{ building }}" class="-small">
+          <input type="text" id="building" name="building" value="{{ session.building }}" class="-small">
         </div>
       </div>
 
@@ -45,7 +45,7 @@
       <div class="form-group {% if error.postcode %}-errors{% endif %}">
         <div>
           <label for="postcode">Postcode</label>
-          <input type="text" id="postcode" name="postcode" value="{{ postcode }}" class="-small">
+          <input type="text" id="postcode" name="postcode" value="{{ session.postcode }}" class="-small">
         </div>
       </div>
     </fieldset>
@@ -55,7 +55,7 @@
     <div class="form-group -controls">
       <button type="submit" class="button">Find address</button>
       {% set back = 'date-of-birth' %}
-      {% if edit == true %}
+      {% if session.edit == true %}
         {% set back = 'confirm-details' %}
       {% endif %}
       <a href="{{ back }}" class="button -back">Back</a>

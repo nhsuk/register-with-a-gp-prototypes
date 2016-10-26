@@ -17,14 +17,22 @@
         What is your home address?
       </legend>
 
+      {% if error %}
+        <div class="error-summary">
+          <div>
+            <p>{{ error }}</p>
+          </div>
+        </div>
+      {% endif %}
+
       <table class="natural compact">
         <tr>
-          {% if building !== '' %}
+          {% if session.building !== '' %}
             <th>Number:</th>
-            <td>{{ building | title }}</td>
+            <td>{{ session.building | title }}</td>
           {% endif %}
           <th>Postcode:</th>
-          <td>{{ postcode | upper }}</td>
+          <td>{{ session.postcode | upper }}</td>
           <td class="control" rowspan="2">
             <a href="home-address">change</a>
           </td>
@@ -39,11 +47,11 @@
         </div>
       {% endif %}
 
-      {% for result in results %}
+      {% for result in session.addressResults %}
         <div class="form-group">
           <label for="address-{{ loop.index0 }}" class="block-label">
             {# single address result #}
-            {% if results.length == 1 %}
+            {% if session.addressResults.length == 1 %}
               {% for line in result %}
                 {% if line != '' %}
                   {{ line }}<br>
@@ -59,7 +67,7 @@
                 {% endif %}
               {% endfor %}
             {% endif %}
-            <input type="radio" id="address-{{ loop.index0 }}" name="address" value="{{ result }}" {% if results.length == 1 %}checked="checked"{% endif %}>
+            <input type="radio" id="address-{{ loop.index0 }}" name="address" value="{{ result }}" {% if session.addressResults.length == 1 %}checked="checked"{% endif %}>
           </label>
         </div>
       {% endfor %}
@@ -78,5 +86,3 @@
 
   </form>
 {% endblock %}
-
-{% block footer %}{% endblock %}

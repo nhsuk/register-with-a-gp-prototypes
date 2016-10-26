@@ -30,13 +30,13 @@
             Address
           </label>
           <div>
-            <input type="text" id="address-1" name="address-1" value="{{ address[0] }}">
+            <input type="text" id="address-1" name="address-1" value="{{ session.address[0] }}">
           </div>
           <div>
-            <input type="text" name="address-2" value="{{ address[1] }}">
+            <input type="text" name="address-2" value="{{ session.address[1] }}">
           </div>
           <div>
-            <input type="text" name="address-3" value="{{ address[2] }}">
+            <input type="text" name="address-3" value="{{ session.address[2] }}">
           </div>
         </div>
       </div>
@@ -46,14 +46,14 @@
           <label for="locality">
             Town or city
           </label>
-          <input type="text" id="address-4" name="address-4" value="{{ address[3] }}">
+          <input type="text" id="address-4" name="address-4" value="{{ session.address[3] }}">
         </div>
       </div>
 
       <div class="form-group {% if error %}-errors{% endif %}">
         <div>
           <label for="postcode">Postcode</label>
-          <input type="text" id="postcode" name="postcode" value="{{ postcode }}" class="-small">
+          <input type="text" id="postcode" name="postcode" value="{{ session.postcode }}" class="-small">
         </div>
       </div>
     </fieldset>
@@ -61,7 +61,7 @@
     <div class="form-group -controls">
       <button type="submit" class="button">Continue</button>
       {% set back = 'home-address' %}
-      {% if edit == true %}
+      {% if session.edit == true %}
         {% set back = 'confirm-details' %}
       {% endif %}
       <a href="{{ back }}" class="button -back">Back</a>
