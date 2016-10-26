@@ -160,6 +160,13 @@ a:visited {
   color: #4c2c92;
 }
 
+a:focus {
+  outline: 0;
+  -webkit-box-shadow: 0 0 0 5px #F7E214;
+  -moz-box-shadow: 0 0 0 5px #F7E214;
+  box-shadow: 0 0 0 5px #F7E214;
+}
+
 body, pre.user-input {
   margin: 0;
   padding: 0;
@@ -357,6 +364,13 @@ body, pre.user-input {
   background-color: #3E8117;
 }
 
+.button:focus {
+  outline: 0;
+  -webkit-box-shadow: 0 0 0 5px #F7E214;
+  -moz-box-shadow: 0 0 0 5px #F7E214;
+  box-shadow: 0 0 0 5px #F7E214;
+}
+
 @media (min-width: 500px) {
   .button {
     width: auto;
@@ -457,6 +471,14 @@ details {
 
 details summary {
   text-decoration: underline;
+  display: inline-block;
+}
+
+details summary:focus {
+  outline: 0;
+  -webkit-box-shadow: 0 0 0 5px #F7E214;
+  -moz-box-shadow: 0 0 0 5px #F7E214;
+  box-shadow: 0 0 0 5px #F7E214;
 }
 
 html {

@@ -31,6 +31,13 @@
     background-color: $button-green;
   }
 
+  &:focus {
+    outline: 0;
+    -webkit-box-shadow: 0 0 0 5px $focus-colour;
+    -moz-box-shadow: 0 0 0 5px $focus-colour;
+    box-shadow: 0 0 0 5px $focus-colour;
+  }
+
   @include media(mid) {
     width: auto;
     margin: 0 $leading 0 0;
