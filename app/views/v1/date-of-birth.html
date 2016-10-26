@@ -27,15 +27,15 @@
       <div class="form-group -date {% if error %}-errors{% endif %}">
         <div>
           <label for="dob-day">Day</label>
-          <input type="text" id="dob-day" name="dob-day" value="{{ dob.day }}" class="day" maxlength="2">
+          <input type="text" id="dob-day" name="dob-day" value="{{ session.dob.day }}" class="day" maxlength="2">
         </div>
         <div>
           <label for="dob-month">Month</label>
-          <input type="text" id="dob-month" name="dob-month" value="{{ dob.month }}" class="month" maxlength="2">
+          <input type="text" id="dob-month" name="dob-month" value="{{ session.dob.month }}" class="month" maxlength="2">
         </div>
         <div>
           <label for="dob-year">Year</label>
-          <input type="text" id="dob-year" name="dob-year" value="{{ dob.year }}" class="year" maxlength="4">
+          <input type="text" id="dob-year" name="dob-year" value="{{ session.dob.year }}" class="year" maxlength="4">
         </div>
         <p class="form-hint">
           For example, 31 / 12 / 1980
@@ -46,7 +46,7 @@
     <div class="form-group -controls">
       <button type="submit" class="button">Continue</button>
       {% set back = 'name' %}
-      {% if edit == true %}
+      {% if session.edit == true %}
         {% set back = 'confirm-details' %}
       {% endif %}
       <a href="{{ back }}" class="button -back">Back</a>

@@ -19,12 +19,12 @@
 
       <table class="natural compact">
         <tr>
-          {% if building !== '' %}
+          {% if session.prevbuilding !== '' %}
             <th>Number:</th>
-            <td>{{ building | title }}</td>
+            <td>{{ session.prevbuilding | title }}</td>
           {% endif %}
           <th>Postcode:</th>
-          <td>{{ postcode | upper }}</td>
+          <td>{{ session.prevpostcode | upper }}</td>
           <td class="control" rowspan="2">
             <a href="previous-address-postcode">change</a>
           </td>
@@ -39,17 +39,17 @@
         </div>
       {% endif %}
 
-      {% for result in results %}
+      {% for result in session.prevAddressResults %}
         <div class="form-group">
           <label for="address-{{ loop.index0 }}" class="block-label">
             {# single address result #}
-            {% if results.length == 1 %}
+            {% if session.prevAddressResults.length == 1 %}
               {% for line in result %}
                 {% if line != '' %}
                   {{ line }}<br>
                 {% endif %}
               {% endfor %}
-              {{ postcode | upper }}
+              {{ session.prevpostcode | upper }}
 
             {% else %}
               {# multiple address result #}
@@ -59,7 +59,7 @@
                 {% endif %}
               {% endfor %}
             {% endif %}
-            <input type="radio" id="address-{{ loop.index0 }}" name="address" value="{{ result }}">
+            <input type="radio" id="address-{{ loop.index0 }}" name="address" value="{{ result }}" {% if session.prevAddressResults.length == 1 %}checked="checked"{% endif %}>
           </label>
         </div>
       {% endfor %}

@@ -20,10 +20,8 @@ router.get('/v1/start', function (req, res) {
 
 // Name ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/v1/name', function (req, res) {
-  console.log(req.session);
   res.render('v1/name', {
-    name: req.session.name,
-    edit: req.session.edit
+    session: req.session
   });
 });
 
@@ -60,7 +58,7 @@ router.post('/v1/name', function (req, res) {
   if (passed === false) {
     res.render('v1/name', {
       errors,
-      name: req.session.name
+      session: req.session
     });
   } else {
     if (req.session.edit === true) {
@@ -75,8 +73,7 @@ router.post('/v1/name', function (req, res) {
 // DOB +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/v1/date-of-birth', function (req, res) {
   res.render('v1/date-of-birth', {
-    dob: req.session.dob,
-    edit: req.session.edit
+    session: req.session
   });
 });
 
@@ -90,7 +87,8 @@ router.post('/v1/date-of-birth', function (req, res) {
 
   if (req.body['dob-day'] === '' || req.body['dob-month'] === '' || req.body['dob-year'] === '') {
     res.render('v1/date-of-birth', {
-      error: 'Please enter your date of birth'
+      error: 'Please enter your date of birth',
+      session: req.session
     });
   } else {
     if (req.session.edit === true) {
@@ -104,9 +102,7 @@ router.post('/v1/date-of-birth', function (req, res) {
 // Postcode ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/v1/home-address', function (req, res) {
   res.render('v1/home-address-postcode', {
-    postcode: req.session.postcode,
-    building: req.session.building,
-    edit: req.session.edit
+    session: req.session
   });
 });
 
@@ -117,7 +113,7 @@ router.post('/v1/home-address', function (req, res) {
 
   if (req.body['postcode'] === '') {
     res.render('v1/home-address-postcode', {
-      building: req.session.building,
+      session: req.session,
       error: {
         postcode: 'Please enter your home postcode'
       }
@@ -149,16 +145,12 @@ router.post('/v1/home-address', function (req, res) {
               req.session.addressResults = addresses;
               res.render('v1/home-address-result', {
                 message: 'No exact match has been found, showing all addresses for ' + req.session.postcode,
-                postcode: req.session.postcode,
-                building: req.session.building,
-                results: req.session.addressResults
+                session: req.session
               });
             } else {
               req.session.addressResults = filtered;
               res.render('v1/home-address-result', {
-                postcode: req.session.postcode,
-                building: req.session.building,
-                results: req.session.addressResults
+                session: req.session
               });
             }
 
@@ -167,9 +159,7 @@ router.post('/v1/home-address', function (req, res) {
             req.session.addressResults = addresses;
 
             res.render('v1/home-address-result', {
-              postcode: req.session.postcode,
-              building: req.session.building,
-              results: req.session.addressResults
+              session: req.session
             });
 
           }
@@ -180,8 +170,7 @@ router.post('/v1/home-address', function (req, res) {
           error: {
             general: 'Sorry, there’s been a problem looking up your address. Please try again.'
           },
-          postcode: req.session.postcode,
-          building: req.session.building
+          session: req.session
         });
       }
     });
@@ -191,9 +180,7 @@ router.post('/v1/home-address', function (req, res) {
 // Address selection +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/v1/select-address', function (req, res) {
   res.render('v1/select-address', {
-    postcode: req.session.postcode,
-    results: req.session.addressResults,
-    edit: req.session.edit
+    session: req.session
   });
 });
 
@@ -202,9 +189,7 @@ router.post('/v1/select-address', function (req, res) {
   if (!req.body['address']) {
     res.render('v1/home-address-result', {
       error: 'Please select your home address',
-      building: req.session.building,
-      postcode: req.session.postcode,
-      results: req.session.addressResults
+      session: req.session
     });
   } else {
     req.session.address = req.body['address'].split(',');
@@ -219,9 +204,7 @@ router.post('/v1/select-address', function (req, res) {
 // Manual address entry ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/v1/home-address-manual', function (req, res) {
   res.render('v1/home-address-manual', {
-    address: req.session.address,
-    postcode: req.session.postcode,
-    edit: req.session.edit
+    session: req.session
   });
 });
 
@@ -238,8 +221,7 @@ router.post('/v1/home-address-manual', function (req, res) {
   if (!req.body['address-1'] && !req.body['address-4']) {
     res.render('v1/home-address-manual', {
       error: 'Please enter your full address',
-      address: req.session.address,
-      postcode: req.session.postcode
+      session: req.session
     });
   } else if (req.session.edit === true) {
     res.redirect('/v1/confirm-details')
@@ -252,8 +234,7 @@ router.post('/v1/home-address-manual', function (req, res) {
 // Contact details +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/v1/contact-details', function (req, res) {
   res.render('v1/contact-details', {
-    contact: req.session.contact,
-    edit: req.session.edit
+    session: req.session
   });
 });
 
@@ -261,11 +242,10 @@ router.post('/v1/contact-details', function (req, res) {
 
   req.session.contact = {
     telephone: req.body['telephone'],
-    mobile: req.body['mobile'],
     email: req.body['email']
   }
 
-  if (req.body['telephone'] === '' && req.body['mobile'] === '' && req.body['email'] === '') {
+  if (req.body['telephone'] === '' && req.body['email'] === '') {
     res.render('v1/contact-details', {
       error: 'Please enter at least one'
     });
@@ -281,8 +261,7 @@ router.post('/v1/contact-details', function (req, res) {
 // NHS Number ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/v1/nhs-number', function (req, res) {
   res.render('v1/nhs-number', {
-    nhsnumber: req.session.nhsnumber,
-    edit: req.session.edit
+    session: req.session
   });
 })
 
@@ -318,7 +297,7 @@ router.post('/v1/nhs-number', function (req, res) {
 
   if (passed === false) {
     res.render('v1/nhs-number', {
-      nhsnumber: req.session.nhsnumber,
+      session: req.session,
       errors: errors
     });
   } else {
@@ -334,8 +313,7 @@ router.post('/v1/nhs-number', function (req, res) {
 // Current GP ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/v1/current-gp', function (req, res) {
   res.render('v1/current-gp', {
-    currentgp: req.session.currentgp,
-    edit: req.session.edit
+    session: req.session
   });
 })
 
@@ -368,7 +346,7 @@ router.post('/v1/current-gp', function (req, res) {
 
   if (passed === false) {
     res.render('v1/current-gp', {
-      currentgp: req.session.currentgp,
+      session: req.session,
       errors: errors
     });
   } else {
@@ -384,8 +362,7 @@ router.post('/v1/current-gp', function (req, res) {
 // Previous address ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/v1/previous-address', function (req, res) {
   res.render('v1/previous-address', {
-    prevaddress: req.session.prevaddress,
-    edit: req.session.edit
+    session: req.session
   });
 })
 
@@ -403,13 +380,17 @@ router.post('/v1/previous-address', function (req, res) {
 
   if (passed === false) {
     res.render('v1/previous-address', {
-      prevaddress: req.session.prevaddress,
+      session: req.session,
       error: error
     });
   } else if (req.body['prev-address'] === 'yes') {
     res.redirect('/v1/previous-address-postcode')
   } else {
-    res.redirect('/v1/armed-forces')
+    if (req.session.edit === true) {
+      res.redirect('/v1/confirm-details')
+    } else {
+      res.redirect('/v1/armed-forces')
+    }
   }
 
 });
@@ -417,9 +398,7 @@ router.post('/v1/previous-address', function (req, res) {
 // Previous address - find +++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/v1/previous-address-postcode', function (req, res) {
   res.render('v1/previous-address-postcode', {
-    postcode: req.session.prevpostcode,
-    building: req.session.prevbuilding,
-    edit: req.session.edit
+    session: req.session
   });
 });
 
@@ -430,7 +409,7 @@ router.post('/v1/previous-address-postcode', function (req, res) {
 
   if (req.body['postcode'] === '') {
     res.render('v1/previous-address-postcode', {
-      building: req.session.prevbuilding,
+      session: req.session,
       error: {
         postcode: 'Please enter your previous home postcode'
       }
@@ -462,16 +441,12 @@ router.post('/v1/previous-address-postcode', function (req, res) {
               req.session.prevAddressResults = addresses;
               res.render('v1/previous-address-result', {
                 message: 'No exact match has been found, showing all addresses for ' + req.session.prevpostcode,
-                postcode: req.session.prevpostcode,
-                building: req.session.prevbuilding,
-                results: req.session.prevAddressResults
+                session: req.session
               });
             } else {
               req.session.prevAddressResults = filtered;
               res.render('v1/previous-address-result', {
-                postcode: req.session.prevpostcode,
-                building: req.session.prevbuilding,
-                results: req.session.prevAddressResults
+                session: req.session
               });
             }
 
@@ -480,9 +455,7 @@ router.post('/v1/previous-address-postcode', function (req, res) {
             req.session.prevAddressResults = addresses;
 
             res.render('v1/previous-address-result', {
-              postcode: req.session.prevpostcode,
-              building: req.session.prevbuilding,
-              results: req.session.prevAddressResults
+              session: req.session
             });
 
           }
@@ -493,8 +466,7 @@ router.post('/v1/previous-address-postcode', function (req, res) {
           error: {
             general: 'Sorry, there’s been a problem looking up your address. Please try again.'
           },
-          postcode: req.session.prevpostcode,
-          building: req.session.prevbuilding
+          session: req.session
         });
       }
     });
@@ -504,9 +476,7 @@ router.post('/v1/previous-address-postcode', function (req, res) {
 // Previous address selection ++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/v1/select-previous-address', function (req, res) {
   res.render('v1/select-previous-address', {
-    postcode: req.session.prevpostcode,
-    results: req.session.prevAddressResults,
-    edit: req.session.edit
+    session: req.session
   });
 });
 
@@ -515,9 +485,7 @@ router.post('/v1/select-previous-address', function (req, res) {
   if (!req.body['address']) {
     res.render('v1/previous-address-result', {
       error: 'Please select your home address',
-      building: req.session.prevbuilding,
-      postcode: req.session.prevpostcode,
-      results: req.session.prevAddressResults
+        session: req.session
     });
   } else {
     req.session.prevAddress = req.body['address'].split(',');
@@ -532,8 +500,7 @@ router.post('/v1/select-previous-address', function (req, res) {
 // Leaving the armed forces? +++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/v1/armed-forces', function (req, res) {
   res.render('v1/armed-forces', {
-    armedforces: req.session.armedforces,
-    edit: req.session.edit
+    session: req.session
   });
 });
 
@@ -568,6 +535,7 @@ router.post('/v1/armed-forces', function (req, res) {
 
   if (passed === false) {
     res.render('v1/armed-forces', {
+      session: req.session,
       error: error
     });
   } else {
@@ -583,8 +551,7 @@ router.post('/v1/armed-forces', function (req, res) {
 // From abroad? ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/v1/from-abroad', function (req, res) {
   res.render('v1/from-abroad', {
-    abroad: req.session.abroad,
-    edit: req.session.edit
+    session: req.session
   });
 });
 
@@ -627,6 +594,7 @@ router.post('/v1/from-abroad', function (req, res) {
 
   if (passed === false) {
     res.render('v1/from-abroad', {
+      session: req.session,
       error: error
     });
   } else {
