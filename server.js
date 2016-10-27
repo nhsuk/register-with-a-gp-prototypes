@@ -8,7 +8,9 @@ var request = require('request')
 var bodyParser = require('body-parser')
 var utils = require('./lib/utils.js')
 var config = require('./app/config.js')
-var routes = require('./app/routes.js')
+
+var index = require('./app/routes/index');
+var v1 = require('./app/routes/v1');
 
 var app = express()
 
@@ -44,11 +46,11 @@ app.use(session({
   secret: Math.round(Math.random() * 100000).toString()
 }))
 
-var myLogger = function (req, res, next) {
+/*var myLogger = function (req, res, next) {
   console.log(req.session);
   next();
 };
-app.use(myLogger);
+app.use(myLogger);*/
 
 // Handle form POSTS
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
@@ -69,7 +71,8 @@ var env = nunjucks.configure('./app/views', {
 });
 env.addFilter('date', dateFilter);
 
-app.use('/', routes);
+app.use('/', index);
+app.use('/v1', v1);
 
 // auto render any view that exists
 app.get(/^\/([^.]+)$/, function (req, res) {

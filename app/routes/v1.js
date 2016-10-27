@@ -1,17 +1,16 @@
 var express = require('express')
-var request = require('request')
-var naturalSort = require('javascript-natural-sort')
 var router = express.Router()
 
+var request = require('request')
+var naturalSort = require('javascript-natural-sort')
 var postcode_api = process.env.POSTCODE_API
 
-router.get('/', function (req, res) {
-  req.session.destroy();
-  res.render('index.html');
-});
+// V1 prototype. Sprints 0-3. Simple recreation of GMS1
+
+// URL structure is /v1/ROUTE
 
 // Start page ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-router.get('/v1/start', function (req, res) {
+router.get('/start', function (req, res) {
   req.session.destroy();
   res.render('v1/start', {
     suppressServiceName: true
@@ -19,13 +18,13 @@ router.get('/v1/start', function (req, res) {
 });
 
 // Name ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-router.get('/v1/name', function (req, res) {
+router.get('/name', function (req, res) {
   res.render('v1/name', {
     session: req.session
   });
 });
 
-router.post('/v1/name', function (req, res) {
+router.post('/name', function (req, res) {
 
   var passed = true;
   var errors = {};
@@ -62,22 +61,22 @@ router.post('/v1/name', function (req, res) {
     });
   } else {
     if (req.session.edit === true) {
-      res.redirect('/v1/confirm-details')
+      res.redirect('confirm-details')
     } else {
-      res.redirect('/v1/date-of-birth')
+      res.redirect('date-of-birth')
     }
   }
 
 })
 
 // DOB +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-router.get('/v1/date-of-birth', function (req, res) {
+router.get('/date-of-birth', function (req, res) {
   res.render('v1/date-of-birth', {
     session: req.session
   });
 });
 
-router.post('/v1/date-of-birth', function (req, res) {
+router.post('/date-of-birth', function (req, res) {
 
   req.session.dob = {
     'day': req.body['dob-day'],
@@ -92,21 +91,21 @@ router.post('/v1/date-of-birth', function (req, res) {
     });
   } else {
     if (req.session.edit === true) {
-      res.redirect('/v1/confirm-details')
+      res.redirect('confirm-details')
     } else {
-      res.redirect('/v1/home-address')
+      res.redirect('home-address')
     }
   }
 })
 
 // Postcode ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-router.get('/v1/home-address', function (req, res) {
+router.get('/home-address', function (req, res) {
   res.render('v1/home-address-postcode', {
     session: req.session
   });
 });
 
-router.post('/v1/home-address', function (req, res) {
+router.post('/home-address', function (req, res) {
 
   req.session.postcode = req.body['postcode'];
   req.session.building = req.body['building'];
@@ -178,13 +177,13 @@ router.post('/v1/home-address', function (req, res) {
 })
 
 // Address selection +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-router.get('/v1/select-address', function (req, res) {
+router.get('/select-address', function (req, res) {
   res.render('v1/select-address', {
     session: req.session
   });
 });
 
-router.post('/v1/select-address', function (req, res) {
+router.post('/select-address', function (req, res) {
 
   if (!req.body['address']) {
     res.render('v1/home-address-result', {
@@ -194,21 +193,21 @@ router.post('/v1/select-address', function (req, res) {
   } else {
     req.session.address = req.body['address'].split(',');
     if (req.session.edit === true) {
-      res.redirect('/v1/confirm-details')
+      res.redirect('confirm-details')
     } else {
-      res.redirect('/v1/contact-details')
+      res.redirect('contact-details')
     }
   }
 })
 
 // Manual address entry ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-router.get('/v1/home-address-manual', function (req, res) {
+router.get('/home-address-manual', function (req, res) {
   res.render('v1/home-address-manual', {
     session: req.session
   });
 });
 
-router.post('/v1/home-address-manual', function (req, res) {
+router.post('/home-address-manual', function (req, res) {
 
   req.session.address = [
     req.body['address-1'],
@@ -224,21 +223,21 @@ router.post('/v1/home-address-manual', function (req, res) {
       session: req.session
     });
   } else if (req.session.edit === true) {
-    res.redirect('/v1/confirm-details')
+    res.redirect('confirm-details')
   } else {
-    res.redirect('/v1/contact-details')
+    res.redirect('contact-details')
   }
 
 })
 
 // Contact details +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-router.get('/v1/contact-details', function (req, res) {
+router.get('/contact-details', function (req, res) {
   res.render('v1/contact-details', {
     session: req.session
   });
 });
 
-router.post('/v1/contact-details', function (req, res) {
+router.post('/contact-details', function (req, res) {
 
   req.session.contact = {
     telephone: req.body['telephone'],
@@ -251,21 +250,21 @@ router.post('/v1/contact-details', function (req, res) {
     });
   } else {
     if (req.session.edit === true) {
-      res.redirect('/v1/confirm-details')
+      res.redirect('confirm-details')
     } else {
-      res.redirect('/v1/nhs-number')
+      res.redirect('nhs-number')
     }
   }
 })
 
 // NHS Number ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-router.get('/v1/nhs-number', function (req, res) {
+router.get('/nhs-number', function (req, res) {
   res.render('v1/nhs-number', {
     session: req.session
   });
 })
 
-router.post('/v1/nhs-number', function (req, res) {
+router.post('/nhs-number', function (req, res) {
 
   var passed = true;
   var errors = {};
@@ -302,22 +301,22 @@ router.post('/v1/nhs-number', function (req, res) {
     });
   } else {
     if (req.session.edit === true) {
-      res.redirect('/v1/confirm-details')
+      res.redirect('confirm-details')
     } else {
-      res.redirect('/v1/current-gp')
+      res.redirect('current-gp')
     }
   }
 
 })
 
 // Current GP ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-router.get('/v1/current-gp', function (req, res) {
+router.get('/current-gp', function (req, res) {
   res.render('v1/current-gp', {
     session: req.session
   });
 })
 
-router.post('/v1/current-gp', function (req, res) {
+router.post('/current-gp', function (req, res) {
 
   var passed = true;
   var errors = {};
@@ -351,22 +350,22 @@ router.post('/v1/current-gp', function (req, res) {
     });
   } else {
     if (req.session.edit === true) {
-      res.redirect('/v1/confirm-details')
+      res.redirect('confirm-details')
     } else {
-      res.redirect('/v1/previous-address')
+      res.redirect('previous-address')
     }
   }
 
 });
 
 // Previous address ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-router.get('/v1/previous-address', function (req, res) {
+router.get('/previous-address', function (req, res) {
   res.render('v1/previous-address', {
     session: req.session
   });
 })
 
-router.post('/v1/previous-address', function (req, res) {
+router.post('/previous-address', function (req, res) {
 
   var passed = true;
   var errors = {};
@@ -384,25 +383,25 @@ router.post('/v1/previous-address', function (req, res) {
       error: error
     });
   } else if (req.body['prev-address'] === 'yes') {
-    res.redirect('/v1/previous-address-postcode')
+    res.redirect('previous-address-postcode')
   } else {
     if (req.session.edit === true) {
-      res.redirect('/v1/confirm-details')
+      res.redirect('confirm-details')
     } else {
-      res.redirect('/v1/armed-forces')
+      res.redirect('armed-forces')
     }
   }
 
 });
 
 // Previous address - find +++++++++++++++++++++++++++++++++++++++++++++++++++++
-router.get('/v1/previous-address-postcode', function (req, res) {
+router.get('/previous-address-postcode', function (req, res) {
   res.render('v1/previous-address-postcode', {
     session: req.session
   });
 });
 
-router.post('/v1/previous-address-postcode', function (req, res) {
+router.post('/previous-address-postcode', function (req, res) {
 
   req.session.prevpostcode = req.body['postcode'];
   req.session.prevbuilding = req.body['building'];
@@ -474,13 +473,13 @@ router.post('/v1/previous-address-postcode', function (req, res) {
 })
 
 // Previous address selection ++++++++++++++++++++++++++++++++++++++++++++++++++
-router.get('/v1/select-previous-address', function (req, res) {
+router.get('/select-previous-address', function (req, res) {
   res.render('v1/select-previous-address', {
     session: req.session
   });
 });
 
-router.post('/v1/select-previous-address', function (req, res) {
+router.post('/select-previous-address', function (req, res) {
 
   if (!req.body['address']) {
     res.render('v1/previous-address-result', {
@@ -490,21 +489,21 @@ router.post('/v1/select-previous-address', function (req, res) {
   } else {
     req.session.prevAddress = req.body['address'].split(',');
     if (req.session.edit === true) {
-      res.redirect('/v1/confirm-details')
+      res.redirect('confirm-details')
     } else {
-      res.redirect('/v1/armed-forces')
+      res.redirect('armed-forces')
     }
   }
 })
 
 // Leaving the armed forces? +++++++++++++++++++++++++++++++++++++++++++++++++++
-router.get('/v1/armed-forces', function (req, res) {
+router.get('/armed-forces', function (req, res) {
   res.render('v1/armed-forces', {
     session: req.session
   });
 });
 
-router.post('/v1/armed-forces', function (req, res) {
+router.post('/armed-forces', function (req, res) {
 
   var passed = true;
   var errors = {};
@@ -540,22 +539,22 @@ router.post('/v1/armed-forces', function (req, res) {
     });
   } else {
     if (req.session.edit === true) {
-      res.redirect('/v1/confirm-details')
+      res.redirect('confirm-details')
     } else {
-      res.redirect('/v1/from-abroad')
+      res.redirect('from-abroad')
     }
   }
 
 });
 
 // From abroad? ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-router.get('/v1/from-abroad', function (req, res) {
+router.get('/from-abroad', function (req, res) {
   res.render('v1/from-abroad', {
     session: req.session
   });
 });
 
-router.post('/v1/from-abroad', function (req, res) {
+router.post('/from-abroad', function (req, res) {
 
   var passed = true;
   var errors = {};
@@ -599,16 +598,16 @@ router.post('/v1/from-abroad', function (req, res) {
     });
   } else {
     if (req.session.edit === true) {
-      res.redirect('/v1/confirm-details')
+      res.redirect('confirm-details')
     } else {
-      res.redirect('/v1/confirm-details')
+      res.redirect('confirm-details')
     }
   }
 
 });
 
 // Check your answers ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-router.get('/v1/confirm-details', function (req, res) {
+router.get('/confirm-details', function (req, res) {
   req.session.edit = true;
   res.render('v1/confirm-details', {
     session: req.session
@@ -616,7 +615,7 @@ router.get('/v1/confirm-details', function (req, res) {
 });
 
 // Registration submitted ++++++++++++++++++++++++++++++++++++++++++++++++++++++
-router.get('/v1/registration-submitted', function (req, res) {
+router.get('/registration-submitted', function (req, res) {
   req.session.edit = false;
   res.render('v1/registration-submitted', {
     session: req.session
