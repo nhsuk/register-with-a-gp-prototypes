@@ -1,0 +1,83 @@
+{% extends '_layouts/layout.html' %}
+
+{% block page_title %}
+  {% if practiceName %}
+    Register with {{ practiceName }}
+  {% else %}
+    {{serviceName}}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  <div class="grid-row">
+    <div class="grid-3-3">
+      <ol class="breadcrumb">
+        <li><a href="#" class="button -bordered -small">GP practices</a></li>
+        <li><a href="#" class="button -bordered -small">{{ practiceName }}</a></li>
+        <li class="selected">Register</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="grid-row">
+    <div class="grid-3-3">
+      <div class="header-panel">
+        <h1 class="h2 header">
+          Register with {{ practiceName }}
+        </h1>
+        <div class="content-seperator"></div>
+        <p class="h3 precis">It usually takes about 10 minutes.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="measure">
+
+    <h2>You’ll be asked for your:</h2>
+
+    <ul>
+      <li>name and address</li>
+      <li>previous name and address</li>
+      <li>contact details</li>
+      <li>date of birth</li>
+    </ul>
+
+    <p>It helps your GP find any previous medical records if you know the following:</p>
+
+    <ul>
+      <li>your NHS number</li>
+      <li>your previous GPs name and address</li>
+      <li>the date you left or came to the UK (if you’ve lived abroad)</li>
+      <li>your military service personnel number (if you have one) and date you joined the military</li>
+    </ul>
+
+    <details>
+      <summary>How to find your NHS number</summary>
+      <div class="signage">
+        <div class="info">
+          <p>
+            An NHS number is a 10 digit number, for example: <b>943 476 5919</b>
+          </p>
+          <p>You can find your NHS number:</p>
+          <ul>
+            <li><a href="javascript:return false;">online</a></li>
+            <li>on a printed prescription</li>
+            <li>on a letter from your GP or a hospital</li>
+            <li>on your NHS medical card if you have one</li>
+          </ul>
+        </div>
+      </div>
+    </details>
+
+    <p>You can still register without this information.</p>
+
+    <div class="cta">
+      <a href="name" class="button">Start</a>
+    </div>
+
+  </div>
+
+{% endblock %}
+
+{% block footer %}{% endblock %}

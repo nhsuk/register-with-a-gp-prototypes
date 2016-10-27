@@ -1,0 +1,185 @@
+{% extends '_layouts/layout.html' %}
+
+{% block page_title %}
+  Check your answers :
+  {% if practiceName %}
+    Register with {{ practiceName }}
+  {% else %}
+    {{serviceName}}
+  {% endif %}
+{% endblock %}
+
+{% block html_head %}
+  <meta name="format-detection" content="telephone=no">
+{% endblock %}
+
+{% block content %}
+  <h1 class="primary">Check your details</h1>
+
+  <table class="measure">
+    <tr>
+      <th scope="row">Name</th>
+      <td>{{ session.name.firstName | title }} {{ session.name.middleNames | title }} {{ session.name.lastName | title }}</td>
+      <td class="control">
+        <a href="name" class="button -secondary">Change</a>
+      </td>
+    </tr>
+
+    <tr>
+      <th scope="row">Previous name</th>
+      <td>
+        {% if session.name.nameChanged == "no" %}
+          I’ve not changed my name
+        {% endif %}
+        {% if session.name.nameChanged == "not-saying" %}
+          I’d prefer not to say
+        {% endif %}
+        {% if session.name.nameChanged == "yes" %}
+          {{ session.name.firstNamePrev | title }} {{ session.name.middleNamesPrev | title }} {{ session.name.lastNamePrev | title }}
+        {% endif %}
+      </td>
+      <td class="control">
+        <a href="name" class="button -secondary">Change</a>
+      </td>
+    </tr>
+
+    <tr>
+      <th scope="row">Date of birth</th>
+      <td>{{ session.dob.day }} {{ session.dob.month | date("MMMM") }} {{ session.dob.year }}</td>
+      <td class="control">
+        <a href="date-of-birth" class="button -secondary">Change</a>
+      </td>
+    </tr>
+
+    <tr>
+      <th scope="row">Contact details</th>
+      <td>
+        {% if session.contact.telephone != '' %}
+          {{ session.contact.telephone }}<br>
+        {% endif %}
+        {% if session.contact.email != '' %}
+          {{ session.contact.email }}
+        {% endif %}
+      </td>
+      <td class="control">
+        <a href="contact-details" class="button -secondary">Change</a>
+      </td>
+    </tr>
+
+    <tr>
+      <th scope="row">Address</th>
+      <td>
+        {% for line in session.address %}
+          {% if line != '' %}
+            {{ line }}<br>
+          {% endif %}
+        {% endfor %}
+        {{ session.postcode | upper }}
+      </td>
+      <td class="control">
+        <a href="home-address" class="button -secondary">Change</a>
+      </td>
+    </tr>
+
+    <tr>
+      <th scope="row">Previous address</th>
+      <td>
+        {% if session.prevaddress == 'yes' %}
+          {% for line in session.prevAddress %}
+            {% if line != '' %}
+              {{ line }}<br>
+            {% endif %}
+          {% endfor %}
+          {{ session.prevpostcode | upper }}
+        {% endif %}
+        {% if session.prevaddress == 'no' %}
+          I’m not providing a previous address
+        {% endif %}
+      </td>
+      <td class="control">
+        <a href="previous-address" class="button -secondary">Change</a>
+      </td>
+    </tr>
+
+    <tr>
+      <th scope="row">Armed forces</th>
+      <td>
+        {% if session.armedforces.leaving == 'yes' %}
+          {% if session.armedforces.serviceno != '' %}
+            Service / personnel number: {{ session.armedforces.serviceno }}<br>
+          {% endif %}
+          {% if session.armedforces.enlistment.year != '' %}
+            Enlisted {{ session.armedforces.enlistment.day }} {{ session.armedforces.enlistment.month | date("MMMM") }} {{ session.armedforces.enlistment.year }}
+          {% endif %}
+        {% endif %}
+        {% if session.armedforces.leaving == 'no' %}
+          I’m not returning from the armed forces
+        {% endif %}
+      </td>
+      <td class="control">
+        <a href="armed-forces" class="button -secondary">Change</a>
+      </td>
+    </tr>
+
+    <tr>
+      <th scope="row">From abroad</th>
+      <td>
+        {% if session.abroad.boolean == 'yes' %}
+          {% if session.abroad.arrival.year != '' %}
+            Arrived {{ session.abroad.arrival.day }} {{ session.abroad.arrival.month | date("MMMM") }} {{ session.abroad.arrival.year }}<br>
+          {% endif %}
+          {% if session.abroad.leaving.year != '' %}
+            Left {{ session.abroad.leaving.day }} {{ session.abroad.leaving.month | date("MMMM") }} {{ session.abroad.leaving.year }}
+          {% endif %}
+        {% endif %}
+        {% if session.abroad.boolean == 'no' %}
+          I’m not from abroad
+        {% endif %}
+      </td>
+      <td class="control">
+        <a href="from-abroad" class="button -secondary">Change</a>
+      </td>
+    </tr>
+
+    <tr>
+      <th scope="row">NHS number</th>
+      <td>
+        {% if session.nhsnumber.known == 'yes' %}
+          {{ session.nhsnumber.number }}
+        {% endif %}
+        {% if session.nhsnumber.known == 'no' %}
+          I don’t know my NHS number
+        {% endif %}
+      </td>
+      <td class="control">
+        <a href="nhs-number" class="button -secondary">Change</a>
+      </td>
+    </tr>
+
+    <tr>
+      <th scope="row">Current GP</th>
+      <td>
+        {% if session.currentgp.registered == 'yes' %}
+          {% if session.currentgp.name != '' %}
+            {{ session.currentgp.name }}<br>
+          {% endif %}
+          {% if session.currentgp.address != '' %}
+            <pre class="user-input">{{ session.currentgp.address }}</pre>
+          {% endif %}
+        {% endif %}
+
+        {% if session.currentgp.registered == 'no' %}
+          I’m not registered with a GP
+        {% endif %}
+      </td>
+      <td class="control">
+        <a href="current-gp" class="button -secondary">Change</a>
+      </td>
+    </tr>
+  </table>
+
+  <div class="shunt-2">
+    <a href="registration-submitted" class="button">Send my details and register</a>
+  </div>
+
+{% endblock %}

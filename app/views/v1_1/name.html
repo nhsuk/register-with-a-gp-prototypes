@@ -1,0 +1,135 @@
+{% extends '_layouts/layout.html' %}
+
+{% block page_title %}
+  Your name :
+  {% if practiceName %}
+    Register with {{ practiceName }}
+  {% else %}
+    {{serviceName}}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  <h1 class="primary">
+    What is your full name?
+    <span class="form-hint">Enter your names in full, don’t use initials</span>
+  </h1>
+  <form action="name" method="post" class="measure">
+
+    {% if errors.name %}
+      <div class="error-summary">
+        <div>
+          <p>{{ errors.name }}</p>
+        </div>
+      </div>
+    {% endif %}
+
+    <fieldset>
+      <div class="form-group {% if errors.name %}-errors{% endif %}">
+        <label for="first-name">First name</label>
+        <input type="text" id="first-name" name="first-name" value="{{ session.name.firstName }}">
+      </div>
+      <div class="form-group">
+        <label for="middle-names">Middle names</label>
+        <input type="text" id="middle-names" name="middle-names" value="{{ session.name.middleNames }}">
+      </div>
+      <div class="form-group {% if errors.name %}-errors{% endif %}">
+        <label for="last-name">Last name</label>
+        <input type="text" id="last-name" name="last-name" value="{{ session.name.lastName }}">
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend class="block-label-legend">
+        <span class="secondary">Have you ever changed your name?</span>
+        <span class="form-hint">For example, by marriage or deed poll</span>
+      </legend>
+
+      {% if errors['name-changed'] %}
+        <div class="error-summary">
+          <div>
+            <p>{{ errors['name-changed'] }}</p>
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="form-group {% if errors['name-changed'] %}-errors{% endif %}">
+        <label for="no" class="block-label">
+          No, I haven’t changed my name
+          <input type="radio" id="no" name="name-changed" value="no" {% if session.name.nameChanged == "no" %}checked="checked"{% endif %}>
+        </label>
+      </div>
+      <div class="form-group {% if errors['name-changed'] %}-errors{% endif %}">
+        <label for="yes" class="block-label">
+          Yes, I’ve changed my name
+          <input type="radio" id="yes" name="name-changed" value="yes" {% if session.name.nameChanged == "yes" %}checked="checked"{% endif %}>
+        </label>
+      </div>
+      <div class="form-group {% if errors['name-changed'] %}-errors{% endif %}">
+        <label for="not-saying" class="block-label">
+          Prefer not to say
+          <input type="radio" id="not-saying" name="name-changed" value="not-saying" {% if session.name.nameChanged == "not-saying" %}checked="checked"{% endif %}>
+        </label>
+      </div>
+    </fieldset>
+
+    <fieldset id="previous-name">
+      <legend class="secondary">What was your previous name?</legend>
+      <div class="form-hint">
+        <p>
+          You don’t have to give your previous name but it helps the GP find your medical records
+        </p>
+      </div>
+
+      {% if errors['previous-name'] %}
+        <div class="error-summary">
+          <div>
+            <p>{{ errors['previous-name'] }}</p>
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="form-group {% if errors['previous-name'] %}-errors{% endif %}">
+        <label for="first-name-previous">First name</label>
+        <input type="text" id="first-name-previous" name="first-name-previous" value="{{ session.name.firstNamePrev }}">
+      </div>
+      <div class="form-group">
+        <label for="middle-names-previous">Middle names</label>
+        <input type="text" id="middle-names-previous" name="middle-names-previous" value="{{ session.name.middleNamesPrev }}">
+      </div>
+      <div class="form-group {% if errors['previous-name'] %}-errors{% endif %}">
+        <label for="last-name-previous">Last name</label>
+        <input type="text" id="last-name-previous" name="last-name-previous" value="{{ session.name.lastNamePrev}}">
+      </div>
+    </fieldset>
+
+    <div class="form-group -controls">
+      <button type="submit" class="button">Continue</button>
+      {% set back = 'start' %}
+      {% if session.edit == true %}
+        {% set back = 'confirm-details' %}
+      {% endif %}
+      <a href="{{ back }}" class="button -back">Back</a>
+    </div>
+  </form>
+{% endblock %}
+
+{% block body_after %}
+  <script>
+    $(function() {
+      var $group = $('#previous-name');
+      var $els = $('[name="name-changed"]');
+      var $selectedEl = $('[name="name-changed"]:checked');
+      if ($selectedEl.val() !== "yes") {
+        $group.hide();
+      }
+      $els.on('change', function(e) {
+        if (this.value === "yes") {
+          $group.show();
+        } else {
+          $group.hide();
+        }
+      });
+    });
+  </script>
+{% endblock %}
