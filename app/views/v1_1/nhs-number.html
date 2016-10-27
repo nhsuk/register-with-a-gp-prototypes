@@ -1,0 +1,110 @@
+{% extends '_layouts/layout.html' %}
+
+{% block page_title %}
+  Your NHS number :
+  {% if practiceName %}
+    Register with {{ practiceName }}
+  {% else %}
+    {{serviceName}}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+
+  <h1 class="primary">Do you know your NHS number?</h1>
+
+  <form method="post">
+    <fieldset>
+
+      {% if errors.known %}
+        <div class="error-summary">
+          <div>
+            <p>{{ errors.known }}</p>
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="form-group {% if errors.known %}-errors{% endif %}">
+        <label for="nhs-number-yes" class="block-label">
+          Yes
+          <input type="radio" id="nhs-number-yes" name="nhs-number-known" value="yes" {% if session.nhsnumber.known == "yes" %}checked="checked"{% endif %}>
+        </label>
+      </div>
+
+      <div class="form-group {% if errors.known %}-errors{% endif %}">
+        <label for="nhs-number-no" class="block-label">
+          No
+          <input type="radio" id="nhs-number-no" name="nhs-number-known" value="no" {% if session.nhsnumber.known == "no" %}checked="checked"{% endif %}>
+        </label>
+      </div>
+    </fieldset>
+
+    <div id="nhs-number-entry">
+      {% if errors.number %}
+        <div class="error-summary">
+          <div>
+            <p>{{ errors.number }}</p>
+          </div>
+        </div>
+      {% endif %}
+
+      <fieldset>
+        <div class="form-group {% if errors.number %}-errors{% endif %}">
+          <label for="nhs-number" class="secondary">What is your NHS number?</label>
+          <input type="text" id="nhs-number" name="nhs-number" value="{{ session.nhsnumber.number }}" class="-small">
+        </div>
+        <p class="form-hint">
+          For example, 943 476 5919
+        </p>
+      </fieldset>
+    </div>
+
+    <details>
+      <summary>How can I find my NHS number?</summary>
+      <div class="signage">
+        <div class="info">
+          <p>
+            An NHS number is a 10 digit number, for example: <b>943 476 5919</b>
+          </p>
+          <p>You can find your NHS number:</p>
+          <ul>
+            <li><a href="javascript:return false;">online</a></li>
+            <li>on a printed prescription</li>
+            <li>on a letter from your GP or a hospital</li>
+            <li>on your NHS medical card if you have one</li>
+          </ul>
+        </div>
+      </div>
+    </details>
+
+    <div class="form-group -controls">
+      <button type="submit" class="button">Continue</button>
+      {% set back = 'contact-details' %}
+      {% if session.edit == true %}
+        {% set back = 'confirm-details' %}
+      {% endif %}
+      <a href="{{ back }}" class="button -back">Back</a>
+    </div>
+
+  </form>
+{% endblock %}
+
+{% block body_after %}
+  <script>
+    $(function() {
+      var $group = $('#nhs-number-entry');
+      var $els = $('[name="nhs-number-known"]');
+      var $selectedEl = $('[name="nhs-number-known"]:checked');
+      if ($selectedEl.val() !== "yes") {
+        $group.hide();
+      }
+      $els.on('change', function(e) {
+        if (this.value === "yes") {
+          $group.show();
+        } else {
+          $group.hide();
+        }
+      });
+    });
+  </script>
+{% endblock %}
