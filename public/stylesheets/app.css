@@ -311,6 +311,10 @@ body, pre.user-input {
   font-size: 16px;
 }
 
+.prototype-warning a {
+  color: #d9e1e2;
+}
+
 .prototype-warning-inner {
   padding-bottom: 8px;
   padding-top: 8px;
