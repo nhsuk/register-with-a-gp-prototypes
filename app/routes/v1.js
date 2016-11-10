@@ -622,4 +622,11 @@ router.get('/registration-submitted', function (req, res) {
   });
 });
 
+
+router.get('/gp-lookup', function (req, res) {
+  res.render('v1/gp-lookup', {
+    session: req.session
+  });
+});
+
 module.exports = router
