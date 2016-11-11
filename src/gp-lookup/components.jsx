@@ -74,7 +74,7 @@ var SearchForm = React.createClass({
   render: function() {
 
     return (
-      <form name="" id="" action="" method="get" className="gp-finder-search">
+      <form name="gp-search" id="gp-search" method="get" className="gp-finder-search">
         <div className="block-container">
           <h1>
             <label htmlFor="search">
@@ -82,7 +82,7 @@ var SearchForm = React.createClass({
             </label>
           </h1>
           <div className="clearfix">
-            <input type="text" name="search" id="search" className="form-control"
+            <input type="text" name="search" id="search" className="form-control" autoComplete="off"
                    value={this.props.searchText}
                    onChange={this.onChange} />
             <button type="submit" className="button">Search</button>
@@ -102,8 +102,10 @@ var ResultsList = React.createClass({
   render: function() {
     return (
       <div className="block-container">
-        {this.results()}
-        {this.footer()}
+        <form name="gp-results" id="gp-results" method="post">
+          {this.results()}
+          {this.footer()}
+        </form>
       </div>
     );
   },
@@ -159,6 +161,8 @@ var PracticeResult = React.createClass({
         <p className="address" dangerouslySetInnerHTML={this.highlightText(this.props.practice.address.value, this.props.practice.address.matches)} />
         {distance}
         {practitioners}
+        <input type="hidden" name="practice-name" value={this.props.practice.name.value} />
+        <input type="hidden" name="practice-address" value={this.props.practice.address.value} />
       </a>
     );
   },

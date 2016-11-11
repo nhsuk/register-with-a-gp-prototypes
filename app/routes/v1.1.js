@@ -322,40 +322,35 @@ router.post('/current-gp', function (req, res) {
   var errors = {};
 
   req.session.currentgp = {
-    registered: req.body['current-gp'],
-    name: req.body['current-gp-name'],
-    address: req.body['current-gp-address']
+    registered: req.body['current-gp']
   }
 
   if (!req.body['current-gp']) {
     passed = false;
-    errors = {
-      registered: 'Please answer ‘yes’ or ‘no’',
-      details: ''
-    }
-  }
-
-  if (req.body['current-gp'] === 'yes' && req.body['current-gp-name'] === '' && req.body['current-gp-address'] === '') {
-    passed = false;
-    errors = {
-      registered: '',
-      details: 'Please enter as much detail as you can about your current GP'
-    }
+    error = 'Please answer ‘yes’ or ‘no’';
   }
 
   if (passed === false) {
     res.render('v1_1/current-gp', {
       session: req.session,
-      errors: errors
+      error: error
     });
   } else {
     if (req.session.edit === true) {
       res.redirect('confirm-details')
     } else {
-      res.redirect('previous-address')
+      res.redirect('current-gp-lookup');
+      //res.redirect('previous-address')
     }
   }
 
+});
+
+// Lookup GP +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+router.get('/current-gp-lookup', function (req, res) {
+  res.render('v1_1/gp-lookup', {
+    session: req.session
+  });
 });
 
 // Previous address ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

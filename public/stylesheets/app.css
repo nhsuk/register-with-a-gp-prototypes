@@ -40,7 +40,7 @@ body, pre.user-input {
   line-height: 32px;
 }
 
-.measure {
+.measure, .gp-finder-search {
   max-width: 34em;
 }
 
@@ -811,6 +811,144 @@ textarea:focus {
   -webkit-box-shadow: 0 0 0 5px #F7E214;
   -moz-box-shadow: 0 0 0 5px #F7E214;
   box-shadow: 0 0 0 5px #F7E214;
+}
+
+.gp-finder-search button {
+  display: none;
+}
+
+@media (min-width: 980px) {
+  .gp-finder-results {
+    max-width: 75%;
+  }
+}
+
+.gp-finder-results a.result {
+  display: block;
+  margin: 9px 0;
+  padding: 12px 12px 6px 12px;
+  text-decoration: none;
+  color: #231f20;
+  background-color: #fff;
+  border: 1px solid rgba(118, 134, 146, 0.2);
+  border-bottom-width: 2px;
+}
+
+@media (min-width: 980px) {
+  .gp-finder-results a.result {
+    margin: 18px 0;
+  }
+}
+
+.gp-finder-results a.result:hover {
+  outline: 3px solid #F7E214;
+}
+
+.gp-finder-results h2, .gp-finder-results .heading-xlarge, .gp-finder-results .secondary {
+  font-weight: 400;
+  color: #0072c6;
+  text-decoration: underline;
+  margin: 0;
+}
+
+.gp-finder-results p {
+  margin: 6px 0;
+  font-size: 16px;
+}
+
+@media (min-width: 980px) {
+  .gp-finder-results p {
+    margin: 12px 0;
+    font-size: 18px;
+  }
+}
+
+.gp-finder-results .distance {
+  font-size: 14px;
+}
+
+@media (min-width: 980px) {
+  .gp-finder-results .distance {
+    font-size: 16px;
+  }
+}
+
+.gp-finder-results .person {
+  position: relative;
+  left: 6px;
+  padding-left: 18px;
+  border-left: 1px dotted #231f20;
+}
+
+.gp-finder-results .person img {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.gp-finder-results .person:before {
+  content: '';
+  position: absolute;
+  left: -1px;
+  top: 48%;
+  bottom: 0;
+  display: block;
+  width: 12px;
+  background-color: #fff;
+  border-top: 1px dotted #231f20;
+}
+
+.gp-finder-results strong {
+  padding-left: 2px;
+  padding-right: 2px;
+  font-weight: 400;
+  background-color: #e6f1f9;
+}
+
+.gp-finder-results a.start-of-page:not(:first-child) {
+  position: relative;
+  margin-top: 30px;
+}
+
+.gp-finder-results a.start-of-page:not(:first-child):before {
+  content: "";
+  display: block;
+  background: #ddd;
+  position: absolute;
+  top: -17px;
+  width: 100%;
+  height: 2px;
+  left: 0;
+}
+
+@media (min-width: 980px) {
+  .gp-finder-pagination {
+    max-width: 75%;
+  }
+}
+
+.gp-finder-foot,
+.gp-finder-no-results {
+  margin-top: 22px;
+  font-size: 16px;
+}
+
+@media (min-width: 980px) {
+  .gp-finder-foot,
+  .gp-finder-no-results {
+    max-width: 75%;
+  }
+}
+
+.gp-finder-foot li,
+.gp-finder-no-results li {
+  margin-bottom: 4px;
+}
+
+@media (min-width: 980px) {
+  .gp-finder-foot li,
+  .gp-finder-no-results li {
+    margin-bottom: 8px;
+  }
 }
 
 #global-header {
