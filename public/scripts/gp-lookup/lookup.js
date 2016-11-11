@@ -30,6 +30,6 @@ function search(text, maxResults) {
     currentAjaxRequest.abort();
   }
 
-  currentAjaxRequest = $.get('//localhost:9292/practices', {search: text, max: maxResults});
+  currentAjaxRequest = $.get(lookupURL + '/practices', {search: text, max: maxResults});
   return currentAjaxRequest;
 }

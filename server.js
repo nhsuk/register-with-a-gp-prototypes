@@ -21,6 +21,7 @@ var password = process.env.PASSWORD
 var appEnvironment = process.env.NODE_ENV || 'development'
 var useAuth = process.env.USE_AUTH || config.useAuth
 var useHttps = process.env.USE_HTTPS || config.useHttps
+var gpLookupURL = process.env.GP_LOOKUP_URL
 
 appEnvironment = appEnvironment.toLowerCase()
 useAuth = useAuth.toLowerCase()
@@ -37,6 +38,7 @@ app.use(function (req, res, next) {
   res.locals.serviceName = config.serviceName
   res.locals.practiceName = config.practiceName
   res.locals.cookieText = config.cookieText
+  res.locals.gpLookupURL = gpLookupURL
   next()
 })
 

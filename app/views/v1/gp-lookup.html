@@ -1,6 +1,9 @@
 {% extends '_layouts/layout.html' %}
 
 {% block body_after %}
+<script>
+  var lookupURL = '{{ gpLookupURL }}';
+</script>
 <script src="/scripts/react.js"></script>
 <script src="/scripts/react-dom.js"></script>
 <script src="/scripts/gp-lookup/lookup.js"></script>
