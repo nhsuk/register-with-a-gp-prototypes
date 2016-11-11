@@ -823,7 +823,8 @@ textarea:focus {
   }
 }
 
-.gp-finder-results a.result {
+.gp-finder-results .result {
+  cursor: pointer;
   display: block;
   margin: 9px 0;
   padding: 12px 12px 6px 12px;
@@ -835,12 +836,12 @@ textarea:focus {
 }
 
 @media (min-width: 980px) {
-  .gp-finder-results a.result {
+  .gp-finder-results .result {
     margin: 18px 0;
   }
 }
 
-.gp-finder-results a.result:hover {
+.gp-finder-results .result:hover, .gp-finder-results .result:focus {
   outline: 3px solid #F7E214;
 }
 

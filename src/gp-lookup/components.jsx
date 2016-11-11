@@ -156,14 +156,12 @@ var PracticeResult = React.createClass({
     }
 
     return (
-      <a href={href} className={className} id={id}>
+      <div className={className} id={id} tabIndex="0">
         <h2 dangerouslySetInnerHTML={this.highlightText(this.props.practice.name.value, this.props.practice.name.matches)} />
         <p className="address" dangerouslySetInnerHTML={this.highlightText(this.props.practice.address.value, this.props.practice.address.matches)} />
         {distance}
         {practitioners}
-        <input type="hidden" name="practice-name" value={this.props.practice.name.value} />
-        <input type="hidden" name="practice-address" value={this.props.practice.address.value} />
-      </a>
+      </div>
     );
   },
 

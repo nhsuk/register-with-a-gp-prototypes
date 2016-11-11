@@ -353,6 +353,12 @@ router.get('/current-gp-lookup', function (req, res) {
   });
 });
 
+router.post('/current-gp-lookup', function (req, res) {
+  res.send(
+    req.body
+  );
+});
+
 // Previous address ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/previous-address', function (req, res) {
   res.render('v1_1/previous-address', {

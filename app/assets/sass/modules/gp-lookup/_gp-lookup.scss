@@ -14,7 +14,8 @@
     max-width: 75%;
   }
 
-  a.result {
+  .result {
+    cursor: pointer;
     display: block;
     margin: 9px 0;
     padding: 12px 12px 6px 12px;
@@ -29,8 +30,9 @@
     }
   }
 
-  a.result {
-    &:hover {
+  .result {
+    &:hover,
+    &:focus {
       outline: 3px solid $yellow;
     }
   }

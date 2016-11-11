@@ -176,14 +176,12 @@ var PracticeResult = React.createClass({
     }
 
     return React.createElement(
-      "a",
-      { href: href, className: className, id: id },
+      "div",
+      { className: className, id: id, tabIndex: "0" },
       React.createElement("h2", { dangerouslySetInnerHTML: this.highlightText(this.props.practice.name.value, this.props.practice.name.matches) }),
       React.createElement("p", { className: "address", dangerouslySetInnerHTML: this.highlightText(this.props.practice.address.value, this.props.practice.address.matches) }),
       distance,
-      practitioners,
-      React.createElement("input", { type: "hidden", name: "practice-name", value: this.props.practice.name.value }),
-      React.createElement("input", { type: "hidden", name: "practice-address", value: this.props.practice.address.value })
+      practitioners
     );
   },
 
