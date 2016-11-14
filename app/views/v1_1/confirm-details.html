@@ -164,7 +164,9 @@
             {{ session.currentgp.name }}<br>
           {% endif %}
           {% if session.currentgp.address != '' %}
-            <pre class="user-input">{{ session.currentgp.address }}</pre>
+            {% for line in session.currentgp.address %}
+              {{ line }}<br>
+            {% endfor %}
           {% endif %}
         {% endif %}
 

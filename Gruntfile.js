@@ -1,4 +1,7 @@
 module.exports = function (grunt) {
+
+  require('load-grunt-tasks')(grunt);
+
   grunt.initConfig({
     // Builds Sass
     sass: {
@@ -19,15 +22,32 @@ module.exports = function (grunt) {
       }
     },
 
+    babel: {
+      options: {
+        plugins: ['transform-react-jsx'],
+        presets: ['es2015', 'react']
+      },
+      dist: {
+        files: {
+          'public/scripts/gp-lookup/components.js': 'src/gp-lookup/components.jsx'
+        }
+      }
+    },
+
+    clean: {
+      file: ['src/gp-lookup/components.js'],
+    },
+
     // Watches assets and sass for changes
     watch: {
       css: {
         files: ['app/assets/sass/**/*.scss'],
-        tasks: ['sass'],
-        options: {
-          spawn: false
-        }
-      }
+        tasks: ['sass']
+      },
+      src: {
+        files: ['src/gp-lookup/components.jsx'],
+        tasks: ['babel', 'clean']
+      },
     },
 
     // nodemon watches for changes and restarts app
@@ -52,21 +72,12 @@ module.exports = function (grunt) {
     }
   })
 
-  ;[
-    'grunt-contrib-watch',
-    'grunt-sass',
-    'grunt-nodemon',
-    'grunt-concurrent'
-  ].forEach(function (task) {
-    grunt.loadNpmTasks(task)
-  })
-
   grunt.registerTask('generate-assets', [
-    'sass'
+    'sass',
+    'babel'
   ])
 
   grunt.registerTask('default', [
-    'sass',
     'concurrent:target'
   ])
 }
