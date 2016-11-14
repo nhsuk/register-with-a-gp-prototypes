@@ -27,6 +27,10 @@ appEnvironment = appEnvironment.toLowerCase()
 useAuth = useAuth.toLowerCase()
 useHttps = useHttps.toLowerCase()
 
+console.log('appEnvironment: ' + appEnvironment);
+console.log('useAuth: ' + useAuth);
+console.log('useHttps: ' + useHttps);
+
 // Authenticate against the environment-provided credentials, if running
 // the app in production (Heroku, effectively)
 if (appEnvironment === 'production' && useAuth === 'true') {
