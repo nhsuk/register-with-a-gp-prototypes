@@ -335,12 +335,13 @@ router.post('/current-gp', function (req, res) {
       session: req.session,
       error: error
     });
+  } else if (req.body['current-gp'] === 'yes') {
+    res.redirect('current-gp-lookup')
   } else {
     if (req.session.edit === true) {
       res.redirect('confirm-details')
     } else {
-      res.redirect('current-gp-lookup');
-      //res.redirect('previous-address')
+      res.redirect('previous-address')
     }
   }
 
@@ -354,9 +355,13 @@ router.get('/current-gp-lookup', function (req, res) {
 });
 
 router.post('/current-gp-lookup', function (req, res) {
-  res.send(
-    req.body
-  );
+  req.session.currentgp.name = req.body['practice-name'];
+  req.session.currentgp.address = req.body['practice-address'].split(',');
+  if (req.session.edit === true) {
+    res.redirect('confirm-details')
+  } else {
+    res.redirect('previous-address')
+  }
 });
 
 // Previous address ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

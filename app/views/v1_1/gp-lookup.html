@@ -9,13 +9,22 @@
 <script src="/scripts/gp-lookup/lookup.js"></script>
 <script src="/scripts/gp-lookup/components.js"></script>
 <script>
+  var submitPractice = function($el) {
+    var els = ''
+    els += '<input type="hidden" name="practice-name" value="' + $el.find('h2').text() + '" />'
+    els += '<input type="hidden" name="practice-address" value="' + $el.find('.address').text() + '" />'
+    $el.append(els);
+    $('#gp-results').submit();
+  }
+
   $(function() {
     $('#content').on('click', '.result', function() {
-      var els = ''
-      els += '<input type="hidden" name="practice-name" value="' + $(this).find('h2').text() + '" />'
-      els += '<input type="hidden" name="practice-address" value="' + $(this).find('.address').text() + '" />'
-      $(this).append(els);
-      $('#gp-results').submit();
+      submitPractice($(this));
+    });
+    $('html').on('keyup', '.result', function(key) {
+      if (key.keyCode === 13) {
+        submitPractice($(key.target));
+      }
     });
   });
 </script>
