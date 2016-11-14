@@ -33,6 +33,18 @@ if (appEnvironment === 'production' && useAuth === 'true') {
   app.use(utils.basicAuth(username, password))
 }
 
+// Force HTTPs on production connections
+if (appEnvironment === 'production' && useHttps === 'true') {
+  app.use(utils.forceHttps)
+}
+
+// Disallow search index
+app.use(function (req, res, next) {
+  // Setting headers stops pages being indexed even if indexed pages link to them.
+  res.setHeader('X-Robots-Tag', 'noindex')
+  next()
+})
+
 // Add variables that are available in all views
 app.use(function (req, res, next) {
   res.locals.serviceName = config.serviceName
@@ -97,18 +109,6 @@ app.get(/^\/([^.]+)$/, function (req, res) {
     }
   })
 });
-
-// Force HTTPs on production connections
-if (appEnvironment === 'production' && useHttps === 'true') {
-  app.use(utils.forceHttps)
-}
-
-// Disallow search index
-app.use(function (req, res, next) {
-  // Setting headers stops pages being indexed even if indexed pages link to them.
-  res.setHeader('X-Robots-Tag', 'noindex')
-  next()
-})
 
 app.get('/robots.txt', function (req, res) {
   res.type('text/plain')
