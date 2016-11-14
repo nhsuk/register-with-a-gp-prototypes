@@ -78,7 +78,7 @@ var SearchForm = React.createClass({
         <div className="block-container">
           <h1>
             <label htmlFor="search">
-              Find your GP practice
+              Find your current GP practice
             </label>
           </h1>
           <div className="clearfix">

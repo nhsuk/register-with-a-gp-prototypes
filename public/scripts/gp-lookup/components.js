@@ -87,7 +87,7 @@ var SearchForm = React.createClass({
           React.createElement(
             "label",
             { htmlFor: "search" },
-            "Find your GP practice"
+            "Find your current GP practice"
           )
         ),
         React.createElement(
