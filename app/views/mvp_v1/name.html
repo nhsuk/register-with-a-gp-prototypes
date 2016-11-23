@@ -1,0 +1,50 @@
+{% extends '_layouts/layout.html' %}
+
+{% block page_title %}
+  Your name :
+  {% if practiceName %}
+    Register with {{ practiceName }}
+  {% else %}
+    {{serviceName}}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  <h1 class="primary">
+    What is your full name?
+  </h1>
+  <form method="post" class="measure">
+
+    {% if error %}
+      <div class="error-summary">
+        <div>
+          <p>{{ error }}</p>
+        </div>
+      </div>
+    {% endif %}
+
+    <fieldset>
+      <div class="form-group {% if error %}-errors{% endif %}">
+        <label for="first-name">First name</label>
+        <input type="text" id="first-name" name="first-name" value="{{ session.name.firstName }}">
+      </div>
+      <div class="form-group">
+        <label for="middle-names">Middle names</label>
+        <input type="text" id="middle-names" name="middle-names" value="{{ session.name.middleNames }}">
+      </div>
+      <div class="form-group {% if error %}-errors{% endif %}">
+        <label for="last-name">Last name</label>
+        <input type="text" id="last-name" name="last-name" value="{{ session.name.lastName }}">
+      </div>
+    </fieldset>
+
+    <div class="form-group -controls">
+      <button type="submit" class="button">Continue</button>
+      {% set back = 'start' %}
+      {% if session.edit == true %}
+        {% set back = 'confirm-details' %}
+      {% endif %}
+      <a href="{{ back }}" class="button -back">Back</a>
+    </div>
+  </form>
+{% endblock %}

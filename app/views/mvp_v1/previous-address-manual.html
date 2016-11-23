@@ -1,0 +1,73 @@
+{% extends '_layouts/layout.html' %}
+
+{% block page_title %}
+  Your home address :
+  {% if practiceName %}
+    Register with {{ practiceName }}
+  {% else %}
+    {{serviceName}}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+
+  <h1 class="primary">What was your address?</h1>
+
+  <form method="post" class="measure">
+    <fieldset>
+
+      {% if error %}
+        <div class="error-summary">
+          <div>
+            <p>{{ error }}</p>
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="form-group {% if error %}-errors{% endif %}">
+        <div>
+          <label for="address-1">
+            Address
+          </label>
+          <div>
+            <input type="text" id="address-1" name="address-1" value="{{ session.prevAddress[0] }}">
+          </div>
+          <div>
+            <input type="text" name="address-2" value="{{ session.prevAddress[1] }}">
+          </div>
+          <div>
+            <input type="text" name="address-3" value="{{ session.prevAddress[2] }}">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group {% if error %}-errors{% endif %}">
+        <div>
+          <label for="locality">
+            Town or city
+          </label>
+          <input type="text" id="address-4" name="address-4" value="{{ session.prevAddress[3] }}">
+        </div>
+      </div>
+
+      <div class="form-group {% if error %}-errors{% endif %}">
+        <div>
+          <label for="postcode">Postcode</label>
+          <input type="text" id="postcode" name="postcode" value="{{ session.prevpostcode }}" class="-small">
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="form-group -controls">
+      <button type="submit" class="button">Continue</button>
+      {% set back = 'previous-address' %}
+      {% if session.edit == true %}
+        {% set back = 'confirm-details' %}
+      {% endif %}
+      <a href="{{ back }}" class="button -back">Back</a>
+    </div>
+
+  </form>
+{% endblock %}
+
+{% block footer %}{% endblock %}

@@ -12,6 +12,7 @@ var config = require('./app/config.js')
 var index = require('./app/routes/index');
 var v1 = require('./app/routes/v1');
 var v1_1 = require('./app/routes/v1.1');
+var mvp_v1 = require('./app/routes/mvp.v1');
 
 var app = express()
 
@@ -45,15 +46,6 @@ app.use(function (req, res, next) {
   next()
 })
 
-// Add variables that are available in all views
-app.use(function (req, res, next) {
-  res.locals.serviceName = config.serviceName
-  res.locals.practiceName = config.practiceName
-  res.locals.cookieText = config.cookieText
-  res.locals.gpLookupURL = gpLookupURL
-  next()
-})
-
 // Support session data
 app.use(session({
   resave: false,
@@ -61,11 +53,21 @@ app.use(session({
   secret: Math.round(Math.random() * 100000).toString()
 }))
 
-/*var myLogger = function (req, res, next) {
+// Add variables that are available in all views
+app.use(function (req, res, next) {
+  res.locals.serviceName = config.serviceName
+  res.locals.practiceName = config.practiceName
+  res.locals.cookieText = config.cookieText
+  res.locals.session = req.session
+  res.locals.gpLookupURL = gpLookupURL
+  next()
+})
+
+var myLogger = function (req, res, next) {
   console.log(req.session);
   next();
 };
-app.use(myLogger);*/
+app.use(myLogger);
 
 // Handle form POSTS
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
@@ -89,6 +91,7 @@ env.addFilter('date', dateFilter);
 app.use('/', index);
 app.use('/v1', v1);
 app.use('/v1.1', v1_1);
+app.use('/mvp-v1', mvp_v1);
 
 // auto render any view that exists
 app.get(/^\/([^.]+)$/, function (req, res) {
