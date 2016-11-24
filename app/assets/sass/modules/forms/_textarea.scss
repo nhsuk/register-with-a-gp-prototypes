@@ -23,9 +23,9 @@ textarea {
   background-repeat: repeat-y;
   background-size: 100% $leading*2;
 
-  @include media(mid) {
+  /*@include media(mid) {
     width: 75%;
-  }
+  }*/
 
   &:focus {
     outline: 0;
