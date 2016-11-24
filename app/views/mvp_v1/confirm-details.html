@@ -177,6 +177,21 @@
     </tr>
 
     <tr>
+      <th scope="row">Allergies</th>
+      <td>
+        {% if session.health.allergies == 'yes' %}
+          {{ session.health.allergiesDetails | striptags(true) | escape | nl2br }}
+        {% endif %}
+        {% if session.health.allergies == 'no' %}
+          I don’t have any allergies
+        {% endif %}
+      </td>
+      <td class="control">
+        <a href="any-allergies" class="button -secondary">Change</a>
+      </td>
+    </tr>
+
+    <tr>
       <th scope="row">Medical history</th>
       <td>
         {% if session.health.medicalHistory !== 'no' %}
@@ -188,21 +203,6 @@
       </td>
       <td class="control">
         <a href="medical-history" class="button -secondary">Change</a>
-      </td>
-    </tr>
-
-    <tr>
-      <th scope="row">Other information</th>
-      <td>
-        {% if session.health.other !== 'no' %}
-          {{ session.health.other | striptags(true) | escape | nl2br }}
-        {% endif %}
-        {% if session.health.other === 'no' %}
-          I’m not supplying any other information
-        {% endif %}
-      </td>
-      <td class="control">
-        <a href="other" class="button -secondary">Change</a>
       </td>
     </tr>
   </table>

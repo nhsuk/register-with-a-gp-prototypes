@@ -47,18 +47,11 @@
         <textarea name="medical-history" id="medical-history" rows="6">{% if session.health.medicalHistory !== "no" %}{{ session.health.medicalHistory }}{% endif %}</textarea>
       </div>
 
-      <div class="form-group {% if error %}-errors{% endif %}">
-        <label for="no-medical-history" class="block-label">
-          I’ve got nothing to add here
-          <input type="checkbox" id="no-medical-history" name="no-medical-history" value="no" {% if session.health.medicalHistory === "no" %}checked="checked"{% endif %}>
-        </label>
-      </div>
-
       <div class="form-group -controls">
         <button type="submit" class="button">Continue</button>
-        {% set back = 'current-medication' %}
-        {% if session.health.medication === 'yes' %}
-          {% set back = 'current-medication-details' %}
+        {% set back = 'any-allergies' %}
+        {% if session.health.allergies === 'yes' %}
+          {% set back = 'allergies-details' %}
         {% endif %}
         {% if session.edit == true %}
           {% set back = 'confirm-details' %}

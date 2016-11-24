@@ -724,7 +724,7 @@ router.post('/current-medication', function (req, res) {
     if (req.session.edit === true) {
       res.redirect('confirm-details')
     } else {
-      res.redirect('medical-history')
+      res.redirect('any-allergies')
     }
   }
 
@@ -756,6 +756,71 @@ router.post('/current-medication-details', function (req, res) {
     if (req.session.edit === true) {
       res.redirect('confirm-details')
     } else {
+      res.redirect('any-allergies')
+    }
+  }
+});
+
+// Minimumn health questionnaire: allergies ++++++++++++++++++++++++++++++++++++
+router.get('/any-allergies', function (req, res) {
+  res.render('mvp_v1/any-allergies');
+});
+
+router.post('/any-allergies', function (req, res) {
+
+  var passed = true;
+
+  if (!req.session.health) {
+    req.session.health = {}
+  }
+
+  if (!req.body['allergies']) {
+    passed = false;
+    var error = 'Please answer ‘yes’ or ‘no’';
+  } else {
+    req.session.health.allergies = req.body['allergies']
+  }
+
+  if (passed === false) {
+    res.render('mvp_v1/any-allergies', { error });
+  } else if (req.body['allergies'] === 'yes') {
+    res.redirect('allergies-details')
+  } else {
+    if (req.session.edit === true) {
+      res.redirect('confirm-details')
+    } else {
+      res.redirect('medical-history')
+    }
+  }
+
+});
+
+// Minimumn health questionnaire: allergies details ++++++++++++++++++++++++++++
+router.get('/allergies-details', function (req, res) {
+  res.render('mvp_v1/allergies-details');
+});
+
+router.post('/allergies-details', function (req, res) {
+
+  var passed = true;
+
+  if (!req.session.health) {
+    req.session.health = {}
+  }
+
+  if (req.body['allergies-details'] === '') {
+    passed = false;
+    var error = 'Please enter your allergy details';
+  } else {
+    req.session.health.allergiesDetails = req.body['allergies-details']
+  }
+
+  if (passed === false) {
+    res.render('mvp_v1/allergies-details', { error });
+  } else {
+    if (req.session.edit === true) {
+      res.redirect('confirm-details')
+    } else {
       res.redirect('medical-history')
     }
   }
@@ -780,33 +845,8 @@ router.post('/medical-history', function (req, res) {
 
   req.session.health.medicalHistory = history
 
-  if (req.session.edit === true) {
-    res.redirect('confirm-details')
-  } else {
-    res.redirect('other')
-  }
-});
-
-// Minimumn health questionnaire: medical histoy +++++++++++++++++++++++++++++++
-router.get('/other', function (req, res) {
-  res.render('mvp_v1/other');
-});
-
-router.post('/other', function (req, res) {
-
-  if (!req.session.health) {
-    req.session.health = {}
-  }
-
-  var other = req.body['other']
-
-  if (other === '') {
-    other = 'no'
-  }
-
-  req.session.health.other = other
-
   res.redirect('confirm-details')
+
 });
 
 // Check your answers ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
