@@ -861,4 +861,12 @@ router.get('/registration-submitted', function (req, res) {
   res.render('mvp_v1/registration-submitted');
 });
 
+
+
+// EMAIL to GP +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+router.get('/gp-email', function (req, res) {
+  req.session.edit = false;
+  res.render('mvp_v1/_email-gp-notification');
+});
+
 module.exports = router
