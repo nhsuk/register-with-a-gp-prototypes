@@ -1,0 +1,9 @@
+{% extends '_layouts/email-layout.html' %}
+
+{% block content %}
+  {% if session.name %}
+    {% include '_includes/email-submission-table.html' %}
+  {% else %}
+    No session present, sorry.
+  {% endif %}
+{% endblock %}
