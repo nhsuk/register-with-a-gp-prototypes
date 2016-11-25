@@ -40,6 +40,7 @@
     "portscanner": "^1.0.0",
     "prompt": "^1.0.0",
     "request": "^2.75.0",
+    "sendgrid": "^4.7.1",
     "serve-favicon": "^2.3.0"
   }
 }
