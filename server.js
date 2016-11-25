@@ -120,27 +120,6 @@ app.get('/robots.txt', function (req, res) {
   res.send('User-agent: *\nDisallow: /')
 })
 
-var helper = require('sendgrid').mail;
-var from_email = new helper.Email('rgp-team@digital.nhs.uk');
-var to_email = new helper.Email('mat.johnson@digital.nhs.uk');
-var subject = 'Hello World from the SendGrid Node.js Library!';
-var content = new helper.Content('text/plain', 'Hello, Email!');
-var mail = new helper.Mail(from_email, subject, to_email, content);
-
-var sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
-var request = sg.emptyRequest({
-  method: 'POST',
-  path: '/v3/mail/send',
-  body: mail.toJSON(),
-});
-
-sg.API(request, function(error, response) {
-  console.log(process.env.SENDGRID_API_KEY);
-  console.log(response.statusCode);
-  console.log(response.body);
-  console.log(response.headers);
-});
-
 // start the app
 utils.findAvailablePort(app, function (port) {
   console.log('Listening on port ' + port + '   url: http://localhost:' + port)

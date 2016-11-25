@@ -1,0 +1,154 @@
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr>
+    <td class="submissionTitle" valign="top" style="border-top:0;">Name</th>
+    <td class="submissionContent" valign="top" style="border-top:0;">{{ session.name.firstName | title }} {{ session.name.middleNames | title }} {{ session.name.lastName | title }}</td>
+  </tr>
+
+  <tr>
+    <td class="submissionTitle" valign="top">Previous name</th>
+    <td class="submissionContent" valign="top">
+      {% if session.name.nameChanged == "no" %}
+        I’ve not changed my name
+      {% endif %}
+      {% if session.name.nameChanged == "not-saying" %}
+        I’d prefer not to say
+      {% endif %}
+      {% if session.name.nameChanged === 'yes' %}
+        {{ session.name.previousFirstName | title }} {{ session.name.previousMiddleNames | title }} {{ session.name.previousLastName | title }}
+      {% endif %}
+    </td>
+  </tr>
+
+  <tr>
+    <td class="submissionTitle" valign="top">Date of birth</th>
+    <td class="submissionContent" valign="top">{{ session.dob.day }} {{ session.dob.month | date("MMMM") }} {{ session.dob.year }}</td>
+  </tr>
+
+  <tr>
+    <td class="submissionTitle" valign="top">Contact details</th>
+    <td class="submissionContent" valign="top">
+      {% if session.contact.telephone != '' %}
+        {{ session.contact.telephone }}<br>
+      {% endif %}
+      {% if session.contact.email != '' %}
+        {{ session.contact.email }}
+      {% endif %}
+    </td>
+  </tr>
+
+  <tr>
+    <td class="submissionTitle" valign="top">Address</th>
+    <td class="submissionContent" valign="top">
+      {% for line in session.homeAddress.address %}
+        {% if line != '' %}
+          {{ line }}<br>
+        {% endif %}
+      {% endfor %}
+      {{ session.homeAddress.postcode | upper }}
+    </td>
+  </tr>
+
+  <tr>
+    <td class="submissionTitle" valign="top">Previous address</th>
+    <td class="submissionContent" valign="top">
+      {% if session.prevaddress == 'yes' %}
+        {% for line in session.prevAddress %}
+          {% if line != '' %}
+            {{ line }}<br>
+          {% endif %}
+        {% endfor %}
+        {{ session.prevpostcode | upper }}
+      {% endif %}
+      {% if session.prevaddress == 'no' %}
+        I’m not providing a previous address
+      {% endif %}
+    </td>
+  </tr>
+
+  {% if session.dob.age < 60 %}
+  <tr>
+    <td class="submissionTitle" valign="top">Armed forces</th>
+    <td class="submissionContent" valign="top">
+      {% if session.armedforces.leaving == 'yes' %}
+        {% if session.armedforces.serviceno != '' %}
+          Service or staff number: {{ session.armedforces.serviceno }}<br>
+        {% endif %}
+        {% if session.armedforces.enlistment.year != '' %}
+          Enlisted {{ session.armedforces.enlistment.day }} {{ session.armedforces.enlistment.month | date("MMMM") }} {{ session.armedforces.enlistment.year }}
+        {% endif %}
+      {% endif %}
+      {% if session.armedforces.leaving == 'no' %}
+        I’m not returning from the armed forces
+      {% endif %}
+    </td>
+  </tr>
+  {% endif %}
+
+  <tr>
+    <td class="submissionTitle" valign="top">NHS number</th>
+    <td class="submissionContent" valign="top">
+      {% if session.nhsnumber.known == 'yes' %}
+        {{ session.nhsnumber.number }}
+      {% endif %}
+      {% if session.nhsnumber.known == 'no' %}
+        I don’t know my NHS number
+      {% endif %}
+    </td>
+  </tr>
+
+  <tr>
+    <td class="submissionTitle" valign="top">Current GP</th>
+    <td class="submissionContent" valign="top">
+      {% if session.currentgp.registered == 'yes' %}
+        {% if session.currentgp.name != '' %}
+          {{ session.currentgp.name }}<br>
+        {% endif %}
+        {% if session.currentgp.address != '' %}
+          {% for line in session.currentgp.address %}
+            {{ line }}<br>
+          {% endfor %}
+        {% endif %}
+      {% endif %}
+
+      {% if session.currentgp.registered == 'no' %}
+        I’m not registered with a GP
+      {% endif %}
+    </td>
+  </tr>
+
+  <tr>
+    <td class="submissionTitle" valign="top">Current medication</th>
+    <td class="submissionContent" valign="top">
+      {% if session.health.medication == 'yes' %}
+        {{ session.health.medicationDetails | striptags(true) | escape | nl2br }}
+      {% endif %}
+      {% if session.health.medication == 'no' %}
+        I’m not currently taking any medication
+      {% endif %}
+    </td>
+  </tr>
+
+  <tr>
+    <td class="submissionTitle" valign="top">Allergies</th>
+    <td class="submissionContent" valign="top">
+      {% if session.health.allergies == 'yes' %}
+        {{ session.health.allergiesDetails | striptags(true) | escape | nl2br }}
+      {% endif %}
+      {% if session.health.allergies == 'no' %}
+        I don’t have any allergies
+      {% endif %}
+    </td>
+  </tr>
+
+  <tr>
+    <td class="submissionTitle" valign="top">Medical history</th>
+    <td class="submissionContent" valign="top">
+      {% if session.health.medicalHistory !== 'no' %}
+        {{ session.health.medicalHistory | striptags(true) | escape | nl2br }}
+      {% endif %}
+      {% if session.health.medicalHistory === 'no' %}
+        I’m not supplying any medical history
+      {% endif %}
+    </td>
+  </tr>
+</table>
