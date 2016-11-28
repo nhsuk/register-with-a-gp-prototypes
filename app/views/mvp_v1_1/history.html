@@ -1,0 +1,64 @@
+{% extends '_layouts/layout.html' %}
+
+{% block page_title %}
+  Your medical history :
+  {% if practiceName %}
+    Register with {{ practiceName }}
+  {% else %}
+    {{serviceName}}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+
+    <h1 class="primary">Your medical history</h1>
+
+    <div class="measure">
+
+      {% if error %}
+        <div class="error-summary">
+          <div>
+            <p>{{ error }}</p>
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="form-group {% if error %}-errors{% endif %}">
+        <label for="medical-history">Enter any details you want your new GP practice to know</label>
+
+        <details>
+          <summary>What kind of details should I give?</summary>
+          <div class="signage">
+            <div class="info">
+              <p>
+                Anything you feel might be useful to your new GP. For example:
+              </p>
+              <ul>
+                <li>any medical conditions you have such as asthma or diabetes</li>
+                <li>any treatments you’ve had to have in hospital</li>
+                <li>any allergies you have</li>
+                <li>any problems or illnesses you’ve had to see a doctor about regularly</li>
+              </ul>
+            </div>
+          </div>
+        </details>
+
+        <textarea name="medical-history" id="medical-history" rows="6">{% if session.health.medicalHistory !== "no" %}{{ session.health.medicalHistory }}{% endif %}</textarea>
+      </div>
+
+      <div class="form-group -controls">
+        <button type="submit" class="button">Continue</button>
+        {% set back = 'any-allergies' %}
+        {% if session.health.allergies === 'yes' %}
+          {% set back = 'allergies-details' %}
+        {% endif %}
+        {% if session.edit == true %}
+          {% set back = 'confirm-details' %}
+        {% endif %}
+        <a href="{{ back }}" class="button -back">Back</a>
+      </div>
+
+    </div>
+  </form>
+{% endblock %}
