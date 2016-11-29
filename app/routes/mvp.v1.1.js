@@ -330,7 +330,7 @@ router.post('/current-gp', function (req, res) {
     if (req.session.edit === true) {
       res.redirect('confirm-details')
     } else {
-      res.redirect('previous-name')
+      res.redirect('armed-forces')
     }
   }
 
@@ -733,28 +733,10 @@ router.post('/medical-history', function (req, res) {
 
 });
 
-// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//==============================================================================
 
-// Services logic fork =========================================================
-router.get('/services-fork', function(req, res) {
-  var dob = req.session.dob;
+// Armed forces branch
 
-  var birthdate = new Date(dob.year + '/' + dob.month + '/' + dob.day);
-  var cur = new Date();
-  var diff = cur-birthdate;
-  var age = Math.floor(diff/31536000000);
-
-  req.session.dob.age = age;
-
-  if (age > retirement) {
-    res.redirect('previous-address');
-  } else {
-    res.redirect('armed-forces');
-  }
-
-});
 //==============================================================================
 
 // Leaving the armed forces? +++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -786,7 +768,7 @@ router.post('/armed-forces', function (req, res) {
       if (req.session.edit === true) {
         res.redirect('confirm-details')
       } else {
-        res.redirect('previous-address')
+        res.redirect('current-medication')
       }
     }
   }
@@ -856,6 +838,7 @@ router.post('/armed-forces-enlistment-date', function (req, res) {
   }
 
 });
+
 //==============================================================================
 
 // END Armed forces branch
