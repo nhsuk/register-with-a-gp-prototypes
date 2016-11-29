@@ -54,82 +54,11 @@ router.post('/name', function (req, res) {
     if (req.session.edit === true) {
       res.redirect('confirm-details')
     } else {
-      res.redirect('previous-name')
-    }
-  }
-
-})
-
-// Previous name +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-router.get('/previous-name', function(req, res) {
-  res.render('mvp_v1_1/previous-name');
-});
-
-router.post('/previous-name', function(req, res) {
-
-  var passed = true;
-
-  if (!req.session.name) {
-    req.session.name = {};
-  }
-
-  if (!req.body['name-changed']) {
-    error = 'Please answer this question';
-    passed = false;
-  } else {
-    req.session.name.nameChanged = req.body['name-changed'];
-  }
-
-  if (passed === false) {
-    res.render('mvp_v1_1/previous-name', { error });
-  } else {
-    if (req.body['name-changed'] === 'yes') {
-      res.redirect('previous-name-details')
-    } else {
-      if (req.session.edit === true) {
-        res.redirect('confirm-details')
-      } else {
-        res.redirect('date-of-birth')
-      }
-    }
-  }
-});
-
-// Previous name details +++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-router.get('/previous-name-details', function(req, res) {
-  res.render('mvp_v1_1/previous-name-details');
-});
-
-router.post('/previous-name-details', function(req, res) {
-
-  var passed = true;
-
-  if (!req.session.name) {
-    req.session.name = {};
-  }
-
-  if (!req.body['previous-first-name'] && !req.body['previous-last-name']) {
-    error = 'Please enter your full previous name';
-    passed = false;
-  } else {
-    req.session.name.previousFirstName = req.body['previous-first-name'];
-    req.session.name.previousMiddleNames = req.body['previous-middle-names'];
-    req.session.name.previousLastName = req.body['previous-last-name'];
-  }
-
-  if (passed === false) {
-    res.render('mvp_v1_1/previous-name-details', { error });
-  } else {
-    if (req.session.edit === true) {
-      res.redirect('confirm-details')
-    } else {
       res.redirect('date-of-birth')
     }
   }
 
-});
+})
 
 // DOB +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/date-of-birth', function (req, res) {
@@ -337,7 +266,7 @@ router.post('/select-address', function (req, res) {
     if (req.session.edit === true) {
       res.redirect('confirm-details')
     } else {
-      res.redirect('services-fork')
+      res.redirect('current-gp')
     }
   }
 })
@@ -368,56 +297,92 @@ router.post('/home-address-manual', function (req, res) {
   } else if (req.session.edit === true) {
     res.redirect('confirm-details')
   } else {
-    res.redirect('services-fork')
+    res.redirect('current-gp')
   }
 
 })
 
-// Services logic fork =========================================================
-router.get('/services-fork', function(req, res) {
-  var dob = req.session.dob;
+// Current GP ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+router.get('/current-gp', function (req, res) {
+  res.render('mvp_v1_1/current-gp');
+})
 
-  var birthdate = new Date(dob.year + '/' + dob.month + '/' + dob.day);
-  var cur = new Date();
-  var diff = cur-birthdate;
-  var age = Math.floor(diff/31536000000);
-
-  req.session.dob.age = age;
-
-  if (age > retirement) {
-    res.redirect('previous-address');
-  } else {
-    res.redirect('armed-forces');
-  }
-
-});
-//==============================================================================
-
-// Leaving the armed forces? +++++++++++++++++++++++++++++++++++++++++++++++++++
-router.get('/armed-forces', function (req, res) {
-  res.render('mvp_v1_1/armed-forces');
-});
-
-router.post('/armed-forces', function (req, res) {
+router.post('/current-gp', function (req, res) {
 
   var passed = true;
 
-  if (!req.session.armedforces) {
-    req.session.armedforces = {}
+  if (!req.session.currentgp) {
+    req.session.currentgp = {}
   }
 
-  if (!req.body['armed-forces']) {
+  if (!req.body['current-gp']) {
     passed = false;
     error = 'Please answer ‘yes’ or ‘no’';
   } else {
-    req.session.armedforces.leaving = req.body['armed-forces']
+    req.session.currentgp.registered = req.body['current-gp']
   }
 
   if (passed === false) {
-    res.render('mvp_v1_1/armed-forces', { error });
+    res.render('mvp_v1_1/current-gp', { error });
+  } else if (req.body['current-gp'] === 'yes') {
+    res.redirect('current-gp-lookup')
   } else {
-    if (req.body['armed-forces'] === 'yes') {
-      res.redirect('armed-forces-service-number')
+    if (req.session.edit === true) {
+      res.redirect('confirm-details')
+    } else {
+      res.redirect('previous-name')
+    }
+  }
+
+});
+
+// Lookup GP +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+router.get('/current-gp-lookup', function (req, res) {
+  res.render('mvp_v1_1/gp-lookup');
+});
+
+router.post('/current-gp-lookup', function (req, res) {
+
+  if (!req.session.currentgp) {
+    req.session.currentgp = {}
+  }
+
+  req.session.currentgp.name = req.body['practice-name'];
+  req.session.currentgp.address = req.body['practice-address'].split(',');
+  if (req.session.edit === true) {
+    res.redirect('confirm-details')
+  } else {
+    res.redirect('previous-name')
+  }
+});
+
+
+// Previous name +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+router.get('/previous-name', function(req, res) {
+  res.render('mvp_v1_1/previous-name');
+});
+
+router.post('/previous-name', function(req, res) {
+
+  var passed = true;
+
+  if (!req.session.name) {
+    req.session.name = {};
+  }
+
+  if (!req.body['name-changed']) {
+    error = 'Please answer this question';
+    passed = false;
+  } else {
+    req.session.name.nameChanged = req.body['name-changed'];
+  }
+
+  if (passed === false) {
+    res.render('mvp_v1_1/previous-name', { error });
+  } else {
+    if (req.body['name-changed'] === 'yes') {
+      res.redirect('previous-name-details')
     } else {
       if (req.session.edit === true) {
         res.redirect('confirm-details')
@@ -426,77 +391,42 @@ router.post('/armed-forces', function (req, res) {
       }
     }
   }
-
 });
 
-// Armed forces service number +++++++++++++++++++++++++++++++++++++++++++++++++
-router.get('/armed-forces-service-number', function (req, res) {
-  res.render('mvp_v1_1/armed-forces-service-number');
+// Previous name details +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+router.get('/previous-name-details', function(req, res) {
+  res.render('mvp_v1_1/previous-name-details');
 });
 
-router.post('/armed-forces-service-number', function (req, res) {
+router.post('/previous-name-details', function(req, res) {
 
   var passed = true;
 
-  if (!req.session.armedforces) {
-    req.session.armedforces = {}
+  if (!req.session.name) {
+    req.session.name = {};
   }
 
-  if (req.body['service-no'] === '') {
+  if (!req.body['previous-first-name'] && !req.body['previous-last-name']) {
+    error = 'Please enter your full previous name';
     passed = false;
-    error = 'Please enter your service or personnel number';
   } else {
-    req.session.armedforces.serviceno = req.body['service-no']
+    req.session.name.previousFirstName = req.body['previous-first-name'];
+    req.session.name.previousMiddleNames = req.body['previous-middle-names'];
+    req.session.name.previousLastName = req.body['previous-last-name'];
   }
 
   if (passed === false) {
-    res.render('mvp_v1_1/armed-forces-service-number', { error });
-  } else {
-    res.redirect('armed-forces-enlistment-date')
-  }
-
-});
-
-// Armed forces enlistment date ++++++++++++++++++++++++++++++++++++++++++++++++
-router.get('/armed-forces-enlistment-date', function (req, res) {
-  res.render('mvp_v1_1/armed-forces-enlistment-date');
-});
-
-router.post('/armed-forces-enlistment-date', function (req, res) {
-
-  var passed = true;
-
-  if (!req.session.armedforces) {
-    req.session.armedforces = {}
-  }
-
-  if (req.body['enlistment-day'] === '' || req.body['enlistment-month'] === '' || req.body['enlistment-year'] === '') {
-    passed = false;
-    error = 'Please enter your enlistment date';
-  } else {
-    req.session.armedforces.enlistment = {
-      day: req.body['enlistment-day'],
-      month: req.body['enlistment-month'],
-      year: req.body['enlistment-year']
-    }
-  }
-
-  if (passed === false) {
-    res.render('mvp_v1_1/armed-forces-enlistment-date', { error });
+    res.render('mvp_v1_1/previous-name-details', { error });
   } else {
     if (req.session.edit === true) {
       res.redirect('confirm-details')
     } else {
-      res.redirect('current-medication')
+      res.redirect('previous-address')
     }
   }
 
 });
-//==============================================================================
-
-// END Armed forces branch
-
-//==============================================================================
 
 // Previous address ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/previous-address', function (req, res) {
@@ -526,7 +456,7 @@ router.post('/previous-address', function (req, res) {
     if (req.session.edit === true) {
       res.redirect('confirm-details')
     } else {
-      res.redirect('current-gp')
+      res.redirect('current-medication')
     }
   }
 
@@ -618,7 +548,7 @@ router.post('/select-previous-address', function (req, res) {
     if (req.session.edit === true) {
       res.redirect('confirm-details')
     } else {
-      res.redirect('current-gp')
+      res.redirect('current-medication')
     }
   }
 })
@@ -645,64 +575,10 @@ router.post('/previous-address-manual', function (req, res) {
   } else if (req.session.edit === true) {
     res.redirect('confirm-details')
   } else {
-    res.redirect('current-gp')
-  }
-
-})
-
-// Current GP ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-router.get('/current-gp', function (req, res) {
-  res.render('mvp_v1_1/current-gp');
-})
-
-router.post('/current-gp', function (req, res) {
-
-  var passed = true;
-
-  if (!req.session.currentgp) {
-    req.session.currentgp = {}
-  }
-
-  if (!req.body['current-gp']) {
-    passed = false;
-    error = 'Please answer ‘yes’ or ‘no’';
-  } else {
-    req.session.currentgp.registered = req.body['current-gp']
-  }
-
-  if (passed === false) {
-    res.render('mvp_v1_1/current-gp', { error });
-  } else if (req.body['current-gp'] === 'yes') {
-    res.redirect('current-gp-lookup')
-  } else {
-    if (req.session.edit === true) {
-      res.redirect('confirm-details')
-    } else {
-      res.redirect('current-medication')
-    }
-  }
-
-});
-
-// Lookup GP +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-router.get('/current-gp-lookup', function (req, res) {
-  res.render('mvp_v1_1/gp-lookup');
-});
-
-router.post('/current-gp-lookup', function (req, res) {
-
-  if (!req.session.currentgp) {
-    req.session.currentgp = {}
-  }
-
-  req.session.currentgp.name = req.body['practice-name'];
-  req.session.currentgp.address = req.body['practice-address'].split(',');
-  if (req.session.edit === true) {
-    res.redirect('confirm-details')
-  } else {
     res.redirect('current-medication')
   }
-});
+
+})
 
 // Minimumn health questionnaire: current meds? ++++++++++++++++++++++++++++++++
 router.get('/current-medication', function (req, res) {
@@ -856,6 +732,135 @@ router.post('/medical-history', function (req, res) {
   res.redirect('confirm-details')
 
 });
+
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+// Services logic fork =========================================================
+router.get('/services-fork', function(req, res) {
+  var dob = req.session.dob;
+
+  var birthdate = new Date(dob.year + '/' + dob.month + '/' + dob.day);
+  var cur = new Date();
+  var diff = cur-birthdate;
+  var age = Math.floor(diff/31536000000);
+
+  req.session.dob.age = age;
+
+  if (age > retirement) {
+    res.redirect('previous-address');
+  } else {
+    res.redirect('armed-forces');
+  }
+
+});
+//==============================================================================
+
+// Leaving the armed forces? +++++++++++++++++++++++++++++++++++++++++++++++++++
+router.get('/armed-forces', function (req, res) {
+  res.render('mvp_v1_1/armed-forces');
+});
+
+router.post('/armed-forces', function (req, res) {
+
+  var passed = true;
+
+  if (!req.session.armedforces) {
+    req.session.armedforces = {}
+  }
+
+  if (!req.body['armed-forces']) {
+    passed = false;
+    error = 'Please answer ‘yes’ or ‘no’';
+  } else {
+    req.session.armedforces.leaving = req.body['armed-forces']
+  }
+
+  if (passed === false) {
+    res.render('mvp_v1_1/armed-forces', { error });
+  } else {
+    if (req.body['armed-forces'] === 'yes') {
+      res.redirect('armed-forces-service-number')
+    } else {
+      if (req.session.edit === true) {
+        res.redirect('confirm-details')
+      } else {
+        res.redirect('previous-address')
+      }
+    }
+  }
+
+});
+
+// Armed forces service number +++++++++++++++++++++++++++++++++++++++++++++++++
+router.get('/armed-forces-service-number', function (req, res) {
+  res.render('mvp_v1_1/armed-forces-service-number');
+});
+
+router.post('/armed-forces-service-number', function (req, res) {
+
+  var passed = true;
+
+  if (!req.session.armedforces) {
+    req.session.armedforces = {}
+  }
+
+  if (req.body['service-no'] === '') {
+    passed = false;
+    error = 'Please enter your service or personnel number';
+  } else {
+    req.session.armedforces.serviceno = req.body['service-no']
+  }
+
+  if (passed === false) {
+    res.render('mvp_v1_1/armed-forces-service-number', { error });
+  } else {
+    res.redirect('armed-forces-enlistment-date')
+  }
+
+});
+
+// Armed forces enlistment date ++++++++++++++++++++++++++++++++++++++++++++++++
+router.get('/armed-forces-enlistment-date', function (req, res) {
+  res.render('mvp_v1_1/armed-forces-enlistment-date');
+});
+
+router.post('/armed-forces-enlistment-date', function (req, res) {
+
+  var passed = true;
+
+  if (!req.session.armedforces) {
+    req.session.armedforces = {}
+  }
+
+  if (req.body['enlistment-day'] === '' || req.body['enlistment-month'] === '' || req.body['enlistment-year'] === '') {
+    passed = false;
+    error = 'Please enter your enlistment date';
+  } else {
+    req.session.armedforces.enlistment = {
+      day: req.body['enlistment-day'],
+      month: req.body['enlistment-month'],
+      year: req.body['enlistment-year']
+    }
+  }
+
+  if (passed === false) {
+    res.render('mvp_v1_1/armed-forces-enlistment-date', { error });
+  } else {
+    if (req.session.edit === true) {
+      res.redirect('confirm-details')
+    } else {
+      res.redirect('current-medication')
+    }
+  }
+
+});
+//==============================================================================
+
+// END Armed forces branch
+
+//==============================================================================
 
 // Check your answers ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/confirm-details', function (req, res) {
