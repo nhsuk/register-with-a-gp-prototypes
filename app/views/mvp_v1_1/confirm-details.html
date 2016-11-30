@@ -25,6 +25,7 @@
       </td>
     </tr>
 
+    {% if session.name.nameChanged %}
     <tr>
       <th scope="row">Previous name</th>
       <td>
@@ -42,6 +43,7 @@
         <a href="previous-name" class="button -secondary">Change</a>
       </td>
     </tr>
+    {% endif %}
 
     <tr>
       <th scope="row">Date of birth</th>
@@ -81,6 +83,7 @@
       </td>
     </tr>
 
+    {% if session.prevaddress %}
     <tr>
       <th scope="row">Previous address</th>
       <td>
@@ -100,17 +103,24 @@
         <a href="previous-address" class="button -secondary">Change</a>
       </td>
     </tr>
+    {% endif %}
 
-    {% if session.dob.age < 60 %}
+    {% if session.armedforces %}
     <tr>
       <th scope="row">Armed forces</th>
       <td>
         {% if session.armedforces.leaving == 'yes' %}
+          I am returning from the armed forces<br>
           {% if session.armedforces.serviceno != '' %}
-            Service or staff number: {{ session.armedforces.serviceno }}<br>
+            Service or staff number: {{ session.armedforces.serviceno }}
+          {% else %}
+            I’m not supplying my service or staff number
           {% endif %}
+          <br>
           {% if session.armedforces.enlistment.year != '' %}
             Enlisted {{ session.armedforces.enlistment.day }} {{ session.armedforces.enlistment.month | date("MMMM") }} {{ session.armedforces.enlistment.year }}
+          {% else %}
+            I’m not supplying my enlistment date
           {% endif %}
         {% endif %}
         {% if session.armedforces.leaving == 'no' %}

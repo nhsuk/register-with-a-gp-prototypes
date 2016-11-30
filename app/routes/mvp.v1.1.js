@@ -782,24 +782,12 @@ router.get('/armed-forces-service-number', function (req, res) {
 
 router.post('/armed-forces-service-number', function (req, res) {
 
-  var passed = true;
-
   if (!req.session.armedforces) {
     req.session.armedforces = {}
   }
+  req.session.armedforces.serviceno = req.body['service-no']
 
-  if (req.body['service-no'] === '') {
-    passed = false;
-    error = 'Please enter your service or personnel number';
-  } else {
-    req.session.armedforces.serviceno = req.body['service-no']
-  }
-
-  if (passed === false) {
-    res.render('mvp_v1_1/armed-forces-service-number', { error });
-  } else {
-    res.redirect('armed-forces-enlistment-date')
-  }
+  res.redirect('armed-forces-enlistment-date')
 
 });
 
@@ -810,31 +798,19 @@ router.get('/armed-forces-enlistment-date', function (req, res) {
 
 router.post('/armed-forces-enlistment-date', function (req, res) {
 
-  var passed = true;
-
   if (!req.session.armedforces) {
     req.session.armedforces = {}
   }
-
-  if (req.body['enlistment-day'] === '' || req.body['enlistment-month'] === '' || req.body['enlistment-year'] === '') {
-    passed = false;
-    error = 'Please enter your enlistment date';
-  } else {
-    req.session.armedforces.enlistment = {
-      day: req.body['enlistment-day'],
-      month: req.body['enlistment-month'],
-      year: req.body['enlistment-year']
-    }
+  req.session.armedforces.enlistment = {
+    day: req.body['enlistment-day'],
+    month: req.body['enlistment-month'],
+    year: req.body['enlistment-year']
   }
 
-  if (passed === false) {
-    res.render('mvp_v1_1/armed-forces-enlistment-date', { error });
+  if (req.session.edit === true) {
+    res.redirect('confirm-details')
   } else {
-    if (req.session.edit === true) {
-      res.redirect('confirm-details')
-    } else {
-      res.redirect('current-medication')
-    }
+    res.redirect('current-medication')
   }
 
 });

@@ -17,14 +17,6 @@
 
   <form method="post" class="measure">
 
-    {% if error %}
-      <div class="error-summary">
-        <div>
-          <p>{{ error }}</p>
-        </div>
-      </div>
-    {% endif %}
-
     <div class="form-group">
       <input type="text" id="service-no" name="service-no" value="{{ session.armedforces.serviceno }}">
     </div>
