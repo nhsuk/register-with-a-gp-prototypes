@@ -10,10 +10,11 @@
 {% endblock %}
 
 {% block content %}
-  <h1 class="primary">Your contact details</h1>
   <form method="post" class="measure">
 
-    <p>{{ practiceName }} may need to get in touch with you to complete your registration.</p>
+    <h1 class="primary">
+      <label for="email">What is your email address?</label>
+    </h1>
 
     {% if error %}
       <div class="error-summary">
@@ -23,16 +24,23 @@
       </div>
     {% endif %}
 
-    <fieldset>
-      <div class="form-group">
-        <label for="telephone">Phone number</label>
-        <input type="tel" id="telephone" name="telephone" value="{{ session.contact.telephone }}">
+    <div class="form-group">
+      <input type="text" id="email" name="email" value="{{ session.contact.email }}">
+    </div>
+
+    <details>
+      <summary>Why should I provide an email address?</summary>
+      <div class="signage">
+        <div class="info">
+          <p>
+            A confirmation will be emailed to you at the end of this service.
+          </p>
+          <p>
+            Your email address will not be used for anything else.
+          </p>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="text" id="email" name="email" value="{{ session.contact.email }}">
-      </div>
-    </fieldset>
+    </details>
 
     <div class="form-group -controls">
       <button type="submit" class="button">Continue</button>

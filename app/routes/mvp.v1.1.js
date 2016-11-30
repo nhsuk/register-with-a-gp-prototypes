@@ -13,8 +13,6 @@ var from_email = new helper.Email('rgp-team@digital.nhs.uk');
 var to_email = new helper.Email('rgp-team@digital.nhs.uk');
 */
 
-var retirement = 60 // Taken as ceiling for Armed Forces retirement
-
 // MVP v1.1 prototype
 // See https://github.com/nhsuk/register-with-a-gp-design/blob/master/Register%20interaction%20flow/register-flow-v2.pdf
 
@@ -113,7 +111,7 @@ router.post('/nhs-number', function (req, res) {
       if (req.session.edit === true) {
         res.redirect('confirm-details')
       } else {
-        res.redirect('contact-details')
+        res.redirect('contact-email')
       }
     }
   }
@@ -146,34 +144,56 @@ router.post('/nhs-number-details', function (req, res) {
     if (req.session.edit === true) {
       res.redirect('confirm-details')
     } else {
-      res.redirect('contact-details')
+      res.redirect('contact-email')
     }
   }
 
 });
 
-// Contact details +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-router.get('/contact-details', function (req, res) {
-  res.render('mvp_v1_1/contact-details');
+// Contact email +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+router.get('/contact-email', function (req, res) {
+  res.render('mvp_v1_1/contact-email');
 });
 
-router.post('/contact-details', function (req, res) {
+router.post('/contact-email', function (req, res) {
 
-  req.session.contact = {
-    telephone: req.body['telephone'],
-    email: req.body['email']
+  if (!req.session.contact) {
+    req.session.contact = {}
   }
 
-  if (req.body['telephone'] === '' && req.body['email'] === '') {
-    res.render('mvp_v1_1/contact-details', {
-      error: 'Please enter at least one'
+  req.session.contact.email = req.body['email']
+
+  if (req.body['email'] === '') {
+    res.render('mvp_v1_1/contact-email', {
+      error: 'Please provide an email address'
     });
   } else {
     if (req.session.edit === true) {
       res.redirect('confirm-details')
     } else {
-      res.redirect('home-address')
+      res.redirect('contact-telephone')
     }
+  }
+})
+
+// Contact phone +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+router.get('/contact-telephone', function (req, res) {
+  res.render('mvp_v1_1/contact-telephone');
+});
+
+router.post('/contact-telephone', function (req, res) {
+
+  if (!req.session.contact) {
+    req.session.contact = {}
+  }
+
+  req.session.contact.telephone = req.body['telephone']
+  req.session.contact.mobile = req.body['mobile']
+
+  if (req.session.edit === true) {
+    res.redirect('confirm-details')
+  } else {
+    res.redirect('home-address')
   }
 })
 
