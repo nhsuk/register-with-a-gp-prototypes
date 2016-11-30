@@ -63,28 +63,6 @@
       </td>
     </tr>
 
-    {% if session.prevaddress %}
-    <tr>
-      <th scope="row">Previous address</th>
-      <td>
-        {% if session.prevaddress == 'yes' %}
-          {% for line in session.prevAddress %}
-            {% if line != '' %}
-              {{ line }}<br>
-            {% endif %}
-          {% endfor %}
-          {{ session.prevpostcode | upper }}
-        {% endif %}
-        {% if session.prevaddress == 'no' %}
-          I’m not providing a previous address
-        {% endif %}
-      </td>
-      <td class="control">
-        <a href="previous-address" class="button -secondary">Change</a>
-      </td>
-    </tr>
-    {% endif %}
-
     {% if session.armedforces %}
     <tr>
       <th scope="row">Armed forces</th>
@@ -152,12 +130,11 @@
     </tr>
 
     {% if session.currentgp.registered == 'yes' %}
-      {% if session.name.nameChanged %}
       <tr>
-        <th scope="row">Name registered at {{ session.currentgp.name }}</th>
+        <th scope="row">Registered name</th>
         <td>
           {% if session.name.nameChanged == "no" %}
-            I’ve not changed my name
+            I’m not registered with a different name
           {% endif %}
           {% if session.name.nameChanged === 'yes' %}
             {{ session.name.previousFirstName | title }} {{ session.name.previousMiddleNames | title }} {{ session.name.previousLastName | title }}
@@ -167,7 +144,25 @@
           <a href="previous-name" class="button -secondary">Change</a>
         </td>
       </tr>
-      {% endif %}
+      <tr>
+        <th scope="row">Registered address</th>
+        <td>
+          {% if session.prevaddress == 'yes' %}
+            {% for line in session.prevAddress %}
+              {% if line != '' %}
+                {{ line }}<br>
+              {% endif %}
+            {% endfor %}
+            {{ session.prevpostcode | upper }}
+          {% endif %}
+          {% if session.prevaddress == 'no' %}
+            I’m not registered with a different address
+          {% endif %}
+        </td>
+        <td class="control">
+          <a href="previous-address" class="button -secondary">Change</a>
+        </td>
+      </tr>
     {% endif %}
 
     <tr>

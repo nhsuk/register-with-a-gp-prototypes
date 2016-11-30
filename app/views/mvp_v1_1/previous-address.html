@@ -11,9 +11,11 @@
 
 {% block content %}
 
-  <h1 class="primary">Are you registering because you’ve moved house?</h1>
+  <h1 class="primary">
+    Are you registered at {{ session.currentgp.name }} with a different address?
+  </h1>
 
-  <form method="post">
+  <form method="post" class="measure">
     <fieldset>
 
       {% if error %}
@@ -38,6 +40,17 @@
         </label>
       </div>
     </fieldset>
+
+    <details>
+      <summary>Why should I give my previous address?</summary>
+      <div class="signage">
+        <div class="info">
+          <p>
+            If your address has changed, giving {{ practiceName }} your previous address will help them find your medical records.
+          </p>
+        </div>
+      </div>
+    </details>
 
     <div class="form-group -controls">
       <button type="submit" class="button">Continue</button>
