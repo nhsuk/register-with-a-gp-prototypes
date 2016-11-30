@@ -59,7 +59,7 @@ h1, .heading-xxlarge, .primary,
   }
 }
 
-h2, .heading-xlarge, .secondary,
+h2, .heading-xlarge, table caption, .secondary,
 .h2 {
   margin: 0;
   padding: 16px 0 0 0;
@@ -69,7 +69,7 @@ h2, .heading-xlarge, .secondary,
 }
 
 @media (min-width: 500px) {
-  h2, .heading-xlarge, .secondary,
+  h2, .heading-xlarge, table caption, .secondary,
   .h2 {
     font-size: 32px;
     line-height: 48px;
@@ -105,7 +105,7 @@ body, pre.user-input {
 
 /* remove undelines for a tags used as anchors */
 h1 a, .heading-xxlarge a, .primary a,
-h2 a, .heading-xlarge a, .secondary a,
+h2 a, .heading-xlarge a, table caption a, .secondary a,
 h3 a, .heading-large a,
 h4 a, .heading-body a,
 h5 a,
@@ -434,7 +434,13 @@ table {
   width: 100%;
   border-collapse: collapse;
   border-top: 1px solid #d9e1e2;
-  margin-bottom: 32px;
+  margin-bottom: 64px;
+}
+
+table caption {
+  font-weight: normal;
+  text-align: left;
+  padding: 0 8px 16px 8px;
 }
 
 table th, table td {
@@ -841,7 +847,7 @@ textarea:focus {
   outline: 3px solid #F7E214;
 }
 
-.gp-finder-results h2, .gp-finder-results .heading-xlarge, .gp-finder-results .secondary {
+.gp-finder-results h2, .gp-finder-results .heading-xlarge, .gp-finder-results table caption, table .gp-finder-results caption, .gp-finder-results .secondary {
   font-weight: 400;
   color: #0072c6;
   text-decoration: underline;

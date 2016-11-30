@@ -17,6 +17,7 @@
   <h1 class="primary">Check your details</h1>
 
   <table class="measure">
+    <!--<caption>Your details</caption>-->
     <tr>
       <th scope="row">Name</th>
       <td>{{ session.name.firstName | title }} {{ session.name.middleNames | title }} {{ session.name.lastName | title }}</td>
@@ -63,34 +64,6 @@
       </td>
     </tr>
 
-    {% if session.armedforces %}
-    <tr>
-      <th scope="row">Armed forces</th>
-      <td>
-        {% if session.armedforces.leaving == 'yes' %}
-          I am returning from the armed forces<br>
-          {% if session.armedforces.serviceno != '' %}
-            Service or staff number: {{ session.armedforces.serviceno }}
-          {% else %}
-            I’m not supplying my service or staff number
-          {% endif %}
-          <br>
-          {% if session.armedforces.enlistment.year != '' %}
-            Enlisted {{ session.armedforces.enlistment.day }} {{ session.armedforces.enlistment.month | date("MMMM") }} {{ session.armedforces.enlistment.year }}
-          {% else %}
-            I’m not supplying my enlistment date
-          {% endif %}
-        {% endif %}
-        {% if session.armedforces.leaving == 'no' %}
-          I’m not returning from the armed forces
-        {% endif %}
-      </td>
-      <td class="control">
-        <a href="armed-forces" class="button -secondary">Change</a>
-      </td>
-    </tr>
-    {% endif %}
-
     <tr>
       <th scope="row">NHS number</th>
       <td>
@@ -106,6 +79,50 @@
       </td>
     </tr>
 
+    {% if not session.armedforces %}
+    <tr>
+      <th scope="row">Armed forces</th>
+      <td>I’m not returning from the armed forces</td>
+      <td class="control">
+        <a href="armed-forces" class="button -secondary">Change</a>
+      </td>
+    </tr>
+    {% endif %}
+  </table>
+
+  {% if session.armedforces %}
+    <table class="measure">
+      <caption>Your service in the armed forces</caption>
+      <tr>
+        <th scope="row">Armed forces</th>
+        <td>
+          {% if session.armedforces.leaving == 'yes' %}
+            I am returning from the armed forces<br>
+            {% if session.armedforces.serviceno != '' %}
+              Service or staff number: {{ session.armedforces.serviceno }}
+            {% else %}
+              I’m not supplying my service or staff number
+            {% endif %}
+            <br>
+            {% if session.armedforces.enlistment.year != '' %}
+              Enlisted {{ session.armedforces.enlistment.day }} {{ session.armedforces.enlistment.month | date("MMMM") }} {{ session.armedforces.enlistment.year }}
+            {% else %}
+              I’m not supplying my enlistment date
+            {% endif %}
+          {% endif %}
+          {% if session.armedforces.leaving == 'no' %}
+            I’m not returning from the armed forces
+          {% endif %}
+        </td>
+        <td class="control">
+          <a href="armed-forces" class="button -secondary">Change</a>
+        </td>
+      </tr>
+    </table>
+  {% endif %}
+
+  <table class="measure">
+    <caption>Your current GP</caption>
     <tr>
       <th scope="row">Current GP</th>
       <td>
@@ -164,7 +181,10 @@
         </td>
       </tr>
     {% endif %}
+  </table>
 
+  <table class="measure">
+    <caption>Your health</caption>
     <tr>
       <th scope="row">Current medication</th>
       <td>
