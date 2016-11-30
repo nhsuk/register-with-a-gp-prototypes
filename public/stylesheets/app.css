@@ -1,8 +1,8 @@
-.grid-row, .prototype-warning-inner, .breadcrumb, .footer-container, .-date, .error-summary, form, .form-group, #global-header, .signage {
+.prototype-warning-inner, .breadcrumb, .footer-container, .-date, .error-summary, form, .form-group, #global-header, .signage, .grid-row {
   zoom: 1;
 }
 
-.grid-row:after, .prototype-warning-inner:after, .breadcrumb:after, .footer-container:after, .-date:after, .error-summary:after, form:after, .form-group:after, #global-header:after, .signage:after {
+.prototype-warning-inner:after, .breadcrumb:after, .footer-container:after, .-date:after, .error-summary:after, form:after, .form-group:after, #global-header:after, .signage:after, .grid-row:after {
   content: "";
   display: block;
   clear: both;
@@ -165,144 +165,6 @@ a:focus {
   -webkit-box-shadow: 0 0 0 5px #F7E214;
   -moz-box-shadow: 0 0 0 5px #F7E214;
   box-shadow: 0 0 0 5px #F7E214;
-}
-
-body, pre.user-input {
-  margin: 0;
-  padding: 0;
-  background-color: #fff;
-}
-
-.prototype-warning-inner, .footer-container, .header-container,
-.content {
-  max-width: 960px;
-  margin: 0 auto;
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
-@media (min-width: 980px) {
-  .prototype-warning-inner, .footer-container, .header-container,
-  .content {
-    padding-left: 0;
-    padding-right: 0;
-  }
-}
-
-.content {
-  padding-top: 32px;
-}
-
-@media (min-width: 640px) {
-  .f-right {
-    float: right;
-  }
-}
-
-.grid-row {
-  display: block;
-  margin-left: -1.7%;
-  margin-right: -1.7%;
-}
-
-.grid-row [class*='grid-'] {
-  margin-left: 1.7%;
-  margin-right: 1.7%;
-}
-
-.grid-1-2 {
-  width: 96.6%;
-}
-
-@media (min-width: 640px) {
-  .grid-1-2 {
-    width: 46.6%;
-    float: left;
-  }
-}
-
-.grid-1-3 {
-  width: 96.6%;
-}
-
-@media (min-width: 640px) {
-  .grid-1-3 {
-    width: 29.9%;
-    float: left;
-  }
-}
-
-.grid-2-3 {
-  width: 96.6%;
-}
-
-@media (min-width: 640px) {
-  .grid-2-3 {
-    width: 63.2666%;
-    float: left;
-  }
-}
-
-.grid-1-4 {
-  width: 21.6%;
-  float: left;
-}
-
-.grid-3-4 {
-  width: 71.6%;
-  float: left;
-}
-
-.grid-1-6 {
-  width: 13.2666%;
-  float: left;
-}
-
-.grid-1-12 {
-  width: 4.9333%;
-  float: left;
-}
-
-.grid-5-12 {
-  width: 96.6%;
-}
-
-@media (min-width: 640px) {
-  .grid-5-12 {
-    width: 38.2665%;
-    float: left;
-  }
-}
-
-.grid-7-12 {
-  width: 54.9331%;
-  float: left;
-}
-
-.grid-10-12 {
-  width: 79.933%;
-  float: left;
-}
-
-.grid-11-12 {
-  width: 88.2663%;
-  float: left;
-}
-
-.grid-row [class*='grid-'] {
-  /*background-color: #eee;*/
-}
-
-.grid-row [class*='grid-'] > :first-child {
-  margin-top: 0;
-}
-
-.shunt {
-  margin-top: 32px;
-}
-
-.shunt-2 {
-  margin-top: 64px;
 }
 
 .prototype-warning {
@@ -1029,4 +891,142 @@ textarea:focus {
 .completion {
   border-top: 2px solid #5bbf21;
   background-color: #eff9e9;
+}
+
+body, pre.user-input {
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+}
+
+.prototype-warning-inner, .footer-container, .header-container,
+.content {
+  max-width: 960px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+@media (min-width: 980px) {
+  .prototype-warning-inner, .footer-container, .header-container,
+  .content {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.content {
+  padding-top: 32px;
+}
+
+@media (min-width: 640px) {
+  .f-right {
+    float: right;
+  }
+}
+
+.grid-row {
+  display: block;
+  margin-left: -1.7%;
+  margin-right: -1.7%;
+}
+
+.grid-row [class*='grid-'] {
+  margin-left: 1.7%;
+  margin-right: 1.7%;
+}
+
+.grid-1-2 {
+  width: 96.6%;
+}
+
+@media (min-width: 640px) {
+  .grid-1-2 {
+    width: 46.6%;
+    float: left;
+  }
+}
+
+.grid-1-3 {
+  width: 96.6%;
+}
+
+@media (min-width: 640px) {
+  .grid-1-3 {
+    width: 29.9%;
+    float: left;
+  }
+}
+
+.grid-2-3 {
+  width: 96.6%;
+}
+
+@media (min-width: 640px) {
+  .grid-2-3 {
+    width: 63.2666%;
+    float: left;
+  }
+}
+
+.grid-1-4 {
+  width: 21.6%;
+  float: left;
+}
+
+.grid-3-4 {
+  width: 71.6%;
+  float: left;
+}
+
+.grid-1-6 {
+  width: 13.2666%;
+  float: left;
+}
+
+.grid-1-12 {
+  width: 4.9333%;
+  float: left;
+}
+
+.grid-5-12 {
+  width: 96.6%;
+}
+
+@media (min-width: 640px) {
+  .grid-5-12 {
+    width: 38.2665%;
+    float: left;
+  }
+}
+
+.grid-7-12 {
+  width: 54.9331%;
+  float: left;
+}
+
+.grid-10-12 {
+  width: 79.933%;
+  float: left;
+}
+
+.grid-11-12 {
+  width: 88.2663%;
+  float: left;
+}
+
+.grid-row [class*='grid-'] {
+  /*background-color: #eee;*/
+}
+
+.grid-row [class*='grid-'] > :first-child {
+  margin-top: 0;
+}
+
+.shunt {
+  margin-top: 32px;
+}
+
+.shunt-2 {
+  margin-top: 64px;
 }
