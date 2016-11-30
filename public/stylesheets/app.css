@@ -470,6 +470,10 @@ table.natural {
   width: auto;
 }
 
+table.compact {
+  margin-bottom: 16px;
+}
+
 table.compact th, table.compact td {
   padding: leading/2;
 }

@@ -1,7 +1,7 @@
 {% extends '_layouts/layout.html' %}
 
 {% block page_title %}
-  Your home address :
+  Your address :
   {% if practiceName %}
     Register with {{ practiceName }}
   {% else %}
@@ -14,7 +14,7 @@
   <form action="select-address" method="post">
     <fieldset>
       <legend class="primary">
-        What is your home address?
+        What is your address?
       </legend>
 
       {% if error %}

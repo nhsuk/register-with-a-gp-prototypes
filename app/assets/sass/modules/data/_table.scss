@@ -42,6 +42,8 @@ table {
   }
 
   &.compact {
+    margin-bottom: $leading;
+    
     th, td {
       padding: leading/2;
     }
