@@ -12,7 +12,9 @@
 {% block content %}
   <form method="post">
 
-    <h1 class="primary">Your allergies</h1>
+    <h1 class="primary">
+      <label for="allergies-details">List your allergies</label>
+    </h1>
 
     <div class="measure">
 
@@ -25,7 +27,6 @@
       {% endif %}
 
       <div class="form-group {% if error %}-errors{% endif %}">
-        <label for="allergies-details">Please list your allergies</label>
         <textarea name="allergies-details" id="allergies-details" rows="6">{% if session.health.allergies !== "no" %}{{ session.health.allergiesDetails }}{% endif %}</textarea>
       </div>
 

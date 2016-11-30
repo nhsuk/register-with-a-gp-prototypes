@@ -193,7 +193,7 @@
   <table class="measure">
     <caption>Your health</caption>
     <tr>
-      <th scope="row">Current medication</th>
+      <th scope="row">Medication</th>
       <td>
         {% if session.health.medication == 'yes' %}
           {{ session.health.medicationDetails | striptags(true) | escape | nl2br }}
@@ -223,13 +223,13 @@
     </tr>
 
     <tr>
-      <th scope="row">Medical history</th>
+      <th scope="row">Health</th>
       <td>
         {% if session.health.medicalHistory !== 'no' %}
           {{ session.health.medicalHistory | striptags(true) | escape | nl2br }}
         {% endif %}
         {% if session.health.medicalHistory === 'no' %}
-          I’m not supplying any medical history
+          I’m not supplying any health details
         {% endif %}
       </td>
       <td class="control">

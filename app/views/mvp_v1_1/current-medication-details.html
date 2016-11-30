@@ -1,7 +1,7 @@
 {% extends '_layouts/layout.html' %}
 
 {% block page_title %}
-  Your date of birth :
+  Your medication :
   {% if practiceName %}
     Register with {{ practiceName }}
   {% else %}
@@ -12,7 +12,9 @@
 {% block content %}
   <form method="post">
 
-    <h1 class="primary">Your current medication</h1>
+    <h1 class="primary">
+      <label for="medication-details">List your regular medicines</label>
+    </h1>
 
     <div class="measure">
 
@@ -25,8 +27,8 @@
       {% endif %}
 
       <div class="form-group {% if error %}-errors{% endif %}">
-        <label for="medication-details">Please list the medicines you use regularly</label>
-        <textarea name="medication-details" id="medication-details" rows="6">{% if session.health.medicationDetails !== "no" %}{{ session.health.medication }}{% endif %}</textarea>
+        <p class="form-hint">It helps to include dosage and the year you started taking them but you don’t have to</p>
+        <textarea name="medication-details" id="medication-details" rows="6">{% if session.health.medication !== "no" %}{{ session.health.medicationDetails }}{% endif %}</textarea>
       </div>
 
       <div class="form-group -controls">
