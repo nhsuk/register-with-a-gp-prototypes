@@ -25,26 +25,6 @@
       </td>
     </tr>
 
-    {% if session.name.nameChanged %}
-    <tr>
-      <th scope="row">Previous name</th>
-      <td>
-        {% if session.name.nameChanged == "no" %}
-          I’ve not changed my name
-        {% endif %}
-        {% if session.name.nameChanged == "not-saying" %}
-          I’d prefer not to say
-        {% endif %}
-        {% if session.name.nameChanged === 'yes' %}
-          {{ session.name.previousFirstName | title }} {{ session.name.previousMiddleNames | title }} {{ session.name.previousLastName | title }}
-        {% endif %}
-      </td>
-      <td class="control">
-        <a href="previous-name" class="button -secondary">Change</a>
-      </td>
-    </tr>
-    {% endif %}
-
     <tr>
       <th scope="row">Date of birth</th>
       <td>{{ session.dob.day }} {{ session.dob.month | date("MMMM") }} {{ session.dob.year }}</td>
@@ -170,6 +150,25 @@
         <a href="current-gp" class="button -secondary">Change</a>
       </td>
     </tr>
+
+    {% if session.currentgp.registered == 'yes' %}
+      {% if session.name.nameChanged %}
+      <tr>
+        <th scope="row">Name registered at {{ session.currentgp.name }}</th>
+        <td>
+          {% if session.name.nameChanged == "no" %}
+            I’ve not changed my name
+          {% endif %}
+          {% if session.name.nameChanged === 'yes' %}
+            {{ session.name.previousFirstName | title }} {{ session.name.previousMiddleNames | title }} {{ session.name.previousLastName | title }}
+          {% endif %}
+        </td>
+        <td class="control">
+          <a href="previous-name" class="button -secondary">Change</a>
+        </td>
+      </tr>
+      {% endif %}
+    {% endif %}
 
     <tr>
       <th scope="row">Current medication</th>

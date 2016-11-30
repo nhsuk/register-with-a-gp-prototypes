@@ -11,12 +11,11 @@
 
 {% block content %}
   <h1 class="primary">
-    Have you ever changed your name?
+    Are you registered at {{ session.currentgp.name }} with a different name?
   </h1>
   <form method="post" class="measure">
 
     <fieldset>
-      <p class="form-hint">For example, by marriage or deed poll</p>
 
       {% if error %}
         <div class="error-summary">
@@ -28,22 +27,28 @@
 
       <div class="form-group {% if error %}-errors{% endif %}">
         <label for="no" class="block-label">
-          No, I haven’t changed my name
+          No
           <input type="radio" id="no" name="name-changed" value="no" {% if session.name.nameChanged == "no" %}checked="checked"{% endif %}>
         </label>
       </div>
       <div class="form-group {% if error %}-errors{% endif %}">
         <label for="yes" class="block-label">
-          Yes, I’ve changed my name
+          Yes
           <input type="radio" id="yes" name="name-changed" value="yes" {% if session.name.nameChanged == "yes" %}checked="checked"{% endif %}>
         </label>
       </div>
-      <div class="form-group {% if error %}-errors{% endif %}">
-        <label for="not-saying" class="block-label">
-          Prefer not to say
-          <input type="radio" id="not-saying" name="name-changed" value="not-saying" {% if session.name.nameChanged == "not-saying" %}checked="checked"{% endif %}>
-        </label>
-      </div>
+
+      <details>
+        <summary>Why should I give my previous name?</summary>
+        <div class="signage">
+          <div class="info">
+            <p>
+              If your name has changed, giving {{ practiceName }} your previous name will help them find your medical records.
+            </p>
+          </div>
+        </div>
+      </details>
+
     </fieldset>
 
     <div class="form-group -controls">
