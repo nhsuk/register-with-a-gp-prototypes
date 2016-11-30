@@ -23,7 +23,8 @@ $bodyweight: 400;
 $boldweight: 700;
 $smallprint: 16px;
 
-body {
+body,
+.body {
   font-family: $family;
   font-weight: $bodyweight;
   font-size: $body;
