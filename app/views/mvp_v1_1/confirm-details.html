@@ -108,13 +108,27 @@
       <caption>Your service in the armed forces</caption>
       <tr>
         <th scope="row">Armed forces</th>
+        <td>I’m returning from the armed forces</td>
+        <td class="control">
+          <a href="armed-forces" class="button -secondary">Change</a>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">Service number</th>
         <td>
           {% if session.armedforces.serviceno != '' %}
-            Service or staff number: {{ session.armedforces.serviceno }}
+            {{ session.armedforces.serviceno }}
           {% else %}
-            I’m not supplying my service or staff number
+            I’m not supplying my service number
           {% endif %}
-          <br>
+        </td>
+        <td class="control">
+          <a href="armed-forces-service-number" class="button -secondary">Change</a>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">Enlistment date</th>
+        <td>
           {% if session.armedforces.enlistment.year != '' %}
             Enlisted {{ session.armedforces.enlistment.day }} {{ session.armedforces.enlistment.month | date("MMMM") }} {{ session.armedforces.enlistment.year }}
           {% else %}
@@ -122,7 +136,7 @@
           {% endif %}
         </td>
         <td class="control">
-          <a href="armed-forces" class="button -secondary">Change</a>
+          <a href="armed-forces-enlistment-date" class="button -secondary">Change</a>
         </td>
       </tr>
     </table>

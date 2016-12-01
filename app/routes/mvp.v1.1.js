@@ -782,11 +782,11 @@ router.post('/armed-forces', function (req, res) {
   if (passed === false) {
     res.render('mvp_v1_1/armed-forces', { error });
   } else {
-    if (req.body['armed-forces'] === 'yes') {
-      res.redirect('armed-forces-service-number')
+    if (req.session.edit === true) {
+      res.redirect('confirm-details')
     } else {
-      if (req.session.edit === true) {
-        res.redirect('confirm-details')
+      if (req.body['armed-forces'] === 'yes') {
+        res.redirect('armed-forces-service-number')
       } else {
         res.redirect('current-medication')
       }
@@ -807,7 +807,11 @@ router.post('/armed-forces-service-number', function (req, res) {
   }
   req.session.armedforces.serviceno = req.body['service-no']
 
-  res.redirect('armed-forces-enlistment-date')
+  if (req.session.edit === true) {
+    res.redirect('confirm-details')
+  } else {
+    res.redirect('armed-forces-enlistment-date')
+  }
 
 });
 

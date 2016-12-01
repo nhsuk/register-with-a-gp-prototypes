@@ -50,8 +50,8 @@
       </tr>
 
       <tr>
-        <td class="submissionTitle" valign="top">NHS number</td>
-        <td class="submissionContent" valign="top">
+        <td class="submissionTitle" valign="top" style="border-bottom-width:2px;">NHS number</td>
+        <td class="submissionContent" valign="top" style="border-bottom-width:2px;">
           {% if session.nhsnumber.known == 'yes' %}
             {{ session.nhsnumber.number }}
           {% endif %}
@@ -63,19 +63,27 @@
 
       {% if not session.armedforces or session.armedforces.leaving == 'no' %}
       <tr>
-        <td class="submissionTitle" valign="top">Armed forces</td>
-        <td class="submissionContent" valign="top">I’m not returning from the armed forces</td>
+        <td class="submissionTitle" valign="top" style="border-width:4px;">Armed forces</td>
+        <td class="submissionContent" valign="top" style="border-width:4px;">I’m not returning from the armed forces</td>
       </tr>
       {% else %}
       <tr>
-        <td class="submissionTitle" valign="top">Armed forces</td>
+        <td class="submissionTitle" valign="top" style="border-width:4px;">Armed forces</td>
+        <td class="submissionContent" valign="top" style="border-width:4px;">I’m returning from the armed forces</td>
+      </tr>
+      <tr>
+        <td class="submissionTitle" valign="top">Service number</td>
         <td class="submissionContent" valign="top">
           {% if session.armedforces.serviceno != '' %}
-            Service or staff number: {{ session.armedforces.serviceno }}
+            {{ session.armedforces.serviceno }}
           {% else %}
             I’m not supplying my service or staff number
           {% endif %}
-          <br>
+        </td>
+      </tr>
+      <tr>
+        <td class="submissionTitle" valign="top">Enlistment date</td>
+        <td class="submissionContent" valign="top">
           {% if session.armedforces.enlistment.year != '' %}
             Enlisted {{ session.armedforces.enlistment.day }} {{ session.armedforces.enlistment.month | date("MMMM") }} {{ session.armedforces.enlistment.year }}
           {% else %}
@@ -86,8 +94,8 @@
       {% endif %}
 
       <tr>
-        <td class="submissionTitle" valign="top">Current GP</td>
-        <td class="submissionContent" valign="top">
+        <td class="submissionTitle" valign="top" style="border-width:4px;">Current GP</td>
+        <td class="submissionContent" valign="top" style="border-width:4px;">
           {% if session.currentgp.registered == 'yes' %}
             {% if session.currentgp.name != '' %}
               {{ session.currentgp.name }}<br>
@@ -136,8 +144,8 @@
       {% endif %}
 
       <tr>
-        <td class="submissionTitle" valign="top">Medication</td>
-        <td class="submissionContent" valign="top">
+        <td class="submissionTitle" valign="top" style="border-width:4px;">Medication</td>
+        <td class="submissionContent" valign="top" style="border-width:4px;">
           {% if session.health.medication == 'yes' %}
             {{ session.health.medicationDetails | striptags(true) | escape | nl2br }}
           {% endif %}
