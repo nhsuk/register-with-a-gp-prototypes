@@ -1,0 +1,88 @@
+{% extends '_layouts/layout.html' %}
+
+{% block page_title %}
+  Your address :
+  {% if practiceName %}
+    Register with {{ practiceName }}
+  {% else %}
+    {{serviceName}}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+
+  <form action="select-address" method="post">
+    <fieldset>
+      <legend class="primary">
+        What is your address?
+      </legend>
+
+      {% if error %}
+        <div class="error-summary">
+          <div>
+            <p>{{ error }}</p>
+          </div>
+        </div>
+      {% endif %}
+
+      <table class="natural compact">
+        <tr>
+          {% if session.building !== '' %}
+            <th>Number:</th>
+            <td>{{ session.homeAddress.building | title }}</td>
+          {% endif %}
+          <th>Postcode:</th>
+          <td>{{ session.homeAddress.postcode | upper }}</td>
+          <td class="control" rowspan="2">
+            <a href="home-address">change</a>
+          </td>
+        </tr>
+      </table>
+
+      {% if message %}
+        <div class="signage measure">
+          <div class="message">
+            <p>{{ message }}</p>
+          </div>
+        </div>
+      {% endif %}
+
+      {% for result in session.addressResults %}
+        <div class="form-group">
+          <label for="address-{{ loop.index0 }}" class="block-label">
+            {# single address result #}
+            {% if session.addressResults.length == 1 %}
+              {% for line in result %}
+                {% if line != '' %}
+                  {{ line }}<br>
+                {% endif %}
+              {% endfor %}
+              {{ postcode | upper }}
+
+            {% else %}
+              {# multiple address result #}
+              {% for line in result %}
+                {% if line != '' %}
+                  {{ line }}{% if loop.last !== true %}, {% endif %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+            <input type="radio" id="address-{{ loop.index0 }}" name="address" value="{{ result }}" {% if session.addressResults.length == 1 %}checked="checked"{% endif %}>
+          </label>
+        </div>
+      {% endfor %}
+
+    </fieldset>
+
+
+    <p>
+      <a href="home-address-manual">I can’t find my address</a>
+    </p>
+
+    <div class="form-group -controls">
+      <button type="submit" class="button">Continue</button>
+      <a href="home-address" class="button -back">Back</a>
+    </div>
+
+  </form>
+{% endblock %}

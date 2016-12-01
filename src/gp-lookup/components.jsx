@@ -88,6 +88,10 @@ var SearchForm = React.createClass({
             <button type="submit" className="button">Search</button>
           </div>
         </div>
+
+        <div className="form-group -controls">
+          <a href="current-gp" className="button -back">Back</a>
+        </div>
       </form>
     );
   },

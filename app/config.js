@@ -11,6 +11,7 @@ module.exports = {
     'Leeds'
   ],
   practicePostcode: 'LS8 1AY',
+  practiceTelephone: '0113 237 1128',
 
   // Default port that prototype runs on
   port: '3000',

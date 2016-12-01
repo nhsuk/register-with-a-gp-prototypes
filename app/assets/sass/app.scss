@@ -13,11 +13,6 @@
 @import "modules/typography/lists";
 @import "modules/typography/links";
 
-// Layout and grid
-@import "modules/layout/layout";
-@import "modules/layout/grid";
-@import "modules/layout/spacing";
-
 // Modules
 @import "modules/banner/prototype";
 @import "modules/controls/breadcrumbs";
@@ -37,3 +32,8 @@
 @import "modules/header-global/header-global";
 @import "modules/header-local/header-panel-local";
 @import "modules/signage/info";
+
+// Layout and grid
+@import "modules/layout/layout";
+@import "modules/layout/grid";
+@import "modules/layout/spacing";

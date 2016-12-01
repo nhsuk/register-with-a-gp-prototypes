@@ -1,0 +1,47 @@
+{% extends '_layouts/layout.html' %}
+
+{% block page_title %}
+  {% if practiceName %}
+    Register with {{ practiceName }}
+  {% else %}
+    {{serviceName}}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  <div class="measure">
+
+    <div class="signage completion">
+      <div>
+        <h1 class="body">Your details have been sent to {{ practiceName }} and you’ll get an email confirming this.</h1>
+      </div>
+    </div>
+
+    <h2>What happens next?</h2>
+
+    <p>{{ practiceName }} will contact you to confirm that you’re registered with them. This can take up to 7 days.</p>
+    <p>If you need to contact {{ practiceName }} you can telephone on {{ practiceTelephone }}</p>
+
+    <p>If you need to book an appointment in the meantime you can:</p>
+
+    <ul>
+      {% if session.currentgp.registered === 'yes' %}
+      <li>use your current GP</li>
+      {% endif %}
+      <li>WHAT ARE THE OPTIONS?</li>
+    </ul>
+
+    <div>
+      <a href="http://www.nhsbt.nhs.uk/" title="This link will open in a new window or tab" target="_blank">
+        <img src="/images/puff-donation.svg" style="max-width: 100%;">
+      </a>
+    </div>
+
+    <p>
+      <a href="/">Back to NHS.UK</a>
+    </p>
+
+  </div>
+{% endblock %}
+
+{% block footer %}{% endblock %}

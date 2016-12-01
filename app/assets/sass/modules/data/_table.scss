@@ -2,7 +2,15 @@ table {
   width: 100%;
   border-collapse: collapse;
   border-top: 1px solid $pale-grey;
-  margin-bottom: $leading*2;
+  margin-bottom: $leading*4;
+
+  caption {
+    @extend h2;
+
+    font-weight: normal;
+    text-align: left;
+    padding: 0 $leading/2 $leading $leading/2;
+  }
 
   th, td {
     text-align: left;
@@ -34,6 +42,8 @@ table {
   }
 
   &.compact {
+    margin-bottom: $leading;
+    
     th, td {
       padding: leading/2;
     }
