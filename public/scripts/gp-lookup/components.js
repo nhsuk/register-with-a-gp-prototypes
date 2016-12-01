@@ -17,7 +17,8 @@ var Application = React.createClass({
       null,
       React.createElement(SearchForm, { searchText: this.state.searchText,
         handleSearchTextChange: this.handleSearchTextChange }),
-      this.resultsList()
+      this.resultsList(),
+      React.createElement(BackLink, null)
     );
   },
 
@@ -102,15 +103,27 @@ var SearchForm = React.createClass({
             "Search"
           )
         )
-      ),
+      )
+    );
+  },
+
+  onChange: function onChange(event) {
+    this.props.handleSearchTextChange(event.target.value);
+  }
+});
+
+var BackLink = React.createClass({
+  displayName: "BackLink",
+
+  render: function render() {
+
+    return React.createElement(
+      "div",
+      { className: "form-group -controls" },
       React.createElement(
-        "div",
-        { className: "form-group -controls" },
-        React.createElement(
-          "a",
-          { href: "current-gp", className: "button -back" },
-          "Back"
-        )
+        "a",
+        { href: "current-gp", className: "button -back" },
+        "Back"
       )
     );
   },

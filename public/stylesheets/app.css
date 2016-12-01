@@ -1,8 +1,10 @@
-.prototype-warning-inner, .breadcrumb, .footer-container, .-date, .error-summary, form, .form-group, #global-header, .signage, .grid-row {
+.prototype-warning-inner, .breadcrumb, .footer-container, .-date, .error-summary, form, .form-group, #global-header, .signage, .header-container,
+.content, .grid-row {
   zoom: 1;
 }
 
-.prototype-warning-inner:after, .breadcrumb:after, .footer-container:after, .-date:after, .error-summary:after, form:after, .form-group:after, #global-header:after, .signage:after, .grid-row:after {
+.prototype-warning-inner:after, .breadcrumb:after, .footer-container:after, .-date:after, .error-summary:after, form:after, .form-group:after, #global-header:after, .signage:after, .header-container:after,
+.content:after, .grid-row:after {
   content: "";
   display: block;
   clear: both;

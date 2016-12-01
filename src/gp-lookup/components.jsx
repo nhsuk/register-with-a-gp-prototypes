@@ -15,6 +15,7 @@ var Application = React.createClass({
         <SearchForm searchText={this.state.searchText}
                     handleSearchTextChange={this.handleSearchTextChange} />
         {this.resultsList()}
+        <BackLink />
       </div>
     );
   },
@@ -88,11 +89,22 @@ var SearchForm = React.createClass({
             <button type="submit" className="button">Search</button>
           </div>
         </div>
-
-        <div className="form-group -controls">
-          <a href="current-gp" className="button -back">Back</a>
-        </div>
       </form>
+    );
+  },
+
+  onChange: function(event) {
+    this.props.handleSearchTextChange(event.target.value);
+  }
+});
+
+var BackLink = React.createClass({
+  render: function() {
+
+    return (
+      <div className="form-group -controls">
+        <a href="current-gp" className="button -back">Back</a>
+      </div>
     );
   },
 
