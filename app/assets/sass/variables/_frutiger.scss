@@ -51,7 +51,7 @@ h1,
 
 h2,
 .h2 {
-  margin: 0; padding: $leading 0 0 0;
+  margin: $leading 0;
   font-size: 30px;
   font-weight: $boldweight;
   line-height: $leading*3;
@@ -64,7 +64,7 @@ h2,
 
 h3,
 .h3 {
-  margin: 0; padding: $leading 0;
+  margin: $leading 0;
   font-size: 24px;
   font-weight: $boldweight;
   line-height: $leading*2;

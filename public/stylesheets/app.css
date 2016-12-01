@@ -62,8 +62,7 @@ h1, .heading-xxlarge, .primary,
 
 h2, .heading-xlarge, table caption, .secondary,
 .h2 {
-  margin: 0;
-  padding: 16px 0 0 0;
+  margin: 16px 0;
   font-size: 30px;
   font-weight: 700;
   line-height: 48px;
@@ -79,8 +78,7 @@ h2, .heading-xlarge, table caption, .secondary,
 
 h3, .heading-large,
 .h3 {
-  margin: 0;
-  padding: 16px 0;
+  margin: 16px 0;
   font-size: 24px;
   font-weight: 700;
   line-height: 32px;
