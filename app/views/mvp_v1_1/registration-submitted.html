@@ -19,9 +19,17 @@
 
     <h2>What happens next?</h2>
 
-    <p>Your new GP will send a letter or email confirming that you’re registered with them. This can take 7 days.</p>
+    <p>{{ practiceName }} will contact you to confirm that you’re registered with them. This can take up to 7 days.</p>
+    <p>If you need to contact {{ practiceName }} you can telephone on {{ practiceTelephone }}</p>
 
-    <p>If you need to book an appointment phone your GP.</p>
+    <p>If you need to book an appointment in the meantime you can:</p>
+
+    <ul>
+      {% if session.currentgp.registered === 'yes' %}
+      <li>use your current GP</li>
+      {% endif %}
+      <li>WHAT ARE THE OPTIONS?</li>
+    </ul>
 
     <div>
       <a href="http://www.nhsbt.nhs.uk/" title="This link will open in a new window or tab" target="_blank">

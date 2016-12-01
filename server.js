@@ -60,6 +60,9 @@ app.use(session({
 app.use(function (req, res, next) {
   res.locals.serviceName = config.serviceName
   res.locals.practiceName = config.practiceName
+  res.locals.practiceAddress = config.practiceAddress
+  res.locals.practicePostcode = config.practicePostcode
+  res.locals.practiceTelephone = config.practiceTelephone
   res.locals.cookieText = config.cookieText
   res.locals.session = req.session
   res.locals.gpLookupURL = gpLookupURL
