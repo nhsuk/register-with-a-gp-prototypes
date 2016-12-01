@@ -444,6 +444,10 @@ form {
   display: block;
 }
 
+.form-group {
+  clear: both;
+}
+
 .form-group.-controls {
   margin: 16px 0;
 }
@@ -680,8 +684,25 @@ textarea:focus {
   box-shadow: 0 0 0 5px #F7E214;
 }
 
+.gp-finder-search .form-control {
+  float: left;
+}
+
 .gp-finder-search button {
-  display: none;
+  display: block;
+  float: left;
+  box-sizing: border-box;
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  margin: 16px 0;
+  font-family: inherit;
+  color: #fff;
+  text-indent: -999em;
+  background: url("/images/icon-search.svg") center no-repeat #0072c6;
+  background-size: 65%;
+  border: 0;
+  cursor: pointer;
 }
 
 @media (min-width: 980px) {

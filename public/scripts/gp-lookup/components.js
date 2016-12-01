@@ -102,6 +102,15 @@ var SearchForm = React.createClass({
             "Search"
           )
         )
+      ),
+      React.createElement(
+        "div",
+        { className: "form-group -controls" },
+        React.createElement(
+          "a",
+          { href: "current-gp", className: "button -back" },
+          "Back"
+        )
       )
     );
   },

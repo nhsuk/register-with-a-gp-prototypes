@@ -2,8 +2,25 @@
 
   @extend .measure;
 
+  .form-control {
+    float: left;
+  }
+
   button {
-    display: none;
+    display: block;
+    float: left;
+    box-sizing: border-box;
+    width: 52px;
+    height: 52px;
+    padding: 0;
+    margin: $leading 0;
+    font-family: inherit;
+    color: $pure-white;
+    text-indent: -999em;
+    background: url("/images/icon-search.svg") center no-repeat $blue;
+    background-size: 65%;
+    border: 0;
+    cursor: pointer;
   }
 
 }

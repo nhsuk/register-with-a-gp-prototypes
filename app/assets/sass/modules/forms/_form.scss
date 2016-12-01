@@ -6,6 +6,8 @@ form {
 .form-group {
   @extend %contain-floats;
 
+  clear: both;
+
   &.-controls {
     margin: $leading 0;
 
