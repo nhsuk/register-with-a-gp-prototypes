@@ -1,11 +1,12 @@
 .header-panel {
   color: $pure-white;
   background-color: $nhs-blue;
-  padding-top: $leading*3;
-  padding-left: $leading*2;
-  padding-right: $leading*2;
-  padding-bottom: $leading*2;
+  padding: $leading*2 $leading $leading $leading;
   margin-bottom: 32px;
+
+  @include media(mid) {
+    padding: $leading*3 $leading*2 $leading*2 $leading*2;
+  }
 
   .header {
     margin-bottom: $leading*2;

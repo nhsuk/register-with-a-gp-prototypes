@@ -2,6 +2,11 @@
   background-color: $dark-grey;
   color: #d9e1e2;
   font-size: $smallprint;
+  line-height: $leading*1.5;
+
+  @include media(mid) {
+    line-height: $leading*2;
+  }
 
   a {
     color: #d9e1e2;

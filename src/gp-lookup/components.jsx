@@ -86,7 +86,7 @@ var SearchForm = React.createClass({
             <input type="text" name="search" id="search" className="form-control" autoComplete="off"
                    value={this.props.searchText}
                    onChange={this.onChange} />
-            <button type="submit" className="button">Search</button>
+                 <span className="button">Search</span>
           </div>
         </div>
       </form>
@@ -173,7 +173,7 @@ var PracticeResult = React.createClass({
 
     return (
       <div className={className} id={id} tabIndex="0">
-        <h2 dangerouslySetInnerHTML={this.highlightText(this.props.practice.name.value, this.props.practice.name.matches)} />
+        <h2 className="result-title" dangerouslySetInnerHTML={this.highlightText(this.props.practice.name.value, this.props.practice.name.matches)} />
         <p className="address" dangerouslySetInnerHTML={this.highlightText(this.props.practice.address.value, this.props.practice.address.matches)} />
         {distance}
         {practitioners}

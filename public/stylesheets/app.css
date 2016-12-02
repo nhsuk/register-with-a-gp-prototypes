@@ -1,3 +1,4 @@
+@import url("//fast.fonts.net/cssapi/4c65968f-c33e-4eb6-9a5d-ab4f81a0543f.css");
 .prototype-warning-inner, .breadcrumb, .footer-container, .-date, .error-summary, form, .form-group, #global-header, .signage, .header-container,
 .content, .grid-row {
   zoom: 1;
@@ -25,18 +26,9 @@ we can add other blues, named like blue40 (for a lighter blue) or blue60 for a d
     very light NHS blue: EBF6FF
   */
 /*#5CAEED; /* #0AC0FC; E2EEFB */
-/*
-56px
-56px,
-40px,
-28px,
-20px,
-
-16px
-*/
 body, pre.user-input,
 .body {
-  font-family: "Frutiger Neue", "Frutiger", sans-serif;
+  font-family: "Neue Frutiger W01", sans-serif;
   font-weight: 400;
   font-size: 20px;
   line-height: 32px;
@@ -49,7 +41,7 @@ body, pre.user-input,
 h1, .heading-xxlarge, .primary,
 .h1 {
   margin: 16px 0;
-  font-size: 40px;
+  font-size: 28px;
   font-weight: 400;
   line-height: 48px;
 }
@@ -57,7 +49,15 @@ h1, .heading-xxlarge, .primary,
 @media (min-width: 500px) {
   h1, .heading-xxlarge, .primary,
   .h1 {
-    font-size: 48px;
+    font-size: 32px;
+    line-height: 64px;
+  }
+}
+
+@media (min-width: 980px) {
+  h1, .heading-xxlarge, .primary,
+  .h1 {
+    font-size: 36px;
     line-height: 64px;
   }
 }
@@ -65,23 +65,15 @@ h1, .heading-xxlarge, .primary,
 h2, .heading-xlarge, table caption, .secondary,
 .h2 {
   margin: 16px 0;
-  font-size: 30px;
+  font-size: 24px;
   font-weight: 700;
   line-height: 48px;
-}
-
-@media (min-width: 500px) {
-  h2, .heading-xlarge, table caption, .secondary,
-  .h2 {
-    font-size: 32px;
-    line-height: 48px;
-  }
 }
 
 h3, .heading-large,
 .h3 {
   margin: 16px 0;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 700;
   line-height: 32px;
 }
@@ -171,6 +163,13 @@ a:focus {
   background-color: #425563;
   color: #d9e1e2;
   font-size: 16px;
+  line-height: 24px;
+}
+
+@media (min-width: 500px) {
+  .prototype-warning {
+    line-height: 32px;
+  }
 }
 
 .prototype-warning a {
@@ -194,11 +193,22 @@ a:focus {
 }
 
 .breadcrumb li.selected {
+  display: none;
   font-size: 16px;
   line-height: 24px;
   margin-top: 12px;
   padding-left: 4px;
   letter-spacing: -0.1px;
+}
+
+@media (min-width: 500px) {
+  .breadcrumb li.selected {
+    display: block;
+  }
+}
+
+.breadcrumb .button {
+  margin-bottom: 0;
 }
 
 .button::-moz-focus-inner {
@@ -297,7 +307,13 @@ table {
   width: 100%;
   border-collapse: collapse;
   border-top: 1px solid #d9e1e2;
-  margin-bottom: 64px;
+  margin-bottom: 32px;
+}
+
+@media (min-width: 500px) {
+  table {
+    margin-bottom: 64px;
+  }
 }
 
 table caption {
@@ -306,17 +322,38 @@ table caption {
   padding: 0 8px 16px 8px;
 }
 
-table th, table td {
-  text-align: left;
-  vertical-align: top;
-  padding: 16px 8px;
-  font-weight: 400;
-  font-size: 16px;
+table tr {
   border-bottom: 1px solid #d9e1e2;
 }
 
+table th, table td {
+  display: block;
+  padding: 16px 2px 8px 2px;
+  text-align: left;
+  vertical-align: top;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+@media (min-width: 500px) {
+  table th, table td {
+    display: table-cell;
+    padding: 16px 8px;
+  }
+}
+
 table th {
+  padding-bottom: 0;
+  font-weight: 700;
   color: #425563;
+}
+
+@media (min-width: 500px) {
+  table th {
+    padding-bottom: 16px;
+    font-weight: 400;
+  }
 }
 
 table .control {
@@ -324,13 +361,25 @@ table .control {
 }
 
 table .control .button {
-  padding: 16px;
   margin-right: 0;
   line-height: 16px;
+  padding: 16px;
+}
+
+@media (min-width: 500px) {
+  table .control .button {
+    display: inline-block;
+  }
 }
 
 table.natural {
-  width: auto;
+  width: 100%;
+}
+
+@media (min-width: 500px) {
+  table.natural {
+    width: auto;
+  }
 }
 
 table.compact {
@@ -338,7 +387,14 @@ table.compact {
 }
 
 table.compact th, table.compact td {
-  padding: leading/2;
+  display: table-cell;
+  padding: leading/4;
+}
+
+@media (min-width: 500px) {
+  table.compact th, table.compact td {
+    padding: leading/2;
+  }
 }
 
 details {
@@ -468,7 +524,8 @@ form {
 
 input[type='text'],
 input[type='number'],
-input[type='tel'] {
+input[type='tel'],
+input[type='email'] {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -490,24 +547,29 @@ input[type='tel'] {
 @media (min-width: 500px) {
   input[type='text'],
   input[type='number'],
-  input[type='tel'] {
+  input[type='tel'],
+  input[type='email'] {
     width: 75%;
   }
 }
 
 input[type='text']:focus,
 input[type='number']:focus,
-input[type='tel']:focus {
+input[type='tel']:focus,
+input[type='email']:focus {
   outline: 0;
   -webkit-box-shadow: 0 0 0 5px #F7E214;
   -moz-box-shadow: 0 0 0 5px #F7E214;
   box-shadow: 0 0 0 5px #F7E214;
 }
 
-input[type='text'].-small,
-input[type='number'].-small,
-input[type='tel'].-small {
-  width: 8em;
+@media (min-width: 500px) {
+  input[type='text'].-small,
+  input[type='number'].-small,
+  input[type='tel'].-small,
+  input[type='email'].-small {
+    width: 8em;
+  }
 }
 
 label {
@@ -688,9 +750,16 @@ textarea:focus {
 
 .gp-finder-search .form-control {
   float: left;
+  width: calc(100% - 52px);
 }
 
-.gp-finder-search button {
+@media (min-width: 500px) {
+  .gp-finder-search .form-control {
+    width: 75%;
+  }
+}
+
+.gp-finder-search .button {
   display: block;
   float: left;
   box-sizing: border-box;
@@ -735,7 +804,8 @@ textarea:focus {
   outline: 3px solid #F7E214;
 }
 
-.gp-finder-results h2, .gp-finder-results .heading-xlarge, .gp-finder-results table caption, table .gp-finder-results caption, .gp-finder-results .secondary {
+.gp-finder-results .result-title {
+  font-size: 20px;
   font-weight: 400;
   color: #0072c6;
   text-decoration: underline;
@@ -844,13 +914,24 @@ textarea:focus {
 
 #global-header {
   border-bottom: 3px solid #0072c6;
-  padding-top: 32px;
-  padding-bottom: 16px;
+  padding: 16px 0;
+}
+
+@media (min-width: 500px) {
+  #global-header {
+    padding-top: 32px;
+  }
 }
 
 .header-logo {
   display: block;
-  float: left;
+  margin-bottom: 8px;
+}
+
+@media (min-width: 500px) {
+  .header-logo {
+    float: left;
+  }
 }
 
 .header-logo img {
@@ -860,19 +941,29 @@ textarea:focus {
 }
 
 .service-name {
+  display: block;
   color: #425563;
-  line-height: 32px;
-  margin-left: 16px;
+}
+
+@media (min-width: 500px) {
+  .service-name {
+    display: inline;
+    margin-left: 16px;
+    line-height: 32px;
+  }
 }
 
 .header-panel {
   color: #fff;
   background-color: #0072c6;
-  padding-top: 48px;
-  padding-left: 32px;
-  padding-right: 32px;
-  padding-bottom: 32px;
+  padding: 32px 16px 16px 16px;
   margin-bottom: 32px;
+}
+
+@media (min-width: 500px) {
+  .header-panel {
+    padding: 48px 32px 32px 32px;
+  }
 }
 
 .header-panel .header {
@@ -895,7 +986,13 @@ textarea:focus {
 
 .signage > div {
   float: left;
-  padding: 0 32px;
+  padding: 0 16px;
+}
+
+@media (min-width: 500px) {
+  .signage > div {
+    padding: 0 32px;
+  }
 }
 
 .info {

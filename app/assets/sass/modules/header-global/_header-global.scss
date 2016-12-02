@@ -1,9 +1,11 @@
 #global-header {
-  //@extend %block;
   @extend %contain-floats;
   border-bottom: 3px solid $nhs-blue;
-  padding-top: $leading*2;
-  padding-bottom: $leading;
+  padding: $leading 0;
+
+  @include media(mid) {
+    padding-top: $leading*2;
+  }
 }
 
 .header-container {
@@ -12,7 +14,11 @@
 
 .header-logo {
   display: block;
-  float: left;
+  margin-bottom: $leading/2;
+
+  @include media(mid) {
+    float: left;
+  }
 
   img {
     display: block;
@@ -22,7 +28,12 @@
 }
 
 .service-name {
+  display: block;
   color: $dark-grey;
-  line-height: 32px;
-  margin-left: $leading;
+
+  @include media(mid) {
+    display: inline;
+    margin-left: $leading;
+    line-height: 32px;
+  }
 }

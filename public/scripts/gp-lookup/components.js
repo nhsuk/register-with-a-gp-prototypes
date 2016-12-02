@@ -98,8 +98,8 @@ var SearchForm = React.createClass({
             value: this.props.searchText,
             onChange: this.onChange }),
           React.createElement(
-            "button",
-            { type: "submit", className: "button" },
+            "span",
+            { className: "button" },
             "Search"
           )
         )
@@ -200,7 +200,7 @@ var PracticeResult = React.createClass({
     return React.createElement(
       "div",
       { className: className, id: id, tabIndex: "0" },
-      React.createElement("h2", { dangerouslySetInnerHTML: this.highlightText(this.props.practice.name.value, this.props.practice.name.matches) }),
+      React.createElement("h2", { className: "result-title", dangerouslySetInnerHTML: this.highlightText(this.props.practice.name.value, this.props.practice.name.matches) }),
       React.createElement("p", { className: "address", dangerouslySetInnerHTML: this.highlightText(this.props.practice.address.value, this.props.practice.address.matches) }),
       distance,
       practitioners
