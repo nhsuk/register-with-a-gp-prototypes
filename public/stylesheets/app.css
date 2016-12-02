@@ -719,9 +719,16 @@ textarea:focus {
 
 .gp-finder-search .form-control {
   float: left;
+  width: calc(100% - 52px);
 }
 
-.gp-finder-search button {
+@media (min-width: 500px) {
+  .gp-finder-search .form-control {
+    width: 75%;
+  }
+}
+
+.gp-finder-search .button {
   display: block;
   float: left;
   box-sizing: border-box;

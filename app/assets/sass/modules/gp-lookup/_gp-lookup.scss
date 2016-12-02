@@ -4,9 +4,14 @@
 
   .form-control {
     float: left;
+    width: calc(100% - 52px);
+
+    @include media(mid) {
+      width: 75%;
+    }
   }
 
-  button {
+  .button {
     display: block;
     float: left;
     box-sizing: border-box;

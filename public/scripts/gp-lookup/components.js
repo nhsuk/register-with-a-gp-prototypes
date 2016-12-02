@@ -98,8 +98,8 @@ var SearchForm = React.createClass({
             value: this.props.searchText,
             onChange: this.onChange }),
           React.createElement(
-            "button",
-            { type: "submit", className: "button" },
+            "span",
+            { className: "button" },
             "Search"
           )
         )
