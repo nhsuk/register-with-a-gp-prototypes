@@ -315,7 +315,13 @@ table {
   width: 100%;
   border-collapse: collapse;
   border-top: 1px solid #d9e1e2;
-  margin-bottom: 64px;
+  margin-bottom: 32px;
+}
+
+@media (min-width: 500px) {
+  table {
+    margin-bottom: 64px;
+  }
 }
 
 table caption {
@@ -324,13 +330,18 @@ table caption {
   padding: 0 8px 16px 8px;
 }
 
+table tr {
+  border-bottom: 1px solid #d9e1e2;
+}
+
 table th, table td {
-  padding: 8px 2px;
+  display: block;
+  padding: 16px 2px 8px 2px;
   text-align: left;
   vertical-align: top;
   font-weight: 400;
   font-size: 16px;
-  border-bottom: 1px solid #d9e1e2;
+  line-height: 24px;
 }
 
 @media (min-width: 500px) {
@@ -341,7 +352,16 @@ table th, table td {
 }
 
 table th {
+  padding-bottom: 0;
+  font-weight: 700;
   color: #425563;
+}
+
+@media (min-width: 500px) {
+  table th {
+    padding-bottom: 16px;
+    font-weight: 400;
+  }
 }
 
 table .control {
@@ -349,13 +369,25 @@ table .control {
 }
 
 table .control .button {
-  padding: 16px;
   margin-right: 0;
   line-height: 16px;
+  padding: 16px;
+}
+
+@media (min-width: 500px) {
+  table .control .button {
+    display: inline-block;
+  }
 }
 
 table.natural {
-  width: auto;
+  width: 100%;
+}
+
+@media (min-width: 500px) {
+  table.natural {
+    width: auto;
+  }
 }
 
 table.compact {
@@ -363,7 +395,14 @@ table.compact {
 }
 
 table.compact th, table.compact td {
-  padding: leading/2;
+  display: table-cell;
+  padding: leading/4;
+}
+
+@media (min-width: 500px) {
+  table.compact th, table.compact td {
+    padding: leading/2;
+  }
 }
 
 details {

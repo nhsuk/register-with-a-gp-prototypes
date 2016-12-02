@@ -2,7 +2,11 @@ table {
   width: 100%;
   border-collapse: collapse;
   border-top: 1px solid $pale-grey;
+  margin-bottom: $leading*2;
+
+  @include media(mid) {
   margin-bottom: $leading*4;
+  }
 
   caption {
     @extend h2;
@@ -12,16 +16,20 @@ table {
     padding: 0 $leading/2 $leading $leading/2;
   }
 
+  tr {
+    border-bottom: 1px solid $pale-grey;
+  }
+
   th, td {
-    padding: $leading/2 $leading/8;
+    display: block;
+    padding: $leading $leading/8 $leading/2 $leading/8;
 
     text-align: left;
     vertical-align: top;
 
     font-weight: $bodyweight;
     font-size: $smallprint;
-
-    border-bottom: 1px solid $pale-grey;
+    line-height: $leading*1.5;
 
     @include media(mid) {
       display: table-cell;
@@ -30,28 +38,48 @@ table {
   }
 
   th {
+    padding-bottom: 0;
+    font-weight: $boldweight;
     color: $dark-grey;
+
+    @include media(mid) {
+      padding-bottom: $leading;
+      font-weight: $bodyweight;
+    }
   }
 
   .control {
     text-align: right;
 
     .button {
-      padding: $leading;
       margin-right: 0;
       line-height: $leading;
+      padding: $leading;
+
+      @include media(mid) {
+        display: inline-block;
+      }
     }
   }
 
   &.natural {
-    width: auto;
+    width: 100%;
+
+    @include media(mid) {
+      width: auto;
+    }
   }
 
   &.compact {
     margin-bottom: $leading;
 
     th, td {
-      padding: leading/2;
+      display: table-cell;
+      padding: leading/4;
+
+      @include media(mid) {
+        padding: leading/2;
+      }
     }
   }
 
