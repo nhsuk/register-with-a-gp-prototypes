@@ -813,7 +813,8 @@ textarea:focus {
   outline: 3px solid #F7E214;
 }
 
-.gp-finder-results h2, .gp-finder-results .heading-xlarge, .gp-finder-results table caption, table .gp-finder-results caption, .gp-finder-results .secondary {
+.gp-finder-results .result-title {
+  font-size: 20px;
   font-weight: 400;
   color: #0072c6;
   text-decoration: underline;

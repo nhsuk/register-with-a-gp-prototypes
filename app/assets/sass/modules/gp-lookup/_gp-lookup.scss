@@ -59,7 +59,8 @@
     }
   }
 
-  h2 {
+  .result-title {
+    font-size: $body;
     font-weight: 400;
     color: $blue;
     text-decoration: underline;
