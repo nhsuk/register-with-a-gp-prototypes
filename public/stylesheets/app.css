@@ -862,13 +862,24 @@ textarea:focus {
 
 #global-header {
   border-bottom: 3px solid #0072c6;
-  padding-top: 32px;
-  padding-bottom: 16px;
+  padding: 16px 0;
+}
+
+@media (min-width: 500px) {
+  #global-header {
+    padding-top: 32px;
+  }
 }
 
 .header-logo {
   display: block;
-  float: left;
+  margin-bottom: 8px;
+}
+
+@media (min-width: 500px) {
+  .header-logo {
+    float: left;
+  }
 }
 
 .header-logo img {
@@ -878,9 +889,16 @@ textarea:focus {
 }
 
 .service-name {
+  display: block;
   color: #425563;
-  line-height: 32px;
-  margin-left: 16px;
+}
+
+@media (min-width: 500px) {
+  .service-name {
+    display: inline;
+    margin-left: 16px;
+    line-height: 32px;
+  }
 }
 
 .header-panel {
