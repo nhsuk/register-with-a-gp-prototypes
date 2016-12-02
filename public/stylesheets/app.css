@@ -28,6 +28,7 @@ we can add other blues, named like blue40 (for a lighter blue) or blue60 for a d
 /*#5CAEED; /* #0AC0FC; E2EEFB */
 body, pre.user-input,
 .body {
+  color: #0b0c0c;
   font-family: "Neue Frutiger W01", sans-serif;
   font-weight: 400;
   font-size: 20px;
@@ -83,19 +84,6 @@ h3, .heading-large,
   color: #666666;
 }
 
-body, pre.user-input {
-  color: #0b0c0c;
-}
-
-.baseline {
-  background-image: -webkit-linear-gradient(top, cyan 0, rgba(255, 255, 255, 0) 1px);
-  background-image: -moz-linear-gradient(top, cyan 0, rgba(255, 255, 255, 0) 1px);
-  background-image: -o-linear-gradient(top, cyan 0, rgba(255, 255, 255, 0) 1px);
-  background-image: linear-gradient(to bottom, cyan 0, rgba(255, 255, 255, 0) 1px);
-  background-repeat: repeat-y;
-  background-size: 100% 16px;
-}
-
 /* remove undelines for a tags used as anchors */
 h1 a, .heading-xxlarge a, .primary a,
 h2 a, .heading-xlarge a, table caption a, .secondary a,
@@ -117,7 +105,6 @@ pre.user-input {
 ul, ol {
   margin: 16px 0 32px 0;
   padding-left: 1em;
-  letter-spacing: 0.01em;
   list-style-position: outside;
 }
 
@@ -198,7 +185,6 @@ a:focus {
   line-height: 24px;
   margin-top: 12px;
   padding-left: 4px;
-  letter-spacing: -0.1px;
 }
 
 @media (min-width: 500px) {

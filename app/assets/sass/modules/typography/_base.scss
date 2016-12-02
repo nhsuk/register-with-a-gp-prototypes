@@ -1,13 +1,59 @@
-body {
+$body: 20px;
+$leading: 16px;
+$lightweight: 200;
+$bodyweight: 400;
+$boldweight: 700;
+$smallprint: 16px;
+
+body,
+.body {
   color: $text-colour;
+  font-family: $family;
+  font-weight: $bodyweight;
+  font-size: $body;
+  line-height: $leading*2;
 }
 
-// a 14px base:
-.baseline {
-  background-image: -webkit-linear-gradient(top, cyan 0, rgba(255,255,255,0) 1px);
-  background-image: -moz-linear-gradient(top, cyan 0, rgba(255,255,255,0) 1px);
-  background-image: -o-linear-gradient(top, cyan 0, rgba(255,255,255,0) 1px);
-  background-image: linear-gradient(to bottom, cyan 0, rgba(255,255,255,0) 1px);
-  background-repeat: repeat-y;
-  background-size: 100% $leading;
+// Reading width
+.measure {
+  max-width: 34em;
+}
+
+h1,
+.h1 {
+  margin: $leading 0;
+  font-size: 28px;
+  font-weight: $bodyweight;
+  line-height: $leading*3;
+
+  @include media(mid) {
+    font-size: 32px;
+    line-height: $leading*4;
+  }
+
+  @include media(large) {
+    font-size: 36px;
+    line-height: $leading*4;
+  }
+}
+
+h2,
+.h2 {
+  margin: $leading 0;
+  font-size: 24px;
+  font-weight: $boldweight;
+  line-height: $leading*3;
+}
+
+h3,
+.h3 {
+  margin: $leading 0;
+  font-size: 20px;
+  font-weight: $boldweight;
+  line-height: $leading*2;
+}
+
+.smallprint {
+  font-size: $smallprint;
+  color: $smallprint-grey;
 }
