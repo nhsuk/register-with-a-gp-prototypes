@@ -130,7 +130,7 @@
         <th scope="row">Enlistment date</th>
         <td>
           {% if session.armedforces.enlistment.year != '' %}
-            Enlisted {{ session.armedforces.enlistment.day }} {{ session.armedforces.enlistment.month | date("MMMM") }} {{ session.armedforces.enlistment.year }}
+            {{ session.armedforces.enlistment.day }} {{ session.armedforces.enlistment.month | date("MMMM") }} {{ session.armedforces.enlistment.year }}
           {% else %}
             I’m not supplying my enlistment date
           {% endif %}

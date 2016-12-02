@@ -85,7 +85,7 @@
         <td class="submissionTitle" valign="top">Enlistment date</td>
         <td class="submissionContent" valign="top">
           {% if session.armedforces.enlistment.year != '' %}
-            Enlisted {{ session.armedforces.enlistment.day }} {{ session.armedforces.enlistment.month | date("MMMM") }} {{ session.armedforces.enlistment.year }}
+            {{ session.armedforces.enlistment.day }} {{ session.armedforces.enlistment.month | date("MMMM") }} {{ session.armedforces.enlistment.year }}
           {% else %}
             I’m not supplying my enlistment date
           {% endif %}
