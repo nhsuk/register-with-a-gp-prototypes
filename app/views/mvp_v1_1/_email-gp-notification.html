@@ -24,9 +24,9 @@
       <tr>
         <td class="submissionTitle" valign="top">Telephone</td>
         <td class="submissionContent" valign="top">
-          {% if session.contact.telephone != '' and session.contact.mobile != '' %}
+          {% if session.contact.telephone != '' or session.contact.mobile != '' %}
             {% if session.contact.telephone != '' %}
-              {{ session.contact.telephone }}
+              {{ session.contact.telephone }}<br>
             {% endif %}
             {% if session.contact.mobile != '' %}
               {{ session.contact.mobile }}
