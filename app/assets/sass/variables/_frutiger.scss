@@ -6,16 +6,6 @@ $family: "Neue Frutiger W01", sans-serif;
 
 //$family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 
-/*
-56px
-56px,
-40px,
-28px,
-20px,
-
-16px
-*/
-
 $body: 20px;
 $leading: 16px;
 $lightweight: 200;
@@ -39,12 +29,17 @@ body,
 h1,
 .h1 {
   margin: $leading 0;
-  font-size: 40px;
+  font-size: 28px;
   font-weight: $bodyweight;
   line-height: $leading*3;
 
   @include media(mid) {
-    font-size: 48px;
+    font-size: 32px;
+    line-height: $leading*4;
+  }
+
+  @include media(large) {
+    font-size: 36px;
     line-height: $leading*4;
   }
 }
@@ -52,20 +47,15 @@ h1,
 h2,
 .h2 {
   margin: $leading 0;
-  font-size: 30px;
+  font-size: 24px;
   font-weight: $boldweight;
   line-height: $leading*3;
-
-  @include media(mid) {
-    font-size: 32px;
-    line-height: $leading*3;
-  }
 }
 
 h3,
 .h3 {
   margin: $leading 0;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: $boldweight;
   line-height: $leading*2;
 }

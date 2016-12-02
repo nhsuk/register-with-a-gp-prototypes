@@ -26,15 +26,6 @@ we can add other blues, named like blue40 (for a lighter blue) or blue60 for a d
     very light NHS blue: EBF6FF
   */
 /*#5CAEED; /* #0AC0FC; E2EEFB */
-/*
-56px
-56px,
-40px,
-28px,
-20px,
-
-16px
-*/
 body, pre.user-input,
 .body {
   font-family: "Neue Frutiger W01", sans-serif;
@@ -50,7 +41,7 @@ body, pre.user-input,
 h1, .heading-xxlarge, .primary,
 .h1 {
   margin: 16px 0;
-  font-size: 40px;
+  font-size: 28px;
   font-weight: 400;
   line-height: 48px;
 }
@@ -58,7 +49,15 @@ h1, .heading-xxlarge, .primary,
 @media (min-width: 500px) {
   h1, .heading-xxlarge, .primary,
   .h1 {
-    font-size: 48px;
+    font-size: 32px;
+    line-height: 64px;
+  }
+}
+
+@media (min-width: 980px) {
+  h1, .heading-xxlarge, .primary,
+  .h1 {
+    font-size: 36px;
     line-height: 64px;
   }
 }
@@ -66,23 +65,15 @@ h1, .heading-xxlarge, .primary,
 h2, .heading-xlarge, table caption, .secondary,
 .h2 {
   margin: 16px 0;
-  font-size: 30px;
+  font-size: 24px;
   font-weight: 700;
   line-height: 48px;
-}
-
-@media (min-width: 500px) {
-  h2, .heading-xlarge, table caption, .secondary,
-  .h2 {
-    font-size: 32px;
-    line-height: 48px;
-  }
 }
 
 h3, .heading-large,
 .h3 {
   margin: 16px 0;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 700;
   line-height: 32px;
 }
