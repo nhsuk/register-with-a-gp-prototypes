@@ -522,10 +522,12 @@ input[type='tel']:focus {
   box-shadow: 0 0 0 5px #F7E214;
 }
 
-input[type='text'].-small,
-input[type='number'].-small,
-input[type='tel'].-small {
-  width: 8em;
+@media (min-width: 500px) {
+  input[type='text'].-small,
+  input[type='number'].-small,
+  input[type='tel'].-small {
+    width: 8em;
+  }
 }
 
 label {

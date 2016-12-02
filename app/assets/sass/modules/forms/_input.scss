@@ -30,6 +30,8 @@ input[type='tel'] {
   }
 
   &.-small {
-    width: 8em;
+    @include media(mid) {
+      width: 8em;
+    }
   }
 }
