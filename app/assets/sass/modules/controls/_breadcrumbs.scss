@@ -16,7 +16,6 @@
     line-height: 24px;
     margin-top:12px;
     padding-left: $leading/4;
-    letter-spacing:-0.1px;
 
     @include media(mid) {
       display: block;
