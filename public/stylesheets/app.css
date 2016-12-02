@@ -171,6 +171,13 @@ a:focus {
   background-color: #425563;
   color: #d9e1e2;
   font-size: 16px;
+  line-height: 24px;
+}
+
+@media (min-width: 500px) {
+  .prototype-warning {
+    line-height: 32px;
+  }
 }
 
 .prototype-warning a {
