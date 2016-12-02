@@ -916,7 +916,13 @@ textarea:focus {
 
 .signage > div {
   float: left;
-  padding: 0 32px;
+  padding: 0 16px;
+}
+
+@media (min-width: 500px) {
+  .signage > div {
+    padding: 0 32px;
+  }
 }
 
 .info {
