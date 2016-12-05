@@ -1,0 +1,81 @@
+{% extends '_layouts/layout.html' %}
+
+{% block page_title %}
+  Your previous home address :
+  {% if practiceName %}
+    Register with {{ practiceName }}
+  {% else %}
+    {{serviceName}}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+
+  <form action="select-previous-address" method="post">
+    <fieldset>
+      <legend class="primary">
+        What was your address?
+      </legend>
+
+      <table class="natural compact">
+        <tr>
+          {% if session.prevbuilding !== '' %}
+            <th>Number:</th>
+            <td>{{ session.prevbuilding | title }}</td>
+          {% endif %}
+          <th>Postcode:</th>
+          <td>{{ session.prevpostcode | upper }}</td>
+          <td class="control" rowspan="2">
+            <a href="previous-address-postcode">change</a>
+          </td>
+        </tr>
+      </table>
+
+      {% if message %}
+        <div class="signage measure">
+          <div class="message">
+            <p>{{ message }}</p>
+          </div>
+        </div>
+      {% endif %}
+
+      {% for result in session.prevAddressResults %}
+        <div class="form-group">
+          <label for="address-{{ loop.index0 }}" class="block-label">
+            {# single address result #}
+            {% if session.prevAddressResults.length == 1 %}
+              {% for line in result %}
+                {% if line != '' %}
+                  {{ line }}<br>
+                {% endif %}
+              {% endfor %}
+              {{ session.prevpostcode | upper }}
+
+            {% else %}
+              {# multiple address result #}
+              {% for line in result %}
+                {% if line != '' %}
+                  {{ line }}{% if loop.last !== true %}, {% endif %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+            <input type="radio" id="address-{{ loop.index0 }}" name="address" value="{{ result }}" {% if session.prevAddressResults.length == 1 %}checked="checked"{% endif %}>
+          </label>
+        </div>
+      {% endfor %}
+
+    </fieldset>
+
+    <p>
+      <a href="previous-address-manual">I can’t find my address</a>
+    </p>
+
+    <div class="form-group -controls">
+      <button type="submit" class="button">Continue</button>
+      <a href="previous-address-postcode" class="button -back">Back</a>
+    </div>
+
+  </form>
+{% endblock %}
+
+{% block footer %}{% endblock %}
