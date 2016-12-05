@@ -1,0 +1,47 @@
+{% extends '_layouts/layout.html' %}
+
+{% block page_title %}
+  Your name :
+  {% if practiceName %}
+    Register with {{ practiceName }}
+  {% else %}
+    {{serviceName}}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  <h1 class="primary">
+    What was your previous name?
+  </h1>
+  <form method="post" class="measure">
+
+    {% if error %}
+      <div class="error-summary">
+        <div>
+          <p>{{ error }}</p>
+        </div>
+      </div>
+    {% endif %}
+
+    <fieldset>
+      <div class="form-group {% if error %}-errors{% endif %}">
+        <label for="previous-first-name">First name</label>
+        <input type="text" id="previous-first-name" name="previous-first-name" value="{{ session.name.previousFirstName }}">
+      </div>
+      <div class="form-group">
+        <label for="previous-middle-names">Middle names</label>
+        <input type="text" id="previous-middle-names" name="previous-middle-names" value="{{ session.name.previousMiddleNames }}">
+      </div>
+      <div class="form-group {% if error %}-errors{% endif %}">
+        <label for="previous-last-name">Last name</label>
+        <input type="text" id="previous-last-name" name="previous-last-name" value="{{ session.name.previousLastName }}">
+      </div>
+    </fieldset>
+
+    <div class="form-group -controls">
+      <button type="submit" class="button">Continue</button>
+      {% set back = 'previous-name' %}
+      <a href="{{ back }}" class="button -back">Back</a>
+    </div>
+  </form>
+{% endblock %}

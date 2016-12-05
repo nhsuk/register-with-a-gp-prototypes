@@ -16,6 +16,7 @@ var v1 = require('./app/routes/v1');
 var v1_1 = require('./app/routes/v1.1');
 var mvp_v1 = require('./app/routes/mvp.v1');
 var mvp_v1_1 = require('./app/routes/mvp.v1.1');
+var mvp_v1_2 = require('./app/routes/mvp.v1.2');
 
 var app = express()
 
@@ -99,6 +100,7 @@ app.use('/v1', v1);
 app.use('/v1.1', v1_1);
 app.use('/mvp-v1', mvp_v1);
 app.use('/mvp-v1.1', mvp_v1_1);
+app.use('/mvp-v1.2', mvp_v1_2);
 
 // auto render any view that exists
 app.get(/^\/([^.]+)$/, function (req, res) {

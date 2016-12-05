@@ -1,0 +1,34 @@
+{% extends '_layouts/layout.html' %}
+
+{% block page_title %}
+  Returning from the armed forces :
+  {% if practiceName %}
+    Register with {{ practiceName }}
+  {% else %}
+    {{serviceName}}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+
+  <h1 class="primary">
+    <label for="service-no">What was your service or staff number?</label>
+  </h1>
+
+  <form method="post" class="measure">
+
+    <div class="form-group">
+      <input type="tel" id="service-no" name="service-no" value="{{ session.armedforces.serviceno }}">
+    </div>
+
+    <div class="form-group -controls">
+      <button type="submit" class="button">Continue</button>
+      {% set back = 'armed-forces' %}
+      {% if session.edit == true %}
+        {% set back = 'confirm-details' %}
+      {% endif %}
+      <a href="{{ back }}" class="button -back">Back</a>
+    </div>
+
+  </form>
+{% endblock %}
