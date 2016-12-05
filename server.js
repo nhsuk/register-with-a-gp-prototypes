@@ -32,15 +32,15 @@ appEnvironment = appEnvironment.toLowerCase()
 useAuth = useAuth.toLowerCase()
 useHttps = useHttps.toLowerCase()
 
+// Force HTTPs on production connections
+if (appEnvironment === 'production' && useHttps === 'true') {
+  app.use(utils.forceHttps)
+}
+
 // Authenticate against the environment-provided credentials, if running
 // the app in production (Heroku, effectively)
 if (appEnvironment === 'production' && useAuth === 'true') {
   app.use(utils.basicAuth(username, password))
-}
-
-// Force HTTPs on production connections
-if (appEnvironment === 'production' && useHttps === 'true') {
-  app.use(utils.forceHttps)
 }
 
 // Disallow search index
