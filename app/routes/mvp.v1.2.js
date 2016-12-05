@@ -188,7 +188,6 @@ router.post('/contact-telephone', function (req, res) {
   }
 
   req.session.contact.telephone = req.body['telephone']
-  req.session.contact.mobile = req.body['mobile']
 
   if (req.session.edit === true) {
     res.redirect('confirm-details')

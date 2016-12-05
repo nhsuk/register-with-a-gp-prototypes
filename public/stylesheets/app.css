@@ -558,6 +558,16 @@ input[type='email']:focus {
   }
 }
 
+.-hanging-hint input {
+  float: left;
+}
+
+.-hanging-hint .form-hint {
+  float: left;
+  clear: none;
+  padding: 10px 0 10px 16px;
+}
+
 label {
   display: block;
   width: 100%;

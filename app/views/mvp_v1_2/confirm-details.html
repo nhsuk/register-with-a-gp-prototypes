@@ -46,13 +46,8 @@
     <tr>
       <th scope="row">Telephone</th>
       <td>
-        {% if session.contact.telephone != '' or session.contact.mobile != '' %}
-          {% if session.contact.telephone != '' %}
-            {{ session.contact.telephone }}<br>
-          {% endif %}
-          {% if session.contact.mobile != '' %}
-            {{ session.contact.mobile }}
-          {% endif %}
+        {% if session.contact.telephone != '' %}
+          {{ session.contact.telephone }}
         {% else %}
           I’m not providing a telephone number
         {% endif %}
