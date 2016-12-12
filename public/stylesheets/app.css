@@ -126,6 +126,10 @@ ul.link-list {
   padding: 0;
 }
 
+.tel {
+  white-space: nowrap;
+}
+
 a {
   color: #0072c6;
   text-decoration: underline;
