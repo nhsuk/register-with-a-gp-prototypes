@@ -13,23 +13,32 @@
 
     <div class="signage completion">
       <div>
-        <h1 class="body">Your details have been sent to {{ practiceName }} and you’ll get an email confirming this.</h1>
+        <h1 class="body">Your application is being processed. You will be contacted by {{ practiceName }} within 2 days.</h1>
       </div>
     </div>
 
-    <h2>What happens next?</h2>
+    <p>Your application to register has been sent to</p>
+    <p>
+      <b>{{ practiceName }}</b><br>
+      {% for line in practiceAddress %}
+        {% if line != '' %}
+          {{ line }}<br>
+        {% endif %}
+      {% endfor %}
+      {{ practicePostcode | upper }}
+    </p>
 
-    <p>{{ practiceName }} will contact you to confirm that you’re registered with them. This can take up to 7 days.</p>
-    <p>If you need to contact {{ practiceName }} you can telephone on {{ practiceTelephone }}</p>
-
-    <p>If you need to book an appointment in the meantime you can:</p>
-
+    <h2>What if I need help sooner?</h2>
+    <p>If you need medical care sooner you can</p>
     <ul>
-      {% if session.currentgp.registered === 'yes' %}
-      <li>use your current GP</li>
-      {% endif %}
-      <li>WHAT ARE THE OPTIONS?</li>
+      <li>call {{ practiceName }} on <span class="tel">{{ practiceTelephone }}</span>, or</li>
+      <li>find <a href="#">other NHS services that can help you</a></li>
     </ul>
+
+
+    <h2>What if I don't hear anything?</h2>
+    <p>If you don’t hear anything within 2 days, call the {{ practiceName }} on <span class="tel">{{ practiceTelephone }}</span></p>
+    <p><a href="#">Your right to register with a GP practice</a></p>
 
     <div>
       <a href="http://www.nhsbt.nhs.uk/" title="This link will open in a new window or tab" target="_blank">
