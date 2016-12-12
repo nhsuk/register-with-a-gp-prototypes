@@ -1,0 +1,48 @@
+{% extends '_layouts/user-email-layout.html' %}
+
+{% block content %}
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+
+    <tr>
+      <td class="contentCell" valign="top" style="padding-bottom:30px;">
+        Thank you for applying to register with<br><br>
+        <b>{{ practiceName }}</b><br>
+        {% for line in practiceAddress %}
+          {% if line != '' %}
+            {{ line }}<br>
+          {% endif %}
+        {% endfor %}
+        {{ practicePostcode | upper }}<br><br>
+        Telephone: {{ practiceTelephone }}
+      </td>
+    </tr>
+
+    <tr>
+      <td class="alertCell" valign="top">
+        Your application is being processed. You will be contacted by {{ practiceName }} within 2 days.
+      </td>
+    </tr>
+
+    <tr>
+      <td class="contentCell" valign="top" style="padding-top:30px;">
+        If you need medical care sooner than xx days then
+        <ul>
+          <li>call {{ practiceName }} on {{ practiceTelephone }}, or</li>
+          <li>find <a href="#">other NHS services that can help you</a></li>
+        </ul>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="contentCell" valign="top" style="border-top:1px solid #cbd6d7; padding-top:30px;">
+        <b>What if I don't hear from {{ practiceName }}?</b><br>
+        If you don’t hear anything within 2 days, call the practice on {{ practiceTelephone }}
+      </td>
+    </tr>
+
+  </table>
+{% endblock %}
+
+{% block footer %}
+  <a href="#">Your right to register with a GP practice</a>
+{% endblock %}
