@@ -4,14 +4,14 @@
 
 module.exports = {
   serviceName: 'Register with a GP',
-  practiceName: 'Street Lane Practice',
+  practiceName: 'Field Way Practice',
   practiceAddress: [
-    '12 Devonshire Avenue',
-    'Roundhay',
-    'Leeds'
+    '8 Gloucestershire Avenue',
+    'Barnfeed',
+    'Sheffield'
   ],
-  practicePostcode: 'LS8 1AY',
-  practiceTelephone: '0113 237 1128',
+  practicePostcode: 'SH22 9AB',
+  practiceTelephone: '0123 456 7890',
 
   // Default port that prototype runs on
   port: '3000',
