@@ -16,6 +16,12 @@ var to_email = new helper.Email('rgp-team@digital.nhs.uk');
 // MVP v1.2 prototype
 // See https://github.com/nhsuk/register-with-a-gp-design/blob/master/Register%20interaction%20flow/register-flow-v2.1.1.pdf
 
+// Choices GP page +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+router.get('/choices', function (req, res) {
+  req.session.destroy();
+  res.render('mvp_v1_2/choices-gp-page');
+});
+
 // Start page +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/start', function (req, res) {
   req.session.destroy();
