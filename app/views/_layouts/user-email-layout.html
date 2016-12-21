@@ -30,6 +30,26 @@
 				background-color:#FFFFFF;
 			}
 
+      /* META */
+
+      #metaTable {
+        background-color: #ddd;
+      }
+
+      #meta { width: 600px; }
+
+      .metaCell {
+				color:#000000;
+				font-family:Courier, monospace;
+				font-size:14px;
+				line-height:150%;
+				text-align:left;
+        padding-top:2px;
+        padding-right:10px;
+        padding-bottom:2px;
+        padding-left:10px;
+      }
+
       /* HEADER */
 
       #headerTable {
@@ -118,9 +138,13 @@
 				/* /\/\/\/\/\/\/ MOBILE RESET STYLES /\/\/\/\/\/\/ */
 
 				/* /\/\/\/\/\/\/ MOBILE TEMPLATE STYLES /\/\/\/\/\/\/ */
-				#headerTable, #header, #bodyTable, #body, #footerTable, #footer{
+				#metaTable, #headerTable, #header, #bodyTable, #body, #footerTable, #footer{
 					max-width:600px !important;
 					width:100% !important;
+				}
+
+				.metaCell{
+					line-height:125% !important;
 				}
 
         .headerContent {
@@ -139,6 +163,27 @@
   </head>
   <body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0">
     <center>
+
+
+			<!-- DUMMY META STUFF // -->
+			<table align="center" border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="metaTable">
+				<tr>
+					<td align="center" valign="top" style="padding-top:10px; padding-bottom:30px;">
+						<table border="0" cellpadding="0" cellspacing="0" width="100%" id="meta">
+							<tr>
+								<td class="metaCell" width="80">from:</td>
+  							<td class="metaCell">gp-practice-registration@service.nhs.uk</td>
+							</tr>
+							<tr>
+								<td class="metaCell">subject:</td>
+  							<td class="metaCell">Your registration application</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+      <!-- // END DUMMY META STUFF -->
+
 
       <!-- BEGIN HEADER // -->
       <table align="center" border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="headerTable">

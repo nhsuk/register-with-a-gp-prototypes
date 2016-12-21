@@ -27,3 +27,9 @@
   border-top: 2px solid $light-green;
   background-color: tint($light-green, 90);
 }
+
+.info-pop {
+  color: $nhs-blue;
+  font-weight: $boldweight;
+  border: 4px solid currentcolor;
+}

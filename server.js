@@ -69,6 +69,7 @@ app.use(function (req, res, next) {
   res.locals.cookieText = config.cookieText
   res.locals.session = req.session
   res.locals.gpLookupURL = gpLookupURL
+  res.locals.jsNow = new Date();
   next()
 })
 
