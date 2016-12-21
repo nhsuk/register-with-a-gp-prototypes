@@ -1,0 +1,35 @@
+{
+  "name": "register-with-a-gp-prototypes",
+  "scripts": {
+  },
+  "env": {
+    "GP_LOOKUP_URL": {
+      "required": true
+    },
+    "NODE_ENV": {
+      "required": true
+    },
+    "PASSWORD": {
+      "required": true
+    },
+    "POSTCODE_API": {
+      "required": true
+    },
+    "USE_HTTPS": {
+      "required": true
+    },
+    "USERNAME": {
+      "required": true
+    }
+  },
+  "formation": {
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
