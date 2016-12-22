@@ -1035,15 +1035,25 @@ textarea:focus {
 
 .nhsid-container {
   margin: 32px auto;
-  padding: 16px;
-  background-color: #f2f8fc;
-  border-top: 4px solid #0072c6;
+  padding: 64px 0 0 0;
+  background: #0072c6 url("/images/nhs-logotype-blue.svg") no-repeat 16px 16px;
+  background-size: 70px;
 }
 
 @media (min-width: 500px) {
   .nhsid-container {
-    padding: 32px;
+    max-width: 480px;
   }
+}
+
+.nhsid-container > div {
+  background-color: #f2f8fc;
+  padding: 32px 32px 16px 32px;
+}
+
+.nhsid-container input[type='text'],
+.nhsid-container input[type='password'] {
+  width: 100%;
 }
 
 body, pre.user-input {

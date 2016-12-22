@@ -59,6 +59,7 @@ router.post('/nhsid-auth', function (req, res) {
 
 // NHS.ID check your details +++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/nhsid-confirm-details', function (req, res) {
+  req.session.edit = 'nhsid';
   res.render('vision_v1/nhsid-confirm-details')
 });
 
@@ -210,6 +211,8 @@ router.post('/contact-email', function (req, res) {
   } else {
     if (req.session.edit === true) {
       res.redirect('confirm-details')
+    } else if (req.session.edit === 'nhsid') {
+      res.redirect('nhsid-confirm-details')
     } else {
       res.redirect('contact-telephone')
     }
@@ -231,6 +234,8 @@ router.post('/contact-telephone', function (req, res) {
 
   if (req.session.edit === true) {
     res.redirect('confirm-details')
+  } else if (req.session.edit === 'nhsid') {
+    res.redirect('nhsid-confirm-details')
   } else {
     res.redirect('home-address')
   }
@@ -324,6 +329,8 @@ router.post('/select-address', function (req, res) {
     req.session.homeAddress.address = req.body['address'].split(',');
     if (req.session.edit === true) {
       res.redirect('confirm-details')
+    } else if (req.session.edit === 'nhsid') {
+      res.redirect('nhsid-confirm-details')
     } else {
       res.redirect('current-gp')
     }
@@ -355,6 +362,8 @@ router.post('/home-address-manual', function (req, res) {
     });
   } else if (req.session.edit === true) {
     res.redirect('confirm-details')
+  } else if (req.session.edit === 'nhsid') {
+    res.redirect('nhsid-confirm-details')
   } else {
     res.redirect('current-gp')
   }
@@ -388,6 +397,8 @@ router.post('/current-gp', function (req, res) {
   } else {
     if (req.session.edit === true) {
       res.redirect('confirm-details')
+    } else if (req.session.edit === 'nhsid') {
+      res.redirect('nhsid-confirm-details')
     } else {
       res.redirect('armed-forces')
     }
@@ -410,6 +421,8 @@ router.post('/current-gp-lookup', function (req, res) {
   req.session.currentgp.address = req.body['practice-address'].split(',');
   if (req.session.edit === true) {
     res.redirect('confirm-details')
+  } else if (req.session.edit === 'nhsid') {
+    res.redirect('nhsid-confirm-details')
   } else {
     res.redirect('previous-name')
   }
@@ -445,6 +458,8 @@ router.post('/previous-name', function(req, res) {
     } else {
       if (req.session.edit === true) {
         res.redirect('confirm-details')
+      } else if (req.session.edit === 'nhsid') {
+        res.redirect('nhsid-confirm-details')
       } else {
         res.redirect('previous-address')
       }
@@ -480,6 +495,8 @@ router.post('/previous-name-details', function(req, res) {
   } else {
     if (req.session.edit === true) {
       res.redirect('confirm-details')
+    } else if (req.session.edit === 'nhsid') {
+      res.redirect('nhsid-confirm-details')
     } else {
       res.redirect('previous-address')
     }
@@ -514,6 +531,8 @@ router.post('/previous-address', function (req, res) {
   } else {
     if (req.session.edit === true) {
       res.redirect('confirm-details')
+    } else if (req.session.edit === 'nhsid') {
+      res.redirect('nhsid-confirm-details')
     } else {
       res.redirect('armed-forces')
     }
@@ -606,6 +625,8 @@ router.post('/select-previous-address', function (req, res) {
     req.session.prevAddress = req.body['address'].split(',');
     if (req.session.edit === true) {
       res.redirect('confirm-details')
+    } else if (req.session.edit === 'nhsid') {
+      res.redirect('nhsid-confirm-details')
     } else {
       res.redirect('armed-forces')
     }
@@ -633,6 +654,8 @@ router.post('/previous-address-manual', function (req, res) {
     });
   } else if (req.session.edit === true) {
     res.redirect('confirm-details')
+  } else if (req.session.edit === 'nhsid') {
+    res.redirect('nhsid-confirm-details')
   } else {
     res.redirect('armed-forces')
   }
@@ -664,6 +687,8 @@ router.post('/armed-forces', function (req, res) {
   } else {
     if (req.session.edit === true) {
       res.redirect('confirm-details')
+    } else if (req.session.edit === 'nhsid') {
+      res.redirect('nhsid-confirm-details')
     } else {
       if (req.body['armed-forces'] === 'yes') {
         res.redirect('armed-forces-service-number')
@@ -689,6 +714,8 @@ router.post('/armed-forces-service-number', function (req, res) {
 
   if (req.session.edit === true) {
     res.redirect('confirm-details')
+  } else if (req.session.edit === 'nhsid') {
+    res.redirect('nhsid-confirm-details')
   } else {
     res.redirect('armed-forces-enlistment-date')
   }
@@ -713,6 +740,8 @@ router.post('/armed-forces-enlistment-date', function (req, res) {
 
   if (req.session.edit === true) {
     res.redirect('confirm-details')
+  } else if (req.session.edit === 'nhsid') {
+    res.redirect('nhsid-confirm-details')
   } else {
     res.redirect('current-medication')
   }
@@ -746,6 +775,8 @@ router.post('/current-medication', function (req, res) {
   } else {
     if (req.session.edit === true) {
       res.redirect('confirm-details')
+    } else if (req.session.edit === 'nhsid') {
+      res.redirect('nhsid-confirm-details')
     } else {
       res.redirect('any-allergies')
     }
@@ -778,6 +809,8 @@ router.post('/current-medication-details', function (req, res) {
   } else {
     if (req.session.edit === true) {
       res.redirect('confirm-details')
+    } else if (req.session.edit === 'nhsid') {
+      res.redirect('nhsid-confirm-details')
     } else {
       res.redirect('any-allergies')
     }
@@ -811,6 +844,8 @@ router.post('/any-allergies', function (req, res) {
   } else {
     if (req.session.edit === true) {
       res.redirect('confirm-details')
+    } else if (req.session.edit === 'nhsid') {
+      res.redirect('nhsid-confirm-details')
     } else {
       res.redirect('medical-history')
     }
@@ -843,6 +878,8 @@ router.post('/allergies-details', function (req, res) {
   } else {
     if (req.session.edit === true) {
       res.redirect('confirm-details')
+    } else if (req.session.edit === 'nhsid') {
+      res.redirect('nhsid-confirm-details')
     } else {
       res.redirect('medical-history')
     }

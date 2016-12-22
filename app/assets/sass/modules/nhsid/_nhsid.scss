@@ -1,11 +1,21 @@
 .nhsid-container {
   @extend %contain-floats;
   margin: $leading*2 auto;
-  padding: $leading;
-  background-color: tint($nhs-blue, 95);
-  border-top: 4px solid $nhs-blue;
+  padding: $leading*4 0 0 0;
+  background: $nhs-blue url('/images/nhs-logotype-blue.svg') no-repeat $leading $leading;
+  background-size: 70px;
 
   @include media(mid) {
-    padding: $leading*2;
+    max-width: 480px;
+  }
+
+  & > div {
+    background-color: tint($nhs-blue, 95);
+    padding: $leading*2 $leading*2 $leading $leading*2;
+  }
+
+  input[type='text'],
+  input[type='password'] {
+    width: 100%;
   }
 }
