@@ -1011,6 +1011,12 @@ textarea:focus {
   background-color: #eff9e9;
 }
 
+.info-pop {
+  color: #0072c6;
+  font-weight: 700;
+  border: 4px solid currentcolor;
+}
+
 body, pre.user-input {
   margin: 0;
   padding: 0;
