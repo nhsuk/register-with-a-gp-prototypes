@@ -1,0 +1,11 @@
+.nhsid-container {
+  @extend %contain-floats;
+  margin: $leading*2 auto;
+  padding: $leading;
+  background-color: tint($nhs-blue, 95);
+  border-top: 4px solid $nhs-blue;
+
+  @include media(mid) {
+    padding: $leading*2;
+  }
+}

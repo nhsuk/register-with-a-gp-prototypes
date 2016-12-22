@@ -1,0 +1,34 @@
+{% extends '_layouts/nhsid-layout.html' %}
+
+{% block page_title %}NHSID: Enter your authorisation code{% endblock %}
+
+{% block content %}
+  <form method="post">
+
+    {% if error %}
+      <div class="error-summary">
+        <div>
+          <p>{{ error }}</p>
+        </div>
+      </div>
+    {% endif %}
+
+    <div class="form-group">
+      <label for="auth-code">Your authorisation code</label>
+      <input type="text" id="auth-code" name="auth-code" value="">
+    </div>
+
+    <div class="form-group -controls">
+      <button type="submit" class="button">Continue</button>
+      {% set back = 'start' %}
+      <a href="{{ back }}" class="button -back">Back</a>
+    </div>
+
+    <div class="form-group">
+      <small><a href="#">Resend code</a></small>
+    </div>
+
+  </form>
+{% endblock %}
+
+{% block footer %}{% endblock %}

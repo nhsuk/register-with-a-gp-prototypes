@@ -4,6 +4,7 @@ details {
   summary {
     text-decoration: underline;
     display: inline-block;
+    cursor: pointer;
 
     &:focus {
       outline: 0;

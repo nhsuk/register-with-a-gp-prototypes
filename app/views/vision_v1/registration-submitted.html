@@ -1,0 +1,56 @@
+{% extends '_layouts/layout.html' %}
+
+{% block page_title %}
+  {% if practiceName %}
+    Register with {{ practiceName }}
+  {% else %}
+    {{serviceName}}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  <div class="measure">
+
+    <div class="signage completion">
+      <div>
+        <h1 class="body">Your application is being processed. You will be contacted by {{ practiceName }} within 2 days.</h1>
+      </div>
+    </div>
+
+    <p>Your application to register has been sent to</p>
+    <p>
+      <b>{{ practiceName }}</b><br>
+      {% for line in practiceAddress %}
+        {% if line != '' %}
+          {{ line }}<br>
+        {% endif %}
+      {% endfor %}
+      {{ practicePostcode | upper }}
+    </p>
+
+    <h2>What if I need help sooner?</h2>
+    <p>If you need medical care sooner you can</p>
+    <ul>
+      <li>call {{ practiceName }} on <span class="tel">{{ practiceTelephone }}</span>, or</li>
+      <li>find <a href="#">other NHS services that can help you</a></li>
+    </ul>
+
+
+    <h2>What if I don't hear anything?</h2>
+    <p>If you don’t hear anything within 2 days, call the {{ practiceName }} on <span class="tel">{{ practiceTelephone }}</span></p>
+    <p><a href="#">Your right to register with a GP practice</a></p>
+
+    <div>
+      <a href="http://www.nhsbt.nhs.uk/" title="This link will open in a new window or tab" target="_blank">
+        <img src="/images/puff-donation.svg" style="max-width: 100%;">
+      </a>
+    </div>
+
+    <p>
+      <a href="/">Back to NHS.UK</a>
+    </p>
+
+  </div>
+{% endblock %}
+
+{% block footer %}{% endblock %}
