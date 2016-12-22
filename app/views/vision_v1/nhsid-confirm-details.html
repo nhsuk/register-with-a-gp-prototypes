@@ -15,42 +15,13 @@
 
 {% block content %}
 
-<!--
-
-  {% if session.currentgp.registered == 'yes' %}
-  <div class="grid-row">
-    <div class="grid-1-2">
-      <h3>From:</h3>
-      <p>
-        {{ session.currentgp.name }}<br>
-        {% for line in session.currentgp.address %}
-          {{ line }}<br>
-        {% endfor %}
-      </p>
-    </div>
-
-    <div class="grid-1-2">
-      <h3>To:</h3>
-      <p>
-        {{ practiceName }}<br>
-        {% for line in practiceAddress %}
-          {{ line }}<br>
-        {% endfor %}
-        {{ practicePostcode | upper }}
-      </p>
-    </div>
-  </div>
-  {% endif %}
-
--->
-
   <h1 class="primary">
     Check your registration details
   </h1>
 
   <div class="measure">
     <p>
-      These details will be sent to {{ practiceName }} to begin your registration. Please check them to make sure they are correct.
+      These details will be sent to {{ practiceName }} to begin your registration.
     </p>
   </div>
 
@@ -217,71 +188,9 @@
     {% endif %}
   </table>
 
-  <!--
-  <table class="measure">
-    <caption>Your health</caption>
-    <tr>
-      <th scope="row">Medication</th>
-      <td>
-        {% if session.health.medication == 'yes' %}
-          {{ session.health.medicationDetails | striptags(true) | escape | nl2br }}
-        {% endif %}
-        {% if session.health.medication == 'no' %}
-          I’m not currently taking any medication
-        {% endif %}
-      </td>
-      <td class="control">
-        <a href="current-medication" class="button -secondary">Change</a>
-      </td>
-    </tr>
-
-    <tr>
-      <th scope="row">Allergies</th>
-      <td>
-        {% if session.health.allergies == 'yes' %}
-          {{ session.health.allergiesDetails | striptags(true) | escape | nl2br }}
-        {% endif %}
-        {% if session.health.allergies == 'no' %}
-          I don’t have any allergies
-        {% endif %}
-      </td>
-      <td class="control">
-        <a href="any-allergies" class="button -secondary">Change</a>
-      </td>
-    </tr>
-
-    <tr>
-      <th scope="row">Health</th>
-      <td>
-        {% if session.health.medicalHistory !== 'no' %}
-          {{ session.health.medicalHistory | striptags(true) | escape | nl2br }}
-        {% endif %}
-        {% if session.health.medicalHistory === 'no' %}
-          I’m not supplying any health details
-        {% endif %}
-      </td>
-      <td class="control">
-        <a href="medical-history" class="button -secondary">Change</a>
-      </td>
-    </tr>
-  </table>
-  -->
-
-  <table class="measure">
-    <caption>Your new GP practice</caption>
-    <tr>
-      <td>
-        {{ practiceName }}<br>
-        {% for line in practiceAddress %}
-          {{ line }}<br>
-        {% endfor %}
-        {{ practicePostcode | upper }}
-      </td>
-    </tr>
-  </table>
-
   <div class="shunt-2">
-    <a href="nhsid-confirm-change" class="button">Send registration application</a>
+    <a href="registration-submitted" class="button">Send registration application</a>
+    <p class="measure form-hint shunt">Your details will be sent to {{ practiceName }} to begin your registration. A confirmation email will be sent to {{ session.contact.email }}.</p>
   </div>
 
 {% endblock %}

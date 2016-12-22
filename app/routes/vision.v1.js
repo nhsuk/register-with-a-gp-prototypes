@@ -11,6 +11,12 @@ var config = require('../config.js')
 // Vision v1 prototype
 // See https://github.com/nhsuk/register-with-a-gp-design/blob/master/Register%20interaction%20flow/register-flow-v2.1.1.pdf
 
+// Choices GP page +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+router.get('/choices', function (req, res) {
+  req.session.destroy();
+  res.render('vision_v1/choices-gp-page');
+});
+
 // Start page ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/start', function (req, res) {
   req.session.destroy();
@@ -54,11 +60,6 @@ router.post('/nhsid-auth', function (req, res) {
 // NHS.ID check your details +++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/nhsid-confirm-details', function (req, res) {
   res.render('vision_v1/nhsid-confirm-details')
-});
-
-// NHS.ID confirm change +++++++++++++++++++++++++++++++++++++++++++++++++++++++
-router.get('/nhsid-confirm-change', function (req, res) {
-  res.render('vision_v1/nhsid-confirm-change')
 });
 
 // NON NHS.ID ROUTE STARTS HERE ++++++++++++++++++++++++++++++++++++++++++++++++
