@@ -1056,6 +1056,15 @@ textarea:focus {
   width: 100%;
 }
 
+.nhsid-container .nhsid-secondary-controls {
+  clear: both;
+  border-top: 1px solid #d9eaf6;
+  margin-top: 32px;
+  padding-top: 16px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
 body, pre.user-input {
   margin: 0;
   padding: 0;

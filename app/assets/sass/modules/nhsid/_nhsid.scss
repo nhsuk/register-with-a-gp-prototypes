@@ -18,4 +18,13 @@
   input[type='password'] {
     width: 100%;
   }
+
+  .nhsid-secondary-controls {
+    clear: both;
+    border-top: 1px solid tint($nhs-blue, 85);
+    margin-top: $leading*2;
+    padding-top: $leading;
+    font-size: $smallprint;
+    line-height: 1.5;
+  }
 }
