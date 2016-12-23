@@ -11,10 +11,10 @@ var config = require('../config.js')
 // Vision v1 prototype
 // See https://github.com/nhsuk/register-with-a-gp-design/blob/master/Register%20interaction%20flow/register-flow-v2.1.1.pdf
 
-// Choices GP page +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-router.get('/choices', function (req, res) {
+// GP details page +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+router.get('/gp-details', function (req, res) {
   req.session.destroy();
-  res.render('vision_v1/choices-gp-page');
+  res.render('vision_v1/gp-details');
 });
 
 // Start page ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

@@ -12,6 +12,7 @@ module.exports = {
   ],
   practicePostcode: 'SH22 9AB',
   practiceTelephone: '0123 456 7890',
+  practiceEmail: 'info@fieldwaypractice.nhs.uk',
 
   nhsid: {
     name: {

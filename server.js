@@ -67,6 +67,7 @@ app.use(function (req, res, next) {
   res.locals.practiceAddress = config.practiceAddress
   res.locals.practicePostcode = config.practicePostcode
   res.locals.practiceTelephone = config.practiceTelephone
+  res.locals.practiceEmail = config.practiceEmail
   res.locals.cookieText = config.cookieText
   res.locals.session = req.session
   res.locals.gpLookupURL = gpLookupURL

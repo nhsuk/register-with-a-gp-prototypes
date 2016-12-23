@@ -760,6 +760,42 @@ textarea:focus {
   box-shadow: 0 0 0 5px #F7E214;
 }
 
+.gp-local-header {
+  display: inline-block;
+}
+
+.gp-local-header > h1, .gp-local-header > .heading-xxlarge, .gp-local-header > .primary {
+  display: inline-block;
+  margin-right: 16px;
+}
+
+.gp-list {
+  display: inline-block;
+  font-size: 16px;
+}
+
+.status {
+  display: inline-block;
+  padding: 0 8px;
+}
+
+.status.-open {
+  border: 2px solid #d6efc8;
+}
+
+.map {
+  width: 100%;
+  height: 200px;
+  margin: 16px 0 32px 0;
+  border: 2px solid #ecf0f1;
+}
+
+@media (min-width: 500px) {
+  .map {
+    height: 400px;
+  }
+}
+
 .gp-finder-search .form-control {
   float: left;
   width: calc(100% - 52px);
