@@ -30,6 +30,7 @@ var appEnvironment = process.env.NODE_ENV || 'development'
 var useAuth = process.env.USE_AUTH || config.useAuth
 var useHttps = process.env.USE_HTTPS || config.useHttps
 var gpLookupURL = process.env.GP_LOOKUP_URL
+var mapsKey = process.env.GOOGLE_MAPS_API_KEY
 
 appEnvironment = appEnvironment.toLowerCase()
 useAuth = useAuth.toLowerCase()
@@ -71,6 +72,7 @@ app.use(function (req, res, next) {
   res.locals.cookieText = config.cookieText
   res.locals.session = req.session
   res.locals.gpLookupURL = gpLookupURL
+  res.locals.mapsKey = mapsKey;
   res.locals.jsNow = new Date();
   next()
 })
