@@ -253,7 +253,10 @@
 
   <div class="shunt-2">
     <a href="registration-submitted" class="button">Send my details</a>
-    <p class="measure form-hint shunt">Your details will be sent to {{ practiceName }} to begin your registration. A confirmation email will be sent to {{ session.contact.email }}.</p>
+    <p class="measure form-hint shunt">
+      Your details will be sent to {{ practiceName }} to begin your registration.
+      {% if session.contact.email != '' %} A confirmation email will be sent to {{ session.contact.email }}.{% endif %}
+    </p>
   </div>
 
 {% endblock %}
