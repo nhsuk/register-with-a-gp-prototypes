@@ -1,0 +1,42 @@
+{% extends '_layouts/nhsid-layout.html' %}
+
+{% block page_title %}NHSID: Sign in{% endblock %}
+
+{% block content %}
+  <form method="post">
+
+    {% if error %}
+      <div class="error-summary">
+        <div>
+          <p>{{ error }}</p>
+        </div>
+      </div>
+    {% endif %}
+
+    <div class="form-group">
+      <div>
+        <label for="username">User name</label>
+        <input type="text" id="username" name="username" value="">
+      </div>
+      <div>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" value="">
+      </div>
+    </div>
+
+    <div class="form-group -controls">
+      <button type="submit" class="button">Continue</button>
+      {% set back = 'nhsid' %}
+      <a href="{{ back }}" class="button -back">Back</a>
+    </div>
+
+    <div class="nhsid-secondary-controls">
+      <a href="#">Forgotten user name</a><br>
+      <a href="#">Forgotten password</a><br>
+      <a href="#">Forgotten user name and password</a>
+    </div>
+
+  </form>
+{% endblock %}
+
+{% block footer %}{% endblock %}

@@ -30,10 +30,13 @@
 @import "modules/forms/label";
 @import "modules/forms/radio-checkbox";
 @import "modules/forms/textarea";
+@import "modules/gp-details/gp-details";
 @import "modules/gp-lookup/gp-lookup";
 @import "modules/header-global/header-global";
 @import "modules/header-local/header-panel-local";
 @import "modules/signage/info";
+
+@import "modules/nhsid/nhsid";
 
 // Layout and grid
 @import "modules/layout/layout";

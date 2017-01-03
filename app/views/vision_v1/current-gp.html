@@ -1,0 +1,52 @@
+{% extends '_layouts/layout.html' %}
+
+{% block page_title %}
+  Your current GP :
+  {% if practiceName %}
+    Register with {{ practiceName }}
+  {% else %}
+    {{serviceName}}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+
+  <h1 class="primary">Are you already registered with a GP?</h1>
+
+  <form method="post">
+    <fieldset>
+
+      {% if error %}
+        <div class="error-summary">
+          <div>
+            <p>{{ error }}</p>
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="form-group {% if error %}-errors{% endif %}">
+        <label for="current-gp-yes" class="block-label">
+          Yes
+          <input type="radio" id="current-gp-yes" name="current-gp" value="yes" {% if session.currentgp.registered == "yes" %}checked="checked"{% endif %}>
+        </label>
+      </div>
+
+      <div class="form-group {% if error %}-errors{% endif %}">
+        <label for="current-gp-no" class="block-label">
+          No
+          <input type="radio" id="current-gp-no" name="current-gp" value="no" {% if session.currentgp.registered == "no" %}checked="checked"{% endif %}>
+        </label>
+      </div>
+    </fieldset>
+
+    <div class="form-group -controls">
+      <button type="submit" class="button">Continue</button>
+      {% set back = 'home-address' %}
+      {% if session.edit == true %}
+        {% set back = 'confirm-details' %}
+      {% endif %}
+      <a href="{{ back }}" class="button -back">Back</a>
+    </div>
+
+  </form>
+{% endblock %}

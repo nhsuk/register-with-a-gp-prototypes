@@ -33,3 +33,7 @@
   font-weight: $boldweight;
   border: 4px solid currentcolor;
 }
+
+.subtle-push {
+  border: 2px solid tint($nhs-blue, 50);
+}

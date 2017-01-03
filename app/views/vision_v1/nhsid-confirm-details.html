@@ -14,23 +14,27 @@
 {% endblock %}
 
 {% block content %}
-  <h1 class="primary">Check your details</h1>
+
+  <h1 class="primary">
+    Check your registration details
+  </h1>
+
+  <div class="measure">
+    <p>
+      These details will be sent to {{ practiceName }} to begin your registration.
+    </p>
+  </div>
 
   <table class="measure">
+    <caption>Your details</caption>
     <tr>
       <th scope="row">Name</th>
-      <td>{{ session.name.firstName | title }} {{ session.name.middleNames | title }} {{ session.name.lastName | title }}</td>
-      <td class="control">
-        <a href="name" class="button -secondary">Change</a>
-      </td>
+      <td colspan="2">{{ session.name.firstName | title }} {{ session.name.middleNames | title }} {{ session.name.lastName | title }}</td>
     </tr>
 
     <tr>
       <th scope="row">Date of birth</th>
-      <td>{{ session.dob.day }} {{ session.dob.month | date("MMMM") }} {{ session.dob.year }}</td>
-      <td class="control">
-        <a href="date-of-birth" class="button -secondary">Change</a>
-      </td>
+      <td colspan="2">{{ session.dob.day }} {{ session.dob.month | date("MMMM") }} {{ session.dob.year }}</td>
     </tr>
 
     <tr>
@@ -73,21 +77,6 @@
       </td>
       <td class="control">
         <a href="home-address" class="button -secondary">Change</a>
-      </td>
-    </tr>
-
-    <tr>
-      <th scope="row">NHS number</th>
-      <td>
-        {% if session.nhsnumber.known == 'yes' %}
-          {{ session.nhsnumber.number }}
-        {% endif %}
-        {% if session.nhsnumber.known == 'no' %}
-          I don’t know my NHS number
-        {% endif %}
-      </td>
-      <td class="control">
-        <a href="nhs-number" class="button -secondary">Change</a>
       </td>
     </tr>
 
@@ -142,7 +131,7 @@
   {% endif %}
 
   <table class="measure">
-    <caption>Your current GP</caption>
+    <caption>Your current GP practice</caption>
     <tr>
       <th scope="row">Current GP</th>
       <td>
@@ -203,56 +192,8 @@
     {% endif %}
   </table>
 
-  <table class="measure">
-    <caption>Your health</caption>
-    <tr>
-      <th scope="row">Medication</th>
-      <td>
-        {% if session.health.medication == 'yes' %}
-          {{ session.health.medicationDetails | striptags(true) | escape | nl2br }}
-        {% endif %}
-        {% if session.health.medication == 'no' %}
-          I’m not currently taking any medication
-        {% endif %}
-      </td>
-      <td class="control">
-        <a href="current-medication" class="button -secondary">Change</a>
-      </td>
-    </tr>
-
-    <tr>
-      <th scope="row">Allergies</th>
-      <td>
-        {% if session.health.allergies == 'yes' %}
-          {{ session.health.allergiesDetails | striptags(true) | escape | nl2br }}
-        {% endif %}
-        {% if session.health.allergies == 'no' %}
-          I don’t have any allergies
-        {% endif %}
-      </td>
-      <td class="control">
-        <a href="any-allergies" class="button -secondary">Change</a>
-      </td>
-    </tr>
-
-    <tr>
-      <th scope="row">Health</th>
-      <td>
-        {% if session.health.medicalHistory !== 'no' %}
-          {{ session.health.medicalHistory | striptags(true) | escape | nl2br }}
-        {% endif %}
-        {% if session.health.medicalHistory === 'no' %}
-          I’m not supplying any health details
-        {% endif %}
-      </td>
-      <td class="control">
-        <a href="medical-history" class="button -secondary">Change</a>
-      </td>
-    </tr>
-  </table>
-
   <div class="shunt-2">
-    <a href="registration-submitted" class="button">Send my details</a>
+    <a href="registration-submitted" class="button">Send registration application</a>
     <p class="measure form-hint shunt">Your details will be sent to {{ practiceName }} to begin your registration. A confirmation email will be sent to {{ session.contact.email }}.</p>
   </div>
 

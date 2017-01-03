@@ -1,0 +1,192 @@
+{% extends '_layouts/layout.html' %}
+
+{% block page_title %}
+  {% if practiceName %}
+    Register with {{ practiceName }}
+  {% else %}
+    {{serviceName}}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+
+  <div class="grid-row">
+    <div class="grid-3-3">
+      <ol class="breadcrumb">
+        <li><a href="#" class="button -bordered -small">GP practices</a></li>
+        <li class="selected">{{ practiceName }}</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="gp-local-header">
+    <h1>{{ practiceName }}</h1>
+
+    <div class="gp-list">
+      <a class="status -open" href="start">
+        Accepting patients - register now
+      </a>
+    </div>
+  </div>
+
+  <div id="map" class="map"></div>
+
+  <script>
+    var catchmentStyle = {
+      on: {
+        strokeColor: '#0071C6',
+        strokeOpacity: 0.5,
+        fillColor: '#0071C6',
+        fillOpacity: 0.1,
+      },
+      off: {
+        strokeOpacity: 0,
+        fillOpacity: 0,
+      }
+    };
+
+    /**
+       * Update a map's viewport to fit each geometry in a dataset
+       * @param {google.maps.Map} map The map to adjust
+       */
+    function zoom(map) {
+      var bounds = new google.maps.LatLngBounds();
+      map.data.forEach(function(feature) {
+        processPoints(feature.getGeometry(), bounds.extend, bounds);
+      });
+      map.fitBounds(bounds);
+    }
+
+    /**
+      * Process each point in a Geometry, regardless of how deep the points may lie.
+      * @param {google.maps.Data.Geometry} geometry The structure to process
+      * @param {function(google.maps.LatLng)} callback A function to call on each
+      *     LatLng point encountered (e.g. Array.push)
+      * @param {Object} thisArg The value of 'this' as provided to 'callback' (e.g.
+      *     myArray)
+      */
+     function processPoints(geometry, callback, thisArg) {
+       if (geometry instanceof google.maps.LatLng) {
+         callback.call(thisArg, geometry);
+       } else if (geometry instanceof google.maps.Data.Point) {
+         callback.call(thisArg, geometry.get());
+       } else {
+         geometry.getArray().forEach(function(g) {
+           processPoints(g, callback, thisArg);
+         });
+       }
+     }
+
+    function initMap() {
+      var uluru = {lat: 53.386959, lng: -1.499677};
+      map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 15,
+        center: uluru,
+        zoomControl: true,
+        mapTypeControl: false,
+        scaleControl: false,
+        streetViewControl: false,
+        rotateControl: true,
+        fullscreenControl: false
+      });
+      var marker = new google.maps.Marker({
+        position: uluru,
+        map: map
+      });
+      map.data.loadGeoJson('/scripts/gp-details/catchment.json');
+      map.data.setStyle(catchmentStyle.off);
+    };
+  </script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ mapsKey }}&callback=initMap"></script>
+
+  <p>
+    <a href="#" id="catchment-toggle" class="js-catchment-hidden">Show practice catchment area on map</a>
+  </p>
+
+  <div class="grid-row">
+    <div class="grid-2-3">
+      <p>
+        {% for line in practiceAddress %}
+          {{ line }}<br>
+        {% endfor %}
+        {{ practicePostcode }}<br><br>
+        Phone: {{ practiceTelephone }}<br>
+        Email: {{ practiceEmail }}
+      </p>
+      <p>
+        <a href="#">7 staff</a><br>
+        2,000 patients
+      </p>
+
+      <ul>
+        <li>82% of patients would recommend this surgery</li>
+        <li>88% of patients feel they are listened to</li>
+        <li>8 days average wait time for routine appointments</li>
+      </ul>
+      <p>
+        <a href="#">Find out more feedback from patients</a>
+      </p>
+    </div>
+
+    <div class="grid-1-3">
+      <table>
+        <tr>
+          <td>Monday</td>
+          <td>9am – 4.50pm</td>
+        </tr>
+        <tr>
+          <td>Tuesday</td>
+          <td>7.30am – 7.20pm</td>
+        </tr>
+        <tr>
+          <td>Wednesday</td>
+          <td>9am – 4.50pm</td>
+        </tr>
+        <tr>
+          <td>Thursday</td>
+          <td>9am – 4.50pm</td>
+        </tr>
+        <tr>
+          <td>Friday</td>
+          <td>7.30am – 7.20pm</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+
+  <div class="">
+    <div class="signage subtle-push">
+      <div>
+        <p>
+          <a href="#">Book an appointment</a>
+        </p>
+        <p>
+          <a href="start">Register with {{ practiceName }}</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block body_after %}
+  <script>
+    $(function() {
+      $('#catchment-toggle').on('click', function(e) {
+        e.preventDefault();
+        var $this = $(this);
+        if ($this.hasClass('js-catchment-hidden')) {
+          map.data.setStyle(catchmentStyle.on);
+          zoom(map);
+          $this.removeClass('js-catchment-hidden');
+          $this.text('Hide practice catchment area');
+        } else {
+          map.data.setStyle(catchmentStyle.off);
+          $this.addClass('js-catchment-hidden');
+          $this.text('Show practice catchment area on map');
+        }
+      });
+    });
+  </script>
+{% endblock %}

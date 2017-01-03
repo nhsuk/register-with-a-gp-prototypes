@@ -6,33 +6,68 @@ var request = require('request')
 var naturalSort = require('javascript-natural-sort')
 var postcode_api = process.env.POSTCODE_API
 
-/*
-var helper = require('sendgrid').mail;
-var sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
-var from_email = new helper.Email('rgp-team@digital.nhs.uk');
-var to_email = new helper.Email('rgp-team@digital.nhs.uk');
-*/
+var config = require('../config.js')
 
-// MVP v1.2 prototype
+// Vision v1 prototype
 // See https://github.com/nhsuk/register-with-a-gp-design/blob/master/Register%20interaction%20flow/register-flow-v2.1.1.pdf
 
-// Choices GP page +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-router.get('/choices', function (req, res) {
+// GP details page +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+router.get('/gp-details', function (req, res) {
   req.session.destroy();
-  res.render('mvp_v1_2/choices-gp-page');
+  res.render('vision_v1/gp-details');
 });
 
-// Start page +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// Start page ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/start', function (req, res) {
   req.session.destroy();
-  res.render('mvp_v1_2/start', {
+  res.render('vision_v1/start', {
     suppressServiceName: true
   });
 });
 
+// NHS.ID ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+router.get('/nhsid', function (req, res) {
+  res.render('vision_v1/nhsid')
+});
+
+// NHS.ID sign in ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+router.get('/nhsid-sign-in', function (req, res) {
+  res.render('vision_v1/nhsid-sign-in')
+});
+
+router.post('/nhsid-sign-in', function (req, res) {
+  res.redirect('nhsid-auth')
+});
+
+// NHS.ID auth code ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+router.get('/nhsid-auth', function (req, res) {
+  res.render('vision_v1/nhsid-auth')
+});
+
+router.post('/nhsid-auth', function (req, res) {
+  // populate session with data from config.js
+  req.session.name = config.nhsid.name
+  req.session.dob = config.nhsid.dob
+  req.session.contact = config.nhsid.contact
+  req.session.homeAddress = config.nhsid.homeAddress
+  req.session.prevaddress = config.nhsid.prevaddress
+  req.session.nhsnumber = config.nhsid.nhsnumber
+  req.session.armedforces = config.nhsid.armedforces
+  req.session.currentgp = config.nhsid.currentgp
+  res.redirect('nhsid-confirm-details')
+});
+
+// NHS.ID check your details +++++++++++++++++++++++++++++++++++++++++++++++++++
+router.get('/nhsid-confirm-details', function (req, res) {
+  req.session.edit = 'nhsid';
+  res.render('vision_v1/nhsid-confirm-details')
+});
+
+// NON NHS.ID ROUTE STARTS HERE ++++++++++++++++++++++++++++++++++++++++++++++++
+
 // Name ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/name', function (req, res) {
-  res.render('mvp_v1_2/name')
+  res.render('vision_v1/name')
 });
 
 router.post('/name', function (req, res) {
@@ -53,7 +88,7 @@ router.post('/name', function (req, res) {
   }
 
   if (passed === false) {
-    res.render('mvp_v1_2/name', { error });
+    res.render('vision_v1/name', { error });
   } else {
     if (req.session.edit === true) {
       res.redirect('confirm-details')
@@ -66,7 +101,7 @@ router.post('/name', function (req, res) {
 
 // DOB +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/date-of-birth', function (req, res) {
-  res.render('mvp_v1_2/date-of-birth');
+  res.render('vision_v1/date-of-birth');
 });
 
 router.post('/date-of-birth', function (req, res) {
@@ -78,7 +113,7 @@ router.post('/date-of-birth', function (req, res) {
   };
 
   if (req.body['dob-day'] === '' || req.body['dob-month'] === '' || req.body['dob-year'] === '') {
-    res.render('mvp_v1_2/date-of-birth', { error: 'Please enter your date of birth' });
+    res.render('vision_v1/date-of-birth', { error: 'Please enter your date of birth' });
   } else {
     if (req.session.edit === true) {
       res.redirect('confirm-details')
@@ -90,7 +125,7 @@ router.post('/date-of-birth', function (req, res) {
 
 // NHS Number ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/nhs-number', function (req, res) {
-  res.render('mvp_v1_2/nhs-number');
+  res.render('vision_v1/nhs-number');
 })
 
 router.post('/nhs-number', function (req, res) {
@@ -109,7 +144,7 @@ router.post('/nhs-number', function (req, res) {
   }
 
   if (passed === false) {
-    res.render('mvp_v1_2/nhs-number', { error });
+    res.render('vision_v1/nhs-number', { error });
   } else {
     if (req.body['nhs-number-known'] === 'yes') {
       res.redirect('nhs-number-details')
@@ -126,7 +161,7 @@ router.post('/nhs-number', function (req, res) {
 
 // NHS Number details ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/nhs-number-details', function (req, res) {
-  res.render('mvp_v1_2/nhs-number-details' );
+  res.render('vision_v1/nhs-number-details' );
 })
 
 router.post('/nhs-number-details', function (req, res) {
@@ -145,7 +180,7 @@ router.post('/nhs-number-details', function (req, res) {
   }
 
   if (passed === false) {
-    res.render('mvp_v1_2/nhs-number-details', { error });
+    res.render('vision_v1/nhs-number-details', { error });
   } else {
     if (req.session.edit === true) {
       res.redirect('confirm-details')
@@ -158,7 +193,7 @@ router.post('/nhs-number-details', function (req, res) {
 
 // Contact email +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/contact-email', function (req, res) {
-  res.render('mvp_v1_2/contact-email');
+  res.render('vision_v1/contact-email');
 });
 
 router.post('/contact-email', function (req, res) {
@@ -171,6 +206,8 @@ router.post('/contact-email', function (req, res) {
 
   if (req.session.edit === true) {
     res.redirect('confirm-details')
+  } else if (req.session.edit === 'nhsid') {
+    res.redirect('nhsid-confirm-details')
   } else {
     res.redirect('contact-telephone')
   }
@@ -178,7 +215,7 @@ router.post('/contact-email', function (req, res) {
 
 // Contact phone +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/contact-telephone', function (req, res) {
-  res.render('mvp_v1_2/contact-telephone');
+  res.render('vision_v1/contact-telephone');
 });
 
 router.post('/contact-telephone', function (req, res) {
@@ -191,6 +228,8 @@ router.post('/contact-telephone', function (req, res) {
 
   if (req.session.edit === true) {
     res.redirect('confirm-details')
+  } else if (req.session.edit === 'nhsid') {
+    res.redirect('nhsid-confirm-details')
   } else {
     res.redirect('home-address')
   }
@@ -198,7 +237,7 @@ router.post('/contact-telephone', function (req, res) {
 
 // Postcode ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/home-address', function (req, res) {
-  res.render('mvp_v1_2/home-address-postcode');
+  res.render('vision_v1/home-address-postcode');
 });
 
 router.post('/home-address', function (req, res) {
@@ -211,7 +250,7 @@ router.post('/home-address', function (req, res) {
   req.session.homeAddress.building = req.body['building'];
 
   if (req.body['postcode'] === '') {
-    res.render('mvp_v1_2/home-address-postcode', {
+    res.render('vision_v1/home-address-postcode', {
       error: {
         postcode: 'Please enter your home postcode'
       }
@@ -241,25 +280,25 @@ router.post('/home-address', function (req, res) {
               // Nothing found for this combo of building / postcode
               // So just display the postcode results?
               req.session.addressResults = addresses;
-              res.render('mvp_v1_2/home-address-result', {
+              res.render('vision_v1/home-address-result', {
                 message: 'No exact match has been found, showing all addresses for ' + req.session.homeAddress.postcode,
               });
             } else {
               req.session.addressResults = filtered;
-              res.render('mvp_v1_2/home-address-result');
+              res.render('vision_v1/home-address-result');
             }
 
           } else {
 
             req.session.addressResults = addresses;
 
-            res.render('mvp_v1_2/home-address-result');
+            res.render('vision_v1/home-address-result');
 
           }
         }
 
       } else {
-        res.render('mvp_v1_2/home-address-postcode', {
+        res.render('vision_v1/home-address-postcode', {
           error: {
             general: 'Sorry, there’s been a problem looking up your address. Please try again.'
           }
@@ -271,19 +310,21 @@ router.post('/home-address', function (req, res) {
 
 // Address selection +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/select-address', function (req, res) {
-  res.render('mvp_v1_2/select-address');
+  res.render('vision_v1/select-address');
 });
 
 router.post('/select-address', function (req, res) {
 
   if (!req.body['address']) {
-    res.render('mvp_v1_2/home-address-result', {
+    res.render('vision_v1/home-address-result', {
       error: 'Please select your home address'
     });
   } else {
     req.session.homeAddress.address = req.body['address'].split(',');
     if (req.session.edit === true) {
       res.redirect('confirm-details')
+    } else if (req.session.edit === 'nhsid') {
+      res.redirect('nhsid-confirm-details')
     } else {
       res.redirect('current-gp')
     }
@@ -292,7 +333,7 @@ router.post('/select-address', function (req, res) {
 
 // Manual address entry ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/home-address-manual', function (req, res) {
-  res.render('mvp_v1_2/home-address-manual');
+  res.render('vision_v1/home-address-manual');
 });
 
 router.post('/home-address-manual', function (req, res) {
@@ -310,11 +351,13 @@ router.post('/home-address-manual', function (req, res) {
   req.session.homeAddress.postcode = req.body['postcode'];
 
   if (!req.body['address-1'] && !req.body['address-4']) {
-    res.render('mvp_v1_2/home-address-manual', {
+    res.render('vision_v1/home-address-manual', {
       error: 'Please enter your full address'
     });
   } else if (req.session.edit === true) {
     res.redirect('confirm-details')
+  } else if (req.session.edit === 'nhsid') {
+    res.redirect('nhsid-confirm-details')
   } else {
     res.redirect('current-gp')
   }
@@ -323,7 +366,7 @@ router.post('/home-address-manual', function (req, res) {
 
 // Current GP ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/current-gp', function (req, res) {
-  res.render('mvp_v1_2/current-gp');
+  res.render('vision_v1/current-gp');
 })
 
 router.post('/current-gp', function (req, res) {
@@ -342,12 +385,14 @@ router.post('/current-gp', function (req, res) {
   }
 
   if (passed === false) {
-    res.render('mvp_v1_2/current-gp', { error });
+    res.render('vision_v1/current-gp', { error });
   } else if (req.body['current-gp'] === 'yes') {
     res.redirect('current-gp-lookup')
   } else {
     if (req.session.edit === true) {
       res.redirect('confirm-details')
+    } else if (req.session.edit === 'nhsid') {
+      res.redirect('nhsid-confirm-details')
     } else {
       res.redirect('armed-forces')
     }
@@ -357,7 +402,7 @@ router.post('/current-gp', function (req, res) {
 
 // Lookup GP +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/current-gp-lookup', function (req, res) {
-  res.render('mvp_v1_2/gp-lookup');
+  res.render('vision_v1/gp-lookup');
 });
 
 router.post('/current-gp-lookup', function (req, res) {
@@ -370,6 +415,8 @@ router.post('/current-gp-lookup', function (req, res) {
   req.session.currentgp.address = req.body['practice-address'].split(',');
   if (req.session.edit === true) {
     res.redirect('confirm-details')
+  } else if (req.session.edit === 'nhsid') {
+    res.redirect('nhsid-confirm-details')
   } else {
     res.redirect('previous-name')
   }
@@ -379,7 +426,7 @@ router.post('/current-gp-lookup', function (req, res) {
 // Previous name +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 router.get('/previous-name', function(req, res) {
-  res.render('mvp_v1_2/previous-name');
+  res.render('vision_v1/previous-name');
 });
 
 router.post('/previous-name', function(req, res) {
@@ -398,13 +445,15 @@ router.post('/previous-name', function(req, res) {
   }
 
   if (passed === false) {
-    res.render('mvp_v1_2/previous-name', { error });
+    res.render('vision_v1/previous-name', { error });
   } else {
     if (req.body['name-changed'] === 'yes') {
       res.redirect('previous-name-details')
     } else {
       if (req.session.edit === true) {
         res.redirect('confirm-details')
+      } else if (req.session.edit === 'nhsid') {
+        res.redirect('nhsid-confirm-details')
       } else {
         res.redirect('previous-address')
       }
@@ -415,7 +464,7 @@ router.post('/previous-name', function(req, res) {
 // Previous name details +++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 router.get('/previous-name-details', function(req, res) {
-  res.render('mvp_v1_2/previous-name-details');
+  res.render('vision_v1/previous-name-details');
 });
 
 router.post('/previous-name-details', function(req, res) {
@@ -436,10 +485,12 @@ router.post('/previous-name-details', function(req, res) {
   }
 
   if (passed === false) {
-    res.render('mvp_v1_2/previous-name-details', { error });
+    res.render('vision_v1/previous-name-details', { error });
   } else {
     if (req.session.edit === true) {
       res.redirect('confirm-details')
+    } else if (req.session.edit === 'nhsid') {
+      res.redirect('nhsid-confirm-details')
     } else {
       res.redirect('previous-address')
     }
@@ -449,7 +500,7 @@ router.post('/previous-name-details', function(req, res) {
 
 // Previous address ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/previous-address', function (req, res) {
-  res.render('mvp_v1_2/previous-address');
+  res.render('vision_v1/previous-address');
 })
 
 router.post('/previous-address', function (req, res) {
@@ -468,12 +519,14 @@ router.post('/previous-address', function (req, res) {
   }
 
   if (passed === false) {
-    res.render('mvp_v1_2/previous-address', { error });
+    res.render('vision_v1/previous-address', { error });
   } else if (req.body['prev-address'] === 'yes') {
     res.redirect('previous-address-postcode')
   } else {
     if (req.session.edit === true) {
       res.redirect('confirm-details')
+    } else if (req.session.edit === 'nhsid') {
+      res.redirect('nhsid-confirm-details')
     } else {
       res.redirect('armed-forces')
     }
@@ -483,7 +536,7 @@ router.post('/previous-address', function (req, res) {
 
 // Previous address - find +++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/previous-address-postcode', function (req, res) {
-  res.render('mvp_v1_2/previous-address-postcode');
+  res.render('vision_v1/previous-address-postcode');
 });
 
 router.post('/previous-address-postcode', function (req, res) {
@@ -492,7 +545,7 @@ router.post('/previous-address-postcode', function (req, res) {
   req.session.prevbuilding = req.body['building'];
 
   if (req.body['postcode'] === '') {
-    res.render('mvp_v1_2/previous-address-postcode', {
+    res.render('vision_v1/previous-address-postcode', {
       error: {
         postcode: 'Please enter your previous postcode'
       }
@@ -522,26 +575,26 @@ router.post('/previous-address-postcode', function (req, res) {
               // Nothing found for this combo of building / postcode
               // So just display the postcode results?
               req.session.prevAddressResults = addresses;
-              res.render('mvp_v1_2/previous-address-result', {
+              res.render('vision_v1/previous-address-result', {
                 message: 'No exact match has been found, showing all addresses for ' + req.session.prevpostcode,
                 session: req.session
               });
             } else {
               req.session.prevAddressResults = filtered;
-              res.render('mvp_v1_2/previous-address-result');
+              res.render('vision_v1/previous-address-result');
             }
 
           } else {
 
             req.session.prevAddressResults = addresses;
 
-            res.render('mvp_v1_2/previous-address-result');
+            res.render('vision_v1/previous-address-result');
 
           }
         }
 
       } else {
-        res.render('mvp_v1_2/previous-address-postcode', {
+        res.render('vision_v1/previous-address-postcode', {
           error: {
             general: 'Sorry, there’s been a problem looking up your address. Please try again.'
           }
@@ -553,19 +606,21 @@ router.post('/previous-address-postcode', function (req, res) {
 
 // Previous address selection ++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/select-previous-address', function (req, res) {
-  res.render('mvp_v1_2/select-previous-address');
+  res.render('vision_v1/select-previous-address');
 });
 
 router.post('/select-previous-address', function (req, res) {
 
   if (!req.body['address']) {
-    res.render('mvp_v1_2/previous-address-result', {
+    res.render('vision_v1/previous-address-result', {
       error: 'Please select your previous address'
     });
   } else {
     req.session.prevAddress = req.body['address'].split(',');
     if (req.session.edit === true) {
       res.redirect('confirm-details')
+    } else if (req.session.edit === 'nhsid') {
+      res.redirect('nhsid-confirm-details')
     } else {
       res.redirect('armed-forces')
     }
@@ -574,7 +629,7 @@ router.post('/select-previous-address', function (req, res) {
 
 // Manual address entry ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/previous-address-manual', function (req, res) {
-  res.render('mvp_v1_2/previous-address-manual');
+  res.render('vision_v1/previous-address-manual');
 });
 
 router.post('/previous-address-manual', function (req, res) {
@@ -588,11 +643,13 @@ router.post('/previous-address-manual', function (req, res) {
   req.session.prevpostcode = req.body['postcode'];
 
   if (!req.body['address-1'] && !req.body['address-4']) {
-    res.render('mvp_v1_2/home-address-manual', {
+    res.render('vision_v1/home-address-manual', {
       error: 'Please enter your full address'
     });
   } else if (req.session.edit === true) {
     res.redirect('confirm-details')
+  } else if (req.session.edit === 'nhsid') {
+    res.redirect('nhsid-confirm-details')
   } else {
     res.redirect('armed-forces')
   }
@@ -601,7 +658,7 @@ router.post('/previous-address-manual', function (req, res) {
 
 // Armed forces? +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/armed-forces', function (req, res) {
-  res.render('mvp_v1_2/armed-forces');
+  res.render('vision_v1/armed-forces');
 });
 
 router.post('/armed-forces', function (req, res) {
@@ -620,10 +677,12 @@ router.post('/armed-forces', function (req, res) {
   }
 
   if (passed === false) {
-    res.render('mvp_v1_2/armed-forces', { error });
+    res.render('vision_v1/armed-forces', { error });
   } else {
     if (req.session.edit === true) {
       res.redirect('confirm-details')
+    } else if (req.session.edit === 'nhsid') {
+      res.redirect('nhsid-confirm-details')
     } else {
       if (req.body['armed-forces'] === 'yes') {
         res.redirect('armed-forces-service-number')
@@ -637,7 +696,7 @@ router.post('/armed-forces', function (req, res) {
 
 // Armed forces service number +++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/armed-forces-service-number', function (req, res) {
-  res.render('mvp_v1_2/armed-forces-service-number');
+  res.render('vision_v1/armed-forces-service-number');
 });
 
 router.post('/armed-forces-service-number', function (req, res) {
@@ -649,6 +708,8 @@ router.post('/armed-forces-service-number', function (req, res) {
 
   if (req.session.edit === true) {
     res.redirect('confirm-details')
+  } else if (req.session.edit === 'nhsid') {
+    res.redirect('nhsid-confirm-details')
   } else {
     res.redirect('armed-forces-enlistment-date')
   }
@@ -657,7 +718,7 @@ router.post('/armed-forces-service-number', function (req, res) {
 
 // Armed forces enlistment date ++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/armed-forces-enlistment-date', function (req, res) {
-  res.render('mvp_v1_2/armed-forces-enlistment-date');
+  res.render('vision_v1/armed-forces-enlistment-date');
 });
 
 router.post('/armed-forces-enlistment-date', function (req, res) {
@@ -673,6 +734,8 @@ router.post('/armed-forces-enlistment-date', function (req, res) {
 
   if (req.session.edit === true) {
     res.redirect('confirm-details')
+  } else if (req.session.edit === 'nhsid') {
+    res.redirect('nhsid-confirm-details')
   } else {
     res.redirect('current-medication')
   }
@@ -681,7 +744,7 @@ router.post('/armed-forces-enlistment-date', function (req, res) {
 
 // Minimumn health questionnaire: current meds? ++++++++++++++++++++++++++++++++
 router.get('/current-medication', function (req, res) {
-  res.render('mvp_v1_2/current-medication');
+  res.render('vision_v1/current-medication');
 });
 
 router.post('/current-medication', function (req, res) {
@@ -700,12 +763,14 @@ router.post('/current-medication', function (req, res) {
   }
 
   if (passed === false) {
-    res.render('mvp_v1_2/current-medication', { error });
+    res.render('vision_v1/current-medication', { error });
   } else if (req.body['medication'] === 'yes') {
     res.redirect('current-medication-details')
   } else {
     if (req.session.edit === true) {
       res.redirect('confirm-details')
+    } else if (req.session.edit === 'nhsid') {
+      res.redirect('nhsid-confirm-details')
     } else {
       res.redirect('any-allergies')
     }
@@ -715,7 +780,7 @@ router.post('/current-medication', function (req, res) {
 
 // Minimumn health questionnaire: current med details ++++++++++++++++++++++++++
 router.get('/current-medication-details', function (req, res) {
-  res.render('mvp_v1_2/current-medication-details');
+  res.render('vision_v1/current-medication-details');
 });
 
 router.post('/current-medication-details', function (req, res) {
@@ -734,10 +799,12 @@ router.post('/current-medication-details', function (req, res) {
   }
 
   if (passed === false) {
-    res.render('mvp_v1_2/current-medication-details', { error });
+    res.render('vision_v1/current-medication-details', { error });
   } else {
     if (req.session.edit === true) {
       res.redirect('confirm-details')
+    } else if (req.session.edit === 'nhsid') {
+      res.redirect('nhsid-confirm-details')
     } else {
       res.redirect('any-allergies')
     }
@@ -746,7 +813,7 @@ router.post('/current-medication-details', function (req, res) {
 
 // Minimumn health questionnaire: allergies ++++++++++++++++++++++++++++++++++++
 router.get('/any-allergies', function (req, res) {
-  res.render('mvp_v1_2/any-allergies');
+  res.render('vision_v1/any-allergies');
 });
 
 router.post('/any-allergies', function (req, res) {
@@ -765,12 +832,14 @@ router.post('/any-allergies', function (req, res) {
   }
 
   if (passed === false) {
-    res.render('mvp_v1_2/any-allergies', { error });
+    res.render('vision_v1/any-allergies', { error });
   } else if (req.body['allergies'] === 'yes') {
     res.redirect('allergies-details')
   } else {
     if (req.session.edit === true) {
       res.redirect('confirm-details')
+    } else if (req.session.edit === 'nhsid') {
+      res.redirect('nhsid-confirm-details')
     } else {
       res.redirect('medical-history')
     }
@@ -780,7 +849,7 @@ router.post('/any-allergies', function (req, res) {
 
 // Minimumn health questionnaire: allergies details ++++++++++++++++++++++++++++
 router.get('/allergies-details', function (req, res) {
-  res.render('mvp_v1_2/allergies-details');
+  res.render('vision_v1/allergies-details');
 });
 
 router.post('/allergies-details', function (req, res) {
@@ -799,10 +868,12 @@ router.post('/allergies-details', function (req, res) {
   }
 
   if (passed === false) {
-    res.render('mvp_v1_2/allergies-details', { error });
+    res.render('vision_v1/allergies-details', { error });
   } else {
     if (req.session.edit === true) {
       res.redirect('confirm-details')
+    } else if (req.session.edit === 'nhsid') {
+      res.redirect('nhsid-confirm-details')
     } else {
       res.redirect('medical-history')
     }
@@ -811,7 +882,7 @@ router.post('/allergies-details', function (req, res) {
 
 // Minimumn health questionnaire: medical histoy +++++++++++++++++++++++++++++++
 router.get('/medical-history', function (req, res) {
-  res.render('mvp_v1_2/history');
+  res.render('vision_v1/history');
 });
 
 router.post('/medical-history', function (req, res) {
@@ -836,7 +907,7 @@ router.post('/medical-history', function (req, res) {
 // Check your answers ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/confirm-details', function (req, res) {
   req.session.edit = true;
-  res.render('mvp_v1_2/confirm-details');
+  res.render('vision_v1/confirm-details');
 });
 
 // Registration submitted ++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -868,7 +939,7 @@ router.get('/registration-submitted', function (req, res) {
   });
   */
 
-  res.render('mvp_v1_2/registration-submitted');
+  res.render('vision_v1/registration-submitted');
 });
 
 
@@ -876,7 +947,7 @@ router.get('/registration-submitted', function (req, res) {
 // EMAIL to GP +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/gp-email', function (req, res) {
   req.session.edit = false;
-  res.render('mvp_v1_2/_email-gp-notification');
+  res.render('vision_v1/_email-gp-notification');
 });
 
 module.exports = router

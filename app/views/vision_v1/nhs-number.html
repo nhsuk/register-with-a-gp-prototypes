@@ -1,0 +1,52 @@
+{% extends '_layouts/layout.html' %}
+
+{% block page_title %}
+  Your NHS number :
+  {% if practiceName %}
+    Register with {{ practiceName }}
+  {% else %}
+    {{serviceName}}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+
+  <h1 class="primary">Do you know your NHS number?</h1>
+
+  <form method="post">
+    <fieldset>
+
+      {% if error %}
+        <div class="error-summary">
+          <div>
+            <p>{{ error }}</p>
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="form-group {% if error %}-errors{% endif %}">
+        <label for="nhs-number-yes" class="block-label">
+          Yes
+          <input type="radio" id="nhs-number-yes" name="nhs-number-known" value="yes" {% if session.nhsnumber.known == "yes" %}checked="checked"{% endif %}>
+        </label>
+      </div>
+
+      <div class="form-group {% if error %}-errors{% endif %}">
+        <label for="nhs-number-no" class="block-label">
+          No
+          <input type="radio" id="nhs-number-no" name="nhs-number-known" value="no" {% if session.nhsnumber.known == "no" %}checked="checked"{% endif %}>
+        </label>
+      </div>
+    </fieldset>
+
+    <div class="form-group -controls">
+      <button type="submit" class="button">Continue</button>
+      {% set back = 'date-of-birth' %}
+      {% if session.edit == true %}
+        {% set back = 'confirm-details' %}
+      {% endif %}
+      <a href="{{ back }}" class="button -back">Back</a>
+    </div>
+
+  </form>
+{% endblock %}

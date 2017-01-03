@@ -1,0 +1,38 @@
+{% extends '_layouts/nhsid-layout.html' %}
+
+{% block page_title %}NHSID: Enter your access code{% endblock %}
+
+{% block content %}
+  <form method="post">
+
+    {% if error %}
+      <div class="error-summary">
+        <div>
+          <p>{{ error }}</p>
+        </div>
+      </div>
+    {% endif %}
+
+    <div class="form-group">
+      <label for="auth-code">Enter your access code</label>
+      <p class="form-hint">
+        A text message containing your access code has been sent to ***** *** 024
+      </p>
+      <input type="text" id="auth-code" name="auth-code" value="">
+    </div>
+
+    <div class="form-group -controls">
+      <button type="submit" class="button">Continue</button>
+      {% set back = 'nhsid-sign-in' %}
+      <a href="{{ back }}" class="button -back">Back</a>
+    </div>
+
+    <div class="nhsid-secondary-controls">
+      <a href="#">Resend code</a><br>
+      <a href="#">I don’t have access to that phone</a>
+    </div>
+
+  </form>
+{% endblock %}
+
+{% block footer %}{% endblock %}
