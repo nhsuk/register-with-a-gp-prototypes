@@ -1,0 +1,43 @@
+{% extends '_layouts/layout.html' %}
+
+{% block page_title %}
+  Your NHS number :
+  {% if practiceName %}
+    Register with {{ practiceName }}
+  {% else %}
+    {{serviceName}}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+
+  <form method="post">
+
+    <h1 class="primary">
+      <label for="nhs-number">What is your NHS number?</label>
+    </h1>
+
+    <div id="nhs-number-entry">
+      {% if error %}
+        <div class="error-summary">
+          <div>
+            <p>{{ error }}</p>
+          </div>
+        </div>
+      {% endif %}
+      <div class="form-group {% if error %}-errors{% endif %}">
+        <input type="tel" id="nhs-number" name="nhs-number" value="{{ session.nhsnumber.number }}" class="-small">
+      </div>
+      <p class="form-hint">
+        For example, 943 476 5919
+      </p>
+    </div>
+
+    <div class="form-group -controls">
+      <button type="submit" class="button">Continue</button>
+      {% set back = 'nhs-number' %}
+      <a href="{{ back }}" class="button -back">Back</a>
+    </div>
+
+  </form>
+{% endblock %}

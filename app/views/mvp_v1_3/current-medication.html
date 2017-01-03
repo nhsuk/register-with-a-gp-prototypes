@@ -1,0 +1,64 @@
+{% extends '_layouts/layout.html' %}
+
+{% block page_title %}
+  Your medication :
+  {% if practiceName %}
+    Register with {{ practiceName }}
+  {% else %}
+    {{serviceName}}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+
+  <h1 class="primary">Are you taking any medication?</h1>
+
+  <form method="post" class="measure">
+    <fieldset>
+
+      {% if error %}
+        <div class="error-summary">
+          <div>
+            <p>{{ error }}</p>
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="form-group {% if error %}-errors{% endif %}">
+        <label for="medication-yes" class="block-label">
+          Yes
+          <input type="radio" id="medication-yes" name="medication" value="yes" {% if session.health.medication == "yes" %}checked="checked"{% endif %}>
+        </label>
+      </div>
+
+      <div class="form-group {% if error %}-errors{% endif %}">
+        <label for="medication-no" class="block-label">
+          No
+          <input type="radio" id="medication-no" name="medication" value="no" {% if session.health.medication == "no" %}checked="checked"{% endif %}>
+        </label>
+      </div>
+    </fieldset>
+
+    <details>
+      <summary>Why am I being asked this?</summary>
+      <div class="signage">
+        <div class="info">
+          <p>Letting your new GP know about your medication will help them while they wait for your medical records to transfer.</p>
+        </div>
+      </div>
+    </details>
+
+    <div class="form-group -controls">
+      <button type="submit" class="button">Continue</button>
+      {% set back = 'previous-address' %}
+      {% if session.armedforces.leaving === 'yes' %}
+        {% set back = 'armed-forces-enlistment-date' %}
+      {% endif %}
+      {% if session.edit == true %}
+        {% set back = 'confirm-details' %}
+      {% endif %}
+      <a href="{{ back }}" class="button -back">Back</a>
+    </div>
+
+  </form>
+{% endblock %}
