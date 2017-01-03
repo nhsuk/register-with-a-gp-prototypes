@@ -204,18 +204,12 @@ router.post('/contact-email', function (req, res) {
 
   req.session.contact.email = req.body['email']
 
-  if (req.body['email'] === '') {
-    res.render('vision_v1/contact-email', {
-      error: 'Please provide an email address'
-    });
+  if (req.session.edit === true) {
+    res.redirect('confirm-details')
+  } else if (req.session.edit === 'nhsid') {
+    res.redirect('nhsid-confirm-details')
   } else {
-    if (req.session.edit === true) {
-      res.redirect('confirm-details')
-    } else if (req.session.edit === 'nhsid') {
-      res.redirect('nhsid-confirm-details')
-    } else {
-      res.redirect('contact-telephone')
-    }
+    res.redirect('contact-telephone')
   }
 })
 

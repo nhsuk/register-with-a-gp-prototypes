@@ -16,16 +16,9 @@
       <label for="email">What is your email address?</label>
     </h1>
 
-    {% if error %}
-      <div class="error-summary">
-        <div>
-          <p>{{ error }}</p>
-        </div>
-      </div>
-    {% endif %}
-
-    <div class="form-group">
-      <input type="email" id="email" name="email" value="{{ session.contact.email }}">
+    <div class="form-group -hanging-hint">
+      <input type="email" id="email" name="email" value="{{ session.contact.email }}" style="float: left;">
+      <span class="form-hint">(optional)</span>
     </div>
 
     <details>
@@ -36,7 +29,7 @@
             A confirmation will be emailed to you at the end of this service.
           </p>
           <p>
-            Your email address will not be used for anything else.
+            {{ practiceName }} may need to get in touch with you to complete your registration.
           </p>
         </div>
       </div>

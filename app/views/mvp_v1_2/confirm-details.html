@@ -36,7 +36,11 @@
     <tr>
       <th scope="row">Email</th>
       <td>
-        {{ session.contact.email }}
+        {% if session.contact.email != '' %}
+          {{ session.contact.email }}
+        {% else %}
+          I’m not providing an email address
+        {% endif %}
       </td>
       <td class="control">
         <a href="contact-email" class="button -secondary">Change</a>

@@ -169,16 +169,10 @@ router.post('/contact-email', function (req, res) {
 
   req.session.contact.email = req.body['email']
 
-  if (req.body['email'] === '') {
-    res.render('mvp_v1_2/contact-email', {
-      error: 'Please provide an email address'
-    });
+  if (req.session.edit === true) {
+    res.redirect('confirm-details')
   } else {
-    if (req.session.edit === true) {
-      res.redirect('confirm-details')
-    } else {
-      res.redirect('contact-telephone')
-    }
+    res.redirect('contact-telephone')
   }
 })
 
