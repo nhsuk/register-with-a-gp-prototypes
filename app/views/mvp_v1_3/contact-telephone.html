@@ -1,0 +1,48 @@
+{% extends '_layouts/layout.html' %}
+
+{% block page_title %}
+  Your telephone number :
+  {% if practiceName %}
+    Register with {{ practiceName }}
+  {% else %}
+    {{serviceName}}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  <form method="post" class="measure">
+
+    <h1 class="primary">
+      <label for="telephone">
+        What is your telephone number?
+      </label>
+    </h1>
+
+    <div class="form-group -hanging-hint">
+      <input type="tel" id="telephone" name="telephone" value="{{ session.contact.telephone }}" style="float: left;">
+      <span class="form-hint">(optional)</span>
+    </div>
+
+    <details>
+      <summary>Why should I provide a telephone number?</summary>
+      <div class="signage">
+        <div class="info">
+          <p>
+            {{ practiceName }} may need to get in touch with you to complete your registration.
+          </p>
+        </div>
+      </div>
+    </details>
+
+    <div class="form-group -controls">
+      <button type="submit" class="button">Continue</button>
+      {% set back = 'contact-email' %}
+      {% if session.edit == true %}
+        {% set back = 'confirm-details' %}
+      {% endif %}
+      <a href="{{ back }}" class="button -back">Back</a>
+    </div>
+  </form>
+{% endblock %}
+
+{% block footer %}{% endblock %}

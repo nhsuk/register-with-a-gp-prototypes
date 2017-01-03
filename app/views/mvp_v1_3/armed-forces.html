@@ -1,0 +1,67 @@
+{% extends '_layouts/layout.html' %}
+
+{% block page_title %}
+  Returning from the armed forces :
+  {% if practiceName %}
+    Register with {{ practiceName }}
+  {% else %}
+    {{serviceName}}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+
+  <h1 class="primary">Have you served in the armed forces?</h1>
+
+  <form method="post" class="measure">
+
+    <fieldset>
+
+      {% if error %}
+        <div class="error-summary">
+          <div>
+            <p>{{ error }}</p>
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="form-group {% if error %}-errors{% endif %}">
+        <label for="armed-forces-yes" class="block-label">
+          Yes
+          <input type="radio" id="armed-forces-yes" name="armed-forces" value="yes" {% if session.armedforces.leaving == "yes" %}checked="checked"{% endif %}>
+        </label>
+      </div>
+
+      <div class="form-group {% if error %}-errors{% endif %}">
+        <label for="armed-forces-no" class="block-label">
+          No
+          <input type="radio" id="armed-forces-no" name="armed-forces" value="no" {% if session.armedforces.leaving == "no" %}checked="checked"{% endif %}>
+        </label>
+      </div>
+    </fieldset>
+
+    <details>
+      <summary>Why am I being asked this question?</summary>
+      <div class="signage">
+        <div class="info">
+          <p>If you’ve served for at least one day in the armed forces (as a regular or a reservist) you’re entitled to priority care for any conditions relating to that time.</p>
+          <p>Telling your new GP practice about your service will:</p>
+          <ul>
+            <li>start the transfer of your medical records from the Ministry of Defence</li>
+            <li>help you benefit from special services, like prosthetics and mental health</li>
+          </ul>
+        </div>
+      </div>
+    </details>
+
+    <div class="form-group -controls">
+      <button type="submit" class="button">Continue</button>
+      {% set back = 'current-gp' %}
+      {% if session.edit == true %}
+        {% set back = 'confirm-details' %}
+      {% endif %}
+      <a href="{{ back }}" class="button -back">Back</a>
+    </div>
+
+  </form>
+{% endblock %}

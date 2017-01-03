@@ -1,0 +1,67 @@
+{% extends '_layouts/layout.html' %}
+
+{% block page_title %}
+  Your address :
+  {% if practiceName %}
+    Register with {{ practiceName }}
+  {% else %}
+    {{serviceName}}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+
+  <h1 class="primary">What is your address?</h1>
+
+  <form method="post" class="measure">
+    <fieldset>
+
+      {% if error.general %}
+        <div class="error-summary">
+          <div>
+            <p>{{ error.general }}</p>
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="form-group">
+        <div>
+          <label for="building">
+            Flat or house number, or house name (optional)
+            <span class="form-hint">For example, 122 or 17c</span>
+          </label>
+          <input type="text" id="building" name="building" value="{{ session.homeAddress.building }}" class="-small">
+        </div>
+      </div>
+
+      {% if error.postcode %}
+        <div class="error-summary">
+          <div>
+            <p>{{ error.postcode }}</p>
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="form-group {% if error.postcode %}-errors{% endif %}">
+        <div>
+          <label for="postcode">Postcode</label>
+          <input type="text" id="postcode" name="postcode" value="{{ session.homeAddress.postcode }}" class="-small">
+        </div>
+      </div>
+    </fieldset>
+
+    <p><a href="home-address-manual">I’ll type in my address</a></p>
+
+    <div class="form-group -controls">
+      <button type="submit" class="button">Find address</button>
+      {% set back = 'contact-telephone' %}
+      {% if session.edit == true %}
+        {% set back = 'confirm-details' %}
+      {% endif %}
+      <a href="{{ back }}" class="button -back">Back</a>
+    </div>
+
+  </form>
+{% endblock %}
+
+{% block footer %}{% endblock %}

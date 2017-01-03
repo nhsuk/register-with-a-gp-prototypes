@@ -1,0 +1,49 @@
+{% extends '_layouts/layout.html' %}
+
+{% block page_title %}
+  Your contact details :
+  {% if practiceName %}
+    Register with {{ practiceName }}
+  {% else %}
+    {{serviceName}}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  <form method="post" class="measure">
+
+    <h1 class="primary">
+      <label for="email">What is your email address?</label>
+    </h1>
+
+    <div class="form-group -hanging-hint">
+      <input type="email" id="email" name="email" value="{{ session.contact.email }}" style="float: left;">
+      <span class="form-hint">(optional)</span>
+    </div>
+
+    <details>
+      <summary>Why should I provide an email address?</summary>
+      <div class="signage">
+        <div class="info">
+          <p>
+            A confirmation will be emailed to you at the end of this service.
+          </p>
+          <p>
+            {{ practiceName }} may need to get in touch with you to complete your registration.
+          </p>
+        </div>
+      </div>
+    </details>
+
+    <div class="form-group -controls">
+      <button type="submit" class="button">Continue</button>
+      {% set back = 'nhs-number' %}
+      {% if session.edit == true %}
+        {% set back = 'confirm-details' %}
+      {% endif %}
+      <a href="{{ back }}" class="button -back">Back</a>
+    </div>
+  </form>
+{% endblock %}
+
+{% block footer %}{% endblock %}

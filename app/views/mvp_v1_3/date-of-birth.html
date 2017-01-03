@@ -1,0 +1,58 @@
+{% extends '_layouts/layout.html' %}
+
+{% block page_title %}
+  Your date of birth :
+  {% if practiceName %}
+    Register with {{ practiceName }}
+  {% else %}
+    {{serviceName}}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+    <fieldset>
+      <legend class="primary">
+        What is your date of birth?
+      </legend>
+
+      {% if error %}
+        <div class="error-summary">
+          <div>
+            <p>{{ error }}</p>
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="form-group -date {% if error %}-errors{% endif %}">
+        <div>
+          <label for="dob-day">Day</label>
+          <input type="number" id="dob-day" name="dob-day" value="{{ session.dob.day }}" class="day" maxlength="2">
+        </div>
+        <div>
+          <label for="dob-month">Month</label>
+          <input type="number" id="dob-month" name="dob-month" value="{{ session.dob.month }}" class="month" maxlength="2">
+        </div>
+        <div>
+          <label for="dob-year">Year</label>
+          <input type="number" id="dob-year" name="dob-year" value="{{ session.dob.year }}" class="year" maxlength="4">
+        </div>
+        <p class="form-hint">
+          For example, 31 / 12 / 1980
+        </p>
+      </div>
+    </fieldset>
+
+    <div class="form-group -controls">
+      <button type="submit" class="button">Continue</button>
+      {% set back = 'name' %}
+      {% if session.edit == true %}
+        {% set back = 'confirm-details' %}
+      {% endif %}
+      <a href="{{ back }}" class="button -back">Back</a>
+    </div>
+
+  </form>
+{% endblock %}
+
+{% block footer %}{% endblock %}
