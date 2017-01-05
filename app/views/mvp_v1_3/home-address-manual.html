@@ -30,13 +30,13 @@
             Address
           </label>
           <div>
-            <input type="text" id="address-1" name="address-1" value="{{ session.homeAddress.address[0] }}">
+            <input autocomplete="off" type="text" id="address-1" name="address-1" value="{{ session.homeAddress.address[0] }}">
           </div>
           <div>
-            <input type="text" name="address-2" value="{{ session.homeAddress.address[1] }}">
+            <input autocomplete="off" type="text" name="address-2" value="{{ session.homeAddress.address[1] }}">
           </div>
           <div>
-            <input type="text" name="address-3" value="{{ session.homeAddress.address[2] }}">
+            <input autocomplete="off" type="text" name="address-3" value="{{ session.homeAddress.address[2] }}">
           </div>
         </div>
       </div>
@@ -46,14 +46,14 @@
           <label for="locality">
             Town or city
           </label>
-          <input type="text" id="address-4" name="address-4" value="{{ session.homeAddress.address[3] }}">
+          <input autocomplete="off" type="text" id="address-4" name="address-4" value="{{ session.homeAddress.address[3] }}">
         </div>
       </div>
 
       <div class="form-group {% if error %}-errors{% endif %}">
         <div>
           <label for="postcode">Postcode</label>
-          <input type="text" id="postcode" name="postcode" value="{{ session.homeAddress.postcode }}" class="-small">
+          <input autocomplete="off" type="text" id="postcode" name="postcode" value="{{ session.homeAddress.postcode }}" class="-small">
         </div>
       </div>
     </fieldset>
