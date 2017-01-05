@@ -26,15 +26,15 @@
       {% endif %}
 
       <div class="form-group {% if error %}-errors{% endif %}">
+        <div class="form-group {% if error %}-errors{% endif %}">
+          <label for="yes" class="block-label">
+            Yes
+            <input type="radio" id="yes" name="name-changed" value="yes" {% if session.name.nameChanged == "yes" %}checked="checked"{% endif %}>
+          </label>
+        </div>
         <label for="no" class="block-label">
           No
           <input type="radio" id="no" name="name-changed" value="no" {% if session.name.nameChanged == "no" %}checked="checked"{% endif %}>
-        </label>
-      </div>
-      <div class="form-group {% if error %}-errors{% endif %}">
-        <label for="yes" class="block-label">
-          Yes
-          <input type="radio" id="yes" name="name-changed" value="yes" {% if session.name.nameChanged == "yes" %}checked="checked"{% endif %}>
         </label>
       </div>
 
