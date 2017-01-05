@@ -26,15 +26,15 @@
     <fieldset>
       <div class="form-group {% if error %}-errors{% endif %}">
         <label for="previous-first-name">First name</label>
-        <input type="text" id="previous-first-name" name="previous-first-name" value="{{ session.name.previousFirstName }}">
+        <input autocomplete="off" type="text" id="previous-first-name" name="previous-first-name" value="{{ session.name.previousFirstName }}">
       </div>
       <div class="form-group">
         <label for="previous-middle-names">Middle names</label>
-        <input type="text" id="previous-middle-names" name="previous-middle-names" value="{{ session.name.previousMiddleNames }}">
+        <input autocomplete="off" type="text" id="previous-middle-names" name="previous-middle-names" value="{{ session.name.previousMiddleNames }}">
       </div>
       <div class="form-group {% if error %}-errors{% endif %}">
         <label for="previous-last-name">Last name</label>
-        <input type="text" id="previous-last-name" name="previous-last-name" value="{{ session.name.previousLastName }}">
+        <input autocomplete="off" type="text" id="previous-last-name" name="previous-last-name" value="{{ session.name.previousLastName }}">
       </div>
     </fieldset>
 

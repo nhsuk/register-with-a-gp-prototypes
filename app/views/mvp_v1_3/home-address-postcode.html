@@ -30,7 +30,7 @@
             Flat or house number, or house name (optional)
             <span class="form-hint">For example, 122 or 17c</span>
           </label>
-          <input type="text" id="building" name="building" value="{{ session.homeAddress.building }}" class="-small">
+          <input autocomplete="off" type="text" id="building" name="building" value="{{ session.homeAddress.building }}" class="-small">
         </div>
       </div>
 
@@ -45,7 +45,7 @@
       <div class="form-group {% if error.postcode %}-errors{% endif %}">
         <div>
           <label for="postcode">Postcode</label>
-          <input type="text" id="postcode" name="postcode" value="{{ session.homeAddress.postcode }}" class="-small">
+          <input autocomplete="off" type="text" id="postcode" name="postcode" value="{{ session.homeAddress.postcode }}" class="-small">
         </div>
       </div>
     </fieldset>
