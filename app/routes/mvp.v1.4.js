@@ -369,7 +369,11 @@ router.post('/current-gp-lookup', function (req, res) {
   req.session.currentgp.name = req.body['practice-name'];
   req.session.currentgp.address = req.body['practice-address'].split(',');
   if (req.session.edit === true) {
-    res.redirect('confirm-details')
+    if (!req.session.prevaddress) {
+      res.redirect('previous-address')
+    } else {
+      res.redirect('confirm-details')
+    }
   } else {
     res.redirect('previous-address')
   }
@@ -400,7 +404,7 @@ router.post('/previous-address', function (req, res) {
   } else if (req.body['prev-address'] === 'yes') {
     res.redirect('previous-address-postcode')
   } else {
-    if (req.session.edit === true) {
+    if (req.session.edit === true && req.session.name.nameChanged) {
       res.redirect('confirm-details')
     } else {
       res.redirect('previous-name')
@@ -492,7 +496,7 @@ router.post('/select-previous-address', function (req, res) {
     });
   } else {
     req.session.prevAddress = req.body['address'].split(',');
-    if (req.session.edit === true) {
+    if (req.session.edit === true && req.session.name.nameChanged) {
       res.redirect('confirm-details')
     } else {
       res.redirect('previous-name')
@@ -519,7 +523,7 @@ router.post('/previous-address-manual', function (req, res) {
     res.render('mvp_v1_4/home-address-manual', {
       error: 'Please enter your full address'
     });
-  } else if (req.session.edit === true) {
+  } else if (req.session.edit === true && req.session.name.nameChanged) {
     res.redirect('confirm-details')
   } else {
     res.redirect('previous-name')
