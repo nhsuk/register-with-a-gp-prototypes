@@ -1,0 +1,262 @@
+{% extends '_layouts/layout.html' %}
+
+{% block page_title %}
+  Check your answers :
+  {% if practiceName %}
+    Register with {{ practiceName }}
+  {% else %}
+    {{serviceName}}
+  {% endif %}
+{% endblock %}
+
+{% block html_head %}
+  <meta name="format-detection" content="telephone=no">
+{% endblock %}
+
+{% block content %}
+  <h1 class="primary">Check your details</h1>
+
+  <table class="measure">
+    <tr>
+      <th scope="row">Name</th>
+      <td>{{ session.name.firstName | title }} {{ session.name.middleNames | title }} {{ session.name.lastName | title }}</td>
+      <td class="control">
+        <a href="name" class="button -secondary">Change</a>
+      </td>
+    </tr>
+
+    <tr>
+      <th scope="row">Date of birth</th>
+      <td>{{ session.dob.day }} {{ session.dob.month | date("MMMM") }} {{ session.dob.year }}</td>
+      <td class="control">
+        <a href="date-of-birth" class="button -secondary">Change</a>
+      </td>
+    </tr>
+
+    <tr>
+      <th scope="row">Email</th>
+      <td>
+        {% if session.contact.email != '' %}
+          {{ session.contact.email }}
+        {% else %}
+          I’m not providing an email address
+        {% endif %}
+      </td>
+      <td class="control">
+        <a href="contact-email" class="button -secondary">Change</a>
+      </td>
+    </tr>
+
+    <tr>
+      <th scope="row">Telephone</th>
+      <td>
+        {% if session.contact.telephone != '' %}
+          {{ session.contact.telephone }}
+        {% else %}
+          I’m not providing a telephone number
+        {% endif %}
+      </td>
+      <td class="control">
+        <a href="contact-telephone" class="button -secondary">Change</a>
+      </td>
+    </tr>
+
+    <tr>
+      <th scope="row">Address</th>
+      <td>
+        {% for line in session.homeAddress.address %}
+          {% if line != '' %}
+            {{ line }}<br>
+          {% endif %}
+        {% endfor %}
+        {{ session.homeAddress.postcode | upper }}
+      </td>
+      <td class="control">
+        <a href="home-address" class="button -secondary">Change</a>
+      </td>
+    </tr>
+
+    <tr>
+      <th scope="row">NHS number</th>
+      <td>
+        {% if session.nhsnumber.known == 'yes' %}
+          {{ session.nhsnumber.number }}
+        {% endif %}
+        {% if session.nhsnumber.known == 'no' %}
+          I don’t know my NHS number
+        {% endif %}
+      </td>
+      <td class="control">
+        <a href="nhs-number" class="button -secondary">Change</a>
+      </td>
+    </tr>
+
+    {% if not session.armedforces or session.armedforces.leaving == 'no' %}
+    <tr>
+      <th scope="row">Armed forces</th>
+      <td>I’m not returning from the armed forces</td>
+      <td class="control">
+        <a href="armed-forces" class="button -secondary">Change</a>
+      </td>
+    </tr>
+    {% endif %}
+  </table>
+
+  {% if session.armedforces.leaving == 'yes' %}
+    <table class="measure">
+      <caption>Your service in the armed forces</caption>
+      <tr>
+        <th scope="row">Armed forces</th>
+        <td>I’m returning from the armed forces</td>
+        <td class="control">
+          <a href="armed-forces" class="button -secondary">Change</a>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">Service number</th>
+        <td>
+          {% if session.armedforces.serviceno != '' %}
+            {{ session.armedforces.serviceno }}
+          {% else %}
+            I’m not supplying my service number
+          {% endif %}
+        </td>
+        <td class="control">
+          <a href="armed-forces-service-number" class="button -secondary">Change</a>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">Enlistment date</th>
+        <td>
+          {% if session.armedforces.enlistment.year != '' %}
+            {{ session.armedforces.enlistment.day }} {{ session.armedforces.enlistment.month | date("MMMM") }} {{ session.armedforces.enlistment.year }}
+          {% else %}
+            I’m not supplying my enlistment date
+          {% endif %}
+        </td>
+        <td class="control">
+          <a href="armed-forces-enlistment-date" class="button -secondary">Change</a>
+        </td>
+      </tr>
+    </table>
+  {% endif %}
+
+  <table class="measure">
+    <caption>Your current GP</caption>
+    <tr>
+      <th scope="row">Current GP</th>
+      <td>
+        {% if session.currentgp.registered == 'yes' %}
+          {% if session.currentgp.name != '' %}
+            {{ session.currentgp.name }}<br>
+          {% endif %}
+          {% if session.currentgp.address != '' %}
+            {% for line in session.currentgp.address %}
+              {{ line }}<br>
+            {% endfor %}
+          {% endif %}
+        {% endif %}
+
+        {% if session.currentgp.registered == 'no' %}
+          I’m not registered with a GP
+        {% endif %}
+      </td>
+      <td class="control">
+        <a href="current-gp" class="button -secondary">Change</a>
+      </td>
+    </tr>
+
+    {% if session.currentgp.registered == 'yes' %}
+      <tr>
+        <th scope="row">Registered name</th>
+        <td>
+          {% if session.name.nameChanged == "no" %}
+            I’m not registered with a different name
+          {% endif %}
+          {% if session.name.nameChanged === 'yes' %}
+            {{ session.name.previousFirstName | title }} {{ session.name.previousMiddleNames | title }} {{ session.name.previousLastName | title }}
+          {% endif %}
+        </td>
+        <td class="control">
+          <a href="previous-name" class="button -secondary">Change</a>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">Registered address</th>
+        <td>
+          {% if session.prevaddress == 'yes' %}
+            {% for line in session.prevAddress %}
+              {% if line != '' %}
+                {{ line }}<br>
+              {% endif %}
+            {% endfor %}
+            {{ session.prevpostcode | upper }}
+          {% endif %}
+          {% if session.prevaddress == 'no' %}
+            I’m not registered with a different address
+          {% endif %}
+        </td>
+        <td class="control">
+          <a href="previous-address" class="button -secondary">Change</a>
+        </td>
+      </tr>
+    {% endif %}
+  </table>
+
+  <table class="measure">
+    <caption>Your health</caption>
+    <tr>
+      <th scope="row">Medication</th>
+      <td>
+        {% if session.health.medication == 'yes' %}
+          {{ session.health.medicationDetails | striptags(true) | escape | nl2br }}
+        {% endif %}
+        {% if session.health.medication == 'no' %}
+          I’m not currently taking any medication
+        {% endif %}
+      </td>
+      <td class="control">
+        <a href="current-medication" class="button -secondary">Change</a>
+      </td>
+    </tr>
+
+    <tr>
+      <th scope="row">Allergies</th>
+      <td>
+        {% if session.health.allergies == 'yes' %}
+          {{ session.health.allergiesDetails | striptags(true) | escape | nl2br }}
+        {% endif %}
+        {% if session.health.allergies == 'no' %}
+          I don’t have any allergies
+        {% endif %}
+      </td>
+      <td class="control">
+        <a href="any-allergies" class="button -secondary">Change</a>
+      </td>
+    </tr>
+
+    <tr>
+      <th scope="row">Health</th>
+      <td>
+        {% if session.health.medicalHistory !== 'no' %}
+          {{ session.health.medicalHistory | striptags(true) | escape | nl2br }}
+        {% endif %}
+        {% if session.health.medicalHistory === 'no' %}
+          I’m not supplying any health details
+        {% endif %}
+      </td>
+      <td class="control">
+        <a href="medical-history" class="button -secondary">Change</a>
+      </td>
+    </tr>
+  </table>
+
+  <div class="shunt-2">
+    <a href="registration-submitted" class="button">Send my details</a>
+    <p class="measure form-hint shunt">
+      Your details will be sent to {{ practiceName }} to begin your registration.
+      {% if session.contact.email != '' %} A confirmation email will be sent to {{ session.contact.email }}.{% endif %}
+    </p>
+  </div>
+
+{% endblock %}
