@@ -168,20 +168,6 @@
 
     {% if session.currentgp.registered == 'yes' %}
       <tr>
-        <th scope="row">Registered name</th>
-        <td>
-          {% if session.name.nameChanged == "no" %}
-            I’m not registered with a different name
-          {% endif %}
-          {% if session.name.nameChanged === 'yes' %}
-            {{ session.name.previousFirstName | title }} {{ session.name.previousMiddleNames | title }} {{ session.name.previousLastName | title }}
-          {% endif %}
-        </td>
-        <td class="control">
-          <a href="previous-name" class="button -secondary">Change</a>
-        </td>
-      </tr>
-      <tr>
         <th scope="row">Registered address</th>
         <td>
           {% if session.prevaddress == 'yes' %}
@@ -198,6 +184,20 @@
         </td>
         <td class="control">
           <a href="previous-address" class="button -secondary">Change</a>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">Registered name</th>
+        <td>
+          {% if session.name.nameChanged == "no" %}
+            I’m not registered with a different name
+          {% endif %}
+          {% if session.name.nameChanged === 'yes' %}
+            {{ session.name.previousFirstName | title }} {{ session.name.previousMiddleNames | title }} {{ session.name.previousLastName | title }}
+          {% endif %}
+        </td>
+        <td class="control">
+          <a href="previous-name" class="button -secondary">Change</a>
         </td>
       </tr>
     {% endif %}

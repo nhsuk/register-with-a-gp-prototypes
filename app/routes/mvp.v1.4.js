@@ -371,80 +371,8 @@ router.post('/current-gp-lookup', function (req, res) {
   if (req.session.edit === true) {
     res.redirect('confirm-details')
   } else {
-    res.redirect('previous-name')
+    res.redirect('previous-address')
   }
-});
-
-
-// Previous name +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-router.get('/previous-name', function(req, res) {
-  res.render('mvp_v1_4/previous-name');
-});
-
-router.post('/previous-name', function(req, res) {
-
-  var passed = true;
-
-  if (!req.session.name) {
-    req.session.name = {};
-  }
-
-  if (!req.body['name-changed']) {
-    error = 'Please answer this question';
-    passed = false;
-  } else {
-    req.session.name.nameChanged = req.body['name-changed'];
-  }
-
-  if (passed === false) {
-    res.render('mvp_v1_4/previous-name', { error });
-  } else {
-    if (req.body['name-changed'] === 'yes') {
-      res.redirect('previous-name-details')
-    } else {
-      if (req.session.edit === true) {
-        res.redirect('confirm-details')
-      } else {
-        res.redirect('previous-address')
-      }
-    }
-  }
-});
-
-// Previous name details +++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-router.get('/previous-name-details', function(req, res) {
-  res.render('mvp_v1_4/previous-name-details');
-});
-
-router.post('/previous-name-details', function(req, res) {
-
-  var passed = true;
-
-  if (!req.session.name) {
-    req.session.name = {};
-  }
-
-  if (!req.body['previous-first-name'] && !req.body['previous-last-name']) {
-    error = 'Please enter your full previous name';
-    passed = false;
-  } else {
-    req.session.name.previousFirstName = req.body['previous-first-name'];
-    req.session.name.previousMiddleNames = req.body['previous-middle-names'];
-    req.session.name.previousLastName = req.body['previous-last-name'];
-  }
-
-  if (passed === false) {
-    res.render('mvp_v1_4/previous-name-details', { error });
-  } else {
-    if (req.session.edit === true) {
-      res.redirect('confirm-details')
-    } else {
-      res.redirect('previous-address')
-    }
-  }
-
 });
 
 // Previous address ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -475,7 +403,7 @@ router.post('/previous-address', function (req, res) {
     if (req.session.edit === true) {
       res.redirect('confirm-details')
     } else {
-      res.redirect('armed-forces')
+      res.redirect('previous-name')
     }
   }
 
@@ -567,7 +495,7 @@ router.post('/select-previous-address', function (req, res) {
     if (req.session.edit === true) {
       res.redirect('confirm-details')
     } else {
-      res.redirect('armed-forces')
+      res.redirect('previous-name')
     }
   }
 })
@@ -594,10 +522,82 @@ router.post('/previous-address-manual', function (req, res) {
   } else if (req.session.edit === true) {
     res.redirect('confirm-details')
   } else {
-    res.redirect('armed-forces')
+    res.redirect('previous-name')
   }
 
 })
+
+
+// Previous name +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+router.get('/previous-name', function(req, res) {
+  res.render('mvp_v1_4/previous-name');
+});
+
+router.post('/previous-name', function(req, res) {
+
+  var passed = true;
+
+  if (!req.session.name) {
+    req.session.name = {};
+  }
+
+  if (!req.body['name-changed']) {
+    error = 'Please answer this question';
+    passed = false;
+  } else {
+    req.session.name.nameChanged = req.body['name-changed'];
+  }
+
+  if (passed === false) {
+    res.render('mvp_v1_4/previous-name', { error });
+  } else {
+    if (req.body['name-changed'] === 'yes') {
+      res.redirect('previous-name-details')
+    } else {
+      if (req.session.edit === true) {
+        res.redirect('confirm-details')
+      } else {
+        res.redirect('armed-forces')
+      }
+    }
+  }
+});
+
+// Previous name details +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+router.get('/previous-name-details', function(req, res) {
+  res.render('mvp_v1_4/previous-name-details');
+});
+
+router.post('/previous-name-details', function(req, res) {
+
+  var passed = true;
+
+  if (!req.session.name) {
+    req.session.name = {};
+  }
+
+  if (!req.body['previous-first-name'] && !req.body['previous-last-name']) {
+    error = 'Please enter your full previous name';
+    passed = false;
+  } else {
+    req.session.name.previousFirstName = req.body['previous-first-name'];
+    req.session.name.previousMiddleNames = req.body['previous-middle-names'];
+    req.session.name.previousLastName = req.body['previous-last-name'];
+  }
+
+  if (passed === false) {
+    res.render('mvp_v1_4/previous-name-details', { error });
+  } else {
+    if (req.session.edit === true) {
+      res.redirect('confirm-details')
+    } else {
+      res.redirect('armed-forces')
+    }
+  }
+
+});
 
 // Armed forces? +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/armed-forces', function (req, res) {
