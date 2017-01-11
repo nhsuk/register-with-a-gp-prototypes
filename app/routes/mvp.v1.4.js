@@ -32,7 +32,15 @@ router.get('/start', function (req, res) {
 
 // Name ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/name', function (req, res) {
-  res.render('mvp_v1_4/name')
+  if (!req.session.name) {
+    res.render('mvp_v1_4/name');
+  } else {
+    res.render('mvp_v1_4/name', {
+      first: req.session.name.firstName,
+      middle: req.session.name.middleNames,
+      last: req.session.name.lastName
+    })
+  }
 });
 
 router.post('/name', function (req, res) {
@@ -53,7 +61,12 @@ router.post('/name', function (req, res) {
   }
 
   if (passed === false) {
-    res.render('mvp_v1_4/name', { error });
+    res.render('mvp_v1_4/name', {
+      error,
+      first: req.body['first-name'],
+      middle: req.body['middle-names'],
+      last: req.body['last-name']
+    });
   } else {
     if (req.session.edit === true) {
       res.redirect('confirm-details')
