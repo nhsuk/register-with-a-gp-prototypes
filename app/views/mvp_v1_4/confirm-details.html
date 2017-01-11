@@ -34,6 +34,21 @@
     </tr>
 
     <tr>
+      <th scope="row">Address</th>
+      <td>
+        {% for line in session.homeAddress.address %}
+          {% if line != '' %}
+            {{ line }}<br>
+          {% endif %}
+        {% endfor %}
+        {{ session.homeAddress.postcode | upper }}
+      </td>
+      <td class="control">
+        <a href="home-address" class="button -secondary">Change</a>
+      </td>
+    </tr>
+
+    <tr>
       <th scope="row">Email</th>
       <td>
         {% if session.contact.email != '' %}
@@ -58,21 +73,6 @@
       </td>
       <td class="control">
         <a href="contact-telephone" class="button -secondary">Change</a>
-      </td>
-    </tr>
-
-    <tr>
-      <th scope="row">Address</th>
-      <td>
-        {% for line in session.homeAddress.address %}
-          {% if line != '' %}
-            {{ line }}<br>
-          {% endif %}
-        {% endfor %}
-        {{ session.homeAddress.postcode | upper }}
-      </td>
-      <td class="control">
-        <a href="home-address" class="button -secondary">Change</a>
       </td>
     </tr>
 
