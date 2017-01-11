@@ -622,15 +622,21 @@ router.post('/armed-forces', function (req, res) {
   if (passed === false) {
     res.render('mvp_v1_4/armed-forces', { error });
   } else {
+
     if (req.session.edit === true) {
-      res.redirect('confirm-details')
+      if (!req.session.armedforces.serviceno) {
+        res.redirect('armed-forces-service-number')
+      } else {
+        res.redirect('confirm-details')
+      }
     } else {
-      if (req.body['armed-forces'] === 'yes') {
+      if (req.session.armedforces.leaving === 'yes') {
         res.redirect('armed-forces-service-number')
       } else {
         res.redirect('current-medication')
       }
     }
+
   }
 
 });
@@ -648,7 +654,11 @@ router.post('/armed-forces-service-number', function (req, res) {
   req.session.armedforces.serviceno = req.body['service-no']
 
   if (req.session.edit === true) {
-    res.redirect('confirm-details')
+    if (!req.session.armedforces.enlistment) {
+      res.redirect('armed-forces-enlistment-date')
+    } else {
+      res.redirect('confirm-details')
+    }
   } else {
     res.redirect('armed-forces-enlistment-date')
   }
