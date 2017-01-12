@@ -190,7 +190,7 @@ router.post('/select-address', function (req, res) {
     if (req.session.edit === true) {
       res.redirect('confirm-details')
     } else {
-      res.redirect('nhs-number')
+      res.redirect('contact-email')
     }
   }
 })
@@ -221,78 +221,10 @@ router.post('/home-address-manual', function (req, res) {
   } else if (req.session.edit === true) {
     res.redirect('confirm-details')
   } else {
-    res.redirect('nhs-number')
+    res.redirect('contact-email')
   }
 
 })
-
-// NHS Number ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-router.get('/nhs-number', function (req, res) {
-  res.render('mvp_v1_4/nhs-number');
-})
-
-router.post('/nhs-number', function (req, res) {
-
-  var passed = true;
-
-  if (!req.session.nhsnumber) {
-    req.session.nhsnumber = {};
-  }
-
-  if (!req.body['nhs-number-known']) {
-    error = 'Please answer ‘yes’ or ‘no’';
-    passed = false;
-  } else {
-    req.session.nhsnumber.known = req.body['nhs-number-known'];
-  }
-
-  if (passed === false) {
-    res.render('mvp_v1_4/nhs-number', { error });
-  } else {
-    if (req.body['nhs-number-known'] === 'yes') {
-      res.redirect('nhs-number-details')
-    } else {
-      if (req.session.edit === true) {
-        res.redirect('confirm-details')
-      } else {
-        res.redirect('contact-email')
-      }
-    }
-  }
-
-})
-
-// NHS Number details ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-router.get('/nhs-number-details', function (req, res) {
-  res.render('mvp_v1_4/nhs-number-details' );
-})
-
-router.post('/nhs-number-details', function (req, res) {
-
-  var passed = true;
-
-  if (!req.session.nhsnumber) {
-    req.session.nhsnumber = {};
-  }
-
-  if (req.body['nhs-number'] === '') {
-    passed = false;
-    error = 'Please enter your NHS number';
-  } else {
-    req.session.nhsnumber.number = req.body['nhs-number'];
-  }
-
-  if (passed === false) {
-    res.render('mvp_v1_4/nhs-number-details', { error });
-  } else {
-    if (req.session.edit === true) {
-      res.redirect('confirm-details')
-    } else {
-      res.redirect('contact-email')
-    }
-  }
-
-});
 
 // Contact email +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/contact-email', function (req, res) {
@@ -330,9 +262,99 @@ router.post('/contact-telephone', function (req, res) {
   if (req.session.edit === true) {
     res.redirect('confirm-details')
   } else {
-    res.redirect('current-gp')
+    res.redirect('armed-forces')
   }
 })
+
+// Armed forces? +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+router.get('/armed-forces', function (req, res) {
+  res.render('mvp_v1_4/armed-forces');
+});
+
+router.post('/armed-forces', function (req, res) {
+
+  var passed = true;
+
+  if (!req.session.armedforces) {
+    req.session.armedforces = {}
+  }
+
+  if (!req.body['armed-forces']) {
+    passed = false;
+    error = 'Please answer ‘yes’ or ‘no’';
+  } else {
+    req.session.armedforces.leaving = req.body['armed-forces']
+  }
+
+  if (passed === false) {
+    res.render('mvp_v1_4/armed-forces', { error });
+  } else {
+
+    if (req.session.edit === true) {
+      if (!req.session.armedforces.serviceno) {
+        res.redirect('armed-forces-service-number')
+      } else {
+        res.redirect('confirm-details')
+      }
+    } else {
+      if (req.session.armedforces.leaving === 'yes') {
+        res.redirect('armed-forces-service-number')
+      } else {
+        res.redirect('current-gp')
+      }
+    }
+
+  }
+
+});
+
+// Armed forces service number +++++++++++++++++++++++++++++++++++++++++++++++++
+router.get('/armed-forces-service-number', function (req, res) {
+  res.render('mvp_v1_4/armed-forces-service-number');
+});
+
+router.post('/armed-forces-service-number', function (req, res) {
+
+  if (!req.session.armedforces) {
+    req.session.armedforces = {}
+  }
+  req.session.armedforces.serviceno = req.body['service-no']
+
+  if (req.session.edit === true) {
+    if (!req.session.armedforces.enlistment) {
+      res.redirect('armed-forces-enlistment-date')
+    } else {
+      res.redirect('confirm-details')
+    }
+  } else {
+    res.redirect('armed-forces-enlistment-date')
+  }
+
+});
+
+// Armed forces enlistment date ++++++++++++++++++++++++++++++++++++++++++++++++
+router.get('/armed-forces-enlistment-date', function (req, res) {
+  res.render('mvp_v1_4/armed-forces-enlistment-date');
+});
+
+router.post('/armed-forces-enlistment-date', function (req, res) {
+
+  if (!req.session.armedforces) {
+    req.session.armedforces = {}
+  }
+  req.session.armedforces.enlistment = {
+    day: req.body['enlistment-day'],
+    month: req.body['enlistment-month'],
+    year: req.body['enlistment-year']
+  }
+
+  if (req.session.edit === true) {
+    res.redirect('confirm-details')
+  } else {
+    res.redirect('current-gp')
+  }
+
+});
 
 // Current GP ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/current-gp', function (req, res) {
@@ -362,7 +384,7 @@ router.post('/current-gp', function (req, res) {
     if (req.session.edit === true) {
       res.redirect('confirm-details')
     } else {
-      res.redirect('armed-forces')
+      res.redirect('nhs-number')
     }
   }
 
@@ -575,7 +597,7 @@ router.post('/previous-name', function(req, res) {
       if (req.session.edit === true) {
         res.redirect('confirm-details')
       } else {
-        res.redirect('armed-forces')
+        res.redirect('nhs-number')
       }
     }
   }
@@ -610,98 +632,76 @@ router.post('/previous-name-details', function(req, res) {
     if (req.session.edit === true) {
       res.redirect('confirm-details')
     } else {
-      res.redirect('armed-forces')
+      res.redirect('nhs-number')
     }
   }
 
 });
 
-// Armed forces? +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-router.get('/armed-forces', function (req, res) {
-  res.render('mvp_v1_4/armed-forces');
-});
+// NHS Number ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+router.get('/nhs-number', function (req, res) {
+  res.render('mvp_v1_4/nhs-number');
+})
 
-router.post('/armed-forces', function (req, res) {
+router.post('/nhs-number', function (req, res) {
 
   var passed = true;
 
-  if (!req.session.armedforces) {
-    req.session.armedforces = {}
+  if (!req.session.nhsnumber) {
+    req.session.nhsnumber = {};
   }
 
-  if (!req.body['armed-forces']) {
-    passed = false;
+  if (!req.body['nhs-number-known']) {
     error = 'Please answer ‘yes’ or ‘no’';
+    passed = false;
   } else {
-    req.session.armedforces.leaving = req.body['armed-forces']
+    req.session.nhsnumber.known = req.body['nhs-number-known'];
   }
 
   if (passed === false) {
-    res.render('mvp_v1_4/armed-forces', { error });
+    res.render('mvp_v1_4/nhs-number', { error });
   } else {
-
-    if (req.session.edit === true) {
-      if (!req.session.armedforces.serviceno) {
-        res.redirect('armed-forces-service-number')
-      } else {
-        res.redirect('confirm-details')
-      }
+    if (req.body['nhs-number-known'] === 'yes') {
+      res.redirect('nhs-number-details')
     } else {
-      if (req.session.armedforces.leaving === 'yes') {
-        res.redirect('armed-forces-service-number')
+      if (req.session.edit === true) {
+        res.redirect('confirm-details')
       } else {
         res.redirect('current-medication')
       }
     }
-
   }
 
-});
+})
 
-// Armed forces service number +++++++++++++++++++++++++++++++++++++++++++++++++
-router.get('/armed-forces-service-number', function (req, res) {
-  res.render('mvp_v1_4/armed-forces-service-number');
-});
+// NHS Number details ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+router.get('/nhs-number-details', function (req, res) {
+  res.render('mvp_v1_4/nhs-number-details' );
+})
 
-router.post('/armed-forces-service-number', function (req, res) {
+router.post('/nhs-number-details', function (req, res) {
 
-  if (!req.session.armedforces) {
-    req.session.armedforces = {}
+  var passed = true;
+
+  if (!req.session.nhsnumber) {
+    req.session.nhsnumber = {};
   }
-  req.session.armedforces.serviceno = req.body['service-no']
 
-  if (req.session.edit === true) {
-    if (!req.session.armedforces.enlistment) {
-      res.redirect('armed-forces-enlistment-date')
-    } else {
+  if (req.body['nhs-number'] === '') {
+    passed = false;
+    error = 'Please enter your NHS number';
+  } else {
+    req.session.nhsnumber.number = req.body['nhs-number'];
+  }
+
+  if (passed === false) {
+    res.render('mvp_v1_4/nhs-number-details', { error });
+  } else {
+    if (req.session.edit === true) {
       res.redirect('confirm-details')
+    } else {
+      res.redirect('current-medication')
     }
-  } else {
-    res.redirect('armed-forces-enlistment-date')
-  }
-
-});
-
-// Armed forces enlistment date ++++++++++++++++++++++++++++++++++++++++++++++++
-router.get('/armed-forces-enlistment-date', function (req, res) {
-  res.render('mvp_v1_4/armed-forces-enlistment-date');
-});
-
-router.post('/armed-forces-enlistment-date', function (req, res) {
-
-  if (!req.session.armedforces) {
-    req.session.armedforces = {}
-  }
-  req.session.armedforces.enlistment = {
-    day: req.body['enlistment-day'],
-    month: req.body['enlistment-month'],
-    year: req.body['enlistment-year']
-  }
-
-  if (req.session.edit === true) {
-    res.redirect('confirm-details')
-  } else {
-    res.redirect('current-medication')
   }
 
 });

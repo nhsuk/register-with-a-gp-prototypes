@@ -50,9 +50,9 @@
 
     <div class="form-group -controls">
       <button type="submit" class="button">Continue</button>
-      {% set back = 'previous-address' %}
-      {% if session.armedforces.leaving === 'yes' %}
-        {% set back = 'armed-forces-enlistment-date' %}
+      {% set back = 'nhs-number' %}
+      {% if session.nhsnumber.known === 'yes' %}
+        {% set back = 'nhs-number-details' %}
       {% endif %}
       {% if session.edit == true %}
         {% set back = 'confirm-details' %}

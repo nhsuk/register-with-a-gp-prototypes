@@ -37,7 +37,7 @@
 
     <div class="form-group -controls">
       <button type="submit" class="button">Continue</button>
-      {% set back = 'nhs-number' %}
+      {% set back = 'javascript:window.history.back();' %}
       {% if session.edit == true %}
         {% set back = 'confirm-details' %}
       {% endif %}

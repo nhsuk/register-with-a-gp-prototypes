@@ -59,7 +59,13 @@
 
     <div class="form-group -controls">
       <button type="submit" class="button">Continue</button>
-      {% set back = 'date-of-birth' %}
+      {% set back = 'current-gp' %}
+      {% if session.currentgp.registered == 'yes' %}
+        {% if session.name.nameChanged == 'yes' %}
+          {% set back = 'previous-name-details' %}
+        {% else %}
+          {% set back = 'previous-name' %}
+      {% endif %}
       {% if session.edit == true %}
         {% set back = 'confirm-details' %}
       {% endif %}
