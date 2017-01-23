@@ -3,17 +3,19 @@ Design prototypes for Register with a GP project
 
 Note this is prototype code. Not intended for production use.
 
-##1: What you need for local development
+## 1: What you need for local development
 
-There are two Github repos you need:
+There are two Github repos you need.
 
-`https://github.com/nhsuk/register-with-a-gp-prototypes` - this repo
-This is the main app for Register with a GP prototypes.
+The main app for Register with a GP prototypes (this repo):
+
+`https://github.com/nhsuk/register-with-a-gp-prototypes`
+
+The GP Lookup app, used to perform the ‘Find your GP’ lookup functionality (via CORS):
 
 `https://github.com/nhsuk/gp-lookup`
-This app is used to perform the ‘Find your GP’ lookup functionality (via CORS)
 
-###Downloading and running `gp-lookup`:
+### Downloading and running `gp-lookup`:
 
 Make sure you’ve got a suitable version of Ruby, and Bundler (have fun). Clone the directory then:
 
@@ -23,9 +25,9 @@ Once that’s done, start the app with an environment variable like this:
 
 `ALLOWED_ORIGINS=http://localhost:3000 bundle exec rackup`
 
-This app should now be running happily. You can use it at `http://localhost:9292`
+This app should now be running happily. You can use it at [http://localhost:9292](http://localhost:9292).
 
-###Downloading and running register-with-a-gp-prototypes:
+### Downloading and running register-with-a-gp-prototypes:
 
 Clone the directory then:
 
@@ -46,14 +48,14 @@ Once that’s done, run the app with:
 
 `grunt`
 
-This app should now be running happily, and be able to talk to your local running copy of `gp-lookup`. Use it at `http://localhost:3000`
+This app should now be running happily, and be able to talk to your local running copy of `gp-lookup`. Use it at [http://localhost:3000](http://localhost:3000).
 
 For the ‘find your GP’ feature to work when using the Register with a GP prototypes, you *must* have gp-finder running at the same time.
 
 
-##2: Structure of the ‘Register with a GP’ prototype
+## 2: Structure of the ‘Register with a GP’ prototype
 
-###Routes, views and server.js
+### Routes, views and server.js
 
 Each version of the prototype (as you’ll see in the index page https://register-with-a-gp-prototypes.herokuapp.com) has its own routes file and views folder living in `/app`:
 
@@ -70,7 +72,7 @@ Further down, from line 107 the app is then instructed to use those routes. Agai
 Basically we’re importing all the code in the routes file, and then telling the server to refer to that code when it gets a request along the lines of `/mvp-v1.3/*`
 
 
-###Creating a new iteration
+### Creating a new iteration
 
 So you might want to build vision v1.1 or mvp 1.5 - here’s how.
 
@@ -92,7 +94,7 @@ You might need to restart the server. The new MVP 1.5  iteration in the app will
 
 Finally I manually add a link to the new iteration in `/views/index.html`
 
-###The routes files
+### The routes files
 
 A very quick bit about the way the routes files are laid out.
 
@@ -102,24 +104,24 @@ Within each single route - for example `/name` - the first hook is for get reque
 
 Every form submission going through the process builds up a session, which is constantly played back in the terminal window running the app. You’ll be able to see the structure of the session object get built up as you go through.
 
-##3: Dependencies, APIs, etc
-###GP lookup functionality
+## 3: Dependencies, APIs, etc
+### GP lookup functionality
 
 For local development, you need the gp-finder app running as documented above. On Heroku, the https://register-with-a-gp-prototypes.herokuapp.com app does CORS to http://gp-lookup-demo.herokuapp.com so that should be pain free.
 
-###Postcode lookup functionality
+### Postcode lookup functionality
 
 The sections where we do address lookups use the https://getaddress.io API service. It uses the `POSTCODE_API` key in the `.env` file locally (details above).
 
-###Google maps
+### Google maps
 
 There’s a simple API key, again in the `.env` file locally (details above).
 
-###Sendgrid email service
+### Sendgrid email service
 
 This is non-functional in all prototypes at the moment. Have a look in any of the `mvp.v*.js` files for some commented out functionality. Possibly a bad idea to turn it back on if you’re going out to do user research with it because security. I expect so anyway.
 
-##4: Remote - Github and Heroku
+## 4: Remote - Github and Heroku
 
 The Heroku app is https://register-with-a-gp-prototypes.herokuapp.com
 
