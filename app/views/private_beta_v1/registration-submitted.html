@@ -1,0 +1,60 @@
+{% extends '_layouts/layout.html' %}
+
+{% block page_title %}
+  {% if practiceName %}
+    Register with {{ practiceName }}
+  {% else %}
+    {{serviceName}}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  <div class="measure">
+
+    <h1 class="heading-xlarge">Thank you for applying to register with {{ practiceName }}</h1>
+
+    <p>
+      They are dealing with your registration application. They will contact you about it by {{ jsNow | date('add', 2, 'days') | date('Do MMMM YYYY') }}.
+    </p>
+
+    <p>
+      <b>{{ practiceName }}</b><br>
+      {% for line in practiceAddress %}
+        {% if line != '' %}
+          {{ line }}<br>
+        {% endif %}
+      {% endfor %}
+      {{ practicePostcode | upper }}<br><br>
+      Phone: {{ practiceTelephone }}
+    </p>
+
+    <div class="signage info-pop">
+      <div>
+        <p>
+          If you need to see a doctor sooner, contact the practice or <a href="#">find other NHS services that can help you.</a>
+        </p>
+      </div>
+    </div>
+
+    <p>
+      <a href="#">Print this page</a>
+    </p>
+
+    <p>
+      <a href="#">Read about your right to register with a GP practice</a>
+    </p>
+
+    <div>
+      <a href="http://www.nhsbt.nhs.uk/" title="This link will open in a new window or tab" target="_blank">
+        <img src="/images/puff-donation.svg" style="max-width: 100%;">
+      </a>
+    </div>
+
+    <p>
+      <a href="/">Back to NHS.UK</a>
+    </p>
+
+  </div>
+{% endblock %}
+
+{% block footer %}{% endblock %}

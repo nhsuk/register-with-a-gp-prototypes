@@ -23,6 +23,8 @@ var vision_v1 = require('./app/routes/vision.v1');
 
 var emails = require('./app/routes/emails');
 
+var private_beta_v1 = require('./app/routes/private.beta.v1');
+
 var app = express()
 
 // Grab environment variables specified in Procfile or as Heroku config vars
@@ -116,6 +118,8 @@ app.use('/mvp-v1.4', mvp_v1_4);
 app.use('/vision-v1', vision_v1);
 
 app.use('/emails', emails);
+
+app.use('/private-beta-v1', private_beta_v1);
 
 // auto render any view that exists
 app.get(/^\/([^.]+)$/, function (req, res) {
