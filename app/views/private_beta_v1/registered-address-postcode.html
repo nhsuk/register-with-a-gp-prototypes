@@ -49,11 +49,11 @@
       </div>
     </fieldset>
 
-    <p><a href="previous-address-manual">I’ll type in the address</a></p>
+    <p><a href="registered-address-manual">I’ll type in the address</a></p>
 
     <div class="form-group -controls">
       <button type="submit" class="button">Find address</button>
-      {% set back = 'previous-address' %}
+      {% set back = 'registered-address' %}
       {% if session.edit == true %}
         {% set back = 'confirm-details' %}
       {% endif %}
