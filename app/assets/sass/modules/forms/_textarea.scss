@@ -16,10 +16,10 @@ textarea {
   font-weight: $bodyweight;
   line-height: $leading*2;
 
-  background-image: -webkit-linear-gradient(top, $pale-grey 0, rgba(255,255,255,0) 1px);
-  background-image: -moz-linear-gradient(top, $pale-grey 0, rgba(255,255,255,0) 1px);
-  background-image: -o-linear-gradient(top, $pale-grey 0, rgba(255,255,255,0) 1px);
-  background-image: linear-gradient(to bottom, $pale-grey 0, rgba(255,255,255,0) 1px);
+  background-image: -webkit-linear-gradient(top, $grey-3 0, rgba(255,255,255,0) 1px);
+  background-image: -moz-linear-gradient(top, $grey-3 0, rgba(255,255,255,0) 1px);
+  background-image: -o-linear-gradient(top, $grey-3 0, rgba(255,255,255,0) 1px);
+  background-image: linear-gradient(to bottom, $grey-3 0, rgba(255,255,255,0) 1px);
   background-repeat: repeat-y;
   background-size: 100% $leading*2;
 

@@ -1,7 +1,7 @@
 table {
   width: 100%;
   border-collapse: collapse;
-  border-top: 1px solid $pale-grey;
+  border-top: 1px solid $grey-3;
   margin-bottom: $leading*2;
 
   @include media(mid) {
@@ -17,7 +17,7 @@ table {
   }
 
   tr {
-    border-bottom: 1px solid $pale-grey;
+    border-bottom: 1px solid $grey-3;
   }
 
   th, td {
@@ -40,7 +40,7 @@ table {
   th {
     padding-bottom: 0;
     font-weight: $boldweight;
-    color: $dark-grey;
+    color: $grey-1;
 
     @include media(mid) {
       padding-bottom: $leading;

@@ -5,29 +5,29 @@
 
   & > div {
     float: left;
-    border-top: 2px solid $error-colour;
-    background-color: tint($error-colour, 90);
+    border-top: 2px solid $red;
+    background-color: tint($red, 90);
     padding: 0 $leading*2;
-    color: darken($error-colour, 10);
+    color: darken($red, 10);
   }
 
   a {
-    color: darken($error-colour, 10);
+    color: darken($red, 10);
   }
 }
 
 .error-hint {
   display: block;
-  color: $error-colour;
+  color: $red;
 }
 
 .form-group.-errors {
   input,
   textarea {
-    border-color: $error-colour;
+    border-color: $red;
   }
   .js-enabled & .selection-button-radio::before,
   .js-enabled & .selection-button-checkbox::before {
-    border-color: $error-colour;
+    border-color: $red;
   }
 }

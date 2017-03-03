@@ -15,10 +15,10 @@
   padding: 0 $leading*2;
   margin: 0 0 $leading 0;
   text-align: center;
-  color: $pure-white;
-  background-color: $button-green;
+  color: $white;
+  background-color: $green;
   cursor: pointer;
-  border: 1px solid $button-green;
+  border: 1px solid $green;
   -webkit-appearance: none;
 
 
@@ -27,8 +27,8 @@
   &:focus,
   &:visited {
     text-decoration: none;
-    color: $pure-white;
-    background-color: $button-green;
+    color: $white;
+    background-color: $green;
   }
 
   &:focus {
@@ -48,7 +48,7 @@
     border: transparent;
     border-left: 0;
     padding-left: 0;
-    color: $dark-grey;
+    color: $grey-1;
     font-weight: $bodyweight;
     font-size: $smallprint;
     text-decoration: underline;
@@ -61,7 +61,7 @@
       height: 0;
       border-top: 5px solid transparent;
       border-bottom: 5px solid transparent;
-      border-right: 5px solid $dark-grey;
+      border-right: 5px solid $grey-1;
     }
   }
 
@@ -76,8 +76,8 @@
 .button {
 
   &.-bordered {
-    border: 2px solid rgba($pale-grey, 0.5);
-    background-color: rgba($pale-grey, 0.1);
+    border: 2px solid rgba($grey-3, 0.5);
+    background-color: rgba($grey-3, 0.1);
     padding: 2px $leading/2;
     color: $nhs-blue;
     margin-right: $leading/4;
@@ -85,7 +85,7 @@
 
   }
   &.-bordered:hover {
-    background-color: $pale-grey;
+    background-color: $grey-3;
   }
 
   &.-small {

@@ -7,7 +7,7 @@ $smallprint: 16px;
 
 body,
 .body {
-  color: $text-colour;
+  color: $black;
   font-family: $family;
   font-weight: $bodyweight;
   font-size: $body;
@@ -55,5 +55,5 @@ h3,
 
 .smallprint {
   font-size: $smallprint;
-  color: $smallprint-grey;
+  color: $grey-1;
 }

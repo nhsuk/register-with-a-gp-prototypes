@@ -11,24 +11,9 @@
   clear: both;
 }
 
-/*
-
-these should be a scale of tint: blue00, blue10...blue70....
-i.e. NHS is blue50 as thats a median point, and if we add dark or light tints,
-we can add other blues, named like blue40 (for a lighter blue) or blue60 for a darker blue.
-
-*/
-/*#0988E7;*/
-/* #70C1FF */
-/*
-    colours to test:
-    very light grey:F7F7F7
-    very light NHS blue: EBF6FF
-  */
-/*#5CAEED; /* #0AC0FC; E2EEFB */
 body, pre.user-input,
 .body {
-  color: #0b0c0c;
+  color: #231f20;
   font-family: "Neue Frutiger W01", sans-serif;
   font-weight: 400;
   font-size: 20px;
@@ -81,7 +66,7 @@ h3, .heading-large,
 
 .smallprint {
   font-size: 16px;
-  color: #666666;
+  color: #425563;
 }
 
 /* remove undelines for a tags used as anchors */
@@ -138,28 +123,28 @@ ul.link-list {
 }
 
 a {
-  color: #0072c6;
+  color: #005eb8;
   text-decoration: underline;
 }
 
 a:hover {
-  color: #66B0E8;
+  color: #4c92d9;
 }
 
 a:visited {
-  color: #4c2c92;
+  color: #003087;
 }
 
 a:focus {
   outline: 0;
-  -webkit-box-shadow: 0 0 0 5px #F7E214;
-  -moz-box-shadow: 0 0 0 5px #F7E214;
-  box-shadow: 0 0 0 5px #F7E214;
+  -webkit-box-shadow: 0 0 0 5px #ffb81c;
+  -moz-box-shadow: 0 0 0 5px #ffb81c;
+  box-shadow: 0 0 0 5px #ffb81c;
 }
 
 .prototype-warning {
   background-color: #425563;
-  color: #d9e1e2;
+  color: #d8dde0;
   font-size: 16px;
   line-height: 24px;
 }
@@ -225,23 +210,23 @@ a:focus {
   margin: 0 0 16px 0;
   text-align: center;
   color: #fff;
-  background-color: #3E8117;
+  background-color: #007f3b;
   cursor: pointer;
-  border: 1px solid #3E8117;
+  border: 1px solid #007f3b;
   -webkit-appearance: none;
 }
 
 .button:link, .button:hover, .button:focus, .button:visited {
   text-decoration: none;
   color: #fff;
-  background-color: #3E8117;
+  background-color: #007f3b;
 }
 
 .button:focus {
   outline: 0;
-  -webkit-box-shadow: 0 0 0 5px #F7E214;
-  -moz-box-shadow: 0 0 0 5px #F7E214;
-  box-shadow: 0 0 0 5px #F7E214;
+  -webkit-box-shadow: 0 0 0 5px #ffb81c;
+  -moz-box-shadow: 0 0 0 5px #ffb81c;
+  box-shadow: 0 0 0 5px #ffb81c;
 }
 
 @media (min-width: 500px) {
@@ -274,23 +259,23 @@ a:focus {
 }
 
 .button.-secondary {
-  background-color: #e6f1f9;
-  border-color: #cce3f4;
+  background-color: #e6eff8;
+  border-color: #ccdff1;
   color: #231f20;
   font-weight: 400;
 }
 
 .button.-bordered {
-  border: 2px solid rgba(217, 225, 226, 0.5);
-  background-color: rgba(217, 225, 226, 0.1);
+  border: 2px solid rgba(174, 183, 189, 0.5);
+  background-color: rgba(174, 183, 189, 0.1);
   padding: 2px 8px;
-  color: #0072c6;
+  color: #005eb8;
   margin-right: 4px;
   font-weight: 400;
 }
 
 .button.-bordered:hover {
-  background-color: #d9e1e2;
+  background-color: #aeb7bd;
 }
 
 .button.-small {
@@ -303,7 +288,7 @@ a:focus {
 table {
   width: 100%;
   border-collapse: collapse;
-  border-top: 1px solid #d9e1e2;
+  border-top: 1px solid #aeb7bd;
   margin-bottom: 32px;
 }
 
@@ -320,7 +305,7 @@ table caption {
 }
 
 table tr {
-  border-bottom: 1px solid #d9e1e2;
+  border-bottom: 1px solid #aeb7bd;
 }
 
 table th, table td {
@@ -406,13 +391,13 @@ details summary {
 
 details summary:focus {
   outline: 0;
-  -webkit-box-shadow: 0 0 0 5px #F7E214;
-  -moz-box-shadow: 0 0 0 5px #F7E214;
-  box-shadow: 0 0 0 5px #F7E214;
+  -webkit-box-shadow: 0 0 0 5px #ffb81c;
+  -moz-box-shadow: 0 0 0 5px #ffb81c;
+  box-shadow: 0 0 0 5px #ffb81c;
 }
 
 html {
-  background-color: #d9e1e2;
+  background-color: #aeb7bd;
 }
 
 #global-footer {
@@ -420,8 +405,8 @@ html {
   padding-top: 16px;
   padding-bottom: 16px;
   min-height: 80px;
-  border-top: 1px solid #cbd6d7;
-  background-color: #d9e1e2;
+  border-top: 1px solid #a0abb2;
+  background-color: #aeb7bd;
 }
 
 .footer-container {
@@ -455,29 +440,29 @@ html {
 
 .error-summary > div {
   float: left;
-  border-top: 2px solid #D81E05;
-  background-color: #fbe9e6;
+  border-top: 2px solid #da291c;
+  background-color: #fbeae8;
   padding: 0 32px;
-  color: #a61704;
+  color: #ad2116;
 }
 
 .error-summary a {
-  color: #a61704;
+  color: #ad2116;
 }
 
 .error-hint {
   display: block;
-  color: #D81E05;
+  color: #da291c;
 }
 
 .form-group.-errors input,
 .form-group.-errors textarea {
-  border-color: #D81E05;
+  border-color: #da291c;
 }
 
 .js-enabled .form-group.-errors .selection-button-radio::before,
 .js-enabled .form-group.-errors .selection-button-checkbox::before {
-  border-color: #D81E05;
+  border-color: #da291c;
 }
 
 fieldset {
@@ -536,7 +521,7 @@ input[type='password'] {
   width: 100%;
   margin: 16px 0 32px 0;
   padding: 8px;
-  border: 2px solid #0072c6;
+  border: 2px solid #005eb8;
   font-family: inherit;
   font-size: inherit;
   font-weight: 400;
@@ -559,9 +544,9 @@ input[type='tel']:focus,
 input[type='email']:focus,
 input[type='password']:focus {
   outline: 0;
-  -webkit-box-shadow: 0 0 0 5px #F7E214;
-  -moz-box-shadow: 0 0 0 5px #F7E214;
-  box-shadow: 0 0 0 5px #F7E214;
+  -webkit-box-shadow: 0 0 0 5px #ffb81c;
+  -moz-box-shadow: 0 0 0 5px #ffb81c;
+  box-shadow: 0 0 0 5px #ffb81c;
 }
 
 @media (min-width: 500px) {
@@ -663,7 +648,7 @@ label .form-hint {
 
 .js-enabled .block-label.selection-button-radio::before {
   content: "";
-  border: 3px solid #0072c6;
+  border: 3px solid #005eb8;
   border-radius: 50%;
   background: #fff;
   width: 34px;
@@ -689,7 +674,7 @@ label .form-hint {
 
 .js-enabled .block-label.selection-button-checkbox::before {
   content: "";
-  border: 3px solid #0072c6;
+  border: 3px solid #005eb8;
   background: #fff;
   width: 34px;
   height: 34px;
@@ -719,9 +704,9 @@ label .form-hint {
 }
 
 .js-enabled .block-label.selection-button-radio.focused::before, .js-enabled .block-label.selection-button-checkbox.focused::before {
-  -webkit-box-shadow: 0 0 0 5px #F7E214;
-  -moz-box-shadow: 0 0 0 5px #F7E214;
-  box-shadow: 0 0 0 5px #F7E214;
+  -webkit-box-shadow: 0 0 0 5px #ffb81c;
+  -moz-box-shadow: 0 0 0 5px #ffb81c;
+  box-shadow: 0 0 0 5px #ffb81c;
 }
 
 .js-enabled .block-label.selection-button-radio.selected::after, .js-enabled .block-label.selection-button-checkbox.selected::after {
@@ -742,15 +727,15 @@ textarea {
   width: 100%;
   margin: 16px 0 32px 0;
   padding: 8px;
-  border: 2px solid #0072c6;
+  border: 2px solid #005eb8;
   font-family: inherit;
   font-size: inherit;
   font-weight: 400;
   line-height: 32px;
-  background-image: -webkit-linear-gradient(top, #d9e1e2 0, rgba(255, 255, 255, 0) 1px);
-  background-image: -moz-linear-gradient(top, #d9e1e2 0, rgba(255, 255, 255, 0) 1px);
-  background-image: -o-linear-gradient(top, #d9e1e2 0, rgba(255, 255, 255, 0) 1px);
-  background-image: linear-gradient(to bottom, #d9e1e2 0, rgba(255, 255, 255, 0) 1px);
+  background-image: -webkit-linear-gradient(top, #aeb7bd 0, rgba(255, 255, 255, 0) 1px);
+  background-image: -moz-linear-gradient(top, #aeb7bd 0, rgba(255, 255, 255, 0) 1px);
+  background-image: -o-linear-gradient(top, #aeb7bd 0, rgba(255, 255, 255, 0) 1px);
+  background-image: linear-gradient(to bottom, #aeb7bd 0, rgba(255, 255, 255, 0) 1px);
   background-repeat: repeat-y;
   background-size: 100% 32px;
   /*@include media(mid) {
@@ -760,9 +745,9 @@ textarea {
 
 textarea:focus {
   outline: 0;
-  -webkit-box-shadow: 0 0 0 5px #F7E214;
-  -moz-box-shadow: 0 0 0 5px #F7E214;
-  box-shadow: 0 0 0 5px #F7E214;
+  -webkit-box-shadow: 0 0 0 5px #ffb81c;
+  -moz-box-shadow: 0 0 0 5px #ffb81c;
+  box-shadow: 0 0 0 5px #ffb81c;
 }
 
 .gp-local-header {
@@ -785,14 +770,14 @@ textarea:focus {
 }
 
 .status.-open {
-  border: 2px solid #d6efc8;
+  border: 2px solid #ddefc7;
 }
 
 .map {
   width: 100%;
   height: 200px;
   margin: 16px 0 32px 0;
-  border: 2px solid #ecf0f1;
+  border: 2px solid #d7dbde;
 }
 
 @media (min-width: 500px) {
@@ -823,7 +808,7 @@ textarea:focus {
   font-family: inherit;
   color: #fff;
   text-indent: -999em;
-  background: url("/images/icon-search.svg") center no-repeat #0072c6;
+  background: url("/images/icon-search.svg") center no-repeat #005eb8;
   background-size: 65%;
   border: 0;
   cursor: pointer;
@@ -843,7 +828,7 @@ textarea:focus {
   text-decoration: none;
   color: #231f20;
   background-color: #fff;
-  border: 1px solid rgba(118, 134, 146, 0.2);
+  border: 1px solid #425563;
   border-bottom-width: 2px;
 }
 
@@ -854,13 +839,13 @@ textarea:focus {
 }
 
 .gp-finder-results .result:hover, .gp-finder-results .result:focus {
-  outline: 3px solid #F7E214;
+  outline: 3px solid #ffb81c;
 }
 
 .gp-finder-results .result-title {
   font-size: 20px;
   font-weight: 400;
-  color: #0072c6;
+  color: #005eb8;
   text-decoration: underline;
   margin: 0;
 }
@@ -915,7 +900,7 @@ textarea:focus {
   padding-left: 2px;
   padding-right: 2px;
   font-weight: 400;
-  background-color: #e6f1f9;
+  background-color: #e6eff8;
 }
 
 .gp-finder-results a.start-of-page:not(:first-child) {
@@ -966,7 +951,7 @@ textarea:focus {
 }
 
 #global-header {
-  border-bottom: 3px solid #0072c6;
+  border-bottom: 3px solid #005eb8;
   padding: 16px 0;
 }
 
@@ -1008,7 +993,7 @@ textarea:focus {
 
 .header-panel {
   color: #fff;
-  background-color: #0072c6;
+  background-color: #005eb8;
   padding: 32px 16px 16px 16px;
   margin-bottom: 32px;
 }
@@ -1026,7 +1011,7 @@ textarea:focus {
 .header-panel .content-seperator {
   width: 130px;
   height: 4px;
-  background-color: #338ed1;
+  background-color: #337ec6;
 }
 
 .header-panel .precis {
@@ -1054,30 +1039,30 @@ textarea:focus {
 }
 
 .message {
-  border-top: 2px solid #F7E214;
-  background-color: #fefce8;
-  color: #6e6404;
+  border-top: 2px solid #ffb81c;
+  background-color: #fff8e8;
+  color: #825900;
 }
 
 .completion {
-  border-top: 2px solid #5bbf21;
-  background-color: #eff9e9;
+  border-top: 2px solid #78be20;
+  background-color: #f2f9e9;
 }
 
 .info-pop {
-  color: #0072c6;
+  color: #005eb8;
   font-weight: 700;
   border: 4px solid currentcolor;
 }
 
 .subtle-push {
-  border: 2px solid #80b9e3;
+  border: 2px solid #80afdc;
 }
 
 .nhsid-container {
   margin: 32px auto;
   padding: 64px 0 0 0;
-  background: #0072c6 url("/images/nhs-logotype-blue.svg") no-repeat 16px 16px;
+  background: #005eb8 url("/images/nhs-logotype-blue.svg") no-repeat 16px 16px;
   background-size: 70px;
 }
 
@@ -1088,7 +1073,7 @@ textarea:focus {
 }
 
 .nhsid-container > div {
-  background-color: #f2f8fc;
+  background-color: #f2f7fb;
   padding: 32px 32px 16px 32px;
 }
 
@@ -1099,7 +1084,7 @@ textarea:focus {
 
 .nhsid-container .nhsid-secondary-controls {
   clear: both;
-  border-top: 1px solid #d9eaf6;
+  border-top: 1px solid #d9e7f4;
   margin-top: 32px;
   padding-top: 16px;
   font-size: 16px;
