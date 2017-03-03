@@ -23,7 +23,7 @@
   width: 100%;
   height: 200px;
   margin: $leading 0 $leading*2 0;
-  border: 2px solid tint($pale-grey, 50);
+  border: 2px solid tint($grey-3, 50);
 
   @include media(mid) {
     height: 400px;

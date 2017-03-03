@@ -20,7 +20,7 @@
     padding: 0;
     margin: $leading 0;
     font-family: inherit;
-    color: $pure-white;
+    color: $white;
     text-indent: -999em;
     background: url("/images/icon-search.svg") center no-repeat $blue;
     background-size: 65%;
@@ -43,8 +43,8 @@
     padding: 12px 12px 6px 12px;
     text-decoration: none;
     color: $black;
-    background-color: $pure-white;
-    border: 1px solid $grey-2;
+    background-color: $white;
+    border: 1px solid $grey-1;
     border-bottom-width: 2px;
 
     @include media(large) {
@@ -102,7 +102,7 @@
       bottom: 0;
       display: block;
       width: 12px;
-      background-color: $pure-white;
+      background-color: $white;
       border-top: 1px dotted $black;
     }
   }
