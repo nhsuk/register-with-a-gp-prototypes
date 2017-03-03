@@ -6,7 +6,7 @@
   & > div {
     float: left;
     border-top: 2px solid $red;
-    background-color: tint($red, 90);
+    background-color: $red-10;
     padding: 0 $leading*2;
     color: darken($red, 10);
   }
