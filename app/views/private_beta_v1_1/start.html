@@ -15,7 +15,7 @@
       <ol class="breadcrumb">
         <li><a href="#" class="button -bordered -small">GP practices</a></li>
         <li><a href="#" class="button -bordered -small">{{ practiceName }}</a></li>
-        <li class="selected">Register</li>
+        <li class="selected">Registration</li>
       </ol>
     </div>
   </div>
@@ -24,10 +24,10 @@
     <div class="grid-3-3">
       <div class="header-panel">
         <h1 class="h2 header">
-          Register with {{ practiceName }}
+          Apply to register with {{ practiceName }}
         </h1>
         <div class="content-seperator"></div>
-        <p class="h3 precis">It usually takes about 10 minutes.</p>
+        <p class="h3 precis">There are two parts for you to complete.</p>
       </div>
     </div>
   </div>
@@ -35,25 +35,31 @@
 
   <div class="measure">
 
-    <h2>You’ll need to provide:</h2>
+    <h2>
+      <span class="heading-prefix">Part 1</span>
+      Your details
+    </h2>
+
+    <h3>You’ll need to provide:</h3>
 
     <ul>
       <li>your name and date of birth</li>
-      <li>contact details</li>
-      <li>your address</li>
+      <li>your address and contact details</li>
     </ul>
 
-    <h3>Other things you’ll be asked</h3>
-
-    <p>It will help {{ practiceName }} find your medical records if you’re able to provide as much information as you can. This could include:</p>
+    <h3>You’ll also be asked for:</h3>
 
     <ul>
       <li>the GP you’re currently registered with if you have one</li>
-      <li>the name or address under which you’re registered with your current GP (if they’re different)</li>
-      <li>details of any allergies, medication and your general health</li>
+      <li>the name and address under which you’re registered with your current
+        GP (if they’re different)</li>
       <li>your military service number (if you have one) and enlistment date</li>
       <li>your NHS number if you know it</li>
     </ul>
+
+    <p>
+      This is to help {{ practiceName }} find your medical records.
+    </p>
 
     <details>
       <summary>How to find your NHS number</summary>
@@ -73,9 +79,25 @@
       </div>
     </details>
 
-    <p>You can still register without this information.</p>
+    <div class="content-seperator"></div>
 
-    <div class="cta">
+    <h2 class="shunt">
+      <span class="heading-prefix">Part 2</span>
+      About your health
+    </h2>
+
+    <p>
+      You’ll be asked to fill in a health questionnaire which will ask about
+      any allergies, medication and your general health.
+    </p>
+
+    <p>
+      This is to help {{ practiceName }} DO SOMETHING.
+    </p>
+
+    <div class="content-seperator"></div>
+
+    <div class="cta shunt">
       <a href="name" class="button">Start</a>
     </div>
 

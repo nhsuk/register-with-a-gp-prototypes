@@ -82,6 +82,7 @@ h6 a {
 .heading-prefix {
   display: block;
   font-size: 20px;
+  font-weight: 400;
   line-height: 1;
   color: #918f90;
 }
@@ -1008,14 +1009,14 @@ textarea:focus {
   margin-bottom: 32px;
 }
 
-.header-panel .content-seperator {
+.header-panel .precis {
+  font-weight: 200;
+}
+
+.content-seperator {
   width: 130px;
   height: 4px;
   background-color: #337ec6;
-}
-
-.header-panel .precis {
-  font-weight: 200;
 }
 
 .signage {

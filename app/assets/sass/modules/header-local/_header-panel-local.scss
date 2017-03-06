@@ -12,13 +12,13 @@
     margin-bottom: $leading*2;
   }
 
-  .content-seperator {
-    width: 130px;
-    height: $leading/4;
-    background-color: tint($nhs-blue, 20%);
-  }
-
   .precis {
     font-weight: $lightweight;
   }
+}
+
+.content-seperator {
+  width: 130px;
+  height: $leading/4;
+  background-color: tint($nhs-blue, 20%);
 }
