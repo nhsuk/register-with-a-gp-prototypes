@@ -1,7 +1,7 @@
 {% extends '_layouts/layout.html' %}
 
 {% block page_title %}
-  Your medical history :
+  Your health :
   {% if practiceName %}
     Register with {{ practiceName }}
   {% else %}
@@ -10,6 +10,9 @@
 {% endblock %}
 
 {% block content %}
+
+  {% include "_includes/section-indicator-2.html" %}
+
   <form method="post">
 
     <h1 class="primary">Your health</h1>

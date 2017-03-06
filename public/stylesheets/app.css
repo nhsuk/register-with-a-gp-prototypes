@@ -1019,6 +1019,10 @@ textarea:focus {
   background-color: #337ec6;
 }
 
+.section-indicator {
+  color: #425563;
+}
+
 .signage {
   margin: 32px 0;
 }
