@@ -62,8 +62,8 @@ router.post('/name', function (req, res) {
       last: req.body['last-name']
     });
   } else {
-    if (req.session.edit === true) {
-      res.redirect('confirm-details')
+    if (req.session.edit === 'part-one') {
+      res.redirect('check-your-details')
     } else {
       res.redirect('date-of-birth')
     }
@@ -87,8 +87,8 @@ router.post('/date-of-birth', function (req, res) {
   if (req.body['dob-day'] === '' || req.body['dob-month'] === '' || req.body['dob-year'] === '') {
     res.render('private_beta_v1_1/date-of-birth', { error: 'Please enter your date of birth' });
   } else {
-    if (req.session.edit === true) {
-      res.redirect('confirm-details')
+    if (req.session.edit === 'part-one') {
+      res.redirect('check-your-details')
     } else {
       res.redirect('home-address')
     }
@@ -181,8 +181,8 @@ router.post('/select-address', function (req, res) {
     });
   } else {
     req.session.homeAddress.address = req.body['address'].split(',');
-    if (req.session.edit === true) {
-      res.redirect('confirm-details')
+    if (req.session.edit === 'part-one') {
+      res.redirect('check-your-details')
     } else {
       res.redirect('contact-email')
     }
@@ -212,8 +212,8 @@ router.post('/home-address-manual', function (req, res) {
     res.render('private_beta_v1_1/home-address-manual', {
       error: 'Please enter your full address'
     });
-  } else if (req.session.edit === true) {
-    res.redirect('confirm-details')
+  } else if (req.session.edit === 'part-one') {
+    res.redirect('check-your-details')
   } else {
     res.redirect('contact-email')
   }
@@ -233,8 +233,8 @@ router.post('/contact-email', function (req, res) {
 
   req.session.contact.email = req.body['email']
 
-  if (req.session.edit === true) {
-    res.redirect('confirm-details')
+  if (req.session.edit === 'part-one') {
+    res.redirect('check-your-details')
   } else {
     res.redirect('contact-telephone')
   }
@@ -253,8 +253,8 @@ router.post('/contact-telephone', function (req, res) {
 
   req.session.contact.telephone = req.body['telephone']
 
-  if (req.session.edit === true) {
-    res.redirect('confirm-details')
+  if (req.session.edit === 'part-one') {
+    res.redirect('check-your-details')
   } else {
     res.redirect('armed-forces')
   }
@@ -284,11 +284,11 @@ router.post('/armed-forces', function (req, res) {
     res.render('private_beta_v1_1/armed-forces', { error });
   } else {
 
-    if (req.session.edit === true) {
+    if (req.session.edit === 'part-one') {
       if (!req.session.armedforces.serviceno) {
         res.redirect('armed-forces-service-number')
       } else {
-        res.redirect('confirm-details')
+        res.redirect('check-your-details')
       }
     } else {
       if (req.session.armedforces.leaving === 'yes') {
@@ -314,11 +314,11 @@ router.post('/armed-forces-service-number', function (req, res) {
   }
   req.session.armedforces.serviceno = req.body['service-no']
 
-  if (req.session.edit === true) {
+  if (req.session.edit === 'part-one') {
     if (!req.session.armedforces.enlistment) {
       res.redirect('armed-forces-enlistment-date')
     } else {
-      res.redirect('confirm-details')
+      res.redirect('check-your-details')
     }
   } else {
     res.redirect('armed-forces-enlistment-date')
@@ -342,8 +342,8 @@ router.post('/armed-forces-enlistment-date', function (req, res) {
     year: req.body['enlistment-year']
   }
 
-  if (req.session.edit === true) {
-    res.redirect('confirm-details')
+  if (req.session.edit === 'part-one') {
+    res.redirect('check-your-details')
   } else {
     res.redirect('current-gp')
   }
@@ -375,8 +375,8 @@ router.post('/current-gp', function (req, res) {
   } else if (req.body['current-gp'] === 'yes') {
     res.redirect('current-gp-lookup')
   } else {
-    if (req.session.edit === true) {
-      res.redirect('confirm-details')
+    if (req.session.edit === 'part-one') {
+      res.redirect('check-your-details')
     } else {
       res.redirect('nhs-number')
     }
@@ -397,11 +397,11 @@ router.post('/current-gp-lookup', function (req, res) {
 
   req.session.currentgp.name = req.body['practice-name'];
   req.session.currentgp.address = req.body['practice-address'].split(',');
-  if (req.session.edit === true) {
+  if (req.session.edit === 'part-one') {
     if (!req.session.prevaddress) {
       res.redirect('registered-address')
     } else {
-      res.redirect('confirm-details')
+      res.redirect('check-your-details')
     }
   } else {
     res.redirect('registered-address')
@@ -433,8 +433,8 @@ router.post('/registered-address', function (req, res) {
   } else if (req.body['registered-address-correct'] === 'no') {
     res.redirect('registered-address-postcode')
   } else {
-    if (req.session.edit === true && req.session.name.nameChanged) {
-      res.redirect('confirm-details')
+    if (req.session.edit === 'part-one' && req.session.name.nameChanged) {
+      res.redirect('check-your-details')
     } else {
       res.redirect('registered-name')
     }
@@ -525,8 +525,8 @@ router.post('/select-registered-address', function (req, res) {
     });
   } else {
     req.session.currentgp.registeredaddress.address = req.body['address'].split(',');
-    if (req.session.edit === true && req.session.name.nameChanged) {
-      res.redirect('confirm-details')
+    if (req.session.edit === 'part-one' && req.session.name.nameChanged) {
+      res.redirect('check-your-details')
     } else {
       res.redirect('registered-name')
     }
@@ -552,8 +552,8 @@ router.post('/previous-address-manual', function (req, res) {
     res.render('private_beta_v1_1/home-address-manual', {
       error: 'Please enter your full address'
     });
-  } else if (req.session.edit === true && req.session.name.nameChanged) {
-    res.redirect('confirm-details')
+  } else if (req.session.edit === 'part-one' && req.session.name.nameChanged) {
+    res.redirect('check-your-details')
   } else {
     res.redirect('registered-name')
   }
@@ -588,8 +588,8 @@ router.post('/registered-name', function(req, res) {
     if (req.body['name-different'] === 'yes') {
       res.redirect('registered-name-details')
     } else {
-      if (req.session.edit === true) {
-        res.redirect('confirm-details')
+      if (req.session.edit === 'part-one') {
+        res.redirect('check-your-details')
       } else {
         res.redirect('nhs-number')
       }
@@ -623,8 +623,8 @@ router.post('/registered-name-details', function(req, res) {
   if (passed === false) {
     res.render('private_beta_v1_1/registered-name-details', { error });
   } else {
-    if (req.session.edit === true) {
-      res.redirect('confirm-details')
+    if (req.session.edit === 'part-one') {
+      res.redirect('check-your-details')
     } else {
       res.redirect('nhs-number')
     }
@@ -658,10 +658,11 @@ router.post('/nhs-number', function (req, res) {
     if (req.body['nhs-number-known'] === 'yes') {
       res.redirect('nhs-number-details')
     } else {
-      if (req.session.edit === true) {
-        res.redirect('confirm-details')
+      if (req.session.edit === 'part-one') {
+        res.redirect('check-your-details')
       } else {
-        res.redirect('current-medication')
+        //res.redirect('current-medication')
+        res.redirect('check-your-details')
       }
     }
   }
@@ -691,14 +692,22 @@ router.post('/nhs-number-details', function (req, res) {
   if (passed === false) {
     res.render('private_beta_v1_1/nhs-number-details', { error });
   } else {
-    if (req.session.edit === true) {
-      res.redirect('confirm-details')
+    if (req.session.edit === 'part-one') {
+      res.redirect('check-your-details')
     } else {
-      res.redirect('current-medication')
+      //res.redirect('current-medication')
+      res.redirect('check-your-details')
     }
   }
 
 });
+
+// End of 'your details' - sum up for editing
+router.get('/check-your-details', function (req, res) {
+  req.session.edit = 'part-one';
+  res.render('private_beta_v1_1/check-your-details' );
+})
+
 
 // Minimumn health questionnaire: current meds? ++++++++++++++++++++++++++++++++
 router.get('/current-medication', function (req, res) {

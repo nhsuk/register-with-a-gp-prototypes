@@ -211,60 +211,12 @@
     {% endif %}
   </table>
 
-  <table class="measure">
-    <caption>Your health</caption>
-    <tr>
-      <th scope="row">Medication</th>
-      <td>
-        {% if session.health.medication == 'yes' %}
-          {{ session.health.medicationDetails | striptags(true) | escape | nl2br }}
-        {% endif %}
-        {% if session.health.medication == 'no' %}
-          I’m not currently taking any medication
-        {% endif %}
-      </td>
-      <td class="control">
-        <a href="current-medication" class="button -secondary">Change</a>
-      </td>
-    </tr>
-
-    <tr>
-      <th scope="row">Allergies</th>
-      <td>
-        {% if session.health.allergies == 'yes' %}
-          {{ session.health.allergiesDetails | striptags(true) | escape | nl2br }}
-        {% endif %}
-        {% if session.health.allergies == 'no' %}
-          I don’t have any allergies
-        {% endif %}
-      </td>
-      <td class="control">
-        <a href="any-allergies" class="button -secondary">Change</a>
-      </td>
-    </tr>
-
-    <tr>
-      <th scope="row">Health</th>
-      <td>
-        {% if session.health.medicalHistory !== 'no' %}
-          {{ session.health.medicalHistory | striptags(true) | escape | nl2br }}
-        {% endif %}
-        {% if session.health.medicalHistory === 'no' %}
-          I’m not supplying any health details
-        {% endif %}
-      </td>
-      <td class="control">
-        <a href="medical-history" class="button -secondary">Change</a>
-      </td>
-    </tr>
-  </table>
-
   <div class="shunt-2">
-    <a href="registration-submitted" class="button">Send my details</a>
-    <p class="measure form-hint shunt">
-      Your details will be sent to {{ practiceName }} to begin your registration.
-      {% if session.contact.email != '' %} A confirmation email will be sent to {{ session.contact.email }}.{% endif %}
+    <p class="measure form-hint">
+      Once you’re happy that your details are correct, please continue on to
+      part two &mdash; your health:
     </p>
+    <a href="current-medication" class="button">Continue to part 2</a>
   </div>
 
 {% endblock %}
