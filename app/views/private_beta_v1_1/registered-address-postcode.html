@@ -13,7 +13,7 @@
 
   {% include "_includes/section-indicator-1.html" %}
 
-  <h1 class="primary">What was your address?</h1>
+  <h1 class="primary">What is your registered address?</h1>
 
   <form method="post" class="measure">
     <fieldset>
@@ -56,8 +56,8 @@
     <div class="form-group -controls">
       <button type="submit" class="button">Find address</button>
       {% set back = 'registered-address' %}
-      {% if session.edit == true %}
-        {% set back = 'confirm-details' %}
+      {% if session.edit != false %}
+        {% set back = 'check-your-details' %}
       {% endif %}
       <a href="{{ back }}" class="button -back">Back</a>
     </div>

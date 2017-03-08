@@ -30,14 +30,12 @@
 
       <div class="signage subtle-push">
         <div>
-          <p>
-            {% for line in session.homeAddress.address %}
-              {% if line != '' %}
-                {{ line }}<br>
-              {% endif %}
-            {% endfor %}
-            {{ session.homeAddress.postcode | upper }}
-          </p>
+          {% for line in session.homeAddress.address %}
+            {% if line != '' %}
+              {{ line }}<br>
+            {% endif %}
+          {% endfor %}
+          {{ session.homeAddress.postcode | upper }}
         </div>
       </div>
 
@@ -59,8 +57,8 @@
     <div class="form-group -controls">
       <button type="submit" class="button">Continue</button>
       {% set back = 'current-gp-lookup' %}
-      {% if session.edit == true %}
-        {% set back = 'confirm-details' %}
+      {% if session.edit != false %}
+        {% set back = 'check-your-details' %}
       {% endif %}
       <a href="{{ back }}" class="button -back">Back</a>
     </div>

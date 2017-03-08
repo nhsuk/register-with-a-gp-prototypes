@@ -12,7 +12,7 @@ input[type='password'] {
   -webkit-box-sizing: border-box;
   display: block; // Remove margin under textarea in Chrome and FF
   width: 100%;
-  margin: $leading 0 $leading*2 0;
+  margin: $leading/2 0 $leading 0;
   padding: $leading/2;
   border: 2px solid $nhs-blue;
   font-family: inherit;
@@ -22,6 +22,7 @@ input[type='password'] {
 
   @include media(mid) {
     width: 75%;
+    margin: $leading 0 $leading*2 0;
   }
 
   &:focus {

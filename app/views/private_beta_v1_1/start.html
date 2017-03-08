@@ -23,11 +23,9 @@
   <div class="grid-row">
     <div class="grid-3-3">
       <div class="header-panel">
-        <h1 class="h2 header">
+        <h1 class="header">
           Apply to register with {{ practiceName }}
         </h1>
-        <div class="content-seperator"></div>
-        <p class="h3 precis">There are two parts for you to complete.</p>
       </div>
     </div>
   </div>
@@ -35,53 +33,57 @@
 
   <div class="measure">
 
-    <h2>
+    <p>This application is made up of two parts.</p>
+
+    <div class="content-seperator"></div>
+
+    <h2 class="h1 shunt">
       <span class="heading-prefix">Part 1</span>
       Your details
     </h2>
 
-    <h3>You’ll need to provide:</h3>
+    <h3 class="body p">You’ll need to provide:</h3>
 
     <ul>
       <li>your name and date of birth</li>
       <li>your address and contact details</li>
     </ul>
 
-    <h3>You’ll also be asked for:</h3>
+    <h3 class="body p">You’ll also be asked for:</h3>
 
     <ul>
       <li>the GP you’re currently registered with if you have one</li>
       <li>the name and address under which you’re registered with your current
         GP (if they’re different)</li>
       <li>your military service number (if you have one) and enlistment date</li>
-      <li>your NHS number if you know it</li>
+      <li>
+        <details class="-inline">
+          <summary>your <span class="details-cta">NHS number</span> if you know it</summary>
+          <div class="signage">
+            <div class="info">
+              <p>
+                An NHS number is 10 digits, for example <b>943 476 5919</b>
+              </p>
+              <p>You can find your NHS number:</p>
+              <ul>
+                <li><a href="javascript:return false;">online</a></li>
+                <li>on a printed prescription</li>
+                <li>on a letter from your GP or a hospital</li>
+                <li>on your NHS medical card if you have one</li>
+              </ul>
+            </div>
+          </div>
+        </details>
+      </li>
     </ul>
 
     <p>
       This is to help {{ practiceName }} find your medical records.
     </p>
 
-    <details>
-      <summary>How to find your NHS number</summary>
-      <div class="signage">
-        <div class="info">
-          <p>
-            An NHS number is a 10 digit number, for example: <b>943 476 5919</b>
-          </p>
-          <p>You can find your NHS number:</p>
-          <ul>
-            <li><a href="javascript:return false;">online</a></li>
-            <li>on a printed prescription</li>
-            <li>on a letter from your GP or a hospital</li>
-            <li>on your NHS medical card if you have one</li>
-          </ul>
-        </div>
-      </div>
-    </details>
-
     <div class="content-seperator"></div>
 
-    <h2 class="shunt">
+    <h2 class="h1 shunt">
       <span class="heading-prefix">Part 2</span>
       About your health
     </h2>
@@ -92,7 +94,7 @@
     </p>
 
     <p>
-      This is to help {{ practiceName }} DO SOMETHING.
+      This is to help {{ practiceName }} understand your needs.
     </p>
 
     <div class="content-seperator"></div>

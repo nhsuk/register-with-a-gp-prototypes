@@ -18,7 +18,7 @@ var to_email = new helper.Email('rgp-team@digital.nhs.uk');
 
 // Start page +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/start', function (req, res) {
-  req.session.destroy();
+  req.session.edit = false;
   res.render('private_beta_v1_1/start', {
     suppressServiceName: true
   });
@@ -62,7 +62,7 @@ router.post('/name', function (req, res) {
       last: req.body['last-name']
     });
   } else {
-    if (req.session.edit === 'part-one') {
+    if (req.session.edit !== false) {
       res.redirect('check-your-details')
     } else {
       res.redirect('date-of-birth')
@@ -87,7 +87,7 @@ router.post('/date-of-birth', function (req, res) {
   if (req.body['dob-day'] === '' || req.body['dob-month'] === '' || req.body['dob-year'] === '') {
     res.render('private_beta_v1_1/date-of-birth', { error: 'Please enter your date of birth' });
   } else {
-    if (req.session.edit === 'part-one') {
+    if (req.session.edit !== false) {
       res.redirect('check-your-details')
     } else {
       res.redirect('home-address')
@@ -181,7 +181,7 @@ router.post('/select-address', function (req, res) {
     });
   } else {
     req.session.homeAddress.address = req.body['address'].split(',');
-    if (req.session.edit === 'part-one') {
+    if (req.session.edit !== false) {
       res.redirect('check-your-details')
     } else {
       res.redirect('contact-email')
@@ -212,7 +212,7 @@ router.post('/home-address-manual', function (req, res) {
     res.render('private_beta_v1_1/home-address-manual', {
       error: 'Please enter your full address'
     });
-  } else if (req.session.edit === 'part-one') {
+  } else if (req.session.edit !== false) {
     res.redirect('check-your-details')
   } else {
     res.redirect('contact-email')
@@ -233,7 +233,7 @@ router.post('/contact-email', function (req, res) {
 
   req.session.contact.email = req.body['email']
 
-  if (req.session.edit === 'part-one') {
+  if (req.session.edit !== false) {
     res.redirect('check-your-details')
   } else {
     res.redirect('contact-telephone')
@@ -253,7 +253,7 @@ router.post('/contact-telephone', function (req, res) {
 
   req.session.contact.telephone = req.body['telephone']
 
-  if (req.session.edit === 'part-one') {
+  if (req.session.edit !== false) {
     res.redirect('check-your-details')
   } else {
     res.redirect('armed-forces')
@@ -284,7 +284,7 @@ router.post('/armed-forces', function (req, res) {
     res.render('private_beta_v1_1/armed-forces', { error });
   } else {
 
-    if (req.session.edit === 'part-one') {
+    if (req.session.edit !== false) {
       if (!req.session.armedforces.serviceno) {
         res.redirect('armed-forces-service-number')
       } else {
@@ -314,7 +314,7 @@ router.post('/armed-forces-service-number', function (req, res) {
   }
   req.session.armedforces.serviceno = req.body['service-no']
 
-  if (req.session.edit === 'part-one') {
+  if (req.session.edit !== false) {
     if (!req.session.armedforces.enlistment) {
       res.redirect('armed-forces-enlistment-date')
     } else {
@@ -342,7 +342,7 @@ router.post('/armed-forces-enlistment-date', function (req, res) {
     year: req.body['enlistment-year']
   }
 
-  if (req.session.edit === 'part-one') {
+  if (req.session.edit !== false) {
     res.redirect('check-your-details')
   } else {
     res.redirect('current-gp')
@@ -375,7 +375,7 @@ router.post('/current-gp', function (req, res) {
   } else if (req.body['current-gp'] === 'yes') {
     res.redirect('current-gp-lookup')
   } else {
-    if (req.session.edit === 'part-one') {
+    if (req.session.edit !== false) {
       res.redirect('check-your-details')
     } else {
       res.redirect('nhs-number')
@@ -397,7 +397,7 @@ router.post('/current-gp-lookup', function (req, res) {
 
   req.session.currentgp.name = req.body['practice-name'];
   req.session.currentgp.address = req.body['practice-address'].split(',');
-  if (req.session.edit === 'part-one') {
+  if (req.session.edit !== false) {
     if (!req.session.prevaddress) {
       res.redirect('registered-address')
     } else {
@@ -525,7 +525,8 @@ router.post('/select-registered-address', function (req, res) {
     });
   } else {
     req.session.currentgp.registeredaddress.address = req.body['address'].split(',');
-    if (req.session.edit === 'part-one' && req.session.name.nameChanged) {
+    //if (req.session.edit === 'part-one' && req.session.name.nameChanged) {
+    if (req.session.edit !== false) {
       res.redirect('check-your-details')
     } else {
       res.redirect('registered-name')
@@ -534,11 +535,11 @@ router.post('/select-registered-address', function (req, res) {
 })
 
 // Manual address entry ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-router.get('/previous-address-manual', function (req, res) {
-  res.render('private_beta_v1_1/previous-address-manual');
+router.get('/registered-address-manual', function (req, res) {
+  res.render('private_beta_v1_1/registered-address-manual');
 });
 
-router.post('/previous-address-manual', function (req, res) {
+router.post('/registered-address-manual', function (req, res) {
 
   req.session.currentgp.registeredaddress.address = [
     req.body['address-1'],
@@ -549,10 +550,11 @@ router.post('/previous-address-manual', function (req, res) {
   req.session.currentgp.registeredaddress.postcode = req.body['postcode'];
 
   if (!req.body['address-1'] && !req.body['address-4']) {
-    res.render('private_beta_v1_1/home-address-manual', {
+    res.render('private_beta_v1_1/registered-address-manual', {
       error: 'Please enter your full address'
     });
-  } else if (req.session.edit === 'part-one' && req.session.name.nameChanged) {
+  //} else if (req.session.edit === 'part-one' && req.session.name.nameChanged) {
+  } else if (req.session.edit !== false) {
     res.redirect('check-your-details')
   } else {
     res.redirect('registered-name')
@@ -588,7 +590,7 @@ router.post('/registered-name', function(req, res) {
     if (req.body['name-different'] === 'yes') {
       res.redirect('registered-name-details')
     } else {
-      if (req.session.edit === 'part-one') {
+      if (req.session.edit !== false) {
         res.redirect('check-your-details')
       } else {
         res.redirect('nhs-number')
@@ -623,7 +625,7 @@ router.post('/registered-name-details', function(req, res) {
   if (passed === false) {
     res.render('private_beta_v1_1/registered-name-details', { error });
   } else {
-    if (req.session.edit === 'part-one') {
+    if (req.session.edit !== false) {
       res.redirect('check-your-details')
     } else {
       res.redirect('nhs-number')
@@ -658,7 +660,7 @@ router.post('/nhs-number', function (req, res) {
     if (req.body['nhs-number-known'] === 'yes') {
       res.redirect('nhs-number-details')
     } else {
-      if (req.session.edit === 'part-one') {
+      if (req.session.edit !== false) {
         res.redirect('check-your-details')
       } else {
         //res.redirect('current-medication')
@@ -692,7 +694,7 @@ router.post('/nhs-number-details', function (req, res) {
   if (passed === false) {
     res.render('private_beta_v1_1/nhs-number-details', { error });
   } else {
-    if (req.session.edit === 'part-one') {
+    if (req.session.edit !== false) {
       res.redirect('check-your-details')
     } else {
       //res.redirect('current-medication')
@@ -704,7 +706,9 @@ router.post('/nhs-number-details', function (req, res) {
 
 // End of 'your details' - sum up for editing
 router.get('/check-your-details', function (req, res) {
-  req.session.edit = 'part-one';
+  if (req.session.edit !== 'part-two') {
+    req.session.edit = 'part-one';
+  }
   res.render('private_beta_v1_1/check-your-details' );
 })
 
@@ -734,8 +738,8 @@ router.post('/current-medication', function (req, res) {
   } else if (req.body['medication'] === 'yes') {
     res.redirect('current-medication-details')
   } else {
-    if (req.session.edit === true) {
-      res.redirect('confirm-details')
+    if (req.session.edit === 'part-two') {
+      res.redirect('check-your-answers')
     } else {
       res.redirect('any-allergies')
     }
@@ -766,8 +770,8 @@ router.post('/current-medication-details', function (req, res) {
   if (passed === false) {
     res.render('private_beta_v1_1/current-medication-details', { error });
   } else {
-    if (req.session.edit === true) {
-      res.redirect('confirm-details')
+    if (req.session.edit === 'part-two') {
+      res.redirect('check-your-answers')
     } else {
       res.redirect('any-allergies')
     }
@@ -799,8 +803,8 @@ router.post('/any-allergies', function (req, res) {
   } else if (req.body['allergies'] === 'yes') {
     res.redirect('allergies-details')
   } else {
-    if (req.session.edit === true) {
-      res.redirect('confirm-details')
+    if (req.session.edit === 'part-two') {
+      res.redirect('check-your-answers')
     } else {
       res.redirect('medical-history')
     }
@@ -831,8 +835,8 @@ router.post('/allergies-details', function (req, res) {
   if (passed === false) {
     res.render('private_beta_v1_1/allergies-details', { error });
   } else {
-    if (req.session.edit === true) {
-      res.redirect('confirm-details')
+    if (req.session.edit === 'part-two') {
+      res.redirect('check-your-answers')
     } else {
       res.redirect('medical-history')
     }
@@ -858,16 +862,15 @@ router.post('/medical-history', function (req, res) {
 
   req.session.health.medicalHistory = history
 
-  res.redirect('confirm-details')
+  res.redirect('check-your-answers')
 
 });
 
-
-// Check your answers ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-router.get('/confirm-details', function (req, res) {
-  req.session.edit = true;
-  res.render('private_beta_v1_1/confirm-details');
-});
+// End of 'questionnaire' - sum up for editing
+router.get('/check-your-answers', function (req, res) {
+  req.session.edit = 'part-two';
+  res.render('private_beta_v1_1/check-your-answers' );
+})
 
 // Registration submitted ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/registration-submitted', function (req, res) {

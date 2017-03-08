@@ -1,7 +1,8 @@
 .section-indicator {
-
   color: $grey-1;
+  padding-top: $leading/2;
 
   @include media(mid) {
+    padding-top: $leading;
   }
 }

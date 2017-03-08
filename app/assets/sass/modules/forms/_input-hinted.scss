@@ -5,6 +5,9 @@
   .form-hint {
     float: left;
     clear: none;
-    padding: ($leading/2 + 2) 0 ($leading/2 + 2) $leading;
+    margin: 0;
+    @include media(mid) {
+      padding: ($leading*1.5 + 2) 0 ($leading/2 + 2) $leading;
+    }
   }
 }

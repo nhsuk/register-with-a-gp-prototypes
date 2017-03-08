@@ -52,8 +52,8 @@
         {% if session.health.allergies === 'yes' %}
           {% set back = 'allergies-details' %}
         {% endif %}
-        {% if session.edit == true %}
-          {% set back = 'confirm-details' %}
+        {% if session.edit != false %}
+          {% set back = 'check-your-answers' %}
         {% endif %}
         <a href="{{ back }}" class="button -back">Back</a>
       </div>

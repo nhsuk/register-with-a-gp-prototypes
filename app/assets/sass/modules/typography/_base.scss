@@ -31,10 +31,12 @@ h1,
     line-height: $leading*4;
   }
 
+/*
   @include media(large) {
     font-size: 36px;
     line-height: $leading*4;
   }
+*/
 }
 
 h2,

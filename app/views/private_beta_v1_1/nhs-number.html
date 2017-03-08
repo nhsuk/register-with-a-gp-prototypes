@@ -70,8 +70,8 @@
           {% set back = 'registered-name' %}
         {% endif %}
       {% endif %}
-      {% if session.edit == true %}
-        {% set back = 'confirm-details' %}
+      {% if session.edit != false %}
+        {% set back = 'check-your-details' %}
       {% endif %}
       <a href="{{ back }}" class="button -back">Back</a>
     </div>

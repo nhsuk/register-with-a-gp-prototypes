@@ -16,7 +16,11 @@
   <form action="select-address" method="post">
     <fieldset>
       <legend class="primary">
-        What is your address?
+        {% if session.addressResults.length == 1 %}
+          Confirm your address
+        {% else %}
+          Select your address
+        {% endif %}
       </legend>
 
       {% if error %}
@@ -26,20 +30,6 @@
           </div>
         </div>
       {% endif %}
-
-      <table class="natural compact">
-        <tr>
-          {% if session.building !== '' %}
-            <th>Number:</th>
-            <td>{{ session.homeAddress.building | title }}</td>
-          {% endif %}
-          <th>Postcode:</th>
-          <td>{{ session.homeAddress.postcode | upper }}</td>
-          <td class="control" rowspan="2">
-            <a href="home-address">change</a>
-          </td>
-        </tr>
-      </table>
 
       {% if message %}
         <div class="signage measure">
@@ -59,13 +49,13 @@
                   {{ line }}<br>
                 {% endif %}
               {% endfor %}
-              {{ postcode | upper }}
+              {{ session.homeAddress.postcode | upper }}
 
             {% else %}
               {# multiple address result #}
               {% for line in result %}
                 {% if line != '' %}
-                  {{ line }}{% if loop.last !== true %}, {% endif %}
+                  {{ line }}{% if loop.last !== true %}, {% endif %}{% if loop.last === true %}, {{ session.homeAddress.postcode | upper }}{% endif %}
                 {% endif %}
               {% endfor %}
             {% endif %}
@@ -78,7 +68,13 @@
 
 
     <p>
-      <a href="home-address-manual">I can’t find my address</a>
+      <a href="home-address">
+        {% if session.addressResults.length == 1 %}
+          This isn’t my address
+        {% else %}
+          I can’t find my address
+        {% endif %}
+      </a>
     </p>
 
     <div class="form-group -controls">

@@ -47,8 +47,8 @@
       {% if session.armedforces.leaving === 'yes' %}
         {% set back = 'armed-forces-enlistment-date' %}
       {% endif %}
-      {% if session.edit == true %}
-        {% set back = 'confirm-details' %}
+      {% if session.edit != false %}
+        {% set back = 'check-your-details' %}
       {% endif %}
       <a href="{{ back }}" class="button -back">Back</a>
     </div>

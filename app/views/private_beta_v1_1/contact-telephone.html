@@ -12,7 +12,7 @@
 {% block content %}
 
   {% include "_includes/section-indicator-1.html" %}
-  
+
   <form method="post" class="measure">
 
     <h1 class="primary">
@@ -40,8 +40,8 @@
     <div class="form-group -controls">
       <button type="submit" class="button">Continue</button>
       {% set back = 'contact-email' %}
-      {% if session.edit == true %}
-        {% set back = 'confirm-details' %}
+      {% if session.edit != false %}
+        {% set back = 'check-your-details' %}
       {% endif %}
       <a href="{{ back }}" class="button -back">Back</a>
     </div>

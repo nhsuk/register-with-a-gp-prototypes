@@ -56,8 +56,12 @@
       {% if session.nhsnumber.known === 'yes' %}
         {% set back = 'nhs-number-details' %}
       {% endif %}
-      {% if session.edit == true %}
-        {% set back = 'confirm-details' %}
+      {% if session.edit != false %}
+        {% if session.edit == 'part-one' %}
+          {% set back = 'check-your-details' %}
+        {% else %}
+          {% set back = 'check-your-answers' %}
+        {% endif %}
       {% endif %}
       <a href="{{ back }}" class="button -back">Back</a>
     </div>

@@ -15,7 +15,18 @@
 
 {% block content %}
 
-  {% include "_includes/section-indicator-1.html" %}
+  {% if session.edit == "part-two" %}
+  <div class="tabbed measure">
+    <div class="section-indicator tab active">
+      <a href="check-your-details">Part 1: Your details</a>
+    </div><div class="section-indicator tab">
+      <a href="check-your-answers">Part 2: Your answers</a>
+    </div>
+  </div>
+  {% else %}
+    {% include "_includes/section-indicator-1.html" %}
+  {% endif %}
+
 
   <h1 class="primary">Check your details</h1>
 
@@ -211,12 +222,22 @@
     {% endif %}
   </table>
 
-  <div class="shunt-2">
-    <p class="measure form-hint">
-      Once you’re happy that your details are correct, please continue on to
-      part two &mdash; your health:
-    </p>
-    <a href="current-medication" class="button">Continue to part 2</a>
+  <div class="measure">
+    {% if session.edit == "part-one" %}
+      <p><a href="current-medication" class="button">Continue</a></p>
+    {% endif %}
+    {% if session.edit == "part-two" %}
+      <p>
+        <a href="registration-submitted" class="button">Send my application</a>
+      </p>
+      <p>
+        <a href="check-your-answers" class="button -back">Check my answers to part 2</a>
+      </p>
+      <p>
+        Your details will be sent to {{ practiceName }} to begin your registration.
+        {% if session.contact.email != '' %} A confirmation email will be sent to {{ session.contact.email }}.{% endif %}
+      </p>
+    {% endif %}
   </div>
 
 {% endblock %}
