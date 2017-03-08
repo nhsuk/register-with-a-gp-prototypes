@@ -7,11 +7,15 @@ label {
 .form-hint {
   display: block;
   clear: both;
-  margin: $leading 0 $leading*2 0;
+  margin: $leading 0;
   font-size: $smallprint;
   font-weight: $bodyweight;
   line-height: $leading*2;
   color: #5C6770;
+
+  @include media(mid) {
+    margin-bottom: $leading*2;
+  }
 }
 
 label .form-hint {

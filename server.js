@@ -24,6 +24,7 @@ var vision_v1 = require('./app/routes/vision.v1');
 var emails = require('./app/routes/emails');
 
 var private_beta_v1 = require('./app/routes/private.beta.v1');
+var private_beta_v1_1 = require('./app/routes/private.beta.v1.1');
 
 var app = express()
 
@@ -120,6 +121,7 @@ app.use('/vision-v1', vision_v1);
 app.use('/emails', emails);
 
 app.use('/private-beta-v1', private_beta_v1);
+app.use('/private-beta-v1.1', private_beta_v1_1);
 
 // auto render any view that exists
 app.get(/^\/([^.]+)$/, function (req, res) {

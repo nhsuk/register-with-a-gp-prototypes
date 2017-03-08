@@ -1,0 +1,28 @@
+.tabbed {
+  border-bottom: 1px solid $grey-2;
+  padding-bottom: $leading;
+  margin-bottom: $leading;
+
+  @include media(mid) {
+    padding-bottom: 0;
+  }
+
+  & > .tab {
+
+    @include media(mid) {
+      display: inline-block;
+      padding: $leading;
+      border: 1px solid $white;
+      border-bottom: 1px solid $grey-2;
+      margin-bottom: -1px;
+    }
+  }
+
+  .active {
+
+    @include media(mid) {
+      border: 1px solid $grey-2;
+      border-bottom: 1px solid $white;
+    }
+  }
+}

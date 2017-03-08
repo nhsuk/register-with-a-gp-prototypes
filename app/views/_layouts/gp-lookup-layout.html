@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block page_title %}{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/app.css">
+    {% block html_head %}{% endblock %}
+  </head>
+
+  <body class="{% block body_css_classes %}{% endblock %}">
+    <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
+
+    {% include '_includes/prototype-warning.html' %}
+
+    {% block header_before %}{% endblock %}
+
+    {% include '_includes/masthead.html' %}
+
+    <main role="main" class="content">
+      {% block content %}{% endblock %}
+      <div id="content"></div>
+    </main>
+
+    {% include '_includes/footer.html' %}
+
+    <script src="/scripts/jquery-1.12.4.min.js"></script>
+    <script src="/scripts/selection-buttons.js"></script>
+    <!-- additional scripts etc -->
+    {% block body_after %}{% endblock %}
+
+  </body>
+
+</html>

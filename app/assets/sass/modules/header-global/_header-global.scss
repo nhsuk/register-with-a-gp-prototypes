@@ -29,10 +29,12 @@
 
 .service-name {
   display: block;
+  font-size: $smallprint;
   color: $grey-1;
 
   @include media(mid) {
     display: inline;
+    font-size: $body;
     margin-left: $leading;
     line-height: 32px;
   }

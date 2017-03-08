@@ -8,7 +8,7 @@ body {
 %block,
 .content {
   @extend %contain-floats;
-  
+
   max-width: 960px;
   margin: 0 auto;
   padding-left: 20px;
@@ -21,7 +21,9 @@ body {
 }
 
 .content {
-  padding-top: $leading*2;
+  @include media(mid) {
+    padding-top: $leading*2;
+  }
 }
 
 // float a column right instead of left
