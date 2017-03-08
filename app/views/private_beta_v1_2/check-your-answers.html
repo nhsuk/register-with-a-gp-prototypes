@@ -1,0 +1,88 @@
+{% extends '_layouts/layout.html' %}
+
+{% block page_title %}
+  Check your answers :
+  {% if practiceName %}
+    Register with {{ practiceName }}
+  {% else %}
+    {{serviceName}}
+  {% endif %}
+{% endblock %}
+
+{% block html_head %}
+  <meta name="format-detection" content="telephone=no">
+{% endblock %}
+
+{% block content %}
+
+  <div class="tabbed measure">
+    <div class="section-indicator tab">
+      <a href="check-your-details">Part 1: Your details</a>
+    </div><div class="section-indicator tab active">
+      <a href="check-your-answers">Part 2: Your answers</a>
+    </div>
+  </div>
+
+  <h1 class="primary">Check your answers</h1>
+
+  <table class="measure">
+    <tr>
+      <th scope="row">Medication</th>
+      <td>
+        {% if session.health.medication == 'yes' %}
+          {{ session.health.medicationDetails | striptags(true) | escape | nl2br }}
+        {% endif %}
+        {% if session.health.medication == 'no' %}
+          I’m not currently taking any medication
+        {% endif %}
+      </td>
+      <td class="control">
+        <a href="current-medication" class="button -secondary">Change</a>
+      </td>
+    </tr>
+
+    <tr>
+      <th scope="row">Allergies</th>
+      <td>
+        {% if session.health.allergies == 'yes' %}
+          {{ session.health.allergiesDetails | striptags(true) | escape | nl2br }}
+        {% endif %}
+        {% if session.health.allergies == 'no' %}
+          I don’t have any allergies
+        {% endif %}
+      </td>
+      <td class="control">
+        <a href="any-allergies" class="button -secondary">Change</a>
+      </td>
+    </tr>
+
+    <tr>
+      <th scope="row">Health</th>
+      <td>
+        {% if session.health.medicalHistory !== 'no' %}
+          {{ session.health.medicalHistory | striptags(true) | escape | nl2br }}
+        {% endif %}
+        {% if session.health.medicalHistory === 'no' %}
+          I’m not supplying any health details
+        {% endif %}
+      </td>
+      <td class="control">
+        <a href="medical-history" class="button -secondary">Change</a>
+      </td>
+    </tr>
+  </table>
+
+  <div class="measure">
+    <p>
+      <a href="registration-submitted" class="button">Send my application</a>
+    </p>
+    <p>
+      <a href="check-your-details" class="button -back">Check my details in part 1</a>
+    </p>
+    <p>
+      Your details will be sent to {{ practiceName }} to begin your registration.
+      {% if session.contact.email != '' %} A confirmation email will be sent to {{ session.contact.email }}.{% endif %}
+    </p>
+  </div>
+
+{% endblock %}

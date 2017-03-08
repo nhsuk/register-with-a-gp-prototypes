@@ -1,0 +1,52 @@
+{% extends '_layouts/layout.html' %}
+
+{% block page_title %}
+  Returning from the armed forces :
+  {% if practiceName %}
+    Register with {{ practiceName }}
+  {% else %}
+    {{serviceName}}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+
+  {% include "_includes/section-indicator-1.html" %}
+
+  <h1 class="primary">
+    When did you enlist?
+  </h1>
+
+  <form method="post" class="measure">
+
+    <fieldset>
+      <div class="form-group -date">
+        <div>
+          <label for="enlistment-day">Day</label>
+          <input autocomplete="off" type="number" id="enlistment-day" name="enlistment-day" value="{{ session.armedforces.enlistment.day }}" class="day" maxlength="2">
+        </div>
+        <div>
+          <label for="enlistment-month">Month</label>
+          <input autocomplete="off" type="number" id="enlistment-month" name="enlistment-month" value="{{ session.armedforces.enlistment.month }}" class="month" maxlength="2">
+        </div>
+        <div>
+          <label for="enlistment-year">Year</label>
+          <input autocomplete="off" type="number" id="enlistment-year" name="enlistment-year" value="{{ session.armedforces.enlistment.year }}" class="year" maxlength="4">
+        </div>
+        <p class="form-hint">
+          For example: 9 / 7 / 2001
+        </p>
+      </div>
+    </fieldset>
+
+    <div class="form-group -controls">
+      <button type="submit" class="button">Continue</button>
+      {% set back = 'armed-forces-service-number' %}
+      {% if session.edit != false %}
+        {% set back = 'check-your-details' %}
+      {% endif %}
+      <a href="{{ back }}" class="button -back">Back</a>
+    </div>
+
+  </form>
+{% endblock %}

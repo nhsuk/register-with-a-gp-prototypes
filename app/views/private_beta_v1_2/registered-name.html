@@ -1,0 +1,66 @@
+{% extends '_layouts/layout.html' %}
+
+{% block page_title %}
+  Your name :
+  {% if practiceName %}
+    Register with {{ practiceName }}
+  {% else %}
+    {{serviceName}}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+
+  {% include "_includes/section-indicator-1.html" %}
+
+  <h1 class="primary">
+    Are you registered at {{ session.currentgp.name }} with a different name?
+  </h1>
+  <form method="post" class="measure">
+
+    <fieldset>
+
+      {% if error %}
+        <div class="error-summary">
+          <div>
+            <p>{{ error }}</p>
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="form-group {% if error %}-errors{% endif %}">
+        <div class="form-group {% if error %}-errors{% endif %}">
+          <label for="yes" class="block-label">
+            Yes
+            <input type="radio" id="yes" name="name-different" value="yes" {% if session.currentgp.registeredname.different == "yes" %}checked="checked"{% endif %}>
+          </label>
+        </div>
+        <label for="no" class="block-label">
+          No
+          <input type="radio" id="no" name="name-different" value="no" {% if session.currentgp.registeredname.different == "no" %}checked="checked"{% endif %}>
+        </label>
+      </div>
+
+      <details>
+        <summary>Why should I give my previous name?</summary>
+        <div class="signage">
+          <div class="info">
+            <p>
+              If your name has changed, giving {{ practiceName }} your previous name will help them find your medical records.
+            </p>
+          </div>
+        </div>
+      </details>
+
+    </fieldset>
+
+    <div class="form-group -controls">
+      <button type="submit" class="button">Continue</button>
+      {% set back = 'javascript:window.history.back();' %}
+      {% if session.edit != false %}
+        {% set back = 'check-your-details' %}
+      {% endif %}
+      <a href="{{ back }}" class="button -back">Back</a>
+    </div>
+  </form>
+{% endblock %}
