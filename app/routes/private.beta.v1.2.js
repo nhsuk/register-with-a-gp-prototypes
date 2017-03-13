@@ -26,15 +26,7 @@ router.get('/start', function (req, res) {
 
 // Name ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/name', function (req, res) {
-  if (!req.session.name) {
-    res.render('private_beta_v1_2/name');
-  } else {
-    res.render('private_beta_v1_2/name', {
-      first: req.session.name.firstName,
-      middle: req.session.name.middleNames,
-      last: req.session.name.lastName
-    })
-  }
+  res.render('private_beta_v1_2/name');
 });
 
 router.post('/name', function (req, res) {
@@ -49,6 +41,7 @@ router.post('/name', function (req, res) {
     var error = 'Please enter your full name';
     passed = false;
   } else {
+    req.session.name.title = req.body['title']
     req.session.name.firstName = req.body['first-name']
     req.session.name.middleNames = req.body['middle-names']
     req.session.name.lastName = req.body['last-name']
@@ -57,6 +50,7 @@ router.post('/name', function (req, res) {
   if (passed === false) {
     res.render('private_beta_v1_2/name', {
       error,
+      title: req.body['title'],
       first: req.body['first-name'],
       middle: req.body['middle-names'],
       last: req.body['last-name']
