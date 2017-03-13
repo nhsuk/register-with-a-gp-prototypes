@@ -657,8 +657,7 @@ router.post('/nhs-number', function (req, res) {
       if (req.session.edit !== false) {
         res.redirect('check-your-details')
       } else {
-        //res.redirect('current-medication')
-        res.redirect('check-your-details')
+        res.redirect('marital-status')
       }
     }
   }
@@ -691,14 +690,33 @@ router.post('/nhs-number-details', function (req, res) {
     if (req.session.edit !== false) {
       res.redirect('check-your-details')
     } else {
-      //res.redirect('current-medication')
-      res.redirect('check-your-details')
+      res.redirect('marital-status')
     }
   }
 
 });
 
-// End of 'your details' - sum up for editing
+// Marital status ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+router.get('/marital-status', function (req, res) {
+  res.render('private_beta_v1_2/marital-status' );
+})
+
+router.post('/marital-status', function (req, res) {
+
+  if (!req.session.maritalstatus) {
+    req.session.maritalstatus = {}
+  }
+
+  req.session.maritalstatus = req.body['marital-status']
+
+  if (req.session.edit !== false) {
+    res.redirect('check-your-details')
+  } else {
+    res.redirect('check-your-details')
+  }
+})
+
+// End of 'your details' - sum up for editing ++++++++++++++++++++++++++++++++++
 router.get('/check-your-details', function (req, res) {
   if (req.session.edit !== 'part-two') {
     req.session.edit = 'part-one';

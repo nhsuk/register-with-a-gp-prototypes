@@ -1,0 +1,39 @@
+{% extends '_layouts/layout.html' %}
+
+{% block page_title %}
+  Your marital status :
+  {% if practiceName %}
+    Register with {{ practiceName }}
+  {% else %}
+    {{serviceName}}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+
+  {% include "_includes/section-indicator-1.html" %}
+
+  <form method="post" class="measure">
+
+    <h1 class="primary">
+      <label for="marital-status">
+        What is your marital status?
+      </label>
+    </h1>
+
+    <div class="form-group">
+      <input autocomplete="off" type="text" id="marital-status" name="marital-status" value="{{ session.maritalstatus }}">
+    </div>
+
+    <div class="form-group -controls">
+      <button type="submit" class="button">Continue</button>
+      {% set back = 'nhs-number' %}
+      {% if session.edit != false %}
+        {% set back = 'check-your-details' %}
+      {% endif %}
+      <a href="{{ back }}" class="button -back">Back</a>
+    </div>
+  </form>
+{% endblock %}
+
+{% block footer %}{% endblock %}

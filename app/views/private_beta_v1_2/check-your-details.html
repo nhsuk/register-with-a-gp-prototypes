@@ -114,6 +114,20 @@
       </td>
     </tr>
     {% endif %}
+
+    <tr>
+      <th scope="row">Marital status</th>
+      <td>
+        {% if session.maritalstatus == '' %}
+          I’m not providing my marital status
+        {% else %}
+          {{ session.maritalstatus }}
+        {% endif %}
+      </td>
+      <td class="control">
+        <a href="marital-status" class="button -secondary">Change</a>
+      </td>
+    </tr>
   </table>
 
   {% if session.armedforces.leaving == 'yes' %}
