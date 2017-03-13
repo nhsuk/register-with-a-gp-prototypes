@@ -142,6 +142,20 @@
         <a href="occupation" class="button -secondary">Change</a>
       </td>
     </tr>
+
+    <tr>
+      <th scope="row">Religion</th>
+      <td>
+        {% if session.religion == '' %}
+          I’m not providing my religion
+        {% else %}
+          {{ session.religion }}
+        {% endif %}
+      </td>
+      <td class="control">
+        <a href="religion" class="button -secondary">Change</a>
+      </td>
+    </tr>
   </table>
 
   {% if session.armedforces.leaving == 'yes' %}

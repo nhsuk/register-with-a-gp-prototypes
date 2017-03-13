@@ -732,6 +732,26 @@ router.post('/occupation', function (req, res) {
   if (req.session.edit !== false) {
     res.redirect('check-your-details')
   } else {
+    res.redirect('religion')
+  }
+})
+
+// Religion ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+router.get('/religion', function (req, res) {
+  res.render('private_beta_v1_2/religion' );
+})
+
+router.post('/religion', function (req, res) {
+
+  if (!req.session.religion) {
+    req.session.religion = {}
+  }
+
+  req.session.religion = req.body['religion']
+
+  if (req.session.edit !== false) {
+    res.redirect('check-your-details')
+  } else {
     res.redirect('check-your-details')
   }
 })
