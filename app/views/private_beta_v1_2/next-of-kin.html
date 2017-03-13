@@ -1,0 +1,58 @@
+{% extends '_layouts/layout.html' %}
+
+{% block page_title %}
+  Your next of kin :
+  {% if practiceName %}
+    Register with {{ practiceName }}
+  {% else %}
+    {{serviceName}}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+
+  {% include "_includes/section-indicator-1.html" %}
+
+  <h1 class="primary">
+    Who is your next of kin?
+  </h1>
+  <form method="post" class="measure">
+
+    {% if error %}
+      <div class="error-summary">
+        <div>
+          <p>{{ error }}</p>
+        </div>
+      </div>
+    {% endif %}
+
+    <fieldset>
+      <div class="form-group {% if error %}-errors{% endif %}">
+        <label for="name">Name</label>
+        <input autocomplete="off" type="text" id="name" name="name" value="{{ session.kin.name }}">
+      </div>
+      <div class="form-group">
+        <label for="relationship">
+          Their relationship to you
+          <span class="form-hint">
+            For example: “mother”
+          </span>
+        </label>
+        <input autocomplete="off" type="text" id="relationship" name="relationship" value="{{ session.kin.relationship }}">
+      </div>
+      <div class="form-group {% if error %}-errors{% endif %}">
+        <label for="telephone">Their contact telephone number</label>
+        <input autocomplete="off" type="tel" id="telephone" name="telephone" value="{{ session.kin.telephone }}">
+      </div>
+    </fieldset>
+
+    <div class="form-group -controls">
+      <button type="submit" class="button">Continue</button>
+      {% set back = 'religion' %}
+      {% if session.edit != false %}
+        {% set back = 'check-your-details' %}
+      {% endif %}
+      <a href="{{ back }}" class="button -back">Back</a>
+    </div>
+  </form>
+{% endblock %}

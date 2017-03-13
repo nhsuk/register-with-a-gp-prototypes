@@ -156,7 +156,52 @@
         <a href="religion" class="button -secondary">Change</a>
       </td>
     </tr>
+
+    {% if session.kin.name == '' %}
+    <tr>
+      <th scope="row">Next of kin</th>
+      <td>
+        I’m not providing details of any next of kin
+      </td>
+      <td class="control">
+        <a href="next-of-kin" class="button -secondary">Change</a>
+      </td>
+    </tr>
+    {% endif %}
   </table>
+
+  {% if session.kin.name !== '' %}
+    <table class="measure">
+      <caption>Your next of kin</caption>
+      <tr>
+        <th scope="row">Name</th>
+        <td>{{ session.kin.name }}</td>
+        <td class="control">
+          <a href="next-of-kin" class="button -secondary">Change</a>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">Relationship</th>
+        <td>
+          {% if session.kin.relationship !== '' %}
+            {{ session.kin.relationship }}
+          {% else %}
+            I’m not providing my next of kin’s relationship to me
+          {% endif %}
+        </td>
+        <td class="control">
+          <a href="next-of-kin" class="button -secondary">Change</a>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">Contact number</th>
+        <td>{{ session.kin.telephone }}</td>
+        <td class="control">
+          <a href="next-of-kin" class="button -secondary">Change</a>
+        </td>
+      </tr>
+    </table>
+  {% endif %}
 
   {% if session.armedforces.leaving == 'yes' %}
     <table class="measure">

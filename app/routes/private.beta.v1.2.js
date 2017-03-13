@@ -752,7 +752,40 @@ router.post('/religion', function (req, res) {
   if (req.session.edit !== false) {
     res.redirect('check-your-details')
   } else {
-    res.redirect('check-your-details')
+    res.redirect('next-of-kin')
+  }
+})
+
+// Next of kin +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+router.get('/next-of-kin', function (req, res) {
+  res.render('private_beta_v1_2/next-of-kin' );
+})
+
+router.post('/next-of-kin', function (req, res) {
+
+  var passed = true;
+
+  if (!req.session.kin) {
+    req.session.kin = {}
+  }
+
+  req.session.kin.name = req.body['name']
+  req.session.kin.relationship = req.body['relationship']
+  req.session.kin.telephone = req.body['telephone']
+
+  if (req.body['name'] !== '' && req.body['telephone'] === '') {
+    passed = false;
+    error = 'Please enter a contact number';
+  }
+
+  if (passed === false) {
+    res.render('private_beta_v1_2/next-of-kin', { error });
+  } else {
+    if (req.session.edit !== false) {
+      res.redirect('check-your-details')
+    } else {
+      res.redirect('check-your-details')
+    }
   }
 })
 
