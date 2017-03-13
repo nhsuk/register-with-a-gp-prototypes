@@ -128,6 +128,20 @@
         <a href="marital-status" class="button -secondary">Change</a>
       </td>
     </tr>
+
+    <tr>
+      <th scope="row">Occupation</th>
+      <td>
+        {% if session.occupation == '' %}
+          I’m not providing my occupation
+        {% else %}
+          {{ session.occupation }}
+        {% endif %}
+      </td>
+      <td class="control">
+        <a href="occupation" class="button -secondary">Change</a>
+      </td>
+    </tr>
   </table>
 
   {% if session.armedforces.leaving == 'yes' %}

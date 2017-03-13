@@ -712,6 +712,26 @@ router.post('/marital-status', function (req, res) {
   if (req.session.edit !== false) {
     res.redirect('check-your-details')
   } else {
+    res.redirect('occupation')
+  }
+})
+
+// Occupation ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+router.get('/occupation', function (req, res) {
+  res.render('private_beta_v1_2/occupation' );
+})
+
+router.post('/occupation', function (req, res) {
+
+  if (!req.session.occupation) {
+    req.session.occupation = {}
+  }
+
+  req.session.occupation = req.body['occupation']
+
+  if (req.session.edit !== false) {
+    res.redirect('check-your-details')
+  } else {
     res.redirect('check-your-details')
   }
 })
