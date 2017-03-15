@@ -168,6 +168,15 @@
       </td>
     </tr>
     {% endif %}
+
+    <tr>
+      <th scope="row">Your country of birth</th>
+      <td>{{ session.birthcountry }}</td>
+      <td class="control">
+        <a href="uk-born" class="button -secondary">Change</a>
+      </td>
+    </tr>
+
   </table>
 
   {% if session.kin.name !== '' %}

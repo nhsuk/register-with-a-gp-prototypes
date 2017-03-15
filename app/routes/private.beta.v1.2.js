@@ -38,8 +38,7 @@ details: [
     name
     relationship
     contact
-  ukborn
-    birthcountry
+  birthcountry
     nationality
   birthtown
   ukresident
@@ -838,10 +837,77 @@ router.post('/next-of-kin', function (req, res) {
     if (req.session.edit !== false) {
       res.redirect('check-your-details')
     } else {
-      res.redirect('check-your-details')
+      res.redirect('uk-born')
     }
   }
 })
+
+// Born in the UK? +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+router.get('/uk-born', function (req, res) {
+  res.render('private_beta_v1_2/uk-born' );
+})
+
+router.post('/uk-born', function (req, res) {
+
+  var passed = true;
+
+  if (!req.session.birthcountry) {
+    req.session.birthcountry = {};
+  }
+
+  if (!req.body['uk-born']) {
+    error = 'Please answer ‘yes’ or ‘no’';
+    passed = false;
+  }
+
+  if (passed === false) {
+    res.render('private_beta_v1_2/uk-born', { error });
+  } else {
+    if (req.body['uk-born'] !== 'yes') {
+      res.redirect('birth-country')
+    } else {
+      if (req.session.edit !== false) {
+        res.redirect('check-your-details')
+      } else {
+        req.session.birthcountry = 'UK'
+        res.redirect('check-your-details')
+      }
+    }
+  }
+})
+
+// Birth country (if not uk) +++++++++++++++++++++++++++++++++++++++++++++++++++
+router.get('/birth-country', function (req, res) {
+  res.render('private_beta_v1_2/birth-country' );
+})
+
+router.post('/birth-country', function (req, res) {
+
+  var passed = true;
+
+  if (!req.session.birthcountry) {
+    req.session.birthcountry = {};
+  }
+
+  if (req.body['birth-country'] === '') {
+    passed = false;
+    error = 'Please enter the country in which you were born';
+  } else {
+    req.session.birthcountry = req.body['birth-country'];
+  }
+
+  if (passed === false) {
+    res.render('private_beta_v1_2/birth-country', { error });
+  } else {
+    if (req.session.edit !== false) {
+      res.redirect('check-your-details')
+    } else {
+      res.redirect('check-your-details')
+    }
+  }
+
+});
+
 
 // =============================================================================
 // =============================================================================
