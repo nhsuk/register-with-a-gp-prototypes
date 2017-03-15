@@ -9,6 +9,67 @@ var postcode_api = process.env.POSTCODE_API
 // Private beta v1.2 prototype
 // Expands both sections to a large number of questions
 
+/*
+
+details: [
+  name
+  dob
+  address
+    manual
+    results
+  email
+  phone
+  armedforces
+    serviceno
+    enlistmentdate
+  currentgp
+    find
+    registeredaddress
+      manual
+      results
+    registeredname
+      edit
+  nhsnumber
+    add
+  maritalstatus
+  occupation
+  religion
+  nextofkin
+    name
+    relationship
+    contact
+  ukborn
+    birthcountry
+    nationality
+  birthtown
+  ukresident
+    arrivaldate (immigrant)
+    leavedate (expat)
+  caringfor
+    name
+    relationship
+    contact
+  caredforby
+    name
+    relationship
+    contact
+]
+
+health: [
+  medication
+    details
+  allergies
+    details
+  medicalhistory
+]
+
+next: url
+prev: url
+if session.edit === true
+  prev: check-your-details
+
+*/
+
 // Start page +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/start', function (req, res) {
   req.session.edit = false;
@@ -782,6 +843,13 @@ router.post('/next-of-kin', function (req, res) {
   }
 })
 
+// =============================================================================
+// =============================================================================
+// =============================================================================
+// =============================================================================
+// =============================================================================
+
+
 // End of 'your details' - sum up for editing ++++++++++++++++++++++++++++++++++
 router.get('/check-your-details', function (req, res) {
   if (req.session.edit !== 'part-two') {
@@ -789,6 +857,13 @@ router.get('/check-your-details', function (req, res) {
   }
   res.render('private_beta_v1_2/check-your-details' );
 })
+
+
+// =============================================================================
+// =============================================================================
+// =============================================================================
+// =============================================================================
+// =============================================================================
 
 
 // Minimumn health questionnaire: current meds? ++++++++++++++++++++++++++++++++
@@ -944,11 +1019,27 @@ router.post('/medical-history', function (req, res) {
 
 });
 
+
+// =============================================================================
+// =============================================================================
+// =============================================================================
+// =============================================================================
+// =============================================================================
+
+
 // End of 'questionnaire' - sum up for editing
 router.get('/check-your-answers', function (req, res) {
   req.session.edit = 'part-two';
   res.render('private_beta_v1_2/check-your-answers' );
 })
+
+
+// =============================================================================
+// =============================================================================
+// =============================================================================
+// =============================================================================
+// =============================================================================
+
 
 // Registration submitted ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/registration-submitted', function (req, res) {
