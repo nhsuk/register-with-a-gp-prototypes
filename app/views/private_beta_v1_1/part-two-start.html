@@ -1,0 +1,49 @@
+{% extends '_layouts/layout.html' %}
+
+{% block page_title %}
+  {% if practiceName %}
+    Register with {{ practiceName }}
+  {% else %}
+    {{serviceName}}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+
+
+  <div class="measure">
+
+    <h2 class="h1">
+      <span class="heading-prefix">Part 2</span>
+      About your health
+    </h2>
+
+    <p>
+      Thank you for completing part one.
+    </p>
+    <p>
+      Next you’ll be asked questions about any allergies, medication and your general
+      health.
+    </p>
+    <p>
+      This is to help {{ practiceName }} understand your needs.
+    </p>
+
+    <div class="content-seperator"></div>
+
+    <div class="form-group -controls">
+      <div class="shunt">
+        <a href="current-medication" class="button">Continue</a>
+        {% set back = 'nhs-number' %}
+        {% if session.edit != false %}
+          {% set back = 'check-your-answers' %}
+        {% endif %}
+        <a href="{{ back }}" class="button -back">Back</a>
+      </div>
+    </div>
+
+  </div>
+
+{% endblock %}
+
+{% block footer %}{% endblock %}

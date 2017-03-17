@@ -40,9 +40,6 @@
           <label for="dob-year">Year</label>
           <input autocomplete="off" type="number" id="dob-year" name="dob-year" value="{{ session.dob.year }}" class="year" maxlength="4">
         </div>
-        <p class="form-hint">
-          For example: 9 / 7 / 1980
-        </p>
       </div>
     </fieldset>
 
@@ -50,7 +47,7 @@
       <button type="submit" class="button">Continue</button>
       {% set back = 'name' %}
       {% if session.edit != false %}
-        {% set back = 'check-your-details' %}
+        {% set back = 'check-your-answers' %}
       {% endif %}
       <a href="{{ back }}" class="button -back">Back</a>
     </div>

@@ -21,9 +21,8 @@
       </label>
     </h1>
 
-    <div class="form-group -hanging-hint">
+    <div class="form-group">
       <input autocomplete="off" type="tel" id="telephone" name="telephone" value="{{ session.contact.telephone }}" style="float: left;">
-      <span class="form-hint">(optional)</span>
     </div>
 
     <details>
@@ -41,7 +40,7 @@
       <button type="submit" class="button">Continue</button>
       {% set back = 'contact-email' %}
       {% if session.edit != false %}
-        {% set back = 'check-your-details' %}
+        {% set back = 'check-your-answers' %}
       {% endif %}
       <a href="{{ back }}" class="button -back">Back</a>
     </div>

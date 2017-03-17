@@ -19,18 +19,14 @@
       <label for="email">What is your email address?</label>
     </h1>
 
-    <div class="form-group -hanging-hint">
+    <div class="form-group">
       <input autocomplete="off" type="email" id="email" name="email" value="{{ session.contact.email }}" style="float: left;">
-      <span class="form-hint">(optional)</span>
     </div>
 
     <details>
       <summary>Why should I provide an email address?</summary>
       <div class="signage">
         <div class="info">
-          <p>
-            A confirmation will be emailed to you at the end of this service.
-          </p>
           <p>
             {{ practiceName }} may need to get in touch with you to complete your registration.
           </p>
@@ -42,7 +38,7 @@
       <button type="submit" class="button">Continue</button>
       {% set back = 'javascript:window.history.back();' %}
       {% if session.edit != false %}
-        {% set back = 'check-your-details' %}
+        {% set back = 'check-your-answers' %}
       {% endif %}
       <a href="{{ back }}" class="button -back">Back</a>
     </div>
