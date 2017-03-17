@@ -63,7 +63,7 @@ router.post('/name', function (req, res) {
     });
   } else {
     if (req.session.edit !== false) {
-      res.redirect('check-your-details')
+      res.redirect('check-your-answers')
     } else {
       res.redirect('date-of-birth')
     }
@@ -88,7 +88,7 @@ router.post('/date-of-birth', function (req, res) {
     res.render('private_beta_v1_1/date-of-birth', { error: 'Please enter your date of birth' });
   } else {
     if (req.session.edit !== false) {
-      res.redirect('check-your-details')
+      res.redirect('check-your-answers')
     } else {
       res.redirect('home-address')
     }
@@ -182,7 +182,7 @@ router.post('/select-address', function (req, res) {
   } else {
     req.session.homeAddress.address = req.body['address'].split(',');
     if (req.session.edit !== false) {
-      res.redirect('check-your-details')
+      res.redirect('check-your-answers')
     } else {
       res.redirect('contact-email')
     }
@@ -213,7 +213,7 @@ router.post('/home-address-manual', function (req, res) {
       error: 'Please enter your full address'
     });
   } else if (req.session.edit !== false) {
-    res.redirect('check-your-details')
+    res.redirect('check-your-answers')
   } else {
     res.redirect('contact-email')
   }
@@ -234,7 +234,7 @@ router.post('/contact-email', function (req, res) {
   req.session.contact.email = req.body['email']
 
   if (req.session.edit !== false) {
-    res.redirect('check-your-details')
+    res.redirect('check-your-answers')
   } else {
     res.redirect('contact-telephone')
   }
@@ -254,7 +254,7 @@ router.post('/contact-telephone', function (req, res) {
   req.session.contact.telephone = req.body['telephone']
 
   if (req.session.edit !== false) {
-    res.redirect('check-your-details')
+    res.redirect('check-your-answers')
   } else {
     res.redirect('armed-forces')
   }
@@ -288,7 +288,7 @@ router.post('/armed-forces', function (req, res) {
       if (!req.session.armedforces.serviceno) {
         res.redirect('armed-forces-service-number')
       } else {
-        res.redirect('check-your-details')
+        res.redirect('check-your-answers')
       }
     } else {
       if (req.session.armedforces.leaving === 'yes') {
@@ -318,7 +318,7 @@ router.post('/armed-forces-service-number', function (req, res) {
     if (!req.session.armedforces.enlistment) {
       res.redirect('armed-forces-enlistment-date')
     } else {
-      res.redirect('check-your-details')
+      res.redirect('check-your-answers')
     }
   } else {
     res.redirect('armed-forces-enlistment-date')
@@ -343,7 +343,7 @@ router.post('/armed-forces-enlistment-date', function (req, res) {
   }
 
   if (req.session.edit !== false) {
-    res.redirect('check-your-details')
+    res.redirect('check-your-answers')
   } else {
     res.redirect('current-gp')
   }
@@ -376,7 +376,7 @@ router.post('/current-gp', function (req, res) {
     res.redirect('current-gp-lookup')
   } else {
     if (req.session.edit !== false) {
-      res.redirect('check-your-details')
+      res.redirect('check-your-answers')
     } else {
       res.redirect('nhs-number')
     }
@@ -401,7 +401,7 @@ router.post('/current-gp-lookup', function (req, res) {
     if (!req.session.prevaddress) {
       res.redirect('registered-address')
     } else {
-      res.redirect('check-your-details')
+      res.redirect('check-your-answers')
     }
   } else {
     res.redirect('registered-address')
@@ -434,7 +434,7 @@ router.post('/registered-address', function (req, res) {
     res.redirect('registered-address-postcode')
   } else {
     if (req.session.edit === 'part-one' && req.session.name.nameChanged) {
-      res.redirect('check-your-details')
+      res.redirect('check-your-answers')
     } else {
       res.redirect('registered-name')
     }
@@ -527,7 +527,7 @@ router.post('/select-registered-address', function (req, res) {
     req.session.currentgp.registeredaddress.address = req.body['address'].split(',');
     //if (req.session.edit === 'part-one' && req.session.name.nameChanged) {
     if (req.session.edit !== false) {
-      res.redirect('check-your-details')
+      res.redirect('check-your-answers')
     } else {
       res.redirect('registered-name')
     }
@@ -555,7 +555,7 @@ router.post('/registered-address-manual', function (req, res) {
     });
   //} else if (req.session.edit === 'part-one' && req.session.name.nameChanged) {
   } else if (req.session.edit !== false) {
-    res.redirect('check-your-details')
+    res.redirect('check-your-answers')
   } else {
     res.redirect('registered-name')
   }
@@ -591,7 +591,7 @@ router.post('/registered-name', function(req, res) {
       res.redirect('registered-name-details')
     } else {
       if (req.session.edit !== false) {
-        res.redirect('check-your-details')
+        res.redirect('check-your-answers')
       } else {
         res.redirect('nhs-number')
       }
@@ -626,7 +626,7 @@ router.post('/registered-name-details', function(req, res) {
     res.render('private_beta_v1_1/registered-name-details', { error });
   } else {
     if (req.session.edit !== false) {
-      res.redirect('check-your-details')
+      res.redirect('check-your-answers')
     } else {
       res.redirect('nhs-number')
     }
@@ -661,10 +661,9 @@ router.post('/nhs-number', function (req, res) {
       res.redirect('nhs-number-details')
     } else {
       if (req.session.edit !== false) {
-        res.redirect('check-your-details')
+        res.redirect('check-your-answers')
       } else {
-        //res.redirect('current-medication')
-        res.redirect('check-your-details')
+        res.redirect('part-two')
       }
     }
   }
@@ -695,22 +694,26 @@ router.post('/nhs-number-details', function (req, res) {
     res.render('private_beta_v1_1/nhs-number-details', { error });
   } else {
     if (req.session.edit !== false) {
-      res.redirect('check-your-details')
+      res.redirect('check-your-answers')
     } else {
-      //res.redirect('current-medication')
-      res.redirect('check-your-details')
+      res.redirect('part-two')
     }
   }
 
 });
 
 // End of 'your details' - sum up for editing
-router.get('/check-your-details', function (req, res) {
+/*router.get('/check-your-details', function (req, res) {
   if (req.session.edit !== 'part-two') {
     req.session.edit = 'part-one';
   }
   res.render('private_beta_v1_1/check-your-details' );
-})
+})*/
+
+// Part two start ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+router.get('/part-two', function (req, res) {
+  res.render('private_beta_v1_1/part-two-start');
+});
 
 
 // Minimumn health questionnaire: current meds? ++++++++++++++++++++++++++++++++

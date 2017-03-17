@@ -1,0 +1,29 @@
+{% extends '_layouts/layout.html' %}
+
+{% block page_title %}
+  {% if practiceName %}
+    Register with {{ practiceName }}
+  {% else %}
+    {{serviceName}}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+
+
+  <div class="measure">
+
+    <h2 class="h1">
+      <span class="heading-prefix">Part 2</span>
+      About your health
+    </h2>
+
+    <div class="cta shunt">
+      <a href="current-medication" class="button">Continue</a>
+    </div>
+
+  </div>
+
+{% endblock %}
+
+{% block footer %}{% endblock %}
