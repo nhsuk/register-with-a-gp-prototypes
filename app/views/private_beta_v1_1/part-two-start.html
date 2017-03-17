@@ -31,8 +31,15 @@
 
     <div class="content-seperator"></div>
 
-    <div class="cta shunt">
-      <a href="current-medication" class="button">Continue</a>
+    <div class="form-group -controls">
+      <div class="shunt">
+        <a href="current-medication" class="button">Continue</a>
+        {% set back = 'nhs-number' %}
+        {% if session.edit != false %}
+          {% set back = 'check-your-answers' %}
+        {% endif %}
+        <a href="{{ back }}" class="button -back">Back</a>
+      </div>
     </div>
 
   </div>
