@@ -15,9 +15,10 @@
 
 {% block content %}
 
-  <h1 class="primary">Check your details</h1>
+  <h1 class="primary">Check your application</h1>
 
   <table class="measure">
+    <caption>Your details</caption>
     <tr>
       <th scope="row">Name</th>
       <td>{{ session.name.firstName | title }} {{ session.name.middleNames | title }} {{ session.name.lastName | title }}</td>
