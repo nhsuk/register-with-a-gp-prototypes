@@ -913,32 +913,6 @@ router.get('/confirm-details', function (req, res) {
 // Registration submitted ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.get('/registration-submitted', function (req, res) {
   req.session.edit = false;
-
-  // Fire off the email to the GP
-  /*
-  var submission = nunjucks.render('../views/_includes/email-submission-table.html', { session: req.session })
-  var subject = 'New registration request';
-  var content = new helper.Content(
-    'text/html',
-    submission
-  );
-  var mail = new helper.Mail(from_email, subject, to_email, content);
-  mail.setTemplateId('a3834fbd-3eb0-4a0b-a2c5-ee7fa9050847');
-
-  var sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
-  var request = sg.emptyRequest({
-    method: 'POST',
-    path: '/v3/mail/send',
-    body: mail.toJSON(),
-  });
-
-  sg.API(request, function(error, response) {
-    console.log(response.statusCode);
-    console.log(response.body);
-    console.log(response.headers);
-  });
-  */
-
   res.render('vision_v1/registration-submitted');
 });
 

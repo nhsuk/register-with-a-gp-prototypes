@@ -1,0 +1,50 @@
+{% extends '_layouts/layout.html' %}
+
+{% block page_title %}
+  Your name :
+  {% if practiceName %}
+    Register with {{ practiceName }}
+  {% else %}
+    {{serviceName}}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+
+  {% include "_includes/section-indicator-1.html" %}
+
+  <h1 class="primary">
+    What was your previous name?
+  </h1>
+  <form method="post" class="measure">
+
+    {% if error %}
+      <div class="error-summary">
+        <div>
+          <p>{{ error }}</p>
+        </div>
+      </div>
+    {% endif %}
+
+    <fieldset>
+      <div class="form-group {% if error %}-errors{% endif %}">
+        <label for="registered-first-name">First name</label>
+        <input autocomplete="off" type="text" id="registered-first-name" name="registered-first-name" value="{{ session.currentgp.registeredname.firstName }}">
+      </div>
+      <div class="form-group">
+        <label for="registered-middle-names">Middle names</label>
+        <input autocomplete="off" type="text" id="registered-middle-names" name="registered-middle-names" value="{{ session.currentgp.registeredname.middleNames }}">
+      </div>
+      <div class="form-group {% if error %}-errors{% endif %}">
+        <label for="registered-last-name">Last name</label>
+        <input autocomplete="off" type="text" id="registered-last-name" name="registered-last-name" value="{{ session.currentgp.registeredname.lastName }}">
+      </div>
+    </fieldset>
+
+    <div class="form-group -controls">
+      <button type="submit" class="button">Continue</button>
+      {% set back = 'registered-name' %}
+      <a href="{{ back }}" class="button -back">Back</a>
+    </div>
+  </form>
+{% endblock %}

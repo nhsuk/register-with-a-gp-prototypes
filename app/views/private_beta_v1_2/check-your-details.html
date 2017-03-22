@@ -1,0 +1,339 @@
+{% extends '_layouts/layout.html' %}
+
+{% block page_title %}
+  Check your details :
+  {% if practiceName %}
+    Register with {{ practiceName }}
+  {% else %}
+    {{serviceName}}
+  {% endif %}
+{% endblock %}
+
+{% block html_head %}
+  <meta name="format-detection" content="telephone=no">
+{% endblock %}
+
+{% block content %}
+
+  {% if session.edit == "part-two" %}
+  <div class="tabbed measure">
+    <div class="section-indicator tab active">
+      <a href="check-your-details">Part 1: Your details</a>
+    </div><div class="section-indicator tab">
+      <a href="check-your-answers">Part 2: Your answers</a>
+    </div>
+  </div>
+  {% else %}
+    {% include "_includes/section-indicator-1.html" %}
+  {% endif %}
+
+
+  <h1 class="primary">Check your details</h1>
+
+  <table class="measure">
+    <tr>
+      <th scope="row">Name</th>
+      <td>{{ session.name.title }} {{ session.name.firstName | title }} {{ session.name.middleNames | title }} {{ session.name.lastName | title }}</td>
+      <td class="control">
+        <a href="name" class="button -secondary">Change</a>
+      </td>
+    </tr>
+
+    <tr>
+      <th scope="row">Date of birth</th>
+      <td>{{ session.dob.day }} {{ session.dob.month | date("MMMM") }} {{ session.dob.year }}</td>
+      <td class="control">
+        <a href="date-of-birth" class="button -secondary">Change</a>
+      </td>
+    </tr>
+
+    <tr>
+      <th scope="row">Address</th>
+      <td>
+        {% for line in session.homeAddress.address %}
+          {% if line != '' %}
+            {{ line }}<br>
+          {% endif %}
+        {% endfor %}
+        {{ session.homeAddress.postcode | upper }}
+      </td>
+      <td class="control">
+        <a href="home-address" class="button -secondary">Change</a>
+      </td>
+    </tr>
+
+    <tr>
+      <th scope="row">Email</th>
+      <td>
+        {% if session.contact.email != '' %}
+          {{ session.contact.email }}
+        {% else %}
+          I’m not providing an email address
+        {% endif %}
+      </td>
+      <td class="control">
+        <a href="contact-email" class="button -secondary">Change</a>
+      </td>
+    </tr>
+
+    <tr>
+      <th scope="row">Telephone</th>
+      <td>
+        {% if session.contact.telephone != '' %}
+          {{ session.contact.telephone }}
+        {% else %}
+          I’m not providing a telephone number
+        {% endif %}
+      </td>
+      <td class="control">
+        <a href="contact-telephone" class="button -secondary">Change</a>
+      </td>
+    </tr>
+
+    <tr>
+      <th scope="row">NHS number</th>
+      <td>
+        {% if session.nhsnumber.known == 'yes' %}
+          {{ session.nhsnumber.number }}
+        {% endif %}
+        {% if session.nhsnumber.known == 'no' %}
+          I don’t know my NHS number
+        {% endif %}
+      </td>
+      <td class="control">
+        <a href="nhs-number" class="button -secondary">Change</a>
+      </td>
+    </tr>
+
+    {% if not session.armedforces or session.armedforces.leaving == 'no' %}
+    <tr>
+      <th scope="row">Armed forces</th>
+      <td>I’m not returning from the armed forces</td>
+      <td class="control">
+        <a href="armed-forces" class="button -secondary">Change</a>
+      </td>
+    </tr>
+    {% endif %}
+
+    <tr>
+      <th scope="row">Marital status</th>
+      <td>
+        {% if session.maritalstatus == '' %}
+          I’m not providing my marital status
+        {% else %}
+          {{ session.maritalstatus }}
+        {% endif %}
+      </td>
+      <td class="control">
+        <a href="marital-status" class="button -secondary">Change</a>
+      </td>
+    </tr>
+
+    <tr>
+      <th scope="row">Occupation</th>
+      <td>
+        {% if session.occupation == '' %}
+          I’m not providing my occupation
+        {% else %}
+          {{ session.occupation }}
+        {% endif %}
+      </td>
+      <td class="control">
+        <a href="occupation" class="button -secondary">Change</a>
+      </td>
+    </tr>
+
+    <tr>
+      <th scope="row">Religion</th>
+      <td>
+        {% if session.religion == '' %}
+          I’m not providing my religion
+        {% else %}
+          {{ session.religion }}
+        {% endif %}
+      </td>
+      <td class="control">
+        <a href="religion" class="button -secondary">Change</a>
+      </td>
+    </tr>
+
+    {% if session.kin.name == '' %}
+    <tr>
+      <th scope="row">Next of kin</th>
+      <td>
+        I’m not providing details of any next of kin
+      </td>
+      <td class="control">
+        <a href="next-of-kin" class="button -secondary">Change</a>
+      </td>
+    </tr>
+    {% endif %}
+
+    <tr>
+      <th scope="row">Your country of birth</th>
+      <td>{{ session.birthcountry }}</td>
+      <td class="control">
+        <a href="uk-born" class="button -secondary">Change</a>
+      </td>
+    </tr>
+
+  </table>
+
+  {% if session.kin.name !== '' %}
+    <table class="measure">
+      <caption>Your next of kin</caption>
+      <tr>
+        <th scope="row">Name</th>
+        <td>{{ session.kin.name }}</td>
+        <td class="control">
+          <a href="next-of-kin" class="button -secondary">Change</a>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">Relationship</th>
+        <td>
+          {% if session.kin.relationship !== '' %}
+            {{ session.kin.relationship }}
+          {% else %}
+            I’m not providing my next of kin’s relationship to me
+          {% endif %}
+        </td>
+        <td class="control">
+          <a href="next-of-kin" class="button -secondary">Change</a>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">Contact number</th>
+        <td>{{ session.kin.telephone }}</td>
+        <td class="control">
+          <a href="next-of-kin" class="button -secondary">Change</a>
+        </td>
+      </tr>
+    </table>
+  {% endif %}
+
+  {% if session.armedforces.leaving == 'yes' %}
+    <table class="measure">
+      <caption>Your service in the armed forces</caption>
+      <tr>
+        <th scope="row">Armed forces</th>
+        <td>I’m returning from the armed forces</td>
+        <td class="control">
+          <a href="armed-forces" class="button -secondary">Change</a>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">Service number</th>
+        <td>
+          {% if session.armedforces.serviceno != '' %}
+            {{ session.armedforces.serviceno }}
+          {% else %}
+            I’m not supplying my service number
+          {% endif %}
+        </td>
+        <td class="control">
+          <a href="armed-forces-service-number" class="button -secondary">Change</a>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">Enlistment date</th>
+        <td>
+          {% if session.armedforces.enlistment.year != '' %}
+            {{ session.armedforces.enlistment.day }} {{ session.armedforces.enlistment.month | date("MMMM") }} {{ session.armedforces.enlistment.year }}
+          {% else %}
+            I’m not supplying my enlistment date
+          {% endif %}
+        </td>
+        <td class="control">
+          <a href="armed-forces-enlistment-date" class="button -secondary">Change</a>
+        </td>
+      </tr>
+    </table>
+  {% endif %}
+
+  <table class="measure">
+    <caption>Your current GP</caption>
+    <tr>
+      <th scope="row">Current GP</th>
+      <td>
+        {% if session.currentgp.registered == 'yes' %}
+          {% if session.currentgp.name != '' %}
+            {{ session.currentgp.name }}<br>
+          {% endif %}
+          {% if session.currentgp.address != '' %}
+            {% for line in session.currentgp.address %}
+              {{ line }}<br>
+            {% endfor %}
+          {% endif %}
+        {% endif %}
+
+        {% if session.currentgp.registered == 'no' %}
+          I’m not registered with a GP
+        {% endif %}
+      </td>
+      <td class="control">
+        <a href="current-gp" class="button -secondary">Change</a>
+      </td>
+    </tr>
+
+    {% if session.currentgp.registered == 'yes' %}
+      <tr>
+        <th scope="row">Registered address</th>
+        <td>
+          {% if session.currentgp.registeredaddress.correct == 'yes' %}
+            {% for line in session.homeAddress.address %}
+              {% if line != '' %}
+                {{ line }}<br>
+              {% endif %}
+            {% endfor %}
+            {{ session.homeAddress.postcode | upper }}
+          {% endif %}
+          {% if session.currentgp.registeredaddress.correct == 'no' %}
+            {% for line in session.currentgp.registeredaddress.address %}
+              {% if line != '' %}
+                {{ line }}<br>
+              {% endif %}
+            {% endfor %}
+            {{ session.currentgp.registeredaddress.postcode | upper }}
+          {% endif %}
+        </td>
+        <td class="control">
+          <a href="registered-address" class="button -secondary">Change</a>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">Registered name</th>
+        <td>
+          {% if session.currentgp.registeredname.different == "no" %}
+            {{ session.name.firstName | title }} {{ session.name.middleNames | title }} {{ session.name.lastName | title }}
+          {% endif %}
+          {% if session.currentgp.registeredname.different === 'yes' %}
+            {{ session.currentgp.registeredname.firstName | title }} {{ session.currentgp.registeredname.middleNames | title }} {{ session.currentgp.registeredname.lastName | title }}
+          {% endif %}
+        </td>
+        <td class="control">
+          <a href="registered-name" class="button -secondary">Change</a>
+        </td>
+      </tr>
+    {% endif %}
+  </table>
+
+  <div class="measure">
+    {% if session.edit == "part-one" %}
+      <p><a href="current-medication" class="button">Continue</a></p>
+    {% endif %}
+    {% if session.edit == "part-two" %}
+      <p>
+        <a href="registration-submitted" class="button">Send my application</a>
+      </p>
+      <p>
+        <a href="check-your-answers" class="button -back">Check my answers to part 2</a>
+      </p>
+      <p>
+        Your details will be sent to {{ practiceName }} to begin your registration.
+        {% if session.contact.email != '' %} A confirmation email will be sent to {{ session.contact.email }}.{% endif %}
+      </p>
+    {% endif %}
+  </div>
+
+{% endblock %}

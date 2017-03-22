@@ -36,7 +36,6 @@ Clone the directory then:
 You also need to create a plain text `.env` file in the root of the app containing the following environment variables:
 
 ```
-SENDGRID_API_KEY='the-key-value'
 GP_LOOKUP_URL='http://localhost:9292'
 GOOGLE_MAPS_API_KEY='the-key-value'
 POSTCODE_API='the-key-value'
@@ -116,10 +115,6 @@ The sections where we do address lookups use the https://getaddress.io API servi
 ### Google maps
 
 There’s a simple API key, again in the `.env` file locally (details above).
-
-### Sendgrid email service
-
-This is non-functional in all prototypes at the moment. Have a look in any of the `mvp.v*.js` files for some commented out functionality. Possibly a bad idea to turn it back on if you’re going out to do user research with it because security. I expect so anyway.
 
 ## 4: Remote - Github and Heroku
 

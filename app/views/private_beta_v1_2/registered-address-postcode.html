@@ -1,0 +1,66 @@
+{% extends '_layouts/layout.html' %}
+
+{% block page_title %}
+  Your previous address :
+  {% if practiceName %}
+    Register with {{ practiceName }}
+  {% else %}
+    {{serviceName}}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+
+  {% include "_includes/section-indicator-1.html" %}
+
+  <h1 class="primary">What is your registered address?</h1>
+
+  <form method="post" class="measure">
+    <fieldset>
+
+      {% if error.general %}
+        <div class="error-summary">
+          <div>
+            <p>{{ error.general }}</p>
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="form-group">
+        <div>
+          <label for="building">
+            Flat or house number, or house name (optional)
+          </label>
+          <input autocomplete="off" type="text" id="building" name="building" value="{{ session.currentgp.registeredaddress.building }}" class="-small">
+        </div>
+      </div>
+
+      {% if error.postcode %}
+        <div class="error-summary">
+          <div>
+            <p>{{ error.postcode }}</p>
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="form-group {% if error.postcode %}-errors{% endif %}">
+        <div>
+          <label for="postcode">Postcode</label>
+          <input autocomplete="off" type="text" id="postcode" name="postcode" value="{{ session.currentgp.registeredaddress.postcode }}" class="-small">
+        </div>
+      </div>
+    </fieldset>
+
+    <p><a href="registered-address-manual">I’ll type in the address</a></p>
+
+    <div class="form-group -controls">
+      <button type="submit" class="button">Find address</button>
+      {% set back = 'registered-address' %}
+      {% if session.edit != false %}
+        {% set back = 'check-your-details' %}
+      {% endif %}
+      <a href="{{ back }}" class="button -back">Back</a>
+    </div>
+
+  </form>
+{% endblock %}
