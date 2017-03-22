@@ -32,7 +32,7 @@
         <div>
           {{ session.name.firstName }}
           {% if session.name.middleNames !== '' %}
-            {{ session.name.middleNames }} 
+            {{ session.name.middleNames }}
           {% endif %}
           {{ session.name.lastName }}
         </div>
@@ -66,7 +66,7 @@
 
     <div class="form-group -controls">
       <button type="submit" class="button">Continue</button>
-      {% set back = 'javascript:window.history.back();' %}
+      {% set back = 'registered-address' %}
       {% if session.edit != false %}
         {% set back = 'check-your-answers' %}
       {% endif %}
