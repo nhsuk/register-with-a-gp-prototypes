@@ -14,7 +14,7 @@
   {% include "_includes/section-indicator-1.html" %}
 
   <h1 class="primary">
-    Are you registered at {{ session.currentgp.name }} with a different name?
+    Are you registered at {{ session.currentgp.name }} under this name?
   </h1>
   <form method="post" class="measure">
 
@@ -27,6 +27,16 @@
           </div>
         </div>
       {% endif %}
+
+      <div class="signage subtle-push">
+        <div>
+          {{ session.name.firstName }}
+          {% if session.name.middleNames !== '' %}
+            {{ session.name.middleNames }} 
+          {% endif %}
+          {{ session.name.lastName }}
+        </div>
+      </div>
 
       <div class="form-group {% if error %}-errors{% endif %}">
         <div class="form-group {% if error %}-errors{% endif %}">
